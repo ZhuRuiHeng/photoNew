@@ -1,0 +1,21 @@
+<view class="container">
+    <view class='item' wx:for="{{photosList}}" wx:key="{{index}}" data-pw_id='{{item.id}}' >
+        <image class='niceImg' data-url='{{item.thumb}}' src="{{item.thumb}}" 
+                mode='widthFix' data-pw_id='{{item.id}}' bindtap='seeTap'></image>
+        <view class='timeWho'>
+            <input wx:if="{{item.name == 'undefined' || !item.name}}" type='text' 
+                  data-pw_id='{{item.id}}' bindinput="setName" 
+                   placeholder='照片墙' value='朋友照片墙'></input>
+            <input wx:else type='text' data-pw_id='{{item.id}}' bindinput="setName" 
+                   placeholder='照片墙' value='朋友照片墙'></input>
+        </view>
+    </view>
+    <!--新增  -->
+    <view class='item newAdd' >
+        <image class='niceImg'  src="../img/add.png" bindtap='newPhotos'
+               mode='widthFix'></image>
+        <view class='timeWho'>
+            <input type='text' placeholder='新增照片墙' bindinput="niceName" value='{{newName}}'></input>
+        </view>
+    </view>
+</view>

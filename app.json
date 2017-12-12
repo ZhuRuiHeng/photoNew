@@ -1,0 +1,44 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/photos/photos",
+    "pages/avatarUpload/upload/upload",
+    "pages/avatarUpload/upload1/upload1",
+    "pages/indexs/indexs",
+    "pages/share/share",
+    "pages/setting/setting",
+    "pages/more/more"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "朋友照片墙",
+    "navigationBarTextStyle":"#fff"
+  },
+  "tabBar": {
+    "color": "#666",
+    "selectedColor": "#34a8e0",
+    "backgroundColor": "#fff",
+    "borderStyle": "transparent",
+    "list": [
+      {
+        "pagePath": "pages/indexs/indexs",
+        "text": "首页",
+        "iconPath": "/pages/img/home-icon.png",
+        "selectedIconPath": "/pages/img/home-icon-active.png"
+      },
+      {
+        "pagePath": "pages/photos/photos",
+        "text": "我的照片墙",
+        "iconPath": "/pages/img/photo.png",
+        "selectedIconPath": "/pages/img/photo-hover.png"
+      },
+      {
+        "pagePath": "pages/more/more",
+        "text": "更多好玩",
+        "iconPath": "/pages/img/more.png",
+        "selectedIconPath": "/pages/img/more_hover.png"
+      }
+    ]
+  }
+}
