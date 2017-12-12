@@ -1,5 +1,9 @@
 <view class="container">
     <view class='item' wx:for="{{photosList}}" wx:key="{{index}}" data-pw_id='{{item.id}}' >
+        <view class='musicTip' bindtap='musicList'>
+            <image class='music' src="../img/music.png" mode='widthFix'></image>
+            <view>那些年十年那些年</view>
+        </view>
         <image class='niceImg' data-url='{{item.thumb}}' src="{{item.thumb}}" 
                 mode='widthFix' data-pw_id='{{item.id}}' bindtap='seeTap'></image>
         <view class='timeWho'>

@@ -112,6 +112,9 @@ Page({
         wx.hideLoading()
       }
     })
+  },
+  musicList(){
+    
   }
 
 })

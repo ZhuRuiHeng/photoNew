@@ -39,3 +39,24 @@ page{
 .newAdd{
   position: relative
 }
+.musicTip{
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+.musicTip image{
+    width: 60rpx;
+    height: 60rpx;
+}
+.musicTip view{
+  width:100%;
+  text-decoration:none; 
+    display:block; 
+    float:left;  
+    overflow:hidden;          /*超出部分隐藏*/
+    white-space:nowrap;
+    /*文本溢出用"..."表示*/
+    text-overflow:ellipsis;                    /*适用IE*/
+    -o-text-overflow:ellipsis;                 /*适用opera*/
+    -moz-binding: url('ellipsis.xml#ellipsis');/*适用火狐(firefox通过XUL实现效果)*/
+}
