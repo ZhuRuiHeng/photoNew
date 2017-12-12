@@ -36,6 +36,18 @@ Page({
       }
     })
   },
+  seeTap(e){
+    let pw_id = e.currentTarget.dataset.pw_id;
+    wx.showLoading({
+      title: '加载中',
+    })
+    let that = this;
+    let sign = wx.getStorageSync('sign');
+    wx.setStorageSync('pw_id', pw_id);
+    wx.switchTab({
+      url: '../indexs/indexs',
+    })
+  },
   // 新增相册
   newPhotos(e){
     wx.showLoading({

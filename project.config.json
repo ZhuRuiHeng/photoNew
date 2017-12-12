@@ -21,7 +21,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
@@ -39,7 +39,7 @@
 					"id": 2,
 					"name": "分享s",
 					"pathName": "pages/share/share",
-					"query": "pw_id=32"
+					"query": "pw_id=1003"
 				},
 				{
 					"id": 3,

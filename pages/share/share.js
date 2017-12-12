@@ -184,17 +184,19 @@ Page({
     wx.hideLoading()
   },
   mySelf() {
+    let that = this;
     wx.removeStorage({
       key: 'pw_id',
       success: function (res) {
         console.log('移除成功pw_id：',res.data)
+        console.log('mySelf');
+        wx.switchTab({
+          url: '../indexs/indexs',
+        })
       }
     })
-    let that = this;
-    console.log('mySelf');
-    wx.switchTab({
-      url: '../indexs/indexs',
-    })
+    
+    
   },
   // 生成图片墙
   produce() {

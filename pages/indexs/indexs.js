@@ -34,9 +34,29 @@ Page({
           pw_id: that.data.pw_id
       })
     }if (!that.data.pw_id) {
-      that.setData({
-        pw_id: 0
-      })
+      // 获取照片墙pwid 
+      wx.request({
+        url: apiurl + "photo/pw?sign=" + sign + '&operator_id=' + app.data.kid,
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "GET",
+        success: function (res) {
+          console.log("照片墙pwid:", res);
+          var status = res.data.status;
+          if (status == 1) {
+            that.setData({
+              pw_id: res.data.data
+            })
+
+          } else {
+            that.setData({
+              pw_id: 0
+            })
+          }
+          wx.hideLoading()
+        }
+      }) 
 
     }
    
@@ -149,7 +169,7 @@ Page({
   bindPlay: function () {
     var that = this;
     let music_play = app.data.music_play;
-    console.log('music_play:', music_play)
+    console.log('music_play:', music_play);
     if (music_play == true) {
       wx.pauseBackgroundAudio();//暂停
       app.data.music_play = false;
