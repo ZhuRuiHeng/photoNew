@@ -44,6 +44,7 @@ Page({
     let that = this;
     let sign = wx.getStorageSync('sign');
     wx.setStorageSync('pw_id', pw_id);
+    wx.setStorageSync('bgMusic', 'https://gcdn.playonwechat.com/photo/%E9%99%88%E5%A5%95%E8%BF%85-%E5%8D%81%E5%B9%B4.mp3');
     wx.switchTab({
       url: '../indexs/indexs',
     })

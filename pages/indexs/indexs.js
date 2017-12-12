@@ -10,8 +10,10 @@ Page({
   },
   onLoad: function (options) {
     this.setData({
-      music_play : app.data.music_play
+      music_play : app.data.music_play,
+      dataUrl: app.data.dataUrl
     })
+    
     if (wx.getStorageSync('pw_id')){
       this.setData({
         pw_id: wx.getStorageSync('pw_id')
@@ -25,6 +27,11 @@ Page({
     })
     console.log('onshow');
     let that = this;
+    if (wx.getStorageSync('bgMusic')){
+        wx.playBackgroundAudio({ //播放
+          dataUrl: wx.getStorageSync('bgMusic')
+        })
+    }
     if (wx.getStorageSync('pw_id')) {
       this.setData({
         pw_id: wx.getStorageSync('pw_id')
