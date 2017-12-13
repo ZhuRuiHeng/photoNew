@@ -5,21 +5,20 @@ import tips from '../../utils/tips.js';
 
 Page({
   data: {
-    move: true,
-    position: 1//照片位置
+    move: true
   },
   onLoad: function (options) {
     this.setData({
-      music_play : app.data.music_play,
+      music_play: app.data.music_play,
       dataUrl: app.data.dataUrl
     })
-    
-    if (wx.getStorageSync('pw_id')){
+
+    if (wx.getStorageSync('pw_id')) {
       this.setData({
         pw_id: wx.getStorageSync('pw_id')
       })
     }
-   
+
   },
   onShow: function () {
     wx.showLoading({
@@ -27,20 +26,22 @@ Page({
     })
     console.log('onshow');
     let that = this;
-    if (wx.getStorageSync('bgMusic')){
-        wx.playBackgroundAudio({ //播放
-          dataUrl: wx.getStorageSync('bgMusic')
-        })
+    if (wx.getStorageSync('bgMusic')) {
+      console.log('bgMusic:',wx.getStorageSync('bgMusic'));
+      app.data.dataUrl = wx.getStorageSync('bgMusic');
+      wx.playBackgroundAudio({ //播放
+        dataUrl: wx.getStorageSync('bgMusic')
+      })
     }
     if (wx.getStorageSync('pw_id')) {
       this.setData({
         pw_id: wx.getStorageSync('pw_id')
       })
-    } else if (that.data.pw_id){
+    } else if (that.data.pw_id) {
       that.setData({
-          pw_id: that.data.pw_id
+        pw_id: that.data.pw_id
       })
-    }if (!that.data.pw_id) {
+    } if (!that.data.pw_id) {
       // 获取照片墙pwid 
       wx.request({
         url: apiurl + "photo/pw?sign=" + sign + '&operator_id=' + app.data.kid,
@@ -57,16 +58,17 @@ Page({
             })
 
           } else {
-            that.setData({
-              pw_id: 0
-            })
+            console.log('无照片墙id')
+            // that.setData({
+            //   pw_id: 0
+            // })
           }
           wx.hideLoading()
         }
-      }) 
+      })
 
     }
-   
+
     app.getAuth(function () {
       let userInfo = wx.getStorageSync('userInfo');
       let sign = wx.getStorageSync('sign');
@@ -90,7 +92,13 @@ Page({
           var status = res.data.status;
           if (status == 1) {
             let photos = res.data.data.photos;
-
+            if (res.data.data.music_info){
+              console.log('bgMusic:', res.data.data.url)
+              app.data.dataUrl = res.data.data.url;
+              wx.playBackgroundAudio({ //播放
+                dataUrl: res.data.data.url
+              })
+            }
             let datas = [];
             for (let i = 0; i < 27; i++) {
               if (photos[i]) {
@@ -101,9 +109,9 @@ Page({
             }
 
             that.setData({
-              photos: datas,
-              self: res.data.data.self,
-              photosLength:true
+             photos: datas,
+             self: res.data.data.self,
+              photosLength: true
             })
             // console.log(that.data.photos);
 
@@ -111,62 +119,62 @@ Page({
             that.setData({
               photosLength: false
             })
-            tips.alert(res.data.msg);
+            //tips.alert(res.data.msg);
           }
           wx.hideLoading()
         }
       })
-      
+
     })
   },
-  friends(){
+  friends() {
     wx.showToast({
       title: '海报生成中...',
       icon: 'loading'
     })
     let that = this;
     let sign = wx.getStorageSync('sign');
-      wx.request({
-        url: apiurl + "photo/share?sign=" + sign + '&operator_id=' + app.data.kid,
-        data:{
-          pw_id: that.data.pw_id
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        method: "GET",
-        success: function (res) {
-          console.log("好友拼图照片:", res);
-          console.log("海报:", res.data.data);
-          var status = res.data.status;
-          if (status == 1) {
-            that.setData({
-              friendsImg: res.data.data
-            })
-            let friendsImg = res.data.data;
-            let friendsImgs = friendsImg.split();
-            console.log(friendsImg)
-            console.log(friendsImgs)
-            wx.previewImage({
-              current: friendsImg, // 当前显示图片的http链接
-              urls: friendsImgs // 需要预览的图片http链接列表
-            })
+    wx.request({
+      url: apiurl + "photo/share?sign=" + sign + '&operator_id=' + app.data.kid,
+      data: {
+        pw_id: that.data.pw_id
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        console.log("好友拼图照片:", res);
+        console.log("海报:", res.data.data);
+        var status = res.data.status;
+        if (status == 1) {
+          that.setData({
+            friendsImg: res.data.data
+          })
+          let friendsImg = res.data.data;
+          let friendsImgs = friendsImg.split();
+          console.log(friendsImg)
+          console.log(friendsImgs)
+          wx.previewImage({
+            current: friendsImg, // 当前显示图片的http链接
+            urls: friendsImgs // 需要预览的图片http链接列表
+          })
 
-          } else {
-            console.log(res.data.msg);
-          }
-          wx.hideLoading()
+        } else {
+          console.log(res.data.msg);
         }
-      })
+        wx.hideLoading()
+      }
+    })
   },
   //事件处理函数
   prewImg: function (e) {
     let that = this;
     let picture = e.currentTarget.dataset.picture;
     let pictures = picture.split();
-    if (picture =='https://gcdn.playonwechat.com/photo/bg.jpg'){
+    if (picture == 'https://gcdn.playonwechat.com/photo/bg.jpg') {
       console.log('no')
-    }else{
+    } else {
       wx.previewImage({
         current: picture, // 当前显示图片的http链接
         urls: pictures // 需要预览的图片http链接列表
@@ -213,11 +221,12 @@ Page({
     let sign = wx.getStorageSync('sign');
     let photos = that.data.photos;
     let arr = [];//当前上传的位置
-    if (that.data.photosLength==false){
+    if (that.data.photosLength == false) {
       that.setData({
         position: 1
       })
       wx.setStorageSync('position', 1);
+      wx.setStorageSync('photosLength', that.data.photosLength)
     } else { //未拼完
       console.log('未拼完');
       for (let i = 0; i < photos.length; i++) {
@@ -231,7 +240,7 @@ Page({
         }
       }
     }
-    
+
     wx.setStorageSync('pw_id', that.data.pw_id)
     //console.log('arr:',arr);
     wx.showLoading({
@@ -245,7 +254,7 @@ Page({
       success: function (res) {
         console.log("选择相册", res);
         const src = res.tempFilePaths[0]
-        console.log('src',src);
+        console.log('src', src);
 
         wx.redirectTo({
           url: `../avatarUpload/upload/upload?src=${src}&options=that.data.options&position=that.data.position`
@@ -258,12 +267,12 @@ Page({
           dialog: true
         })
         console.log(apiurl + "api/upload-image?sign=" + sign + ' & operator_id=' + app.data.kid);
-       
+
       }
     })
     wx.hideLoading()
   },
- 
+
   // 生成图片墙
   produce() {
     wx.showToast({
@@ -274,7 +283,7 @@ Page({
     let sign = wx.getStorageSync('sign');
     wx.request({
       url: apiurl + "photo/create-image?sign=" + sign + '&operator_id=' + app.data.kid,
-      data:{
+      data: {
         pw_id: that.data.pw_id
       },
       header: {

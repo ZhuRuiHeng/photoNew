@@ -3,7 +3,7 @@ const apiurl = 'https://friend-guess.playonwechat.com/';
 import tips from '../../utils/tips.js'
 Page({
   data: {
-
+    music: false
   },
   onLoad: function (options) {
     newName:'朋友照片墙'
@@ -32,19 +32,103 @@ Page({
         } else {
           tips.alert(res.data.msg)
         }
-        
+      }
+    })
+    //音乐 请求 
+    wx.request({
+      url: apiurl + "photo/music-list?sign=" + sign + '&operator_id=' + app.data.kid,
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        console.log("音乐列表:", res);
+        var status = res.data.status;
+        if (status == 1) {
+          console.log('音乐列表：', res.data.data);
+          that.setData({
+            musicsList:res.data.data
+          })
+        } else {
+            tips.alert(res.data.msg)
+        }
+        wx.hideLoading()
       }
     })
   },
+  // 音乐列表
+  musicList: function (e) {
+    console.log(e);
+      this.setData({
+        music:true,
+        _pw_id: e.currentTarget.dataset.pw_id
+      })
+  },
+  checkMusic(e){
+    wx.showLoading({
+      title: '加载中',
+    })
+    console.log(e);
+      let music_id = e.currentTarget.dataset.music_id;
+      let that = this;
+      let sign = wx.getStorageSync('sign');
+      wx.request({
+        url: apiurl + "photo/edit-music?sign=" + sign + '&operator_id=' + app.data.kid,
+        data:{
+          music_id: music_id,
+          pw_id: that.data._pw_id
+        },
+        header: {
+          'content-type': 'application/json'  
+        },
+        method: "GET",
+        success: function (res) {
+          console.log("修改背景:", res);
+          var status = res.data.status;
+          if (status == 1) {
+            tips.success('修改背景音乐成功！');
+            that.setData({
+              music: false
+            })
+            wx.request({
+              url: apiurl + "photo/photo-list?sign=" + sign + '&operator_id=' + app.data.kid,
+              header: {
+                'content-type': 'application/json'
+              },
+              method: "GET",
+              success: function (res) {
+                console.log("照片墙列表:", res);
+                var status = res.data.status;
+                if (status == 1) {
+                  that.setData({
+                    photosList: res.data.data
+                  })
+                  wx.hideLoading()
+                } else {
+                  tips.alert(res.data.msg)
+                }
+              }
+            })
+            
+          } else {
+            tips.alert(res.data.msg);
+          }
+          
+        }
+      })
+  },
   seeTap(e){
+    console.log(e)
     let pw_id = e.currentTarget.dataset.pw_id;
+    let bgMusic = e.currentTarget.dataset.musicurl;
+    console.log('musicUrl:',e.currentTarget.dataset.musicurl)
     wx.showLoading({
       title: '加载中',
     })
     let that = this;
     let sign = wx.getStorageSync('sign');
     wx.setStorageSync('pw_id', pw_id);
-    wx.setStorageSync('bgMusic', 'https://gcdn.playonwechat.com/photo/%E9%99%88%E5%A5%95%E8%BF%85-%E5%8D%81%E5%B9%B4.mp3');
+    wx.setStorageSync('bgMusic', e.currentTarget.dataset.musicurl);
     wx.switchTab({
       url: '../indexs/indexs',
     })
@@ -85,6 +169,7 @@ Page({
       newName: e.detail.value
     })
   },
+  
   setName(e){
     let that = this;
     let sign = wx.getStorageSync('sign');
@@ -112,9 +197,6 @@ Page({
         wx.hideLoading()
       }
     })
-  },
-  musicList(){
-    
   }
 
 })

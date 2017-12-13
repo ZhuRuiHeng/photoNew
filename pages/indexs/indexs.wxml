@@ -17,3 +17,5 @@
         <view class='active' bindtap='produce'>生成照片墙</view>
     </view>
 </view>
+<view>
+</view>

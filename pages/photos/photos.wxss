@@ -47,6 +47,8 @@ page{
 .musicTip image{
     width: 60rpx;
     height: 60rpx;
+    position: relative;
+    top: -4rpx;
 }
 .musicTip view{
   width:100%;
@@ -59,4 +61,41 @@ page{
     text-overflow:ellipsis;                    /*适用IE*/
     -o-text-overflow:ellipsis;                 /*适用opera*/
     -moz-binding: url('ellipsis.xml#ellipsis');/*适用火狐(firefox通过XUL实现效果)*/
+}
+.hidden{
+  overflow: hidden;
+  height: 100vh!important;
+}
+.footer{
+  font-size: 32rpx;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color:#f2f2f2;
+  z-index: 9;
+}
+.footer view{
+    text-align: center;
+    height: 92rpx;
+    line-height: 92rpx;
+    background: #fff;
+    position: relative;
+}
+.cancel{
+  margin-top: 10rpx;
+}
+.poster:after{
+    content:" ";
+    display: inline-block;
+    width:100%;
+    position:absolute;
+    top:0;
+    right:0;
+    border:1px solid #e5e5e5;
+    -webkit-transform:scaleY(0.5);
+    transform:scaleY(0.5);
+    -webkit-transform-origin:0 0;
+    transform-origin:0 0;
+    box-sizing:border-box;
 }

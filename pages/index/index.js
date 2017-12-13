@@ -22,10 +22,15 @@ Page({
         console.log(strs);
         console.log("pw_id:", strs[2]);
         var pw_id = strs[2];
-        that.setData({
-          pw_id: pw_id
-        })
-        wx.setStorageSync(pw_id, 'strs[2]')
+        if (pw_id =='undefined'){
+            
+        }else{
+          that.setData({
+            pw_id: pw_id
+          })
+          wx.setStorageSync(pw_id, 'strs[2]')
+        }
+        
       }
     }else if (options.pw_id) {  //有参
       let pw_id = options.pw_id;
@@ -33,10 +38,11 @@ Page({
         pw_id: pw_id
       })
       wx.setStorageSync('pw_id', pw_id);
-    } else { //没有参
-      console.log(22)
-      wx.setStorageSync('pw_id', '0');
-    }
+    } 
+    // else { //没有参
+    //   console.log('没有参')
+    //   wx.setStorageSync('pw_id', '0');
+    // }
    
   },
 
@@ -48,7 +54,7 @@ Page({
     let time = that.data.time;
     var second = that.data.second;
     wx.request({
-      url: "https://unify.playonweixin.com/site/get-advertisements",
+      url: "https://unify.playonweixin.com/site/get-advertisements?operator_id=11",
       success: function (res) {
         console.log(res);
         if (res.data.status) {
@@ -70,8 +76,8 @@ Page({
                 })
               }else{
                 wx.switchTab({
-                url: '../indexs/indexs',
-              })
+                  url: '../indexs/indexs',
+                })
               }
             }
             second--;

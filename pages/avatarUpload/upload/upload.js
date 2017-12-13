@@ -24,7 +24,7 @@ Page({
       }
     }
   },
-  onLoad(options){
+  onLoad(options) {
     console.log("options:", options);
     let pw_id = options.pw_id;
     let position = options.position;
@@ -48,6 +48,8 @@ Page({
       icon: 'loading'
     })
     let pw_id = wx.getStorageSync('pw_id');
+    let photosLength = wx.getStorageSync('photosLength');
+    console.log("photosLength:", photosLength);
     let position = wx.getStorageSync('position');
     this.wecropper.getCropperImage((avatar) => {
       if (avatar) {
@@ -69,62 +71,118 @@ Page({
               that.setData({
                 picture: data.data
               })
-              wx.request({
-                url: apiurl + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid,
-                data: {
-                  pw_id: pw_id,
-                  picture: that.data.picture,
-                  position: position
-                },
-                header: {
-                  'content-type': 'application/json'
-                },
-                method: "GET",
-                success: function (res) {
-                  console.log("添加照片:", res);
-                  let status = res.data.status;
-                  if (status == 1) {
-                    console.log('上传成功！')
-                    // 获取照片墙pwid
-                    wx.request({
-                      url: apiurl + "photo/pw?sign=" + sign + '&operator_id=' + app.data.kid,
-                      header: {
-                        'content-type': 'application/json'
-                      },
-                      method: "GET",
-                      success: function (res) {
-                        console.log("照片墙pwid:", res);
-                        var status = res.data.status;
-                        if (status == 1) {
-                          console.log(111);
-                          that.setData({
-                            pw_id: res.data.data
-                          })
-                          //  获取到裁剪后的图片
-                          wx.switchTab({
-                            url: `../../indexs/indexs?avatar=${picture}`
-                          })
+              if(photosLength==false){
+                  wx.request({
+                    url: apiurl + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid,
+                    data: {
+                      picture: that.data.picture,
+                      position: position
+                    },
+                    header: {
+                      'content-type': 'application/json'
+                    },
+                    method: "GET",
+                    success: function (res) {
+                      console.log("添加照片:", res);
+                      let status = res.data.status;
+                      if (status == 1) {
+                        console.log('上传成功！')
+                        // 获取照片墙pwid
+                        wx.request({
+                            url: apiurl + "photo/pw?sign=" + sign + '&operator_id=' + app.data.kid,
+                            header: {
+                              'content-type': 'application/json'
+                            },
+                            method: "GET",
+                            success: function (res) {
+                              console.log("照片墙pwid:", res);
+                              var status = res.data.status;
+                              if (status == 1) {
+                                console.log(111);
+                                that.setData({
+                                  pw_id: res.data.data
+                                })
+                                wx.setStorageSync('pw_id', res.data.data)
+                                //  获取到裁剪后的图片
+                                wx.switchTab({
+                                  url: `../../indexs/indexs?avatar=${picture}`
+                                })
 
-                        } else {
-                          console.log(res.data.msg);
-                          wx.showToast({
-                            title: res.data.msg,
-                            icon: 'loading'
-                          })
-                        }
+                              } else {
+                                wx.showToast({
+                                  title: res.data.msg,
+                                  icon: 'loading'
+                                })
+                              }
+                            }
+                        })
+                      } else {
+                        wx.showToast({
+                          title: res.data.msg,
+                          icon: 'loading'
+                        })
                       }
-                    })
 
-                  } else {
-                    wx.showToast({
-                      title: res.data.msg,
-                      icon: 'loading'
-                    })
-                  }
+                    }
+                  })
+              }else{
+                wx.request({
+                    url: apiurl + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid,
+                    data: {
+                      pw_id: pw_id,
+                      picture: that.data.picture,
+                      position: position
+                    },
+                    header: {
+                      'content-type': 'application/json'
+                    },
+                    method: "GET",
+                    success: function (res) {
+                      console.log("添加照片:", res);
+                      let status = res.data.status;
+                      if (status == 1) {
+                        console.log('上传成功！')
+                        // 获取照片墙pwid
+                        wx.request({
+                          url: apiurl + "photo/pw?sign=" + sign + '&operator_id=' + app.data.kid,
+                          header: {
+                            'content-type': 'application/json'
+                          },
+                          method: "GET",
+                          success: function (res) {
+                            console.log("照片墙pwid:", res);
+                            var status = res.data.status;
+                            if (status == 1) {
+                              console.log(111);
+                              that.setData({
+                                pw_id: res.data.data
+                              })
+                              wx.setStorageSync('pw_id', res.data.data)
+                              //  获取到裁剪后的图片
+                              wx.switchTab({
+                                url: `../../indexs/indexs?avatar=${picture}`
+                              })
 
-                }
-              })
-              // 添加照片
+                            } else {
+                              console.log(res.data.msg);
+                              wx.showToast({
+                                title: res.data.msg,
+                                icon: 'loading'
+                              })
+                            }
+                          }
+                        })
+
+                      } else {
+                        wx.showToast({
+                          title: res.data.msg,
+                          icon: 'loading'
+                        })
+                      }
+
+                    }
+                  })
+              }
             } else {
               wx.showToast({
                 title: res.data.msg,
