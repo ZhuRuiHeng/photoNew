@@ -96,11 +96,11 @@ Page({
           if (status == 1) {
             let photos = res.data.data.photos;
             if (res.data.data.music_info){
-              console.log('bgMusic:', res.data.data.url)
-              // app.data.dataUrl = res.data.data.url;
-              // wx.playBackgroundAudio({ //播放
-              //   dataUrl: res.data.data.url
-              // })
+              console.log('bgMusic:', res.data.data.music_info.url)
+              app.data.dataUrl = res.data.data.music_info.url;
+              wx.playBackgroundAudio({ //播放
+                dataUrl: res.data.data.music_info.url
+              })
             }
             let datas = [];
             for (let i = 0; i < 27; i++) {

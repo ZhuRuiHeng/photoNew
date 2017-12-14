@@ -109,24 +109,24 @@ Page({
               photosList
             })
             console.log("new:",that.data.photosList)
-            wx.request({
-              url: apiurl + "photo/photo-list?sign=" + sign + '&operator_id=' + app.data.kid,
-              header: {
-                'content-type': 'application/json'
-              },
-              method: "GET",
-              success: function (res) {
-                console.log("照片墙列表:", res);
-                var status = res.data.status;
-                if (status == 1) {
-                  that.setData({
-                    photosList:res.data.data
-                  })
-                } else {
-                  tips.alert(res.data.msg)
-                }
-              }
-            })
+            // wx.request({
+            //   url: apiurl + "photo/photo-list?sign=" + sign + '&operator_id=' + app.data.kid,
+            //   header: {
+            //     'content-type': 'application/json'
+            //   },
+            //   method: "GET",
+            //   success: function (res) {
+            //     console.log("照片墙列表:", res);
+            //     var status = res.data.status;
+            //     if (status == 1) {
+            //       that.setData({
+            //         photosList:res.data.data
+            //       })
+            //     } else {
+            //       tips.alert(res.data.msg)
+            //     }
+            //   }
+            // })
             
           } else {
             tips.alert(res.data.msg);
@@ -171,24 +171,24 @@ Page({
           })
           console.log("delsnew:", that.data.photosList)
           // 重新其请求
-          wx.request({
-            url: apiurl + "photo/photo-list?sign=" + sign + '&operator_id=' + app.data.kid,
-            header: {
-              'content-type': 'application/json'
-            },
-            method: "GET",
-            success: function (res) {
-              console.log("照片墙列表:", res);
-              var status = res.data.status;
-              if (status == 1) {
-                that.setData({
-                  photosList: res.data.data
-                })
-              } else {
-                tips.alert(res.data.msg)
-              }
-            }
-          })
+          // wx.request({
+          //   url: apiurl + "photo/photo-list?sign=" + sign + '&operator_id=' + app.data.kid,
+          //   header: {
+          //     'content-type': 'application/json'
+          //   },
+          //   method: "GET",
+          //   success: function (res) {
+          //     console.log("照片墙列表:", res);
+          //     var status = res.data.status;
+          //     if (status == 1) {
+          //       that.setData({
+          //         photosList: res.data.data
+          //       })
+          //     } else {
+          //       tips.alert(res.data.msg)
+          //     }
+          //   }
+          // })
         } else {
           tips.alert(res.data.msg)
         }
