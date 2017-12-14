@@ -102,8 +102,8 @@ Page({
                   let length = that.data.photos.length;
                   let arr = [];//当前上传的位置
                   // 背景音乐
-                  console.log("photos:", that.data.photos);
-                  console.log("length:", length);
+                  //console.log("photos:", that.data.photos);
+                 // console.log("length:", length);
                   for (let i = 0; i < length; i++) {
                     //console.log(photos[i].photo_url);
                     if (that.data.photos[i].photo_url == 'https://gcdn.playonwechat.com/photo/bg.jpg') {
@@ -173,7 +173,7 @@ Page({
                       })
                     }, 1000)
                   }
-                  console.log(that.data.photos);
+                  //console.log(that.data.photos);
                   wx.hideLoading()
                 } else {
                   that.setData({
