@@ -22,7 +22,8 @@ Page({
         width: 300,
         height: 300
       }
-    }
+    },
+    tapss:true
   },
   onLoad(options) {
     console.log("options:", options);
@@ -47,6 +48,7 @@ Page({
       title: '上传中',
       icon: 'loading'
     })
+    
     let pw_id = wx.getStorageSync('pw_id');
     let photosLength = wx.getStorageSync('photosLength');
     console.log("photosLength:", photosLength);
@@ -54,6 +56,9 @@ Page({
     this.wecropper.getCropperImage((avatar) => {
       if (avatar) {
         var that = this;
+        that.setData({
+          tapss: false
+        })
         let sign = wx.getStorageSync('sign');
         console.log(apiurl + "api/upload-image?sign=" + sign + ' & operator_id=' + app.data.kid);
         wx.uploadFile({
@@ -65,13 +70,15 @@ Page({
           },
           success: function (res) {
             console.log('上传图片成功', res);
+            console.log('上传pw_id：', pw_id);
             let data = JSON.parse(res.data);
             let picture = data.data;
             if (data.status == 1) {
               that.setData({
                 picture: data.data
               })
-              if(photosLength==false){
+              if(photosLength == false){
+                console.log("pw_id:",photosLength == false)
                   wx.request({
                     url: apiurl + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid,
                     data: {
@@ -100,7 +107,8 @@ Page({
                               if (status == 1) {
                                 console.log(111);
                                 that.setData({
-                                  pw_id: res.data.data
+                                  pw_id: res.data.data,
+                                  tapss: true
                                 })
                                 wx.setStorageSync('pw_id', res.data.data)
                                 //  获取到裁剪后的图片
@@ -113,6 +121,7 @@ Page({
                                   title: res.data.msg,
                                   icon: 'loading'
                                 })
+                                
                               }
                             }
                         })
@@ -126,6 +135,7 @@ Page({
                     }
                   })
               }else{
+                console.log('上传pw_id：',pw_id);
                 wx.request({
                     url: apiurl + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid,
                     data: {
@@ -138,6 +148,7 @@ Page({
                     },
                     method: "GET",
                     success: function (res) {
+                      console.log('上传pw_id：', pw_id);
                       console.log("添加照片:", res);
                       let status = res.data.status;
                       if (status == 1) {
@@ -155,9 +166,10 @@ Page({
                             if (status == 1) {
                               console.log(111);
                               that.setData({
-                                pw_id: res.data.data
+                                pw_id: pw_id,
+                                tapss: true
                               })
-                              wx.setStorageSync('pw_id', res.data.data)
+                              wx.setStorageSync('pw_id', pw_id)
                               //  获取到裁剪后的图片
                               wx.switchTab({
                                 url: `../../indexs/indexs?avatar=${picture}`
@@ -171,6 +183,7 @@ Page({
                               })
                             }
                           }
+                          
                         })
 
                       } else {
@@ -193,8 +206,17 @@ Page({
         })
 
       } else {
-        console.log('获取图片失败，请稍后重试')
+        console.log('获取图片失败，请稍后重试'),
+        setTimeout(function(){
+          wx.switchTab({
+            url: `../../indexs/indexs?avatar=${picture}`
+          })
+        },1000)
+          
       }
+    })
+    that.setData({
+      tapss: true
     })
   },
   uploadTap() {

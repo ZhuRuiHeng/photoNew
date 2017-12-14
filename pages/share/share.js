@@ -5,7 +5,8 @@ import tips from '../../utils/tips.js';
 
 Page({
   data: {
-    move: true
+    move: true,
+    music_play:true
   },
   onLoad: function (options) {
     let pw_id = options.pw_id;
@@ -53,7 +54,6 @@ Page({
                 url: '../indexs/indexs'
               })
           }
-          
           if (status == 1) {
             let photos = res.data.data.photos;
             let datas = [];
@@ -64,17 +64,14 @@ Page({
                 datas.push({ 'photo_url': 'https://gcdn.playonwechat.com/photo/bg.jpg', 'position': i + 1 })
               }
             }
-
             that.setData({
-              photos: datas,
-              self: res.data.data.self
+              photos: datas
             })
             // console.log(that.data.photos);
             wx.hideLoading()
           } else {
             tips.alert(res.data.msg);
           }
-          
         }
       })
       setTimeout(function () {
@@ -118,8 +115,7 @@ Page({
     }
   },
   upPhoto() {
-
-    let that = this;
+  let that = this;
     let sign = wx.getStorageSync('sign');
     let photos = that.data.photos;
     let length = photos.length;
@@ -127,7 +123,6 @@ Page({
     // 背景音乐
     console.log("length:", length);
     if (length = 27) {  //不足27张，已拼完有删除掉的
-      console.log('已拼完');
       for (let i = 0; i < length; i++) {
         //console.log(photos[i].photo_url);
         if (photos[i].photo_url == 'https://gcdn.playonwechat.com/photo/bg.jpg') {

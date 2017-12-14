@@ -5,7 +5,8 @@ import tips from '../../utils/tips.js';
 
 Page({
   data: {
-    move: true
+    move: true,
+    photosLength:true
   },
   onLoad: function (options) {
     this.setData({
@@ -24,10 +25,12 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    console.log('onshow');
     let that = this;
-    if (wx.getStorageSync('bgMusic')) {
-      console.log('bgMusic:',wx.getStorageSync('bgMusic'));
+    // console.log(wx.getStorageSync('bgMusic'),1)
+    // console.log(app.data.dataUrl,2)
+    if (wx.getStorageSync('bgMusic') != app.data.dataUrl) {
+      // console.log('bgMusic');
+      // console.log('bgMusic:',wx.getStorageSync('bgMusic'));
       app.data.dataUrl = wx.getStorageSync('bgMusic');
       wx.playBackgroundAudio({ //播放
         dataUrl: wx.getStorageSync('bgMusic')
@@ -94,10 +97,10 @@ Page({
             let photos = res.data.data.photos;
             if (res.data.data.music_info){
               console.log('bgMusic:', res.data.data.url)
-              app.data.dataUrl = res.data.data.url;
-              wx.playBackgroundAudio({ //播放
-                dataUrl: res.data.data.url
-              })
+              // app.data.dataUrl = res.data.data.url;
+              // wx.playBackgroundAudio({ //播放
+              //   dataUrl: res.data.data.url
+              // })
             }
             let datas = [];
             for (let i = 0; i < 27; i++) {
@@ -226,7 +229,7 @@ Page({
         position: 1
       })
       wx.setStorageSync('position', 1);
-      wx.setStorageSync('photosLength', that.data.photosLength)
+      
     } else { //未拼完
       console.log('未拼完');
       for (let i = 0; i < photos.length; i++) {
@@ -240,7 +243,7 @@ Page({
         }
       }
     }
-
+    wx.setStorageSync('photosLength', that.data.photosLength)
     wx.setStorageSync('pw_id', that.data.pw_id)
     //console.log('arr:',arr);
     wx.showLoading({

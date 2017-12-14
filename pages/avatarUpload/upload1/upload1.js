@@ -22,15 +22,14 @@ Page({
         width: 300,
         height: 300
       }
-    }
+    },
+    tapss: true
   },
   onLoad(options){
     console.log("options:", options);
     let pw_id = options.pw_id;
-    let position = options.position;
     that.setData({
-      pw_id,
-      position
+      pw_id
     })
   },
   touchStart(e) {
@@ -43,15 +42,20 @@ Page({
     this.wecropper.touchEnd(e)
   },
   getCropperImage() {
+    console.log('getCropperImage11');
+    this.setData({
+      tapss: false
+    })
+    this.cropperOpt
     wx.showToast({
       title: '上传中',
       icon: 'loading'
     })
     let pw_id = wx.getStorageSync('pw_id');
-    let position = wx.getStorageSync('position');
     this.wecropper.getCropperImage((avatar) => {
       if (avatar) {
         var that = this;
+        
         let sign = wx.getStorageSync('sign');
         console.log(apiurl + "api/upload-image?sign=" + sign + ' & operator_id=' + app.data.kid);
         wx.uploadFile({
@@ -65,100 +69,122 @@ Page({
             console.log('上传图片成功', res);
             let data = JSON.parse(res.data);
             let picture = data.data;
-            if (data.status == 1) {
-              that.setData({
-                picture: data.data
-              })
-              wx.request({
-                url: apiurl + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid,
-                data: {
-                  pw_id: pw_id,
-                  picture: that.data.picture,
-                  position: position
-                },
-                header: {
-                  'content-type': 'application/json'
-                },
-                method: "GET",
-                success: function (res) {
-                  console.log("添加照片:", res);
-                  let status = res.data.status;
-                  if (status == 1) {
-                    console.log('上传成功！')
-                    // 获取照片墙pwid
+            that.setData({
+              picture
+            })
+            //new获取照片墙信息
+            wx.request({
+              url: apiurl + "photo/photo-wall-detail?sign=" + sign + '&operator_id=' + app.data.kid,
+              data: {
+                pw_id: pw_id
+              },
+              header: {
+                'content-type': 'application/json'
+              },
+              method: "GET",
+              success: function (res) {
+                console.log("照片墙信息:", res);
+                var status = res.data.status;
+                if (status == 1) {
+                  let photos = res.data.data.photos;
+                  let datas = [];
+                  for (let i = 0; i < 27; i++) {
+                    if (photos[i]) {
+                      datas.push(photos[i]);
+                    } else {
+                      datas.push({ 'photo_url': 'https://gcdn.playonwechat.com/photo/bg.jpg', 'position': i + 1 })
+                    }
+                  }
+                  that.setData({
+                    photos: datas
+                  })
+                  let length = that.data.photos.length;
+                  let arr = [];//当前上传的位置
+                  // 背景音乐
+                  console.log("length:", length);
+                  for (let i = 0; i < length; i++) {
+                    //console.log(photos[i].photo_url);
+                    if (photos[i].photo_url == 'https://gcdn.playonwechat.com/photo/bg.jpg') {
+                      arr.push(photos[i].position);
+                      //console.log('position:', photos[i].position);
+                      wx.setStorageSync('position', arr[0]);
+                      that.setData({
+                        position: arr[0]
+                      })
+                    }
+                  }
+                  console.log("传：", that.data.position);
+                  if (data.status == 1) {
                     wx.request({
-                      url: apiurl + "photo/pw?sign=" + sign + '&operator_id=' + app.data.kid,
+                      url: apiurl + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid,
+                      data: {
+                        pw_id: pw_id,
+                        picture: that.data.picture,
+                        position: that.data.position
+                      },
                       header: {
                         'content-type': 'application/json'
                       },
                       method: "GET",
                       success: function (res) {
-                        console.log("照片墙pwid:", res);
-                        var status = res.data.status;
+                        console.log("添加照片:", res);
+                        let status = res.data.status;
                         if (status == 1) {
-                          console.log(111);
                           that.setData({
-                            pw_id: res.data.data
+                            tapss: true
                           })
+                          console.log('上传成功！')
                           //  获取到裁剪后的图片
                           wx.redirectTo({
                             url: `../../share/share?avatar=${picture}&pw_id=${wx.getStorageSync('pw_id')}`
                           })
 
                         } else {
-                          console.log(res.data.msg);
                           wx.showToast({
                             title: res.data.msg,
                             icon: 'loading'
                           })
+                          that.setData({
+                            tapss: true
+                          })
+                          setTimeout(function () {
+                            wx.redirectTo({
+                              url: `../../share/share?avatar=${picture}&pw_id=${wx.getStorageSync('pw_id')}`
+                            })
+                          }, 1000)
                         }
+
                       }
                     })
-
+                    // 添加照片
                   } else {
                     wx.showToast({
                       title: res.data.msg,
                       icon: 'loading'
                     })
+                    that.setData({
+                      tapss: true
+                    })
+                    setTimeout(function () {
+                      wx.redirectTo({
+                        url: `../../share/share?avatar=${picture}&pw_id=${wx.getStorageSync('pw_id')}`
+                      })
+                    }, 1000)
                   }
-
+                  console.log(that.data.photos);
+                  wx.hideLoading()
+                } else {
+                  that.setData({
+                    tapss: true
+                  })
+                  tips.alert(res.data.msg);
                 }
-              })
-              // 添加照片
-            } else {
-              wx.showToast({
-                title: res.data.msg,
-                icon: 'loading'
-              })
-            }
+
+              }
+            })
+            
           }
         })
-        // wx.uploadFile({
-        //   url: 'https://impress.playonwechat.com/site/save-game?sign=' + sign, //仅为示例，非真实的接口地址
-        //   filePath: avatar,
-        //   name: 'file',
-        //   formData: {
-        //     'user': 'test'
-        //   },
-        //   success: function (res) {
-        //     console.log("图片", res);
-        //     var status = JSON.parse(res.data).status;
-        //     console.log(status);
-        //     var fileData = JSON.parse(res.data).data.url;
-        //     var gid = JSON.parse(res.data).data.gid;
-        //     if (status == 1) {
-        //       var img_src = fileData;
-        //       that.setData({
-        //         img_src: img_src
-        //       });
-        //       console.log(111);
-        //       //  获取到裁剪后的图片
-        //       wx.switchTab({
-        //         url: `../../indexs/indexs?avatar=${fileData}`
-        //       })
-        //     }
-        //   }
-        // })
 
       } else {
         console.log('获取图片失败，请稍后重试')

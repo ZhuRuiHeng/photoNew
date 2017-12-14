@@ -8,9 +8,10 @@
                 bindtap="uploadTap">
             重新选择
         </view>
-        <view
-                class="getCropperImage"
-                bindtap="getCropperImage">
+        <view wx:if="{{tapss}}" class="getCropperImage  one" bindtap="getCropperImage" >
+            确定
+        </view>
+        <view wx:else class="getCropperImage two" >
             确定
         </view>
     </view>

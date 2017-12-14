@@ -21,7 +21,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
@@ -33,7 +33,7 @@
 					"id": 1,
 					"name": "分享",
 					"pathName": "pages/index/index",
-					"query": "scene=photo_wall_1312"
+					"query": "scene=photo_wall_1578"
 				},
 				{
 					"id": 2,
@@ -45,7 +45,7 @@
 					"id": 3,
 					"name": "二维码",
 					"pathName": "pages/index/index",
-					"query": "scene=photo_wall_21"
+					"query": "scene=photo_wall_1312"
 				},
 				{
 					"id": 4,

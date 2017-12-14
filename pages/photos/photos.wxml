@@ -1,10 +1,13 @@
 <view class="container">
     <view class='item' wx:for="{{photosList}}" wx:key="{{index}}" data-pw_id='{{item.id}}' >
-        <view class='musicTip' bindtap="musicList"  data-pw_id="{{item.id}}">
+        <view class='dels' bindtap="dels" data-pw_id='{{item.id}}' data-photoIndex='{{index}}'>
+            <image class='dels' src="../img/dels.png" mode="widthFix"></image>
+        </view>
+        <view class='musicTip' bindtap="musicList"  data-pw_id="{{item.id}}" data-index='{{index}}'>
             <image class='music' src="../img/music.png" mode='widthFix'></image>
             <view>{{item.music_info.name}}-{{item.music_info.singer}}</view>
         </view>
-        <image class='niceImg' data-url='{{item.thumb}}' src="{{item.thumb}}" data-musicUrl='{{item.music_info.url}}'
+        <image class='niceImg' data-url='{{item.thumb}}' src="{{item.thumb}}?{{num}}" data-musicUrl='{{item.music_info.url}}'
                 mode='widthFix' data-pw_id='{{item.id}}' bindtap='seeTap'></image>
         <view class='timeWho'>
             <input wx:if="{{item.name == 'undefined' || !item.name}}" type='text' 
@@ -30,7 +33,7 @@
 <view class='bg' wx:if="{{music}}"  bindtap='shareClose'></view>
 <view class='footer' wx:if="{{music}}"> 
     <view bindtap='checkMusic' wx:for="{{musicsList}}" wx:key="{{index}}" data-url='{{item.url}}'
-          data-music_id="{{item.music_id}}" class='poster'>
+          data-music_id="{{item.music_id}}" class='poster' data-name='{{item.name}}' data-singer='{{item.singer}}'>
       {{item.name}} - {{item.singer}}
     </view>
     <view bindtap='cancel' class='cancel'>取消</view>
