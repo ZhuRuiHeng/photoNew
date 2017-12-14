@@ -231,7 +231,7 @@ Page({
       wx.setStorageSync('position', 1);
       
     } else { //未拼完
-      console.log('未拼完');
+      console.log('未拼完11111');
       for (let i = 0; i < photos.length; i++) {
         if (photos[i].photo_url == 'https://gcdn.playonwechat.com/photo/bg.jpg') {
           arr.push(photos[i].position);

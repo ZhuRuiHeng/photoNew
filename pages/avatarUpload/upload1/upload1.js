@@ -87,6 +87,7 @@ Page({
                 var status = res.data.status;
                 if (status == 1) {
                   let photos = res.data.data.photos;
+                  console.log(photos);
                   let datas = [];
                   for (let i = 0; i < 27; i++) {
                     if (photos[i]) {
@@ -101,11 +102,12 @@ Page({
                   let length = that.data.photos.length;
                   let arr = [];//当前上传的位置
                   // 背景音乐
+                  console.log("photos:", that.data.photos);
                   console.log("length:", length);
                   for (let i = 0; i < length; i++) {
                     //console.log(photos[i].photo_url);
-                    if (photos[i].photo_url == 'https://gcdn.playonwechat.com/photo/bg.jpg') {
-                      arr.push(photos[i].position);
+                    if (that.data.photos[i].photo_url == 'https://gcdn.playonwechat.com/photo/bg.jpg') {
+                      arr.push(that.data.photos[i].position);
                       //console.log('position:', photos[i].position);
                       wx.setStorageSync('position', arr[0]);
                       that.setData({
@@ -178,6 +180,11 @@ Page({
                     tapss: true
                   })
                   tips.alert(res.data.msg);
+                  setTimeout(function () {
+                    wx.redirectTo({
+                      url: `../../share/share?avatar=${picture}&pw_id=${wx.getStorageSync('pw_id')}`
+                    })
+                  }, 1000)
                 }
 
               }

@@ -48,14 +48,16 @@ Page({
         success: function (res) {
           console.log("照片墙信息:", res);
           var status = res.data.status;
-          let self = res.data.data.self;
-          if (self==true){
+          
+          
+          if (status == 1) {
+            let photos = res.data.data.photos;
+            let self = res.data.data.self;
+            if (self == true) {
               wx.switchTab({
                 url: '../indexs/indexs'
               })
-          }
-          if (status == 1) {
-            let photos = res.data.data.photos;
+            }
             let datas = [];
             for (let i = 0; i < 27; i++) {
               if (photos[i]) {
@@ -71,6 +73,14 @@ Page({
             wx.hideLoading()
           } else {
             tips.alert(res.data.msg);
+            setTimeout(function(){
+                if (res.data.msg == '照片墙不存在') {
+                  wx.switchTab({
+                    url: '../indexs/indexs'
+                  })
+                }
+            },1000)
+            
           }
         }
       })

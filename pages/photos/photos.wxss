@@ -115,13 +115,11 @@ page{
   width: 50rpx;
   height: 40rpx;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -7rpx;
+  right: -6rpx;
   cursor: pointer;
 }
 .item .dels image{
   width: 36rpx;
   height: 36rpx;
-  top: -2rpx;
-  right: 0;
 }
