@@ -7,7 +7,7 @@
             <image class='music' src="../img/music.png" mode='widthFix'></image>
             <view>{{item.music_info.name}}-{{item.music_info.singer}}</view>
         </view>
-        <image class='niceImg' data-url='{{item.thumb}}' src="{{item.thumb}}?{{num}}" data-musicUrl='{{item.music_info.url}}'
+        <image class='niceImg' data-url='{{item.thumb}}' src="{{item.thumb}}?{{num}}" data-musicUrl='{{item.music_info.url}}' data-nameMusic='{{item.music_info.name}}'
                 mode='widthFix' data-pw_id='{{item.id}}' bindtap='seeTap'></image>
         <view class='timeWho'>
             <input wx:if="{{item.name == 'undefined' || !item.name}}" type='text' 
@@ -20,7 +20,7 @@
     <!--新增  -->
     <view class='item newAdd' >
         <view class='musicTip'  style="visibility: hidden;">
-            <image class='music' src="../img/music.png" mode='widthFix'></image>
+            <image class='music' src="../img/music.png" mode='widthFix' ></image>
             <view>那些年十年那些年</view>
         </view>
         <image class='niceImg'  src="../img/add.png" bindtap='newPhotos'

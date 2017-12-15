@@ -212,6 +212,8 @@ Page({
     let sign = wx.getStorageSync('sign');
     wx.setStorageSync('pw_id', pw_id);
     wx.setStorageSync('bgMusic', e.currentTarget.dataset.musicurl);
+    wx.setStorageSync('nameMusic', e.currentTarget.dataset.nameMusic);
+    
     wx.switchTab({
       url: '../indexs/indexs',
     })

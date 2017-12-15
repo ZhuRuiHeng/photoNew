@@ -40,6 +40,9 @@ page{
 .newAdd{
   position: relative
 }
+.newAdd .niceImg{
+    top: -26rpx;
+}
 .musicTip{
   width: 100%;
   display: flex;

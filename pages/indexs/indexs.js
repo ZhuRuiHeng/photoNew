@@ -6,11 +6,12 @@ import tips from '../../utils/tips.js';
 Page({
   data: {
     move: true,
-    photosLength:true
+    photosLength:true,
+    music_play:true
   },
   onLoad: function (options) {
     this.setData({
-      music_play: app.data.music_play,
+      //music_play: app.data.music_play,
       dataUrl: app.data.dataUrl
     })
 
@@ -28,12 +29,20 @@ Page({
     let that = this;
     // console.log(wx.getStorageSync('bgMusic'),1)
     // console.log(app.data.dataUrl,2)
-    if (wx.getStorageSync('bgMusic') != app.data.dataUrl) {
+    console.log(wx.getStorageSync('bgMusic'), app.data.dataUrl, 111)
+    if (wx.getStorageSync('bgMusic') == app.data.dataUrl) {
       // console.log('bgMusic');
-      // console.log('bgMusic:',wx.getStorageSync('bgMusic'));
+      // wx.pauseBackgroundAudio()
+      // wx.playBackgroundAudio({ //播放
+      //   dataUrl: wx.getStorageSync('bgMusic'),
+      //   title: wx.getStorageSync('nameMusic')
+      // })
+    }else{
+      console.log('bgMusic:', wx.getStorageSync('bgMusic'), app.data.dataUrl, 333);
       app.data.dataUrl = wx.getStorageSync('bgMusic');
       wx.playBackgroundAudio({ //播放
-        dataUrl: wx.getStorageSync('bgMusic')
+        dataUrl: wx.getStorageSync('bgMusic'),
+        title: wx.getStorageSync('nameMusic'),
       })
     }
     if (wx.getStorageSync('pw_id')) {
@@ -96,11 +105,38 @@ Page({
           if (status == 1) {
             let photos = res.data.data.photos;
             if (res.data.data.music_info){
-              console.log('bgMusic:', res.data.data.music_info.url)
-              app.data.dataUrl = res.data.data.music_info.url;
-              wx.playBackgroundAudio({ //播放
-                dataUrl: res.data.data.music_info.url
-              })
+              console.log('bgMusicnew:', res.data.data.music_info.url);
+              console.log(wx.getStorageSync('bgMusic'), res.data.data.music_info.url,'比较')
+              console.log(wx.getStorageSync('bgMusic') == res.data.data.music_info.url,'是否相同')
+              if (!wx.getStorageSync('bgMusic')){
+                console.log('没有缓存音乐')
+                wx.setStorageSync('bgMusic', res.data.data.music_info.url);
+                app.data.dataUrl = res.data.data.music_info.url;
+                wx.playBackgroundAudio({ //播放
+                  dataUrl: res.data.data.music_info.url,
+                  title: res.data.data.music_info.name,
+                })
+                that.setData({
+                  music_play: true
+                })
+              }
+              if (wx.getStorageSync('bgMusic') == res.data.data.music_info.url) {
+                console.log('缓存音乐与当前音乐相同')
+                // wx.pauseBackgroundAudio()
+                // wx.playBackgroundAudio({ //播放
+                //   dataUrl: wx.getStorageSync('bgMusic')
+                // })
+              }else{
+                console.log(wx.getStorageSync('bgMusic'), res.data.data.music_info.url, 222)
+                app.data.dataUrl = res.data.data.music_info.url;
+                wx.playBackgroundAudio({ //播放
+                  dataUrl: res.data.data.music_info.url
+                })
+                that.setData({
+                  music_play: true
+                })
+              }
+             
             }
             let datas = [];
             for (let i = 0; i < 27; i++) {
@@ -130,6 +166,7 @@ Page({
 
     })
   },
+ 
   friends() {
     wx.showToast({
       title: '海报生成中...',

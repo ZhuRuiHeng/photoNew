@@ -11,7 +11,7 @@ App({
     authStatic: false,
     loginStatic: false,
     authSuccess: false,
-    dataUrl: "https://gcdn.playonwechat.com/photo/musics.mp3",
+    dataUrl: "",
     music_play: true
   },
   onLaunch: function () {
@@ -36,8 +36,7 @@ App({
     wx.setStorageSync('music_play', that.data.music_play);
     if (that.data.music_play==true){
       wx.playBackgroundAudio({
-        dataUrl: that.data.dataUrl,
-        title: '那些年'
+        dataUrl: that.data.dataUrl
       })
     }else{
       wx.pauseBackgroundAudio();
