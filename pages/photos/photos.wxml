@@ -30,11 +30,23 @@
         </view>
     </view>
 </view>
-<view class='bg' wx:if="{{music}}"  bindtap='shareClose'></view>
-<view class='footer' wx:if="{{music}}"> 
+ <view class='bg' wx:if="{{musics}}"  bindtap='shareClose'></view> 
+<view class='footer' wx:if="{{musics}}"> 
     <view bindtap='checkMusic' wx:for="{{musicsList}}" wx:key="{{index}}" data-url='{{item.url}}'
           data-music_id="{{item.music_id}}" class='poster' data-name='{{item.name}}' data-singer='{{item.singer}}'>
       {{item.name}} - {{item.singer}}
     </view>
     <view bindtap='cancel' class='cancel'>取消</view>
+</view>
+<view class='pop' wx:if="{{music}}" >
+        <view class='closePop'>
+            <image class='dels' src="../img/dels.png" mode="widthFix" bindtap='cancel'></image>
+        </view>
+    <scroll-view  scroll-y style="height: 800rpx;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+        
+        <view bindtap='checkMusic' wx:for="{{musicsList}}" wx:key="{{index}}" data-url='{{item.url}}'
+              data-music_id="{{item.music_id}}" class='poster' data-name='{{item.name}}' data-singer='{{item.singer}}'>
+          {{item.name}} - {{item.singer}}
+        </view>
+    </scroll-view>
 </view>

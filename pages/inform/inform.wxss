@@ -1,0 +1,56 @@
+.nicePhoto{
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    padding: 20rpx 0;
+}
+.nicePhoto image{
+  width: 70%;
+}
+.top{
+  width: 100%;
+  font-size: 28rpx;
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+  padding:10rpx 20rpx;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+.top image.niceImg{
+    width: 90rpx;
+    height: 90rpx;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-sizing: border-box;
+    margin-right: 20rpx;
+}
+.top .niceNames{
+  padding: 8rpx 0 0 0;
+}
+.top text{
+  background: #e7e7e7;
+  color: #717171;
+  font-size: 20rpx;
+  border-radius: 20rpx;
+  display: inline-block;
+  padding: 6rpx 12rpx;
+  line-height: 22rpx;
+  margin: 0 10rpx;
+}
+.nowInform{
+  width: 100%;
+  display: flex;
+  padding: 0 20rpx;
+  font-size: 26rpx;
+}
+.nowInform view{
+  flex: 1;
+}
+.lowNight .zan{
+  display: inline-block;
+}
+.nowInform image{
+  width: 40rpx;
+  height: 40rpx;
+}

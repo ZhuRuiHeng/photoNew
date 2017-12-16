@@ -1,0 +1,98 @@
+page{
+  background: #e4e4e4;
+}
+.container{
+    overflow: hidden;
+    padding:0;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 26rpx;
+    background-color: #e4e4e4;
+    margin-bottom: 100rpx;
+}
+.item{
+  background: #fff;
+  width: 100%;
+}
+.item .top{
+  display: flex;
+  justify-content: flex-start;
+}
+.item .top image.niceImg{
+    width: 90rpx;
+    height: 90rpx;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-sizing: border-box;
+    margin-right: 20rpx;
+}
+.top{
+    position: relative;
+    padding:10rpx 20rpx;
+    border-bottom: 1px solid #ddd;
+}
+.top .dels{
+    position: absolute;
+    top: 20rpx;
+    right: 20rpx;
+    width: 30rpx;
+    height: 30rpx;
+}
+.niceNames view{
+  line-height: 46rpx;
+}
+.niceNames view text{
+  background: #e7e7e7;
+  color: #717171;
+  font-size: 20rpx;
+  border-radius: 20rpx;
+  display: inline-block;
+  padding: 6rpx 12rpx;
+  line-height: 22rpx;
+  margin: 0 10rpx;
+}
+.mid{
+  text-align: center;
+  margin: 0 auto;
+  padding: 30rpx 0;
+}
+.btm{
+  width: 100%;
+  background: #000;
+  opacity: 0.6;
+  display: flex;
+  color: #fff;
+  height: 72rpx;
+  line-height: 72rpx;
+}
+.btm view{
+  flex: 1;
+}
+.btm .right image{
+  width: 50rpx;
+  height: 50rpx;
+  position: relative;
+  top: 10rpx;
+}
+.btm .left{
+  padding-left: 20rpx;
+}
+.btm .right{
+  display: flex;
+  justify-content: space-around;
+}
+.btm .right view{
+  cursor: pointer;
+}
+.btm button{
+  font-size: 32rpx;
+  padding: 0!important;
+  margin: 0!important;
+  border-radius: 0!important;
+  height: 72rpx;
+  line-height: 72rpx;
+  background: #000;
+}
+button:after{
+  content: none;
+}

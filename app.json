@@ -2,10 +2,13 @@
   "pages":[
     "pages/index/index",
     "pages/photos/photos",
+    "pages/my/my",
+    "pages/inform/inform",
     "pages/avatarUpload/upload/upload",
     "pages/avatarUpload/upload1/upload1",
     "pages/indexs/indexs",
     "pages/share/share",
+    "pages/square/square",
     "pages/setting/setting",
     "pages/more/more"
   ],
@@ -30,8 +33,14 @@
       {
         "pagePath": "pages/photos/photos",
         "text": "我的照片墙",
-        "iconPath": "/pages/img/photo.png",
-        "selectedIconPath": "/pages/img/photo-hover.png"
+        "iconPath": "/pages/img/photo1.png",
+        "selectedIconPath": "/pages/img/photo1-hover.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我",
+        "iconPath": "/pages/img/my.png",
+        "selectedIconPath": "/pages/img/my_hover.png"
       },
       {
         "pagePath": "pages/more/more",

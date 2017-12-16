@@ -1,0 +1,29 @@
+<view class="container">
+    <view class='item'>
+        <view class='top'>
+            <image class='dels' src="../img/dels.png" mode='widthFix'></image>
+            <image class='niceImg' src="{{userInfo.avatarUrl}}"></image>
+            <view class='niceNames'>
+                <view class='nickName'>{{userInfo.nickName}}</view>
+                <view class='nickName'>{{userInfo.nickName}}<text>照片墙 </text></view>
+            </view>
+        </view>
+        <view class='mid'>
+            <image src="{{url}}"></image>
+        </view>
+        <view class='btm'>
+            <view class='left'>222次播放</view>
+            <view class='right'>
+                <view class='zan'>
+                    <image src="../img/983476-200.png"></image>111
+                </view>
+                <view class='chart'>
+                    <image src="../img/chart.png"></image>111
+                </view>
+                <view class='chart'>
+                    <button open-type='share'><image src="../img/1227062-200.png"></image></button>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

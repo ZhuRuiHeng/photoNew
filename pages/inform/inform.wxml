@@ -1,0 +1,40 @@
+<view class="container">
+    <view class='nicePhoto'>
+        <image src="{{url}}" mode='widthFix'></image>
+    </view>
+    <view class='tops'>
+        <view class='nowInform'>
+            <view class='nowLeft'>制作照片墙</view>
+            <view class='lowNight'>
+              阅读 666 <view class='zan'><image src="../img/983476-200.png"></image>111</view>
+            </view>
+        </view>
+        <view class='top'>
+            <image class='niceImg' src="{{userInfo.avatarUrl}}"></image>
+            <view class='niceNames'>
+                <view class='nickName'>{{userInfo.nickName}}</view>
+                <view class='nickName'>{{userInfo.nickName}}<text>照片墙 </text></view>
+            </view>
+        </view>
+    </view>
+    <view class='content'>
+        <view class='title'>最新留言</view>
+        <view class='chartItem'>
+            <view class='chartTop'>
+                <image class='niceImg' src="{{userInfo.avatarUrl}}"></image>
+                <view class='niceNames'>
+                    <view class='nickName'>{{userInfo.nickName}}</view>
+                    <view class='nickName'>{{userInfo.nickName}}<text>照片墙 </text></view>
+                </view>
+                <view class='zan'><image src="../img/983476-200.png"></image>111</view>
+            </view>
+            <view class='chartText'>哈哈哈哈哈哈</view>
+        </view>
+    </view>
+</view>
+<view class='footer'>
+    <image src="../img/1162232-200.png" mode='widthFix'></image>
+    <input type="text" placeholder='写留言...'></input>
+    <view>评论</view>
+</view>
+

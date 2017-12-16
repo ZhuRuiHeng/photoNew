@@ -1,9 +1,92 @@
 page{
   background: #e4e4e4;
 }
+.headerInform{
+    margin: 0 auto;
+    width: 400rpx;
+    position: absolute;
+    z-index: 6; 
+    top: 50%; 
+    left: 50%;  
+    -webkit-transform: translate(-50%,-50%);  
+    -ms-transform: translate(-50%,-50%);  
+    transform: translate(-50%,-50%)
+}
+.header{
+   text-align: center;
+   position: relative;
+   color: #fff;
+}
+.header .id{
+  line-height: 50rpx;
+}
+.bg-blur {
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+}
+.header .headerInform image{
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-sizing: border-box;
+}
+.niceInform{
+  width: 300rpx;
+  background:rgba(0,0,0,0.5);
+  color: #fff;
+  border-radius: 20rpx;
+  margin: 0 auto;
+  display: inline-block;
+  padding: 10rpx 0;
+}
+.niceInform view{
+  line-height: 36rpx;
+}
+.niceInform .niceFun{
+    font-size: 24rpx;
+}
+.niceInform .niceName{
+    width: 300rpx;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.bgImage,.bgImage image{
+  width: 100%;
+}
+.navbar{
+  display: flex;
+  text-align: center;
+}
+.navbar view{
+  flex: 1;
+  padding: 18rpx 0 20rpx;
+  cursor: pointer;
+  background: #fff;
+}
+.navbar view image{
+    width: 40rpx;
+    height: 40rpx;
+    position: relative;
+    top: 6rpx;
+    right: 6rpx;
+}
+.one.active{
+  background: #aaf3ff;
+}
+.two.active{
+  background: #fedcff;
+}
+/*new  */
 .container{
     overflow: hidden;
-    padding:20rpx 10rpx;
+    padding:0;
     box-sizing: border-box;
     width: 100%;
     font-size: 26rpx;
@@ -24,6 +107,10 @@ page{
   height: 180rpx;
   position: relative;
 }
+.timeWho{
+  position: relative;
+  height:1.4rem;
+}
 .timeWho input{
    border-top: 1px solid #ddd;
     width: 100%;
@@ -36,6 +123,12 @@ page{
     text-overflow:ellipsis;                    /*适用IE*/
     -o-text-overflow:ellipsis;                 /*适用opera*/
     -moz-binding: url('ellipsis.xml#ellipsis');/*适用火狐(firefox通过XUL实现效果)*/
+}
+.timeWho .setting{
+    width: 20rpx;
+    position: absolute;
+    bottom: 10rpx;
+    right: 0rpx;
 }
 .newAdd{
   position: relative
