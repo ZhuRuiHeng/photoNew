@@ -1,3 +1,4 @@
+@import "../template/template.wxss";
 page{
   background: #e4e4e4;
 }
@@ -85,13 +86,13 @@ page{
 }
 /*new  */
 .container{
-    overflow: hidden;
+    overflow-x: hidden;
     padding:0;
     box-sizing: border-box;
     width: 100%;
     font-size: 26rpx;
     background-color: #e4e4e4;
-    margin-bottom: 100rpx;
+    margin-bottom: 200rpx;
 }
 .item{
     width: 31%;
@@ -101,6 +102,7 @@ page{
     background: #fff;
     box-sizing: border-box;
     display: inline-block;
+    z-index: 1;
 }
 .item image{
   width: 100%;
@@ -123,6 +125,7 @@ page{
     text-overflow:ellipsis;                    /*适用IE*/
     -o-text-overflow:ellipsis;                 /*适用opera*/
     -moz-binding: url('ellipsis.xml#ellipsis');/*适用火狐(firefox通过XUL实现效果)*/
+    z-index: 1;
 }
 .timeWho .setting{
     width: 20rpx;
@@ -131,7 +134,7 @@ page{
     right: 0rpx;
 }
 .newAdd{
-  position: relative
+  position: relative;
 }
 .newAdd .niceImg{
     top: -26rpx;

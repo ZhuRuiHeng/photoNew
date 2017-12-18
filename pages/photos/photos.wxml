@@ -1,3 +1,6 @@
+<import src="../template/template.wxml" />
+<!--引入模板  -->
+<template is="navBar"></template>
 <view class="container">
     <view class='item' wx:for="{{photosList}}" wx:key="{{index}}" data-pw_id='{{item.id}}' >
         <view class='dels' bindtap="dels" data-pw_id='{{item.id}}' data-photoIndex='{{index}}'>

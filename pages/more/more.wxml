@@ -1,4 +1,7 @@
-<!--pages/more/more.wxml-->
+<import src="../template/template.wxml" />
+<!--引入模板  -->
+<template is="navBar"></template>
+<template is="pretty" wx:if="{{show}}"></template>
 <view class='container'>
   <scroll-view scroll-y="true">
     <view class='img_wrap' wx:for="{{advers}}" wx:key="{{index}}" 

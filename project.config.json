@@ -21,7 +21,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 7,
+			"current": 12,
 			"list": [
 				{
 					"id": -1,
@@ -68,7 +68,37 @@
 				{
 					"id": -1,
 					"name": "inform",
-					"pathName": "pages/inform/inform"
+					"pathName": "pages/inform/inform",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "template",
+					"pathName": "pages/template/template",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "indexs",
+					"pathName": "pages/indexs/indexs",
+					"query": "scene=photo_wall_1578"
+				},
+				{
+					"id": -1,
+					"name": "album",
+					"pathName": "pages/album/album",
+					"query": "scene=photo_wall_1578"
+				},
+				{
+					"id": -1,
+					"name": "albumInform",
+					"pathName": "pages/albumInform/albumInform",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "templatePhoto",
+					"pathName": "pages/templatePhoto/templatePhoto"
 				}
 			]
 		}

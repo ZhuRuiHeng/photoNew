@@ -75,7 +75,7 @@ Page({
                   url: '../share/share?pw_id=' + that.data.pw_id,
                 })
               }else{
-                wx.switchTab({
+                wx.redirectTo({
                   url: '../indexs/indexs',
                 })
               }

@@ -1,0 +1,83 @@
+/**index.wxss**/
+@import "../template/template.wxss";
+page{
+  background-color: #e4e4e4;
+}
+.container{
+  font-size: 26rpx;
+  overflow: hidden;
+  background-color: #e4e4e4;
+}
+
+.left.music_play{
+  background: url(https://friend-check.playonwechat.com/static/images/music.png) no-repeat;
+  background-size: 100%;
+  -webkit-animation: music 3s linear infinite;
+  animation: music 3s linear infinite;
+  -webkit-tap-highlight-color: transparent;
+}
+@-webkit-keyframes music{
+    0%{
+        -webkit-transform:rotate(0);
+        transform:rotate(0)
+    }
+    to{
+        -webkit-transform:rotate(-3turn);
+        transform:rotate(-3turn)
+    }
+}
+@keyframes music{
+    0%{
+        -webkit-transform:rotate(0);
+        transform:rotate(0)
+    }
+    to{
+        -webkit-transform:rotate(-3turn);
+        transform:rotate(-3turn)
+    }
+}
+
+
+.notice{
+  text-align: center;
+}
+.buttons{
+  margin-top: 100rpx;
+}
+.buttons view{
+  display: block;
+  width: 200rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 10rpx;
+  padding: 0 20rpx;
+  background: #666;
+  color: #fff;
+  margin: 20rpx auto;
+  text-align: center;
+  cursor: pointer;
+}
+.buttons view.active{
+  background: #34a8e0;
+}
+.buttons button{
+  font-size: 26rpx;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  background: #34a8e0;
+  color: #fff;
+  line-height: inherit;
+}
+button::after{
+  content: none;
+}
+
+
+wx-swiper{ width:360px; height: 192px; margin:0 auto; }
+wx-swiper wx-image{ width: 100%; height: 192px; }
+.star-name{ font-family: PingFangSC-Regular; font-size: 23px; line-height: 23px; padding-top: 19px; padding-bottom: 9px; }
+.star-birth{ font-family: PingFangSC-Light; padding-bottom: 19px; font-size: 11px; }
+.single-star{ width:60%; height: 144px; padding:14rpx; display: inline-block; box-sizing: border-box; border: 1px solid #E8E8E8; margin-right: 4px; }
+.star-avatar{ width: 100%;height: inherit;border-radius: 20rpx;}
+.star-box{ width: 90%; white-space: nowrap; margin:30rpx auto; }

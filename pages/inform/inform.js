@@ -14,5 +14,10 @@ Page({
   onShow: function () {
   
   },
+  writeTap(){
+    wx.navigateTo({
+      url: '../comment/comment'
+    })
+  }
 
 })

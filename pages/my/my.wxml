@@ -1,3 +1,7 @@
+<import src="../template/template.wxml" />
+<!--引入模板  -->
+<template is="navBar"></template>
+<template is="pretty" wx:if="{{show}}"></template>
 <view class="container">
     <view class='header'>
         <view class='bgImage bg-blur'><image src="{{userInfo.avatarUrl}}" ></image></view>
@@ -33,9 +37,9 @@
             <view class='timeWho'>
                 <input wx:if="{{item.name == 'undefined' || !item.name}}" type='text' 
                       data-pw_id='{{item.id}}' bindinput="setName" 
-                      placeholder='照片墙' value='朋友照片墙'></input>
+                      placeholder='照片墙' value='朋友照片墙' />
                 <input wx:else type='text' data-pw_id='{{item.id}}' bindinput="setName" 
-                      placeholder='照片墙' value='朋友照片墙'></input>
+                      placeholder='照片墙' value='朋友照片墙' />
                       <image class='setting' src="../img/1162232-200.png" mode="widthFix"></image>
             </view>
         </view>
@@ -48,7 +52,7 @@
             <image class='niceImg'  src="../img/add.png" bindtap='newPhotos'
                   mode='widthFix'></image>
             <view class='timeWho'>
-                <input type='text' placeholder='编辑相册名' bindinput="niceName" value='{{newName}}'></input>
+                <input type='text' placeholder='编辑相册名' bindinput="niceName" value='{{newName}}' />
             </view>
         </view>
     </view> 
@@ -67,9 +71,9 @@
             <view class='timeWho'>
                 <input wx:if="{{item.name == 'undefined' || !item.name}}" type='text' 
                       data-pw_id='{{item.id}}' bindinput="setName" 
-                      placeholder='照片墙' value='朋友照片墙'></input>
+                      placeholder='照片墙' value='朋友照片墙' />
                 <input wx:else type='text' data-pw_id='{{item.id}}' bindinput="setName" 
-                      placeholder='照片墙' value='朋友照片墙'></input>
+                      placeholder='照片墙' value='朋友照片墙' />
                       <image class='setting' src="../img/1162232-200.png" mode="widthFix"></image>
             </view>
         </view>
@@ -82,7 +86,7 @@
             <image class='niceImg'  src="../img/add.png" bindtap='newPhotos'
                   mode='widthFix'></image>
             <view class='timeWho'>
-                <input type='text' placeholder='编辑影集名' bindinput="niceName" value='{{newName}}'></input>
+                <input type='text' placeholder='编辑影集名' bindinput="niceName" value='{{newName}}' />
             </view>
         </view>
     </view> 

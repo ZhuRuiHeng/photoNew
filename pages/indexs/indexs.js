@@ -2,12 +2,13 @@ const app = getApp();
 const apiurl = 'https://friend-guess.playonwechat.com/';
 let sign = wx.getStorageSync('sign');
 import tips from '../../utils/tips.js';
-
 Page({
   data: {
     move: true,
     photosLength:true,
-    music_play:true
+    music_play:true,
+    itemBar:1,
+    show: false
   },
   onLoad: function (options) {
     this.setData({
@@ -21,6 +22,31 @@ Page({
       })
     }
 
+  },
+  navUrl(e) {
+    console.log(e);
+    console.log(e.currentTarget.dataset.itembar);
+    if (e.currentTarget.dataset.itembar == 2) {
+      console.log(111);
+      if (this.data.show) {
+        this.setData({
+          itemBar: 2,
+          show: false
+        })
+      } else {
+        this.setData({
+          itemBar: 2,
+          show: true
+        })
+
+      }
+
+    } else {
+      console.log(222);
+      wx.reLaunch({
+        url: e.currentTarget.dataset.url,
+      })
+    }
   },
   onShow: function () {
     wx.showLoading({

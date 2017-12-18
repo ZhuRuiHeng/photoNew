@@ -4,9 +4,9 @@
     </view>
     <view class='tops'>
         <view class='nowInform'>
-            <view class='nowLeft'>制作照片墙</view>
+            <view class='nowLeft'><view class='production'>制作照片墙</view></view>
             <view class='lowNight'>
-              阅读 666 <view class='zan'><image src="../img/983476-200.png"></image>111</view>
+              阅读 666 <view class='zan'><image src="../img/zan.png"></image>111</view>
             </view>
         </view>
         <view class='top'>
@@ -21,20 +21,22 @@
         <view class='title'>最新留言</view>
         <view class='chartItem'>
             <view class='chartTop'>
-                <image class='niceImg' src="{{userInfo.avatarUrl}}"></image>
+                <image class='niceImgs' src="{{userInfo.avatarUrl}}" mode='widthFix'></image>
                 <view class='niceNames'>
-                    <view class='nickName'>{{userInfo.nickName}}</view>
-                    <view class='nickName'>{{userInfo.nickName}}<text>照片墙 </text></view>
+                    <view class='nickName one' >{{userInfo.nickName}}</view>
+                    <view class='nickName two'>{{userInfo.nickName}}<text>照片墙 </text></view>
                 </view>
-                <view class='zan'><image src="../img/983476-200.png"></image>111</view>
+                <view class='zan'><image src="../img/zan.png"></image>111</view>
             </view>
-            <view class='chartText'>哈哈哈哈哈哈</view>
+            <view class='chartText'>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</view>
         </view>
     </view>
 </view>
-<view class='footer'>
-    <image src="../img/1162232-200.png" mode='widthFix'></image>
-    <input type="text" placeholder='写留言...'></input>
-    <view>评论</view>
+<view class='footer' bindtap='writeTap'>
+    <view class='foot'>
+        <image src="../img/1162232-200.png" mode='widthFix'></image>
+        <view class='placeholder'>写留言...</view>
+        <view class='pinglun'>评论</view>
+    </view>
 </view>
 
