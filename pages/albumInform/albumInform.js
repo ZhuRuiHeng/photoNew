@@ -1,11 +1,14 @@
-// pages/albumInform/albumInform.js
+const app = getApp();
+const apiurl = 'https://friend-guess.playonwechat.com/';
+import tips from '../../utils/tips.js';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-      show:false
+    show: false,
+    checkboxs: true
   },
 
   /**
@@ -52,5 +55,53 @@ Page({
         url: e.currentTarget.dataset.url,
       })
     }
+  },
+  // 是否同意展示
+  Change: function (e) {
+    console.log(e);
+    let that = this;
+    console.log('checkbox发生change事件，携带value值为：', e.currentTarget.dataset.check);
+    if (e.currentTarget.dataset.check == 1) {
+      that.setData({
+        checkboxs: false
+      })
+    } else {
+      that.setData({
+        checkboxs: true
+      })
+    }
+
+    // wx.request({
+    //   url: apiurl + "photo/share?sign=" + sign + '&operator_id=' + app.data.kid,
+    //   data: {
+    //     pw_id: that.data.pw_id
+    //   },
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   method: "GET",
+    //   success: function (res) {
+    //     console.log("好友拼图照片:", res);
+    //     console.log("海报:", res.data.data);
+    //     var status = res.data.status;
+    //     if (status == 1) {
+    //       that.setData({
+    //         friendsImg: res.data.data
+    //       })
+    //       let friendsImg = res.data.data;
+    //       let friendsImgs = friendsImg.split();
+    //       console.log(friendsImg)
+    //       console.log(friendsImgs)
+    //       wx.previewImage({
+    //         current: friendsImg, // 当前显示图片的http链接
+    //         urls: friendsImgs // 需要预览的图片http链接列表
+    //       })
+
+    //     } else {
+    //       console.log(res.data.msg);
+    //     }
+    //     wx.hideLoading()
+    //   }
+    // })
   },
 })

@@ -16,10 +16,24 @@
     </view>
     <view class='notice'>注：自己可以上传多张，每个朋友只能上传一张</view>
     <view class='buttons'>
-        <view class='active' bindtap='upPhoto'>上传照片</view>
-        <view class='active' bindtap='friends'>邀请好友拼图</view>
-        <view class='active' bindtap='produce'>生成照片墙</view>
+        <view class='active' bindtap='produce' wx:if="{{finish==true}}">生成照片墙</view>
+        <view class='active' bindtap='upPhoto' wx:if="{{finish==false}}">上传照片</view>
+        <view class='active' bindtap='friends' wx:if="{{finish==false}}">邀请好友拼图</view>
     </view>
+    <view class='checkboxs'>
+            <image  wx:if="{{checkboxs}}"  bindtap="Change" data-check='1' 
+                    src="../img/checka.png" mode='widthFix'></image>
+            <image wx:else  bindtap="Change" data-check='2' 
+                    src="../img/check.png"  mode='widthFix'></image>
+          同意生成照片墙展示在首页
+    </view>
+        <!-- <checkbox-group >
+        <cover-view style='z-index:1;position: relative;'>
+          <label class="checkbox" >
+            <checkbox value="1" color="#34a8e0" checked/>
+          </label>
+          </cover-view>
+        </checkbox-group> -->
 </view>
 <view>
 </view>

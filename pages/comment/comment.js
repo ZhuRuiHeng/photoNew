@@ -1,4 +1,6 @@
-// pages/comment/comment.js
+const app = getApp();
+const apiurl = 'https://friend-guess.playonwechat.com/';
+import tips from '../../utils/tips.js';
 Page({
 
   /**
@@ -12,11 +14,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var did = options.did;
-    var aid = options.aid;
     this.setData({
-      did,
-      aid
+      pw_id: options.pw_id,
     })
   },
 
@@ -24,7 +23,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    
   },
 
 
@@ -40,70 +39,37 @@ Page({
   // 发表
   publishText(){
     var that = this;
-    var sign = wx.getStorageSync("sign");
-    var operator_id = wx.getStorageSync("operator_id");
-    var did = that.data.did;
-    var aid = that.data.aid;
-    console.log(aid);
     var content = that.data.text;
 
     if (content){
       wx.request({
-        url: "https://gallery.playonwechat.com/api/save-comment?sign=" + sign + "&operator_id=" + operator_id,
-        method: "POST",
+        url: app.data.apiurl + "photo/comment-photo-wall?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
         data: {
-          did,
-          content
+          pw_id: that.data.pw_id,
+          content: content
         },
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "GET",
         success: function (res) {
-          console.log(res);
-          if(res.data.status){
-            wx.navigateTo({
-              url: '../albumDetail/albumDetail?aid=' + aid,
+          console.log("照片墙详情:", res);
+          var status = res.data.status;
+          if (status == 1) {
+            tips.success('评论成功！');
+            wx.redirectTo({
+              url: '../inform/inform',
             })
+          } else {
+            tips.alert(res.data.msg);
           }
         }
       })
     }else{
-      wx.showToast({
-        title: '内容不得为空',
-      })
+      tips.alert('内容不得为空');
     }
    
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
   
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

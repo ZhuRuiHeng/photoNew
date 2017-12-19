@@ -7,6 +7,7 @@ page{
   font-size: 26rpx;
   overflow: hidden;
   background-color: #e4e4e4;
+  margin-bottom: 100rpx;
 }
 .management{
     display: flex;
@@ -307,4 +308,16 @@ button::after{
         -webkit-transform:scale(1);
         transform:scale(1)
     }
+}
+.checkboxs{
+  text-align:center;margin:30rpx 0;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.checkboxs image{
+  width: 50rpx;
+  height: 50rpx;
+  position: relative;
+  top: 18rpx;
+  z-index: 1;
 }

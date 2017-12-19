@@ -21,6 +21,9 @@ Page({
     // 请求 
     wx.request({
       url: apiurl + "photo/photo-list?sign=" + sign + '&operator_id=' + app.data.kid,
+      data:{
+        type:'image'
+      },
       header: {
         'content-type': 'application/json'
       },
@@ -52,6 +55,28 @@ Page({
           console.log('音乐列表：', res.data.data);
           that.setData({
             musicsList: res.data.data
+          })
+          //wx.hideLoading()
+        } else {
+          tips.alert(res.data.msg)
+        }
+
+      }
+    })
+    //获取用户信息
+    wx.request({
+      url: app.data.apiurl + "photo/user-info?sign=" + sign + '&operator_id=' + app.data.kid,
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        console.log("用户信息:", res);
+        var status = res.data.status;
+        if (status == 1) {
+          that.setData({
+            member_number: res.data.data.member_number,
+            photo_fans_count: res.data.data.photo_fans_count
           })
           //wx.hideLoading()
         } else {
@@ -169,9 +194,39 @@ Page({
     })
   },
   navbar(e){
-    this.setData({
+    let that = this;
+    let type =''
+    that.setData({
        now:e.currentTarget.dataset.now
     })
+    if (e.currentTarget.dataset.now==2){
+      type = 'video'
+    }else{
+      type = 'image'
+    }
+    wx.request({
+      url: apiurl + "photo/photo-list?sign=" +wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+      data: {
+        type: type
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        console.log("照片墙列表:", res);
+        var status = res.data.status;
+        if (status == 1) {
+          that.setData({
+            photosList: res.data.data
+          })
+          wx.hideLoading()
+        } else {
+          tips.alert(res.data.msg)
+        }
+      }
+    })
+
   },
   // 删除
   dels(e) {
@@ -247,7 +302,7 @@ Page({
     wx.setStorageSync('bgMusic', e.currentTarget.dataset.musicurl);
     wx.setStorageSync('nameMusic', e.currentTarget.dataset.nameMusic);
 
-    wx.switchTab({
+    wx.reLaunch({
       url: '../indexs/indexs',
     })
   },

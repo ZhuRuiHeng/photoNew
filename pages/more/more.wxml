@@ -1,7 +1,5 @@
 <import src="../template/template.wxml" />
-<!--引入模板  -->
-<template is="navBar"></template>
-<template is="pretty" wx:if="{{show}}"></template>
+
 <view class='container'>
   <scroll-view scroll-y="true">
     <view class='img_wrap' wx:for="{{advers}}" wx:key="{{index}}" 
@@ -9,4 +7,7 @@
       <image src='{{item.ad_url}}' mode='aspectFill'></image>
     </view>    
   </scroll-view>
+  <!--引入模板  -->
+  <template is="navBar"></template>
+  <template is="pretty" wx:if="{{show}}"></template>
 </view>

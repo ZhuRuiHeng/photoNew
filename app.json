@@ -12,9 +12,12 @@
     "pages/comment/comment",
     "pages/template/template",
     "pages/templatePhoto/templatePhoto",
+    "pages/templateVideo/templateVideo",
     "pages/more/more",
     "pages/album/album",
     "pages/albumInform/albumInform",
+    "pages/templateInform/templateInform",
+    "pages/mode1/mode1",
     "pages/square/square"
   ],
   "window":{

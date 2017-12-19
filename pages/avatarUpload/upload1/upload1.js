@@ -137,7 +137,7 @@ Page({
                           })
                           console.log('上传成功！')
                           //  获取到裁剪后的图片
-                          wx.redirectTo({
+                          wx.reLaunch({
                             url: `../../share/share?avatar=${picture}&pw_id=${wx.getStorageSync('pw_id')}`
                           })
 
@@ -150,7 +150,7 @@ Page({
                             tapss: true
                           })
                           setTimeout(function () {
-                            wx.redirectTo({
+                            wx.reLaunch({
                               url: `../../share/share?avatar=${picture}&pw_id=${wx.getStorageSync('pw_id')}`
                             })
                           }, 1000)

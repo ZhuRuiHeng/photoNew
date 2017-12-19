@@ -8,15 +8,20 @@ Page({
     photosLength:true,
     music_play:true,
     itemBar:1,
-    show: false
+    show: false,
+    finish:false,
+    checkboxs:true
   },
   onLoad: function (options) {
     this.setData({
       //music_play: app.data.music_play,
       dataUrl: app.data.dataUrl
     })
-
-    if (wx.getStorageSync('pw_id')) {
+    if (options.pw_id) {
+      this.setData({
+        pw_id: wx.getStorageSync('pw_id')
+      })
+    }else if (wx.getStorageSync('pw_id')) {
       this.setData({
         pw_id: wx.getStorageSync('pw_id')
       })
@@ -53,16 +58,8 @@ Page({
       title: '加载中',
     })
     let that = this;
-    // console.log(wx.getStorageSync('bgMusic'),1)
-    // console.log(app.data.dataUrl,2)
     console.log(wx.getStorageSync('bgMusic'), app.data.dataUrl, 111)
     if (wx.getStorageSync('bgMusic') == app.data.dataUrl) {
-      // console.log('bgMusic');
-      // wx.pauseBackgroundAudio()
-      // wx.playBackgroundAudio({ //播放
-      //   dataUrl: wx.getStorageSync('bgMusic'),
-      //   title: wx.getStorageSync('nameMusic')
-      // })
     }else{
       console.log('bgMusic:', wx.getStorageSync('bgMusic'), app.data.dataUrl, 333);
       app.data.dataUrl = wx.getStorageSync('bgMusic');
@@ -82,7 +79,10 @@ Page({
     } if (!that.data.pw_id) {
       // 获取照片墙pwid 
       wx.request({
-        url: apiurl + "photo/pw?sign=" + sign + '&operator_id=' + app.data.kid,
+        url: apiurl + "photo/pw?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+        data:{
+          type:'image'
+        },
         header: {
           'content-type': 'application/json'
         },
@@ -189,6 +189,29 @@ Page({
           wx.hideLoading()
         }
       })
+      // 判断照片墙是否已满
+      wx.request({
+        url: app.data.apiurl + "photo/is-full?sign=" + sign + '&operator_id=' + app.data.kid,
+        data: {
+          pw_id: that.data.pw_id
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "GET",
+        success: function (res) {
+          console.log("照片墙是否已满:", res);
+          var status = res.data.status;
+          if (status == 1) {
+            that.setData({
+              finish: res.data.data.flag
+            })
+          } else {
+            console.log(res.data.msg);
+          }
+          wx.hideLoading()
+        }
+      })
 
     })
   },
@@ -232,6 +255,54 @@ Page({
         wx.hideLoading()
       }
     })
+  },
+  // 是否同意展示
+  Change: function (e) {
+    console.log(e);
+    let that = this;
+    console.log('checkbox发生change事件，携带value值为：', e.currentTarget.dataset.check);
+    if (e.currentTarget.dataset.check==1){
+      that.setData({
+        checkboxs: false
+      })
+    }else{
+      that.setData({
+        checkboxs: true
+      })
+    }
+    
+    // wx.request({
+    //   url: apiurl + "photo/share?sign=" + sign + '&operator_id=' + app.data.kid,
+    //   data: {
+    //     pw_id: that.data.pw_id
+    //   },
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   method: "GET",
+    //   success: function (res) {
+    //     console.log("好友拼图照片:", res);
+    //     console.log("海报:", res.data.data);
+    //     var status = res.data.status;
+    //     if (status == 1) {
+    //       that.setData({
+    //         friendsImg: res.data.data
+    //       })
+    //       let friendsImg = res.data.data;
+    //       let friendsImgs = friendsImg.split();
+    //       console.log(friendsImg)
+    //       console.log(friendsImgs)
+    //       wx.previewImage({
+    //         current: friendsImg, // 当前显示图片的http链接
+    //         urls: friendsImgs // 需要预览的图片http链接列表
+    //       })
+
+    //     } else {
+    //       console.log(res.data.msg);
+    //     }
+    //     wx.hideLoading()
+    //   }
+    // })
   },
   //事件处理函数
   prewImg: function (e) {

@@ -2,15 +2,15 @@
 <!--引入模板  -->
 <template is="navBar"></template>
 <template is="pretty" wx:if="{{show}}"></template>
-<view class="container">
+<view class="container {{music==true?'fixed':''}}" >
     <view class='header'>
         <view class='bgImage bg-blur'><image src="{{userInfo.avatarUrl}}" ></image></view>
         <view class='headerInform'>
             <image src="{{userInfo.avatarUrl}}" mode="widthFix"></image>
-            <view class='id'>ID:2222</view>
+            <view class='id'>ID:{{member_number}}</view>
             <view class='niceInform'>
                 <view class='niceName'>{{userInfo.nickName}}</view>
-                <view class='niceFun'>粉丝：111</view>
+                <view class='niceFun'>粉丝：{{photo_fans_count}}</view>
             </view>
         </view>
     </view>

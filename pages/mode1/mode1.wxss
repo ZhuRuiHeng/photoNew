@@ -1,0 +1,65 @@
+page{
+  background: #000;
+}
+.container{
+    width: 750rpx;
+    height: 100vh;                                                                                   
+    background: url(http://ovhvevt35.bkt.clouddn.com/photo/o_1c0luibfj10s31dal8eu1l1lilu38.gif ) no-repeat;
+    background-size: contain;
+}
+.inside{
+    /* color: #676767;
+    line-height: 1;
+    background: none;
+    list-style: none!important;
+    margin: 0!important;
+    padding: 0;
+    transition: padding .5s;
+    min-height: 1px;
+    min-width: 1px;
+    -webkit-user-select: none; */
+}
+.inside1{
+    margin: 0 auto;
+    width: 420rpx;
+    height: 420rpx;
+    left: 165rpx;
+    top: -40rpx;
+    z-index: 2;
+    transform: translate3d(0rpx, 0rpx, 0rpx) rotateZ(0deg);
+    opacity: 1;
+    display: block;
+}
+.inside1 .element-box{
+    width: 100%;
+    height: 100%;
+    left: 165rpx;
+    top: -40rpx;
+    z-index: 2;
+    color: rgb(103, 103, 103);
+    transform: none;
+    text-align: left;
+    border-width: 0rpx;
+    border-style: solid;
+    border-color: rgb(0, 0, 0);
+    border-radius: 0rpx;
+    padding-bottom: 0rpx;
+    padding-top: 0rpx;
+    box-shadow: rgba(0, 0, 0, 0.5) 0rpx 0rpx 0rpx;
+    margin-top: 0rpx;
+    margin-bottom: 0rpx;
+    animation: fadeInUp 3s ease 2.4s 1 normal both;
+}
+.inside1 .element-box image{
+    width: 100%;
+}
+.inside2{
+   width: 147rpx;
+    height: 95rpx;
+    left: 13rpx;
+    top: -19rpx;
+    z-index: 6;
+    transform: translate3d(0px, 0px, 0px) rotateZ(0deg);
+    opacity: 1;
+    display: block;
+}

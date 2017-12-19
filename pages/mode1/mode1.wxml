@@ -1,0 +1,65 @@
+<view class="container">
+    <view class="inside inside1">
+        <view class="element-box">
+            <view class="element-image">
+                <image src="http://ovhvevt35.bkt.clouddn.com/photo/o_1c0o820cp1pqcmtc15hcb98s16n.png" mode='widthFix' alt="" ></image>
+            </view>
+        </view>
+    </view>
+    <view class="inside inside2">
+          <view class="element-box">
+                  <view class="element-image">
+                      <image src="./image/mode1/o_1c0m8r09v1a1e17cm1fqutjk1ktr6j.png" alt=""></image>
+                  </view>
+              </view>
+          </view>
+          <view class="inside inside3">
+              <view class="element-box">
+                  <view class="element-image">
+                      <image src="./image/mode1/o_1c0m8r09v1a1e17cm1fqutjk1ktr6j.png" alt=""></image>
+                  </view>
+              </view>
+          </view>
+          <view class="inside inside4">
+              <view class="element-box">
+                  <view class="element-image">
+                      <image src="./image/mode1/o_1c0m41mvs1s1i1n2u1jo21g4n11ek43.png" alt=""></image>
+                  </view>
+              </view>
+          </view>
+          <view class="inside inside5">
+              <view class="element-box">
+                  <view class="element-image">
+                      <image src="./image/mode1/o_1c0m6fdkuknq16ms1a1p19fbakd13.png" alt=""></image>
+                  </view>
+              </view>
+          </view>
+          <view class="inside inside6">
+              <view class="element-box">
+                  <view class="element-image">
+                      <image style="animation: fadeIn 0.2s ease 2.3s infinite normal both;" src="./image/mode1/o_1c0m6h0f0nne17851lp7v7o1i321f.png" alt=""></image>
+                  </view>
+              </view>
+          </view>
+          <view class="inside inside7">
+              <view class="element-box">
+                  <view class="element-image">
+                      <image style="animation: fadeIn 0.2s ease 2.3s infinite normal both;" src="./image/mode1/o_1c0m2ul0hl4fogj1bg8gcvjn72q.png" alt=""></image>
+                  </view>
+              </view>
+          </view>
+          <view class="inside inside8">
+              <view class="element-box">
+                  <view class="element-image">
+                      <image style="animation: fadeIn 0.2s ease 2.3s infinite normal both;" src="./image/mode1/o_1c0m2qp27o1g57ka4rdg6lda22.png" alt=""></image>
+                  </view>
+              </view>
+          </view>
+          <view class="inside inside9">
+              <view class="element-box">
+                  <view class="element-image">
+                      <image style="animation: fadeIn 0.2s ease 2.3s infinite normal both;" src="./image/mode1/o_1c0nsgr741di916js13g44pn1t779.png" alt=""></image>
+                  </view>
+              </view>
+          </view>
+</view>

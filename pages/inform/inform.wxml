@@ -1,35 +1,45 @@
 <view class="container">
     <view class='nicePhoto'>
-        <image src="{{url}}" mode='widthFix'></image>
+        <image src="{{info.thumb}}" mode='widthFix'></image>
     </view>
     <view class='tops'>
         <view class='nowInform'>
-            <view class='nowLeft'><view class='production'>制作照片墙</view></view>
+            <view class='nowLeft'>
+                <view class='production' bindtap='production' data-type="{{type}}">制作照片墙</view>
+            </view>
             <view class='lowNight'>
-              阅读 666 <view class='zan'><image src="../img/zan.png"></image>111</view>
+              阅读 {{info.click_count}} 
+              <view class='zan' bindtap='zanTap' data-type='photowall' data-object_id='{{pw_id}}'>
+                    <image src="../img/zan.png"></image>{{info.thumb_count}}
+              </view>
             </view>
         </view>
         <view class='top'>
-            <image class='niceImg' src="{{userInfo.avatarUrl}}"></image>
-            <view class='niceNames'>
-                <view class='nickName'>{{userInfo.nickName}}</view>
-                <view class='nickName'>{{userInfo.nickName}}<text>照片墙 </text></view>
+            <image class='niceImg' src="{{info.avatarurl}}"></image>
+            <view class='niceNames topnice'>
+                <view class='nickName nice'>{{info.wx_name}}</view>
+                <view class='nickName'>{{name}}
+                    <text wx:if="{{type=='image'}}">照片墙 </text><text wx:else>相册集</text>
+                </view>
             </view>
         </view>
     </view>
     <view class='content'>
         <view class='title'>最新留言</view>
-        <view class='chartItem'>
-            <view class='chartTop'>
-                <image class='niceImgs' src="{{userInfo.avatarUrl}}" mode='widthFix'></image>
-                <view class='niceNames'>
-                    <view class='nickName one' >{{userInfo.nickName}}</view>
-                    <view class='nickName two'>{{userInfo.nickName}}<text>照片墙 </text></view>
+        <block wx:for="{{comment_list}}">
+            <view class='chartItem' data-comment_id='{{item.comment_id}}'>
+                <view class='chartTop'>
+                    <image class='niceImgs' src="{{item.avatarurl}}" mode='widthFix'></image>
+                    <view class='niceNames'>
+                        <view class='nickName one' >{{item.wx_name}}</view>
+                        <view class='nickName two'>{{item.add_time}}</view>
+                    </view>
+                    <view class='zan' bindtap='zanTap' data-type='comment' data-object_id='{{item.comment_id}}'><image src="../img/zan.png"></image>{{item.thumb_count}}</view>
                 </view>
-                <view class='zan'><image src="../img/zan.png"></image>111</view>
+                <view class='chartText'>{{item.comment}}</view>
             </view>
-            <view class='chartText'>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</view>
-        </view>
+        </block> 
+        
     </view>
 </view>
 <view class='footer' bindtap='writeTap'>

@@ -105,15 +105,18 @@ Page({
                               console.log("照片墙pwid:", res);
                               var status = res.data.status;
                               if (status == 1) {
-                                console.log(111);
+                                console.log(111111);
                                 that.setData({
                                   pw_id: res.data.data,
                                   tapss: true
                                 })
                                 wx.setStorageSync('pw_id', res.data.data)
                                 //  获取到裁剪后的图片
-                                wx.switchTab({
-                                  url: `../../indexs/indexs`
+                                wx.reLaunch({
+                                  url: '../../indexs/indexs',
+                                })
+                                wx.navigateBack({
+                                  
                                 })
 
                               } else {
@@ -171,8 +174,8 @@ Page({
                               })
                               wx.setStorageSync('pw_id', pw_id)
                               //  获取到裁剪后的图片
-                              wx.switchTab({
-                                url: `../../indexs/indexs`
+                              wx.reLaunch({
+                                url: '../../indexs/indexs',
                               })
 
                             } else {
@@ -208,8 +211,8 @@ Page({
       } else {
         console.log('获取图片失败，请稍后重试'),
         setTimeout(function(){
-          wx.switchTab({
-            url: `../../indexs/indexs`
+          wx.reLaunch({
+            url: '../../indexs/indexs',
           })
         },1000)
           

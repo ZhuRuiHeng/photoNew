@@ -1,5 +1,6 @@
 .container{
   margin-bottom: 200rpx;
+  font-size: 32rpx;
 }
 .nicePhoto{
     width: 100%;
@@ -30,6 +31,9 @@
 .top .niceNames{
   padding: 8rpx 0 0 0;
   font-size: 32rpx;
+}
+.topnice .nickName{ 
+    line-height: 50rpx;
 }
 .niceNames .nickName{
     line-height: 44rpx;

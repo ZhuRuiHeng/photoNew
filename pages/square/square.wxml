@@ -1,29 +1,46 @@
-<view class="container">
+<import src="../template/template.wxml" />
+<!--引入模板  -->
+<template is="navBar"></template>
+<template is="pretty" wx:if="{{show}}"></template>
+
+<view class="container" wx:if="{{allList}}">
     <view class='item'>
         <view class='top'>
-            <image class='dels' src="../img/dels.png" mode='widthFix'></image>
-            <image class='niceImg' src="{{userInfo.avatarUrl}}"></image>
+            <view class='shanchu' bindtap='shanchu'>
+                <image class='dels' src="../img/dels.png" mode='widthFix'></image>
+            </view>
+            <image class='niceImg' src="{{item.avatarurl}}"></image>
             <view class='niceNames'>
-                <view class='nickName'>{{userInfo.nickName}}</view>
-                <view class='nickName'>{{userInfo.nickName}}<text>照片墙 </text></view>
+                <view class='nickName'>{{item.wx_name}}</view>
+                <view class='nickName'>{{item.name}}
+                    <text wx:if="{{item.type=='image'}}">照片墙 </text>
+                    <text wx:else>相册集</text>
+                </view>
             </view>
         </view>
-        <view class='mid'>
-            <image src="{{url}}"></image>
+        <view class='mid' bindtap='informSquare' data-name="{{item.name}}" data-pw_id='{{item.pw_id}}' 
+              data-type='{{item.type}}'>
+            <image src="{{item.thumb}}" mode='widthFix'></image>
         </view>
         <view class='btm'>
-            <view class='left'>222次播放</view>
+            <view class='left'>{{item.click_count}}次播放</view>
             <view class='right'>
-                <view class='zan'>
-                    <image src="../img/983476-200.png"></image>111
+                <view class='zan' bindtap='zanTap' data-type='photowall' data-object_id='{{item.pw_id}}'>
+                    <image src="../img/983476-200.png"></image>{{item.thumb_count}}
                 </view>
-                <view class='chart'>
-                    <image src="../img/chart.png"></image>111
+                <view class='chart' bindtap='pinglunTap' >
+                    <image src="../img/chart.png"></image>{{item.comment_count}}
                 </view>
-                <view class='chart'>
-                    <button open-type='share'><image src="../img/1227062-200.png"></image></button>
+                <view class='chart' bindtap='share' >
+                    <button open-type='share' data-pw_id='{{item.pw_id}}' data-type='{{item.type}}' 
+                            data-image="{{item.thumb}}" data-name="{{item.name}}">
+                        <image src="../img/1227062-200.png"></image>
+                    </button>
                 </view>
             </view>
         </view>
     </view>
+</view>
+<view wx:else>
+    <view style="text-align:center;font-size:24rpx;padding:30rpx;"> 您还未创建照片信息！ </view>
 </view>

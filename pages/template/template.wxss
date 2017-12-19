@@ -7,6 +7,8 @@
   background: #fff;
   padding: 10rpx 0;
   border-top: 1px solid #ddd;
+  margin-top: 100rpx;
+  z-index: 99;
 }
 .navBar{
   width: 100%;
@@ -17,6 +19,10 @@
   flex: 1;
   position: relative;
   z-index: 99;
+}
+navigator{
+  width: 100%;
+  height: inherit;
 }
 /* .prettyBox{
   position: fixed;
@@ -45,6 +51,7 @@
   height: 80rpx;
   line-height: 80rpx;
   padding: 0rpx 0 2rpx 0;
+  z-index: 99;
 }
 .pretty1 image{
   width: 42rpx;

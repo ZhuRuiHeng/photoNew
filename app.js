@@ -12,7 +12,8 @@ App({
     loginStatic: false,
     authSuccess: false,
     dataUrl: "",
-    music_play: true
+    music_play: true,
+    apiurl:'http://192.168.15.127/'
   },
   onLaunch: function () {
     let that = this;

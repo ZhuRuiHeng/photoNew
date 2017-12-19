@@ -8,8 +8,8 @@
 }
 
 .comment_wrap image{
-  width: 50rpx;
-  height: 50rpx;
+  width: 40rpx;
+  height: 40rpx;
 }
 
 .publish{
@@ -24,7 +24,7 @@
 }
 
 .disabled{
-  color: #fff;
+  color: #000;
   background: #efeff5;
 }
 

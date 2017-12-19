@@ -1,3 +1,4 @@
+@import "../template/template.wxss";
 page{
   background: #e4e4e4;
 }
@@ -30,6 +31,13 @@ page{
     position: relative;
     padding:10rpx 20rpx;
     border-bottom: 1px solid #ddd;
+}
+.top .shanchu{
+    position: absolute;
+    top: 0rpx;
+    right: 20rpx;
+    width: 60rpx;
+    height: 50rpx;
 }
 .top .dels{
     position: absolute;

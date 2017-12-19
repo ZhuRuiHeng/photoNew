@@ -1,4 +1,6 @@
-// pages/template/template.js
+const app = getApp();
+const apiurl = 'https://friend-guess.playonwechat.com/';
+import tips from '../../utils/tips.js';
 Page({
   data:{
     itemBar:0
@@ -26,9 +28,6 @@ Page({
         url: e.currentTarget.dataset.url,
       })
     }
-  }, 
-  pretty1Tap(){
-    
   }
 
 })

@@ -1,0 +1,22 @@
+<!--index.wxml-->
+<import src="../template/template.wxml" />
+<!--引入模板  -->
+<template is="navBar"></template>
+<template is="pretty" wx:if="{{show}}"></template>
+<view class="container">
+    <view class='management'>
+        <view class="left {{music_play?'music_play':''}}" bindtap="bindPlay"></view>
+         <view class='right' bindtap='management'>照片管理</view> 
+    </view>
+    <view class='photo'>
+        <image src='https://gcdn.playonwechat.com/photo/nice1.jpg'></image>
+    </view>
+    <view class='notice'>注：此模板可以上传{{}}张照片</view>
+    <view class='notice'>注：此模板可以上传{{}}个视频</view>
+    <view class='buttons'>
+        <view class='active' bindtap='upPhoto'>上传图片</view>
+        <view class='active' bindtap='savePhoto'>保存图片</view>
+        <view class='active' bindtap='upVideo'>上传视频</view>
+        <view class='active' bindtap='saveVideo'>保存视频</view>
+    </view>
+</view>

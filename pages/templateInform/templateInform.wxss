@@ -77,7 +77,7 @@ page{
   cursor: pointer;
 }
 .buttons{
-  margin-top: 100rpx;
+  margin-bottom: 100rpx;
 }
 .buttons view.active{
   background: #34a8e0;
@@ -167,16 +167,4 @@ button::after{
         -webkit-transform:scale(1);
         transform:scale(1)
     }
-}
-.checkboxs{
-  text-align:center;margin:30rpx 0;
-  height: 60rpx;
-  line-height: 60rpx;
-}
-.checkboxs image{
-  width: 60rpx;
-  height: 60rpx;
-  position: relative;
-  top: 18rpx;
-  z-index: 1;
 }
