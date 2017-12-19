@@ -6,7 +6,7 @@
 <view class="container" wx:if="{{allList}}">
     <view class='item'>
         <view class='top'>
-            <view class='shanchu' bindtap='shanchu'>
+            <view class='shanchu' bindtap='shanchu' data-pw_id='{{pw_id}}' data-index='{{index}}'>
                 <image class='dels' src="../img/dels.png" mode='widthFix'></image>
             </view>
             <image class='niceImg' src="{{item.avatarurl}}"></image>

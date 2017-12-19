@@ -104,4 +104,44 @@ Page({
     //   }
     // })
   },
+  friends() {
+    wx.showToast({
+      title: '海报生成中...',
+      icon: 'loading'
+    })
+    let that = this;
+    let sign = wx.getStorageSync('sign');
+    wx.request({
+      url: app.data.apiurl + "photo/share?sign=" + sign + '&operator_id=' + app.data.kid,
+      data: {
+        pw_id: that.data.pw_id
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        console.log("好友拼图照片:", res);
+        console.log("海报:", res.data.data);
+        var status = res.data.status;
+        if (status == 1) {
+          that.setData({
+            friendsImg: res.data.data
+          })
+          let friendsImg = res.data.data;
+          let friendsImgs = friendsImg.split();
+          console.log(friendsImg)
+          console.log(friendsImgs)
+          wx.previewImage({
+            current: friendsImg, // 当前显示图片的http链接
+            urls: friendsImgs // 需要预览的图片http链接列表
+          })
+
+        } else {
+          console.log(res.data.msg);
+        }
+        wx.hideLoading()
+      }
+    })
+  },
 })

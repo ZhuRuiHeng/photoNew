@@ -7,14 +7,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-      show:false
+      show:false,
+      checkboxs: true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    console.log(options);
+    let temp_id = options.temp_id;
+    this.setData({
+      temp_id
+    })
   },
 
   /**
@@ -28,7 +33,35 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading'
+    })
+    let that = this;
+    wx.request({
+      url: app.data.apiurl + "photo/template-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+      data:{
+        temp_id: that.data.temp_id
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        console.log("模板详情:", res);
+        var status = res.data.status;
+        console.log(JSON.parse(res.data.status));
+        
+        if (status == 1) {
+          that.setData({
+            photoInform: res.data.data
+          })
+        } else {
+          tips.alert(res.data.msg);
+        }
+
+      }
+    })
   },
   navUrl(e) {
     console.log(e);
@@ -54,6 +87,94 @@ Page({
         url: e.currentTarget.dataset.url,
       })
     }
+  },
+  // 生成视频
+  generate(){
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading'
+    })
+      let that = this;
+       // wx.request({
+    //   url: apiurl + "photo/share?sign=" + sign + '&operator_id=' + app.data.kid,
+    //   data: {
+    //     pw_id: that.data.pw_id
+    //   },
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   method: "GET",
+    //   success: function (res) {
+    //     console.log("好友拼图照片:", res);
+    //     console.log("海报:", res.data.data);
+    //     var status = res.data.status;
+    //     if (status == 1) {
+    //       that.setData({
+    //         friendsImg: res.data.data
+    //       })
+    //       let friendsImg = res.data.data;
+    //       let friendsImgs = friendsImg.split();
+    //       console.log(friendsImg)
+    //       console.log(friendsImgs)
+    //       wx.previewImage({
+    //         current: friendsImg, // 当前显示图片的http链接
+    //         urls: friendsImgs // 需要预览的图片http链接列表
+    //       })
+
+    //     } else {
+    //       console.log(res.data.msg);
+    //     }
+    //     wx.hideLoading()
+    //   }
+    // })
+  },
+  // 是否同意展示
+  Change: function (e) {
+    console.log(e);
+    let that = this;
+    console.log('checkbox发生change事件，携带value值为：', e.currentTarget.dataset.check);
+    if (e.currentTarget.dataset.check == 1) {
+      that.setData({
+        checkboxs: false
+      })
+    } else {
+      that.setData({
+        checkboxs: true
+      })
+    }
+
+    // wx.request({
+    //   url: apiurl + "photo/share?sign=" + sign + '&operator_id=' + app.data.kid,
+    //   data: {
+    //     pw_id: that.data.pw_id
+    //   },
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   method: "GET",
+    //   success: function (res) {
+    //     console.log("好友拼图照片:", res);
+    //     console.log("海报:", res.data.data);
+    //     var status = res.data.status;
+    //     if (status == 1) {
+    //       that.setData({
+    //         friendsImg: res.data.data
+    //       })
+    //       let friendsImg = res.data.data;
+    //       let friendsImgs = friendsImg.split();
+    //       console.log(friendsImg)
+    //       console.log(friendsImgs)
+    //       wx.previewImage({
+    //         current: friendsImg, // 当前显示图片的http链接
+    //         urls: friendsImgs // 需要预览的图片http链接列表
+    //       })
+
+    //     } else {
+    //       console.log(res.data.msg);
+    //     }
+    //     wx.hideLoading()
+    //   }
+    // })
   },
   // 传过来可以上传几个视频
   upVideo(e) {
@@ -181,19 +302,32 @@ Page({
   },
   saveVideo(){
        let that = this;
-       wx.setClipboardData({
-         data: '视频地址为:dddd' ,
+       wx.showModal({
+         content: '需要复制视频地址去浏览器下载',
+         confirmText: "复制",
+         cancelText: "取消",
          success: function (res) {
-           wx.getClipboardData({
-             success: function (res) {
-               console.log(res.data) // data
-               tips.success('复制成功，快去下载视频')
-               that.setData({
-                 finish: false
-               })
-             }
-           })
+           if (res.confirm) {
+             console.log('用户点击确定');
+             wx.setClipboardData({
+               data: '视频地址为:dddd',
+               success: function (res) {
+                 wx.getClipboardData({
+                   success: function (res) {
+                     console.log(res.data) // data
+                     tips.success('复制成功，快去下载视频')
+                     that.setData({
+                       finish: false
+                     })
+                   }
+                 })
+               }
+             })
+           } else if (res.cancel) {
+             console.log('用户点击取消')
+           }
          }
        })
+       
   }
 })

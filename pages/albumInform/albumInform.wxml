@@ -9,10 +9,11 @@
         <view class='right' bindtap='management'>照片管理</view>
     </view>
     <view class='photo'>
-        <image src='https://gcdn.playonwechat.com/photo/nice1.jpg'></image>
+        <video id="myVideo" src="https://friend-guess.playonwechat.com/assets/reward/videos/5a38fba8a54968395.mp4"  >
+        <cover-view class="controls"> </cover-view>
+        </video>
     </view>
     <view class='buttons'>
-        <view class='active' bindtap='friends'>上传视频</view>
         <view class='active' bindtap='friends'>分享视频</view>
     </view>
     <view class='checkboxs'>

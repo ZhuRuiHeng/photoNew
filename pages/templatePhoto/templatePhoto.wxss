@@ -1,4 +1,10 @@
 @import "../template/template.wxss";
+page{
+  background: #e4e4e4;
+}
+.container{
+  margin-bottom: 100rpx;
+}
 .navbar{
   display: flex;
   text-align: center;
@@ -35,9 +41,13 @@
     display: inline-block;
     margin: 1%;
     position: relative;
+    text-align: left;
+    height:380rpx;
+    background: #fff;
 }
 .common .item image{
     width: 100%;
+    height:380rpx;
 }
 .video .little{
     position: absolute;
@@ -62,4 +72,8 @@
 	border-top:8px solid #e4e4e4;
 	top:99%;
 	left:46%;
+}
+.common .pwIndexs image{
+    /* position: relative;
+    top: -80rpx; */
 }

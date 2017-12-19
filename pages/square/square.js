@@ -31,9 +31,9 @@ Page({
             allList: res.data.data
           })
         } else {
-          wx.reLaunch({
-            url: '../indexs/indexs',
-          })
+          // wx.reLaunch({
+          //   url: '../indexs/indexs',
+          // })
           that.setData({
             allList: false
           })
@@ -124,27 +124,18 @@ Page({
       }
   },
   shanchu(e){
+    console.log(e);
       let that = this;
-      wx.request({
-        url: app.data.apiurl + "photo/thumb?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-        data: {
-          type: e.currentTarget.dataset.type,
-          object_id: e.currentTarget.dataset.object_id
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        method: "GET",
-        success: function (res) {
-          console.log("删除:", res);
-          var status = res.data.status;
-          if (status == 1) {
-            tips.success('删除成功！')
-          } else {
-            tips.alert(res.data.msg);
-          }
-
+      let allList = that.data.allList;
+      let pw_id = e.currentTarget.dataset.pw_id;
+      let photoIndex = e.currentTarget.dataset.index;
+      for (let i = 0; i < allList.length;i++){
+        if (pw_id == allList[i].pw_id){
+          allList.splice(photoIndex, 1)
+          that.setData({
+            allList
+          })
         }
-      })
+      }
   }
 })

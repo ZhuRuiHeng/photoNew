@@ -9,14 +9,20 @@
          <view class='right' bindtap='management'>照片管理</view> 
     </view>
     <view class='photo'>
-        <image src='https://gcdn.playonwechat.com/photo/nice1.jpg'></image>
+        <image src='{{photoInform.thumb}}'></image>
     </view>
-    <view class='notice'>注：此模板可以上传{{}}张照片</view>
-    <view class='notice'>注：此模板可以上传{{}}个视频</view>
+    <view class='notice'>注：此模板可以上传{{photoInform.counts}}张照片</view>
     <view class='buttons'>
         <view class='active' bindtap='upPhoto'>上传图片</view>
-        <view class='active' bindtap='savePhoto'>保存图片</view>
         <view class='active' bindtap='upVideo'>上传视频</view>
-        <view class='active' bindtap='saveVideo'>保存视频</view>
+        <view class='active' bindtap='generate'>上传视频</view>
+        <view class='active' bindtap='saveVideo' wx:if="{{finish}}">保存图片</view>
+    </view>
+    <view class='checkboxs'>
+            <image  wx:if="{{checkboxs}}"  bindtap="Change" data-check='1' 
+                    src="../img/checka.png" mode='widthFix'></image>
+            <image wx:else  bindtap="Change" data-check='2' 
+                    src="../img/check.png"  mode='widthFix'></image>
+          同意生成照片墙展示在首页
     </view>
 </view>

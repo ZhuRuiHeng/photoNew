@@ -8,6 +8,7 @@ page{
     background-size: contain;
 }
 .inside{
+   position: relative;
     /* color: #676767;
     line-height: 1;
     background: none;
@@ -20,11 +21,10 @@ page{
     -webkit-user-select: none; */
 }
 .inside1{
-    margin: 0 auto;
-    width: 420rpx;
-    height: 420rpx;
-    left: 165rpx;
-    top: -40rpx;
+    width: 320rpx;
+    height: 320rpx;
+    left: 215rpx;
+    top: -100rpx;
     z-index: 2;
     transform: translate3d(0rpx, 0rpx, 0rpx) rotateZ(0deg);
     opacity: 1;
@@ -50,11 +50,14 @@ page{
     margin-bottom: 0rpx;
     animation: fadeInUp 3s ease 2.4s 1 normal both;
 }
+.inside1 .element-image{
+   width: 100%;
+}
 .inside1 .element-box image{
     width: 100%;
 }
 .inside2{
-   width: 147rpx;
+    width: 147rpx;
     height: 95rpx;
     left: 13rpx;
     top: -19rpx;
