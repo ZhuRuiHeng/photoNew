@@ -16,32 +16,40 @@ Page({
     })
     let that = this;
     console.log(app.data.apiurl + "photo/photo-circle?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid)
-
-    wx.request({
-      url: app.data.apiurl + "photo/photo-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "GET",
-      success: function (res) {
-        console.log("圈子列表:", res);
-        var status = res.data.status;
-        if (status == 1) {
-          that.setData({
-            allList: res.data.data
-          })
-        } else {
-          // wx.reLaunch({
-          //   url: '../indexs/indexs',
-          // })
-          that.setData({
-            allList: false
-          })
-         tips.alert(res.data.msg);
+    
+    
+      wx.request({
+        url: app.data.apiurl + "photo/photo-circle?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "GET",
+        success: function (res) {
+          console.log("圈子列表:", res);
+          var status = res.data.status;
+          if (status == 1) {
+            // if (wx.getStorageSync('allList')) {
+            //   that.setData({
+            //     allList: wx.getStorageSync('allList')
+            //   })
+            // }
+            that.setData({
+              allList: res.data.data
+            })
+          } else {
+            wx.reLaunch({
+              url: '../indexs/indexs',
+            })
+            that.setData({
+              allList: false
+            })
+            tips.alert(res.data.msg);
+          }
+          wx.hideLoading()
         }
-        wx.hideLoading()
-      }
-    })
+      })
+    
+    
   },
   navUrl(e) {
     console.log(e);
@@ -68,6 +76,13 @@ Page({
       })
     }
   },
+  // 评论
+  pinglunTap(e){
+    console.log(e);
+      wx.navigateTo({
+        url: '../inform/inform?pw_id=' + e.currentTarget.dataset.pw_id + '&type=' + e.currentTarget.dataset.type + '&name=' + e.currentTarget.dataset.name
+      })
+  },
   // 详情
   informSquare(e){
     let that = this;
@@ -78,6 +93,8 @@ Page({
   // 点赞
   zanTap(e){
     let that = this;
+    let zanIndex = e.currentTarget.dataset.index;
+    let allList = that.data.allList;
     wx.request({
       url: app.data.apiurl + "photo/thumb?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
       data:{
@@ -89,9 +106,19 @@ Page({
       },
       method: "GET",
       success: function (res) {
-        console.log("圈子列表:", res);
+        console.log("点赞:", res);
         var status = res.data.status;
         if (status == 1) {
+          for (let i = 0; i < allList.length;i++){
+            if (i == zanIndex){
+              let thumb_count = parseInt(allList[zanIndex].thumb_count);
+              //console.log(typeof (thumb_count));
+              allList[zanIndex].thumb_count = thumb_count + 1
+            }
+          }
+          that.setData({
+            allList
+          })
           tips.success('点赞成功！')
         } else {
           tips.alert(res.data.msg);
@@ -131,7 +158,8 @@ Page({
       let photoIndex = e.currentTarget.dataset.index;
       for (let i = 0; i < allList.length;i++){
         if (pw_id == allList[i].pw_id){
-          allList.splice(photoIndex, 1)
+          allList.splice(photoIndex, 1);
+          wx.setStorageSync('allList', allList);
           that.setData({
             allList
           })

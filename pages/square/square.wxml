@@ -4,11 +4,11 @@
 <template is="pretty" wx:if="{{show}}"></template>
 
 <view class="container" wx:if="{{allList}}">
-    <view class='item'>
+    <view class='item' wx:for="{{allList}}" wx:key="{{index}}">
         <view class='top'>
-            <view class='shanchu' bindtap='shanchu' data-pw_id='{{pw_id}}' data-index='{{index}}'>
+            <!-- <view class='shanchu' bindtap='shanchu' data-pw_id='{{pw_id}}' data-index='{{index}}'>
                 <image class='dels' src="../img/dels.png" mode='widthFix'></image>
-            </view>
+            </view> -->
             <image class='niceImg' src="{{item.avatarurl}}"></image>
             <view class='niceNames'>
                 <view class='nickName'>{{item.wx_name}}</view>
@@ -25,10 +25,11 @@
         <view class='btm'>
             <view class='left'>{{item.click_count}}次播放</view>
             <view class='right'>
-                <view class='zan' bindtap='zanTap' data-type='photowall' data-object_id='{{item.pw_id}}'>
+                <view class='zan' bindtap='zanTap' data-type='photowall' data-object_id='{{item.pw_id}}' data-index="{{index}}">
                     <image src="../img/983476-200.png"></image>{{item.thumb_count}}
                 </view>
-                <view class='chart' bindtap='pinglunTap' >
+                <view class='chart' bindtap='pinglunTap'  data-name="{{item.name}}" data-pw_id='{{item.pw_id}}' 
+              data-type='{{item.type}}'>
                     <image src="../img/chart.png"></image>{{item.comment_count}}
                 </view>
                 <view class='chart' bindtap='share' >

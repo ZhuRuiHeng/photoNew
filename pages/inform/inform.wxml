@@ -1,6 +1,6 @@
 <view class="container">
     <view class='nicePhoto'>
-        <image src="{{info.thumb}}" mode='widthFix'></image>
+        <image src="{{info.thumb}}" mode='widthFix' bindtap='prewimg' data-url="{{info.thumb}}" ></image>
     </view>
     <view class='tops'>
         <view class='nowInform'>
@@ -9,7 +9,8 @@
             </view>
             <view class='lowNight'>
               阅读 {{info.click_count}} 
-              <view class='zan' bindtap='zanTap' data-type='photowall' data-object_id='{{pw_id}}'>
+              <view class='zan' bindtap='zanTap' data-type='photowall' data-index='{{item.index}}'
+                    data-object_id='{{pw_id}}'>
                     <image src="../img/zan.png"></image>{{info.thumb_count}}
               </view>
             </view>
@@ -34,7 +35,8 @@
                         <view class='nickName one' >{{item.wx_name}}</view>
                         <view class='nickName two'>{{item.add_time}}</view>
                     </view>
-                    <view class='zan' bindtap='zanTap' data-type='comment' data-object_id='{{item.comment_id}}'><image src="../img/zan.png"></image>{{item.thumb_count}}</view>
+                    <view class='zan' bindtap='zanTap1' data-type='comment' data-index='{{index}}'
+                          data-object_id='{{item.comment_id}}'><image src="../img/zan.png"></image>{{item.thumb_count}}</view>
                 </view>
                 <view class='chartText'>{{item.comment}}</view>
             </view>

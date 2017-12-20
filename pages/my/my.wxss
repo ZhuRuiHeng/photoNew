@@ -2,6 +2,9 @@
 page{
   background: #e4e4e4;
 }
+.content{
+  margin-top: 20rpx;
+}
 .headerInform{
     margin: 0 auto;
     width: 400rpx;

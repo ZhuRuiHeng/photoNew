@@ -21,9 +21,9 @@
         <view class='active' bindtap='friends' wx:if="{{finish==false}}">邀请好友拼图</view>
     </view>
     <view class='checkboxs'>
-            <image  wx:if="{{checkboxs}}"  bindtap="Change" data-check='1' 
+            <image  wx:if="{{checkboxs==1}}"  bindtap="Change" data-check='1' 
                     src="../img/checka.png" mode='widthFix'></image>
-            <image wx:else  bindtap="Change" data-check='2' 
+            <image wx:else  bindtap="Change" data-check='0' 
                     src="../img/check.png"  mode='widthFix'></image>
           同意生成照片墙展示在首页
     </view>

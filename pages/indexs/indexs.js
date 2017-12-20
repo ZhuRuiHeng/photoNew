@@ -10,7 +10,7 @@ Page({
     itemBar:1,
     show: false,
     finish:false,
-    checkboxs:true
+    checkboxs: 1 //0不展示  1展示
   },
   onLoad: function (options) {
     this.setData({
@@ -76,36 +76,8 @@ Page({
       that.setData({
         pw_id: that.data.pw_id
       })
-    } if (!that.data.pw_id) {
-      // 获取照片墙pwid 
-      wx.request({
-        url: apiurl + "photo/pw?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-        data:{
-          type:'image'
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        method: "GET",
-        success: function (res) {
-          console.log("照片墙pwid:", res);
-          var status = res.data.status;
-          if (status == 1) {
-            that.setData({
-              pw_id: res.data.data
-            })
-
-          } else {
-            console.log('无照片墙id')
-            // that.setData({
-            //   pw_id: 0
-            // })
-          }
-          wx.hideLoading()
-        }
-      })
-
-    }
+    } 
+    
 
     app.getAuth(function () {
       let userInfo = wx.getStorageSync('userInfo');
@@ -115,6 +87,37 @@ Page({
           move: false, //动态效果
         })
       }, 200)
+      // 如果没有pw_id
+      if (!that.data.pw_id) {
+        // 获取照片墙pwid 
+        wx.request({
+          url: app.data.apiurl + "photo/pw?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+          data: {
+            type: 'image'
+          },
+          header: {
+            'content-type': 'application/json'
+          },
+          method: "GET",
+          success: function (res) {
+            console.log("照片墙pwid:", res);
+            var status = res.data.status;
+            if (status == 1) {
+              that.setData({
+                pw_id: res.data.data
+              })
+
+            } else {
+              console.log('无照片墙id')
+              // that.setData({
+              //   pw_id: 0
+              // })
+            }
+            wx.hideLoading()
+          }
+        })
+
+      }
       // 请求数据
       wx.request({
         url: apiurl + "photo/photo-wall-detail?sign=" + sign + '&operator_id=' + app.data.kid,
@@ -263,11 +266,11 @@ Page({
     console.log('checkbox发生change事件，携带value值为：', e.currentTarget.dataset.check);
     if (e.currentTarget.dataset.check==1){
       that.setData({
-        checkboxs: false
+        checkboxs: 1
       })
     }else{
       that.setData({
-        checkboxs: true
+        checkboxs: 0
       })
     }
     
@@ -344,16 +347,7 @@ Page({
     })
   },
   upPhoto() {
-    wx.getBackgroundAudioPlayerState({
-      success: function (res) {
-        console.log(res)
-        var status = res.status
-        var dataUrl = res.dataUrl
-        var currentPosition = res.currentPosition
-        var duration = res.duration
-        var downloadPercent = res.downloadPercent;
-      }
-    })
+  
     let that = this;
     let sign = wx.getStorageSync('sign');
     let photos = that.data.photos;
@@ -419,10 +413,11 @@ Page({
     let that = this;
     let sign = wx.getStorageSync('sign');
     wx.request({
-      url: apiurl + "photo/create-image?sign=" + sign + '&operator_id=' + app.data.kid,
+      url: app.data.apiurl + "photo/create-image?sign=" + sign + '&operator_id=' + app.data.kid,
       data: {
-        pw_id: that.data.pw_id
-      },
+        pw_id: that.data.pw_id,
+        is_show:that.data.checkboxs //0不展示  1展示
+      }, 
       header: {
         'content-type': 'application/json'
       },

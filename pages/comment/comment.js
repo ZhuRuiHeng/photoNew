@@ -16,6 +16,8 @@ Page({
   onLoad: function (options) {
     this.setData({
       pw_id: options.pw_id,
+      type: options.type,
+      name: options.name
     })
   },
 
@@ -37,7 +39,7 @@ Page({
 
 
   // 发表
-  publishText(){
+  publishText(e){
     var that = this;
     var content = that.data.text;
 
@@ -58,7 +60,7 @@ Page({
           if (status == 1) {
             tips.success('评论成功！');
             wx.redirectTo({
-              url: '../inform/inform',
+              url: '../inform/inform?pw_id=' + that.data.pw_id + '&type=' + that.data.type + '&name=' + that.data.name
             })
           } else {
             tips.alert(res.data.msg);

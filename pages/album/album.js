@@ -9,11 +9,11 @@ Page({
   data: {
     imgUrls: [
       {
-        img: 'https://gcdn.playonwechat.com/photo/nice1.jpg',
+        img: 'https://gcdn.playonwechat.com/photo/o_1c10c739b1pqu13g0bmu4lj12ua81.jpg',
         checked:true
       },
       {
-        img: 'https://gcdn.playonwechat.com/photo/nice1.jpg',
+        img: 'https://gcdn.playonwechat.com/photo/o_1c10c739b1pqu13g0bmu4lj12ua81.jpg',
         checked: false
       },
       {
@@ -43,7 +43,33 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading'
+    })
+    let that = this;
+    // wx.request({
+    //   url: app.data.apiurl + "photo/template-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+    //   data: {
+    //     type: 'h5'
+    //   },
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   method: "GET",
+    //   success: function (res) {
+    //     console.log("模板:", res);
+    //     var status = res.data.status;
+    //     if (status == 1) {
+    //       that.setData({
+    //         //photoList: res.data.data
+    //       })
+    //     } else {
+    //       tips.alert(res.data.msg);
+    //     }
+
+    //   }
+    // })
   },
   albumInform(e){
       // wx.navigateTo({

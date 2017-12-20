@@ -19,40 +19,40 @@
             <image src="../img/1422830-200.png" mode="widthFix"></image>我的照片墙
         </view>
         <view class="two {{now==2?'active':''}} " bindtap='navbar' data-now='2'>
-            <image src="../img/1419919-200.png" mode="widthFix"></image>我的影片集
+            <image src="../img/1419919-200.png" mode="widthFix"></image>我的照片集
         </view>
     </view>
     <!--1  -->
     <view class='content' wx:if="{{now==1}}">
           <view class='item' wx:for="{{photosList}}" wx:key="{{index}}" data-pw_id='{{item.id}}' >
             <view class='dels' bindtap="dels" data-pw_id='{{item.id}}' data-photoIndex='{{index}}'>
-                <image class='dels' src="../img/dels.png" mode="widthFix"></image>
+                <image class='dels' src="../img/dels.png" mode="aspectFill"></image>
             </view>
             <view class='musicTip' bindtap="musicList"  data-pw_id="{{item.id}}" data-index='{{index}}'>
-                <image class='music' src="../img/music.png" mode='widthFix'></image>
+                <image class='music' src="../img/music.png" mode='aspectFill'></image>
                 <view>{{item.music_info.name}}-{{item.music_info.singer}}</view>
             </view>
             <image class='niceImg' data-url='{{item.thumb}}' src="{{item.thumb}}?{{num}}" data-musicUrl='{{item.music_info.url}}' data-nameMusic='{{item.music_info.name}}'
-                    mode='widthFix' data-pw_id='{{item.id}}' bindtap='seeTap'></image>
+                    mode='aspectFill' data-pw_id='{{item.id}}' bindtap='seeTap'></image>
             <view class='timeWho'>
                 <input wx:if="{{item.name == 'undefined' || !item.name}}" type='text' 
                       data-pw_id='{{item.id}}' bindinput="setName" 
                       placeholder='照片墙' value='朋友照片墙' />
                 <input wx:else type='text' data-pw_id='{{item.id}}' bindinput="setName" 
                       placeholder='照片墙' value='朋友照片墙' />
-                      <image class='setting' src="../img/1162232-200.png" mode="widthFix"></image>
+                      <image class='setting' src="../img/1162232-200.png" mode="aspectFill"></image>
             </view>
         </view>
         <!--新增  -->
         <view class='item newAdd' >
             <view class='musicTip'  style="visibility: hidden;">
-                <image class='music' src="../img/music.png" mode='widthFix' ></image>
+                <image class='music' src="../img/music.png" mode='aspectFill' ></image>
                 <view>那些年十年那些年</view>
             </view>
-            <image class='niceImg'  src="../img/add.png" bindtap='newPhotos'
-                  mode='widthFix'></image>
+            <image class='niceImg'  src="../img/add.png" bindtap='newPhotos1'
+                  mode='aspectFill'></image>
             <view class='timeWho'>
-                <input type='text' placeholder='编辑相册名' bindinput="niceName" value='{{newName}}' />
+                <input type='text' placeholder='创建照片墙' disabled bindinput="niceName" value='{{newName}}' />
             </view>
         </view>
     </view> 
@@ -67,7 +67,7 @@
                 <view>{{item.music_info.name}}-{{item.music_info.singer}}</view>
             </view>
             <image class='niceImg' data-url='{{item.thumb}}' src="{{item.thumb}}?{{num}}" data-musicUrl='{{item.music_info.url}}' data-nameMusic='{{item.music_info.name}}'
-                    mode='widthFix' data-pw_id='{{item.id}}' bindtap='seeTap'></image>
+                    mode='aspectFill' data-pw_id='{{item.id}}' bindtap='seeTap'></image>
             <view class='timeWho'>
                 <input wx:if="{{item.name == 'undefined' || !item.name}}" type='text' 
                       data-pw_id='{{item.id}}' bindinput="setName" 
@@ -83,10 +83,10 @@
                 <image class='music' src="../img/music.png" mode='widthFix' ></image>
                 <view>那些年十年那些年</view>
             </view>
-            <image class='niceImg'  src="../img/add.png" bindtap='newPhotos'
-                  mode='widthFix'></image>
+            <image class='niceImg'  src="../img/add.png" bindtap='newPhotos2'
+                  mode='aspectFill'></image>
             <view class='timeWho'>
-                <input type='text' placeholder='编辑影集名' bindinput="niceName" value='{{newName}}' />
+                <input type='text' placeholder='创建影片集' disabled bindinput="niceName" value='{{newName}}' />
             </view>
         </view>
     </view> 

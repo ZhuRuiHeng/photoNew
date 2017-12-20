@@ -21,7 +21,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 14,
+			"current": 10,
 			"list": [
 				{
 					"id": -1,
@@ -31,9 +31,9 @@
 				},
 				{
 					"id": 1,
-					"name": "分享",
+					"name": "分享index",
 					"pathName": "pages/index/index",
-					"query": "scene=photo_wall_1578"
+					"query": "scene=photo_wall_2766"
 				},
 				{
 					"id": 2,
@@ -78,10 +78,10 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 9,
 					"name": "indexs",
 					"pathName": "pages/indexs/indexs",
-					"query": "scene=photo_wall_1578"
+					"query": "scene=photo_wall_2766"
 				},
 				{
 					"id": -1,
@@ -111,6 +111,12 @@
 					"id": -1,
 					"name": "templateInform",
 					"pathName": "pages/templateInform/templateInform",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "square",
+					"pathName": "pages/square/square",
 					"query": ""
 				}
 			]

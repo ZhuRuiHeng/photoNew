@@ -63,6 +63,11 @@ page{
 }
 .notice{
   text-align: center;
+  margin-top: -20rpx;
+}
+.buttons{
+  display: flex;
+  justify-content: space-around;
 }
 .buttons view{
   display: block;
@@ -73,7 +78,7 @@ page{
   padding: 0 20rpx;
   background: #666;
   color: #fff;
-  margin: 20rpx auto;
+  margin: 30rpx auto;
   text-align: center;
   cursor: pointer;
 }
@@ -95,7 +100,7 @@ button::after{
 .photo{
   position: relative;
   width: 710rpx;
-  margin: 50rpx auto;
+  margin: 40rpx auto;
   height: 640rpx;
   /* background:#fff; */
   background: url(https://gcdn.playonwechat.com/photo/bg.png) no-repeat;
@@ -310,7 +315,7 @@ button::after{
     }
 }
 .checkboxs{
-  text-align:center;margin:30rpx 0;
+  text-align:center;margin:0 0 30rpx 0;
   height: 60rpx;
   line-height: 60rpx;
 }

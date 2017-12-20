@@ -20,7 +20,7 @@ Page({
     let sign = wx.getStorageSync('sign');
     // 请求 
     wx.request({
-      url: apiurl + "photo/photo-list?sign=" + sign + '&operator_id=' + app.data.kid,
+      url: app.data.apiurl + "photo/photo-wall-list?sign=" + sign + '&operator_id=' + app.data.kid,
       data:{
         type:'image'
       },
@@ -195,17 +195,17 @@ Page({
   },
   navbar(e){
     let that = this;
-    let type =''
+    let type ='';
     that.setData({
        now:e.currentTarget.dataset.now
     })
     if (e.currentTarget.dataset.now==2){
-      type = 'video'
+      type = 'h5'
     }else{
       type = 'image'
     }
     wx.request({
-      url: apiurl + "photo/photo-list?sign=" +wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+      url: app.data.apiurl + "photo/photo-wall-list?sign=" +wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
       data: {
         type: type
       },
@@ -222,6 +222,9 @@ Page({
           })
           wx.hideLoading()
         } else {
+          that.setData({
+            photosList: false
+          })
           tips.alert(res.data.msg)
         }
       }
@@ -240,7 +243,7 @@ Page({
     let photosList = that.data.photosList;
     // 请求 
     wx.request({
-      url: apiurl + "photo/del-photo-wall?sign=" + sign + '&operator_id=' + app.data.kid,
+      url: app.data.apiurl + "photo/del-photo-wall?sign=" + sign + '&operator_id=' + app.data.kid,
       data: {
         pw_id: e.currentTarget.dataset.pw_id
       },
@@ -301,41 +304,51 @@ Page({
     wx.setStorageSync('pw_id', pw_id);
     wx.setStorageSync('bgMusic', e.currentTarget.dataset.musicurl);
     wx.setStorageSync('nameMusic', e.currentTarget.dataset.nameMusic);
-
+    // temp_id: options.temp_id,pw_id: options.pw_id
     wx.reLaunch({
-      url: '../indexs/indexs',
+      url: '../templateInform/templateInform?pw_id=' + e.currentTarget.dataset.pw_id,
     })
   },
   // 新增相册
-  newPhotos(e) {
-    wx.showLoading({
-      title: '加载中',
-    })
-    let that = this;
-    let sign = wx.getStorageSync('sign');
-    // 请求 
-    wx.request({
-      url: apiurl + "photo/create-new-wall?sign=" + sign + '&operator_id=' + app.data.kid,
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "GET",
-      success: function (res) {
-        console.log("新增照片墙:", res);
-        var status = res.data.status;
-        if (status == 1) {
-          wx.setStorageSync('pw_id', res.data.data);
-          wx.switchTab({
-            url: '../indexs/indexs',
-          })
-
-        } else {
-
-        }
-        wx.hideLoading()
-      }
+  newPhotos1(e){
+    wx.reLaunch({
+      url: '../templatePhoto/templatePhoto',
     })
   },
+  newPhotos2(e) {
+    wx.reLaunch({
+      url: '../album/album',
+    })
+  },
+  // newPhotos(e) {
+  //   wx.showLoading({
+  //     title: '加载中',
+  //   })
+  //   let that = this;
+  //   let sign = wx.getStorageSync('sign');
+  //   // 请求 
+  //   wx.request({
+  //     url: apiurl + "photo/create-new-wall?sign=" + sign + '&operator_id=' + app.data.kid,
+  //     header: {
+  //       'content-type': 'application/json'
+  //     },
+  //     method: "GET",
+  //     success: function (res) {
+  //       console.log("新增照片墙:", res);
+  //       var status = res.data.status;
+  //       if (status == 1) {
+  //         wx.setStorageSync('pw_id', res.data.data);
+  //         wx.reLaunch({
+  //           url: '../indexs/indexs',
+  //         })
+
+  //       } else {
+
+  //       }
+  //       wx.hideLoading()
+  //     }
+  //   })
+  // },
   // 新增照片名称
   niceName(e) {
     this.setData({

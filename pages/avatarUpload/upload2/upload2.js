@@ -3,9 +3,11 @@ import tips from '../../../utils/tips.js';
 const device = wx.getSystemInfoSync()
 const width = device.windowWidth
 const height = device.windowHeight - 50
+console.log("width：", width, height)
 const app = getApp();
 const apiurl = 'https://friend-guess.playonwechat.com/';
-
+console.log(wx.getStorageSync('width') / 2);
+console.log(wx.getStorageSync('height') / 2)
 
 
 Page({
@@ -19,8 +21,8 @@ Page({
       cut: {
         x: (width - 300) / 2,
         y: (height - 300) / 2,
-        width: 300,
-        height: 300
+        width: wx.getStorageSync('width')/2,
+        height: wx.getStorageSync('height')/2
       }
     },
     tapss:true
@@ -77,69 +79,46 @@ Page({
               that.setData({
                 picture: data.data
               })
-              console.log(app.data.apiurl + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid);
-              wx.request({
-                  url: app.data.apiurl + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid,
-                  data: {
-                    pw_id: pw_id,
-                    picture: that.data.picture,
-                    temp_id: wx.getStorageSync('temp_id')
-                  },
-                  header: {
-                    'content-type': 'application/json'
-                  },
-                  method: "GET",
-                  success: function (res) {
-                    console.log('上传pw_id：', pw_id);
-                    console.log("添加照片:", res);
-                    let status = res.data.status;
-                    if (status == 1) {
-                      console.log('上传成功！')
-                      // 获取照片墙pwid
-                      wx.request({
-                        url: apiurl + "photo/pw?sign=" + sign + '&operator_id=' + app.data.kid,
-                        header: {
-                          'content-type': 'application/json'
-                        },
-                        method: "GET",
-                        success: function (res) {
-                          console.log("照片墙pwid:", res);
-                          var status = res.data.status;
-                          if (status == 1) {
-                            console.log(111);
-                            that.setData({
-                              pw_id: pw_id,
-                              tapss: true
-                            })
-                            wx.setStorageSync('pw_id', pw_id)
-                            //  获取到裁剪后的图片
-                            wx.reLaunch({
-                              url: '../../templateInform/templateInform?temp_id=' + wx.getStorageSync('temp_id'),
-                            })
+                console.log('上传pw_id：',pw_id);
+                wx.request({
+                    url: app.data.apiurl + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid,
+                    data: {
+                      pw_id: pw_id,
+                      position: wx.getStorageSync('position'),
+                      picture: picture
+                    },
+                    header: {
+                      'content-type': 'application/json'
+                    },
+                    method: "GET",
+                    success: function (res) {
+                      console.log('上传pw_id：', pw_id);
+                      console.log("添加照片:", res);
+                      let status = res.data.status;
+                      if (status == 1) {
+                        console.log('上传成功！')
+                        // 获取照片墙pwid
+                        wx.setStorageSync('temp_id', wx.getStorageSync('temp_id'))
+                        wx.reLaunch({
+                          url: '../../templateInform/templateInform?temp_id=' + wx.getStorageSync('temp_id') + '&pw_id=' + wx.getStorageSync('pw_id'),
+                        })
 
-                          } else {
-                            console.log(res.data.msg);
-                            wx.showToast({
-                              title: res.data.msg,
-                              icon: 'loading'
-                            })
-                            wx.reLaunch({
-                              url: '../../templateInform/templateInform?temp_id=' + wx.getStorageSync('temp_id'),
-                            })
-                          }
-                        }
-                        
-                      })
+                      } else {
+                        wx.showToast({
+                          title: res.data.msg,
+                          icon: 'loading'
+                        })
+                        wx.setStorageSync('temp_id', wx.getStorageSync('temp_id'))
+                        setTimeout(function(){
+                          wx.reLaunch({
+                            url: '../../templateInform/templateInform?temp_id=' + wx.getStorageSync('temp_id') + '&pw_id=' + wx.getStorageSync('pw_id'),
+                          })
+                        })
+                      }
 
-                    } else {
-                      wx.showToast({
-                        title: res.data.msg,
-                        icon: 'loading'
-                      })
                     }
-
-                  }
-              })
+                  })
+              
             } else {
               wx.showToast({
                 title: res.data.msg,
@@ -153,7 +132,7 @@ Page({
         console.log('获取图片失败，请稍后重试'),
         setTimeout(function(){
           wx.reLaunch({
-            url: '../../templateInform/templateInform?temp_id=' + wx.getStorageSync('temp_id'),
+            url: '../../templateInform/templateInform?temp_id=' + wx.getStorageSync('temp_id') + '&pw_id=' + wx.getStorageSync('pw_id'),
           })
         },1000)
           

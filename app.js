@@ -13,7 +13,7 @@ App({
     authSuccess: false,
     dataUrl: "",
     music_play: true,
-    apiurl:'http://192.168.15.127/v1/'
+    apiurl:'https://friend-guess.playonwechat.com/v1/'
   },
   onLaunch: function () {
     let that = this;

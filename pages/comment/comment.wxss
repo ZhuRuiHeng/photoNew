@@ -25,14 +25,14 @@
 
 .disabled{
   color: #000;
-  background: #efeff5;
+  background: #ddd;
 }
 
 .text{
   width: 700rpx;
   margin: 20rpx auto 0;
   height: 400rpx;
-  background: #efeff5;
+  background: #ddd;
   padding: 20rpx;
   box-sizing: border-box;
   color: #333;

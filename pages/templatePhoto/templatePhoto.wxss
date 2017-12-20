@@ -34,7 +34,6 @@ page{
 }
 .common{
   width: 100%;
-  text-align: center;
 }
 .common .item{
     width: 48%;
