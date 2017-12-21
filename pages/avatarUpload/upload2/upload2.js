@@ -3,12 +3,27 @@ import tips from '../../../utils/tips.js';
 const device = wx.getSystemInfoSync()
 const width = device.windowWidth
 const height = device.windowHeight - 50
-console.log("width：", width, height)
+console.log("width：", width, height);
+let width1='';
+let height1 = '';
 const app = getApp();
 const apiurl = 'https://friend-guess.playonwechat.com/';
 console.log(wx.getStorageSync('width') / 2);
 console.log(wx.getStorageSync('height') / 2)
-
+// if (wx.getStorageSync('width') > width){
+//   width1 = wx.getStorageSync('width')/2
+//   height1 = wx.getStorageSync('height')/2
+// } 
+// if (wx.getStorageSync('height') > height){
+//   width1 = wx.getStorageSync('width') / 2
+//   height1 = wx.getStorageSync('height') / 2
+// }
+// else{
+//   width1 = 214
+//   height1 = 136
+// }
+console.log(width1)
+console.log(height1)
 
 Page({
   data: {
@@ -21,21 +36,13 @@ Page({
       cut: {
         x: (width - 300) / 2,
         y: (height - 300) / 2,
-        width: wx.getStorageSync('width'),
-        height: wx.getStorageSync('height')
+        width: wx.getStorageSync('width') / 2,
+        height: wx.getStorageSync('height') / 2
       }
     },
     tapss:true
   },
-  onLoad(options) {
-    console.log("options:", options);
-    let pw_id = options.pw_id;
-    let position = options.position;
-    that.setData({
-      pw_id,
-      position
-    })
-  },
+ 
   touchStart(e) {
     this.wecropper.touchStart(e)
   },
@@ -98,7 +105,9 @@ Page({
                       if (status == 1) {
                         console.log('上传成功！')
                         // 获取照片墙pwid
-                        wx.setStorageSync('temp_id', wx.getStorageSync('temp_id'))
+                        wx.setStorageSync('temp_id', wx.getStorageSync('temp_id'));
+                        wx.removeStorageSync('width');
+                        wx.removeStorageSync('height')
                         wx.reLaunch({
                           url: '../../templateInform/templateInform?temp_id=' + wx.getStorageSync('temp_id') + '&pw_id=' + wx.getStorageSync('pw_id'),
                         })
@@ -110,6 +119,8 @@ Page({
                         })
                         wx.setStorageSync('temp_id', wx.getStorageSync('temp_id'))
                         setTimeout(function(){
+                          wx.removeStorageSync('width');
+                          wx.removeStorageSync('height')
                           wx.reLaunch({
                             url: '../../templateInform/templateInform?temp_id=' + wx.getStorageSync('temp_id') + '&pw_id=' + wx.getStorageSync('pw_id'),
                           })
@@ -131,6 +142,8 @@ Page({
       } else {
         console.log('获取图片失败，请稍后重试'),
         setTimeout(function(){
+          wx.removeStorageSync('width');
+          wx.removeStorageSync('height')
           wx.reLaunch({
             url: '../../templateInform/templateInform?temp_id=' + wx.getStorageSync('temp_id') + '&pw_id=' + wx.getStorageSync('pw_id'),
           })

@@ -80,14 +80,15 @@ Page({
   pinglunTap(e){
     console.log(e);
       wx.navigateTo({
-        url: '../inform/inform?pw_id=' + e.currentTarget.dataset.pw_id + '&type=' + e.currentTarget.dataset.type + '&name=' + e.currentTarget.dataset.name
+        url: '../inform/inform?pw_id=' + e.currentTarget.dataset.pw_id + '&type=' + e.currentTarget.dataset.type + '&name=' + e.currentTarget.dataset.name + '&temp_id=' + e.currentTarget.dataset.temp_id,
       })
   },
   // 详情
   informSquare(e){
+    console.log(e);
     let that = this;
     wx.navigateTo({
-      url: '../inform/inform?pw_id=' + e.currentTarget.dataset.pw_id + '&type=' + e.currentTarget.dataset.type + '&name=' + e.currentTarget.dataset.name
+      url: '../inform/inform?pw_id=' + e.currentTarget.dataset.pw_id + '&type=' + e.currentTarget.dataset.type + '&name=' + e.currentTarget.dataset.name + '&temp_id=' + e.currentTarget.dataset.temp_id,
     })
   },
   // 点赞
@@ -139,7 +140,7 @@ Page({
       return {
         title: '朋友照片墙',
         imageUrl: e.target.dataset.thumb,
-        path: '/pages/inform/inform?pw_id=' + e.target.dataset.pw_id + '&type=' + e.target.dataset.type + '&name=' + e.target.dataset.name,
+        path: '/pages/inform/inform?pw_id=' + e.target.dataset.pw_id + '&type=' + e.target.dataset.type + '&name=' + e.target.dataset.name + '&temp_id=' + e.target.dataset.temp_id,
         success: function (res) {
           console.log(res);
           // 转发成功

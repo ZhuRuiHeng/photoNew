@@ -1,6 +1,6 @@
 @import "../template/template.wxss";
 page{
-  background: #e4e4e4;
+  background: #fff;
 }
 .container{
     overflow: hidden;
@@ -9,7 +9,7 @@ page{
     width: 100%;
     font-size: 26rpx;
     background-color: #e4e4e4;
-    margin-bottom: 100rpx;
+    padding-bottom: 200rpx;
 }
 .item{
   background: #fff;

@@ -222,7 +222,8 @@ Page({
           that.setData({
             friendsImg: res.data
           })
-          let friendsImg = res.data+'?'+ that.data.num;
+          let friendsImg = res.data.data;
+          console.log("friendsImg:", res.data.data);
           let friendsImgs = friendsImg.split();
           console.log(friendsImg)
           console.log(friendsImgs)

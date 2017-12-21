@@ -3,7 +3,7 @@ page{
   background: #e4e4e4;
 }
 .container{
-  margin-bottom: 100rpx;
+  padding-bottom: 100rpx;
 }
 .navbar{
   display: flex;

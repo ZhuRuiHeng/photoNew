@@ -59,7 +59,7 @@ Page({
           var status = res.data.status;
           if (status == 1) {
             tips.success('评论成功！');
-            wx.redirectTo({
+            wx.navigateBack({
               url: '../inform/inform?pw_id=' + that.data.pw_id + '&type=' + that.data.type + '&name=' + that.data.name
             })
           } else {

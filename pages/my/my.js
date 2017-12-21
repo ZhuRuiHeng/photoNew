@@ -327,18 +327,18 @@ Page({
     wx.setStorageSync('bgMusic', e.currentTarget.dataset.musicurl);
     wx.setStorageSync('nameMusic', e.currentTarget.dataset.nameMusic);
     // temp_id: options.temp_id,pw_id: options.pw_id
-    wx.reLaunch({
+    wx.navigateTo({
       url: '../albumInform/albumInform?pw_id=' + e.currentTarget.dataset.pw_id,
     })
   },
   // 新增相册
   newPhotos1(e){
-    wx.reLaunch({
+    wx.navigateTo({
       url: '../templatePhoto/templatePhoto',
     })
   },
   newPhotos2(e) {
-    wx.reLaunch({
+    wx.navigateTo({
       url: '../album/album',
     })
   },

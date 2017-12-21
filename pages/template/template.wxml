@@ -28,7 +28,7 @@
                 <image src="../img/1422830-200.png" ></image><text>照片墙</text>
             </navigator>
             <navigator url="../album/album" class="pretty2" open-type="reLaunch" >
-                <image src="../img/1419919-200.png" ></image><text>照片集</text>
+                <image src="../img/1419919-200.png" ></image><text>相册集</text>
             </navigator>
         </view>
     </view>

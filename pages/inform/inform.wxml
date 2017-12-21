@@ -1,11 +1,16 @@
 <view class="container">
     <view class='nicePhoto'>
-        <image src="{{info.thumb}}" mode='widthFix' bindtap='prewimg' data-url="{{info.thumb}}" ></image>
+        <view class='index' wx:if="{{type=='h5'}}" bindtap='seeH5' ></view>
+        <image wx:if="{{type=='h5'}}" class='play' src="../img/sanjiao.png" mode='widthFix' bindtap='seeH5' > </image> 
+        <image wx:if="{{type=='h5'}}" src="{{info.thumb}}" mode='widthFix' bindtap='seeH5' ></image>
+        <image wx:else src="{{info.thumb}}" mode='widthFix' bindtap='prewimg' data-temp_id="{{temp_id}}" 
+                data-url='{{info.thumb}}'></image>
     </view>
-    <view class='tops'>
+    <view class="tops {{type!='h5'?'border':''}}">
         <view class='nowInform'>
             <view class='nowLeft'>
-                <view class='production' bindtap='production' data-type="{{type}}">制作照片墙</view>
+                <view class='production' wx:if="{{type=='h5'}}" bindtap='production' data-type="{{type}}">制作相册集</view>
+                <view class='production' wx:else bindtap='production' data-type="{{type}}">制作照片墙</view>
             </view>
             <view class='lowNight'>
               阅读 {{info.click_count}} 

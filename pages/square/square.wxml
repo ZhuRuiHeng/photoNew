@@ -19,7 +19,7 @@
             </view>
         </view>
         <view class='mid' bindtap='informSquare' data-name="{{item.name}}" data-pw_id='{{item.pw_id}}' 
-              data-type='{{item.type}}'>
+              data-type='{{item.type}}' data-temp_id="{{item.temp_id}}">
             <image src="{{item.thumb}}" mode='widthFix'></image>
         </view>
         <view class='btm'>
@@ -29,12 +29,12 @@
                     <image src="../img/983476-200.png"></image>{{item.thumb_count}}
                 </view>
                 <view class='chart' bindtap='pinglunTap'  data-name="{{item.name}}" data-pw_id='{{item.pw_id}}' 
-              data-type='{{item.type}}'>
+              data-type='{{item.type}}' data-temp_id="{{item.temp_id}}">
                     <image src="../img/chart.png"></image>{{item.comment_count}}
                 </view>
                 <view class='chart' bindtap='share' >
                     <button open-type='share' data-pw_id='{{item.pw_id}}' data-type='{{item.type}}' 
-                            data-image="{{item.thumb}}" data-name="{{item.name}}">
+                            data-image="{{item.thumb}}" data-name="{{item.name}}" data-temp_id="{{item.temp_id}}">
                         <image src="../img/1227062-200.png"></image>
                     </button>
                 </view>

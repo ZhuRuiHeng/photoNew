@@ -8,7 +8,8 @@ console.log(comm)
 Page({
   data: {
     sign: wx.getStorageSync('sign'),
-    kid: wx.getStorageSync('kid')
+    kid: wx.getStorageSync('kid'),
+    num: Math.random()
   },
   onLoad: function (options) {
     console.log("options:", options);
@@ -41,7 +42,7 @@ Page({
       wx.showLoading({
         title: '加载中',
       });
-      let indexUrl = apiurl + 'assets/html/index' + that.data.temp_id + '.html?kid=' + kid + '&sign=' + sign + '&pw_id=' + that.data.pw_id;
+      let indexUrl = apiurl + 'assets/html/index' + that.data.temp_id + '.html?kid=' + kid + '&sign=' + sign + '&pw_id=' + that.data.pw_id + '&a=' + that.data.num;
       console.log(indexUrl)
       that.setData({
         indexUrl

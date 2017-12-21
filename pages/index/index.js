@@ -20,15 +20,17 @@ Page({
         var strs = new Array(); //定义一数组 
         strs = scene.split("_"); //字符分割 
         console.log(strs);
-        console.log("pw_id:", strs[2]);
-        var pw_id = strs[2];
+        console.log("pw_id:", strs[3]);
+        var type = strs[2];
+        var pw_id = strs[3];
         if (pw_id =='undefined'){
             
         }else{
           that.setData({
-            pw_id: pw_id
+            pw_id: pw_id,
+            type: type
           })
-          wx.setStorageSync(pw_id, 'strs[2]')
+          wx.setStorageSync(pw_id, 'strs[3]')
         }
         
       }
@@ -71,9 +73,16 @@ Page({
             if (second <= 1) {
               clearInterval(inter);
               if (that.data.pw_id){
-                wx.redirectTo({
-                  url: '../templateInform/templateInform?pw_id=' + that.data.pw_id,
-                })
+                if (that.data.type=='h5'){
+                  wx.redirectTo({
+                    url: '../albumInform/albumInform?pw_id=' + that.data.pw_id,
+                  })
+                }else{
+                  wx.redirectTo({
+                    url: '../templateInform/templateInform?pw_id=' + that.data.pw_id,
+                  })
+                }
+                
               }else{
                 // wx.redirectTo({
                 //   url: '../indexs/indexs',

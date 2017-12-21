@@ -10,21 +10,22 @@
     </view>
     <view class='photo'>
         <view class='index'></view>
-        <!-- <image class='play' src="../img/sanjiao.png" {{thumb}}?{{num}}></image> -->
+         <image class='play' src="../img/sanjiao.png"></image> 
          <image class='thumb' src='https://gcdn.playonwechat.com/photo/o_1c10c739b1pqu13g0bmu4lj12ua81.jpg' mode='aspectFit'></image> 
     </view>
-    <view class='notice'>注：此模板可以上传6张照片</view>
+    <view class='notice'>注：此模板可以上传{{photo_count}}张照片</view>
     <view class='buttons'>
           <!-- wx:if="{{finish}}"  -->
-         <view class='active' bindtap='savePhoto'>查看照片集</view> 
-        <view class='active' bindtap='upPhoto' wx:if="{{!finish}}">上传图片</view>
-        
+          <view class='active' bindtap='upPhoto' wx:if="{{!finish}}">上传图片</view>
+          <view class='active' bindtap='savePhoto' wx:if="{{finish}}">查看相册集</view> 
+          <!-- friends -->
+          <view class='active' bindtap='friends' wx:if="{{finish}}">分享给好友</view> 
     </view>
-     <!-- <view class='checkboxs'>
+      <view class='checkboxs'  wx:if="{{finish}}">
             <image  wx:if="{{checkboxs==1}}"  bindtap="Change" data-check='0' 
                     src="../img/checka.png" mode='widthFix'></image>
-            <image wx:else  bindtap="Change" data-check='1' 
+            <image wx:if="{{checkboxs==0}}"  bindtap="Change" data-check='1' 
                     src="../img/check.png"  mode='widthFix'></image>
           同意生成照片集展示在首页
-    </view>  -->
+     </view>  
 </view>

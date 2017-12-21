@@ -12,7 +12,8 @@ Page({
       this.setData({
         pw_id: options.pw_id,
         type: options.type,
-        name: options.name
+        name: options.name,
+        temp_id: options.temp_id
       })
   },
   onReady: function () {
@@ -78,15 +79,22 @@ Page({
   production(e){
       let that = this;
       let type = e.currentTarget.dataset.type;
-      if (type=='image'){
-          wx.navigateTo({
-            url: '../indexs/indexs',
-          })
-      }else{
+      if (type=='h5'){
         wx.navigateTo({
           url: '../album/album',
         })
+      } else{
+        wx.navigateTo({
+          url: '../templatePhoto/templatePhoto',
+        })
       }
+  },
+  seeH5(e){
+    console.log(e);
+    let that = this;
+    wx.navigateTo({
+      url: '../seephoto/seephoto?pw_id=' + that.data.pw_id + '&temp_id=' + that.data.temp_id,
+    })
   },
   // 点赞照片墙
   zanTap(e) {
