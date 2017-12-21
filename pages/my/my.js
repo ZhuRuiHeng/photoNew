@@ -309,6 +309,28 @@ Page({
       url: '../templateInform/templateInform?pw_id=' + e.currentTarget.dataset.pw_id,
     })
   },
+  seeTap1(e) {
+    console.log(e)
+    let pw_id = e.currentTarget.dataset.pw_id;
+    let bgMusic = e.currentTarget.dataset.musicurl;
+    console.log('musicUrl:', e.currentTarget.dataset.musicurl)
+    app.data.dataUrl = e.currentTarget.dataset.musicurl;
+    wx.playBackgroundAudio({ //播放
+      dataUrl: e.currentTarget.dataset.musicurl
+    })
+    wx.showLoading({
+      title: '加载中',
+    })
+    let that = this;
+    let sign = wx.getStorageSync('sign');
+    wx.setStorageSync('pw_id', pw_id);
+    wx.setStorageSync('bgMusic', e.currentTarget.dataset.musicurl);
+    wx.setStorageSync('nameMusic', e.currentTarget.dataset.nameMusic);
+    // temp_id: options.temp_id,pw_id: options.pw_id
+    wx.reLaunch({
+      url: '../albumInform/albumInform?pw_id=' + e.currentTarget.dataset.pw_id,
+    })
+  },
   // 新增相册
   newPhotos1(e){
     wx.reLaunch({

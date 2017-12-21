@@ -79,7 +79,7 @@ Page({
                 //   url: '../indexs/indexs',
                 // })
                 wx.redirectTo({
-                  url: '../templateInform/templateInform?pw_id=' + that.data.pw_id,
+                  url: '../square/square',
                 })
               }
             }

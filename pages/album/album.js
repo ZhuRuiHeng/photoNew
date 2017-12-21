@@ -13,7 +13,7 @@ Page({
         checked:true
       },
       {
-        img: 'https://gcdn.playonwechat.com/photo/o_1c10c739b1pqu13g0bmu4lj12ua81.jpg',
+        img: 'https://gcdn.playonwechat.com/photo/o_1c05pta846ov1iskptg16kv1ccq.jpg',
         checked: false
       },
       {
@@ -48,49 +48,67 @@ Page({
       icon: 'loading'
     })
     let that = this;
-    // wx.request({
-    //   url: app.data.apiurl + "photo/template-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-    //   data: {
-    //     type: 'h5'
-    //   },
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   method: "GET",
-    //   success: function (res) {
-    //     console.log("模板:", res);
-    //     var status = res.data.status;
-    //     if (status == 1) {
-    //       that.setData({
-    //         //photoList: res.data.data
-    //       })
-    //     } else {
-    //       tips.alert(res.data.msg);
-    //     }
+    wx.request({
+      url: app.data.apiurl + "photo/template-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+      data: {
+        type: 'h5'
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        console.log("模板:", res);
+        var status = res.data.status;
+        if (status == 1) {
+          that.setData({
+            photoList: res.data.data
+          })
+        } else {
+          tips.alert(res.data.msg);
+        }
 
-    //   }
-    // })
+      }
+    })
   },
   albumInform(e){
-      wx.navigateTo({
-        url: '../albumInform/albumInform'
-      })
+      
       console.log(e);
       let that = this;
       let checked = e.currentTarget.dataset.checked;
       let index = e.currentTarget.dataset.index;
+      let temp_id = e.currentTarget.dataset.temp_id;
       let imgUrls = that.data.imgUrls;
-      for (let i = 0; i < imgUrls.length;i++){
-        imgUrls[i].checked=false;
-        if(index==i){
-          console.log(i);
-          imgUrls[index].checked = true;
+      wx.request({
+        url: apiurl + "photo/create-new-wall?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+        data: {
+          name: '圣诞节祝福卡',
+          temp_id: temp_id,
+          type: 'h5'
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "GET",
+        success: function (res) {
+          console.log("创建相册:", res);
+          var status = res.data.status;
+          if (status == 1) {
+            wx.navigateTo({
+              url: '../albumInform/albumInform?pw_id=' + res.data.data + '&temp_id=' + temp_id
+            })
+          } else {
+            tips.alert(res.data.msg);
+          }
+
         }
-      }
+      })
+      
       that.setData({
         imgUrls
       })
   },
+ 
   navUrl(e) {
     console.log(e);
     console.log(e.currentTarget.dataset.itembar);
@@ -115,54 +133,6 @@ Page({
         url: e.currentTarget.dataset.url,
       })
     }
-  },
-  // 是否同意展示
-  Change: function (e) {
-    console.log(e);
-    let that = this;
-    console.log('checkbox发生change事件，携带value值为：', e.currentTarget.dataset.check);
-    if (e.currentTarget.dataset.check == 1) {
-      that.setData({
-        checkboxs: false
-      })
-    } else {
-      that.setData({
-        checkboxs: true
-      })
-    }
-
-    // wx.request({
-    //   url: apiurl + "photo/share?sign=" + sign + '&operator_id=' + app.data.kid,
-    //   data: {
-    //     pw_id: that.data.pw_id
-    //   },
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   method: "GET",
-    //   success: function (res) {
-    //     console.log("好友拼图照片:", res);
-    //     console.log("海报:", res.data.data);
-    //     var status = res.data.status;
-    //     if (status == 1) {
-    //       that.setData({
-    //         friendsImg: res.data.data
-    //       })
-    //       let friendsImg = res.data.data;
-    //       let friendsImgs = friendsImg.split();
-    //       console.log(friendsImg)
-    //       console.log(friendsImgs)
-    //       wx.previewImage({
-    //         current: friendsImg, // 当前显示图片的http链接
-    //         urls: friendsImgs // 需要预览的图片http链接列表
-    //       })
-
-    //     } else {
-    //       console.log(res.data.msg);
-    //     }
-    //     wx.hideLoading()
-    //   }
-    // })
   },
 
  

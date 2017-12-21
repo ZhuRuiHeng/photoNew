@@ -50,137 +50,6 @@ Page({
     //       temp_id: wx.getStorageSync('temp_id')
     //     })
     // }
-    if (that.data.pw_id == 'undefined' || !that.data.pw_id) {
-      console.log(111111111)
-      wx.request({
-        url: apiurl + "photo/create-new-wall?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-        data: {
-          name: '朋友照片墙',
-          temp_id: 1
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        method: "GET",
-        success: function (res) {
-          console.log("新建相册:", res);
-          var status = res.data.status;
-          if (status == 1) {
-            that.setData({
-              pw_id: res.data.data
-            })
-            wx.request({
-              url: app.data.apiurl + "photo/template-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-              data: {
-                temp_id: that.data.temp_id
-              },
-              header: {
-                'content-type': 'application/json'
-              },
-              method: "GET",
-              success: function (res) {
-                console.log("模板详情:", res);
-                var status = res.data.status;
-                console.log(JSON.parse(res.data.status));
-
-                if (status == 1) {
-                  that.setData({
-                    photoInform: res.data.data,
-                    thumb: res.data.data.thumb + '?' + that.data.num,
-                    source_effect: res.data.data.source_effect
-                  })
-
-                } else {
-                  //tips.alert(res.data.msg);
-                }
-              },
-
-            })
-            //照片墙信息temp_id
-            wx.request({
-              url: app.data.apiurl + "photo/photo-wall-detail?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-              data: {
-                pw_id: that.data.pw_id
-              },
-              header: {
-                'content-type': 'application/json'
-              },
-              method: "GET",
-              success: function (res) {
-                console.log("照片墙信息:", res);
-                var status = res.data.status;
-                if (status == 1) {
-                  that.setData({
-                    thumb: res.data.data.pic + '?' + that.data.num,
-                    temp_id: res.data.data.temp_id
-                  })
-                  if (!wx.getStorageSync('bgMusic')) {
-                    console.log('没有缓存音乐')
-                    wx.setStorageSync('bgMusic', res.data.data.music_info.url);
-                    app.data.dataUrl = res.data.data.music_info.url;
-                    wx.playBackgroundAudio({ //播放
-                      dataUrl: res.data.data.music_info.url,
-                      title: res.data.data.music_info.name,
-                    })
-                    that.setData({
-                      music_play: true
-                    })
-                  }
-                  if (wx.getStorageSync('bgMusic') == res.data.data.music_info.url) {
-                    console.log('缓存音乐与当前音乐相同')
-                  } else {
-                    console.log(wx.getStorageSync('bgMusic'), res.data.data.music_info.url, 222)
-                    app.data.dataUrl = res.data.data.music_info.url;
-                    wx.playBackgroundAudio({ //播放
-                      dataUrl: res.data.data.music_info.url
-                    })
-                    that.setData({
-                      music_play: true
-                    })
-                  }
-                  wx.request({
-                    url: app.data.apiurl + "photo/template-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-                    data: {
-                      temp_id: that.data.temp_id
-                    },
-                    header: {
-                      'content-type': 'application/json'
-                    },
-                    method: "GET",
-                    success: function (res) {
-                      console.log("模板详情:", res);
-                      var status = res.data.status;
-                      console.log(JSON.parse(res.data.status));
-
-                      if (status == 1) {
-                        that.setData({
-                          photoInform: res.data.data,
-                          thumb: res.data.data.thumb + '?' + that.data.num,
-                          source_effect: res.data.data.source_effect
-                        })
-
-                      } else {
-                        //tips.alert(res.data.msg);
-                      }
-                    },
-
-                  })
-                } else {
-                  console.log(res.data.msg);
-                }
-                wx.hideLoading()
-              }
-            })
-
-
-          } else {
-            tips.alert(res.data.msg);
-          }
-
-        }
-      })
-    }
-    if (that.data.pw_id != 'undefined') {
         wx.request({
           url: app.data.apiurl + "photo/template-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
           data:{
@@ -198,7 +67,6 @@ Page({
             if (status == 1) {
               that.setData({
                 photoInform: res.data.data,
-                thumb: res.data.data.thumb + '?' + that.data.num,
                 source_effect: res.data.data.source_effect
               })
               
@@ -267,7 +135,6 @@ Page({
                   if (status == 1) {
                     that.setData({
                       photoInform: res.data.data,
-                      thumb: res.data.data.thumb + '?' + that.data.num,
                       source_effect: res.data.data.source_effect
                     })
 
@@ -285,29 +152,27 @@ Page({
         })
         // 判断照片墙是否已满
         wx.request({
-              url: app.data.apiurl + "photo/is-full?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-              data: {
-                pw_id: that.data.pw_id
-              },
-              header: {
-                'content-type': 'application/json'
-              },
-              method: "GET",
-              success: function (res) {
-                console.log("照片墙是否已满:", res);
-                var status = res.data.status;
-                if (status == 1) {
-                  that.setData({
-                    finish: res.data.data.flag
-                  })
-                } else {
-                  console.log(res.data.msg);
-                }
-                wx.hideLoading()
+            url: app.data.apiurl + "photo/is-full?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+            data: {
+              pw_id: that.data.pw_id
+            },
+            header: {
+              'content-type': 'application/json'
+            },
+            method: "GET",
+            success: function (res) {
+              console.log("照片墙是否已满:", res);
+              var status = res.data.status;
+              if (status == 1) {
+                that.setData({
+                  finish: res.data.data.flag
+                })
+              } else {
+                console.log(res.data.msg);
               }
-            })
-        }
-    
+              wx.hideLoading()
+            }
+        })
   },
   // 导航跳转
   navUrl(e) {
@@ -424,28 +289,97 @@ Page({
       wx.showLoading({
         title: '加载中'
       });
-      // 上传 
-      wx.chooseImage({
-        count: 1, // 默认9
-        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      // 请求位置
+      wx.request({
+        url: app.data.apiurl + "photo/can-up-position-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+        data: {
+          pw_id: that.data.pw_id
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "GET",
         success: function (res) {
-          console.log("选择相册", res);
-          const src = res.tempFilePaths[0]
-          console.log('src', src);
-          wx.setStorageSync('temp_id', that.data.temp_id);
-          wx.setStorageSync('pw_id', that.data.pw_id);
-          wx.redirectTo({
-            url: `../avatarUpload/upload/upload?src=${src}&options=that.data.options&position=that.data.position`
-          })
-          // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-          var tempFilePaths = res.tempFilePaths;
-          tips.loading('上传中');
-          tips.loaded(); //消失
-          console.log(apiurl + "api/upload-image?sign=" + sign + ' & operator_id=' + app.data.kid);
+          console.log("照片可上传位置:", res);
+          console.log(res.data.data, 111);
+          var status = res.data.status;
+          if (status == 1) {
+            that.setData({
+              position: res.data.data[0]
+            })
+            let position = res.data.data[0];
+            let source_effect = that.data.source_effect;
+            console.log(position);
+            console.log(source_effect);
+            var arr = []
+            for (var i in source_effect) {
+              arr.push(source_effect[i]); //属性
+              //arr.push(object[i]); //值
+            }
+            // for (let i = 0; i < arr.length; i++) {
+            let weizhi = source_effect[position][0];
+            console.log('weizhi', weizhi);
+            weizhi.split('x');
+            let shuju = weizhi.split('x');
+            wx.setStorageSync('weizhi', weizhi);
+            wx.setStorageSync('width', shuju[0]);
+            wx.setStorageSync('height', shuju[1]);
+            wx.setStorageSync('position', position);
+            // }
+            // that
 
+            // 占位置给后台start - up - picture
+            wx.request({
+              url: app.data.apiurl + "photo/start-up-picture?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+              data: {
+                pw_id: that.data.pw_id,
+                position: that.data.position
+              },
+              header: {
+                'content-type': 'application/json'
+              },
+              method: "GET",
+              success: function (res) {
+                console.log("位置后台:", res);
+                var status = res.data.status;
+                if (status == 1) {
+                  console.log('传递成功')
+                } else {
+                  console.log(res.data.msg);
+                }
+                wx.hideLoading()
+              }
+            })
+            // 上传 
+            wx.chooseImage({
+              count: 1, // 默认9
+              sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+              sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+              success: function (res) {
+                console.log("选择相册", res);
+                const src = res.tempFilePaths[0]
+                console.log('src', src);
+                wx.setStorageSync('temp_id', that.data.temp_id);
+                wx.setStorageSync('pw_id', that.data.pw_id);
+                wx.redirectTo({
+                  url: `../avatarUpload/upload/upload?src=${src}&options=that.data.options&position=that.data.position`
+                })
+                // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+                var tempFilePaths = res.tempFilePaths;
+                tips.loading('上传中');
+                tips.loaded(); //消失
+                console.log(apiurl + "api/upload-image?sign=" + sign + ' & operator_id=' + app.data.kid);
+
+              }
+            })
+
+          } else {
+            console.log(res.data.msg);
+          }
+          wx.hideLoading()
         }
       })
+      
     }else{
       wx.setStorageSync('temp_id', that.data.temp_id);
       wx.setStorageSync('pw_id', that.data.pw_id);
@@ -510,11 +444,7 @@ Page({
                 wx.hideLoading()
               }
             })
-
-
-
-
-            // 上传 
+          // 上传 
             wx.chooseImage({
               count: 1, // 默认9that.data.photoInform.counts.length
               sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -541,12 +471,7 @@ Page({
           wx.hideLoading()
         }
       })
-
-      
-      
-     
-      
-    }
+  }
     wx.hideLoading()
   },
   savePhoto(e){

@@ -19,6 +19,7 @@
     "pages/albumInform/albumInform",
     "pages/templateInform/templateInform",
     "pages/mode1/mode1",
+    "pages/seephoto/seephoto",
     "pages/square/square"
   ],
   "window":{

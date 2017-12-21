@@ -6,23 +6,25 @@
 <view class="container">
     <view class='management'>
         <view class="left {{music_play?'music_play':''}}" bindtap="bindPlay"></view>
-        <view class='right' bindtap='management'>照片管理</view>
+         <!-- <view class='right' bindtap='management'>照片管理</view>  -->
     </view>
     <view class='photo'>
-        <video id="myVideo" src="https://friend-guess.playonwechat.com/assets/reward/videos/5a38fba8a54968395.mp4"  >
-        <cover-view class="controls"> </cover-view>
-        </video>
+        <view class='index'></view>
+        <!-- <image class='play' src="../img/sanjiao.png" {{thumb}}?{{num}}></image> -->
+         <image class='thumb' src='https://gcdn.playonwechat.com/photo/o_1c10c739b1pqu13g0bmu4lj12ua81.jpg' mode='aspectFit'></image> 
     </view>
+    <view class='notice'>注：此模板可以上传6张照片</view>
     <view class='buttons'>
-        <view class='active' bindtap='friends'>分享视频</view>
+          <!-- wx:if="{{finish}}"  -->
+         <view class='active' bindtap='savePhoto'>查看照片集</view> 
+        <view class='active' bindtap='upPhoto' wx:if="{{!finish}}">上传图片</view>
+        
     </view>
-    <view class='checkboxs'>
-            <image  wx:if="{{checkboxs}}"  bindtap="Change" data-check='1' 
+     <!-- <view class='checkboxs'>
+            <image  wx:if="{{checkboxs==1}}"  bindtap="Change" data-check='0' 
                     src="../img/checka.png" mode='widthFix'></image>
-            <image wx:else  bindtap="Change" data-check='2' 
+            <image wx:else  bindtap="Change" data-check='1' 
                     src="../img/check.png"  mode='widthFix'></image>
-          同意生成照片墙展示在首页
-    </view>
-</view>
-<view>
+          同意生成照片集展示在首页
+    </view>  -->
 </view>

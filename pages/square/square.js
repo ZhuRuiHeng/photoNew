@@ -38,7 +38,7 @@ Page({
             })
           } else {
             wx.reLaunch({
-              url: '../templateInform/templateInform?pw_id=' + that.data.pw_id
+              url: '../templatePhoto/templatePhoto' 
             })
             that.setData({
               allList: false
