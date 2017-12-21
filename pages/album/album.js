@@ -72,9 +72,9 @@ Page({
     // })
   },
   albumInform(e){
-      // wx.navigateTo({
-      //   url: '../albumInform/albumInform'
-      // })
+      wx.navigateTo({
+        url: '../albumInform/albumInform'
+      })
       console.log(e);
       let that = this;
       let checked = e.currentTarget.dataset.checked;

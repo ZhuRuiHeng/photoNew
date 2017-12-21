@@ -19,12 +19,14 @@ Page({
    */
   onLoad: function (options) {
     console.log(options);
-    this.setData({
+    let that = this;
+    that.setData({
       temp_id: options.temp_id,
       pw_id: options.pw_id
     })
     wx.setStorageSync('temp_id', options.temp_id)
     console.log(wx.getStorageSync('temp_id'));
+    
   },
 
   /**
@@ -48,131 +50,264 @@ Page({
     //       temp_id: wx.getStorageSync('temp_id')
     //     })
     // }
-    wx.request({
-      url: app.data.apiurl + "photo/template-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-      data:{
-        temp_id: that.data.temp_id
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "GET",
-      success: function (res) {
-        console.log("模板详情:", res);
-        var status = res.data.status;
-        console.log(JSON.parse(res.data.status));
-        
-        if (status == 1) {
-          that.setData({
-            photoInform: res.data.data,
-            thumb: res.data.data.thumb + '?' + that.data.num,
-            source_effect: res.data.data.source_effect
-          })
-          
-        } else {
-          //tips.alert(res.data.msg);
-        }
-      },
-      
-    })
-    //照片墙信息temp_id
-    wx.request({
-      url: app.data.apiurl + "photo/photo-wall-detail?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-      data: {
-        pw_id: that.data.pw_id
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "GET",
-      success: function (res) {
-        console.log("照片墙信息:", res);
-        var status = res.data.status;
-        if (status == 1) {
-          that.setData({
-            thumb: res.data.data.pic +'?'+ that.data.num,
-            temp_id: res.data.data.temp_id
-          })
-          if (!wx.getStorageSync('bgMusic')) {
-            console.log('没有缓存音乐')
-            wx.setStorageSync('bgMusic', res.data.data.music_info.url);
-            app.data.dataUrl = res.data.data.music_info.url;
-            wx.playBackgroundAudio({ //播放
-              dataUrl: res.data.data.music_info.url,
-              title: res.data.data.music_info.name,
-            })
+    if (that.data.pw_id == 'undefined' || !that.data.pw_id) {
+      console.log(111111111)
+      wx.request({
+        url: apiurl + "photo/create-new-wall?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+        data: {
+          name: '朋友照片墙',
+          temp_id: 1
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "GET",
+        success: function (res) {
+          console.log("新建相册:", res);
+          var status = res.data.status;
+          if (status == 1) {
             that.setData({
-              music_play: true
+              pw_id: res.data.data
             })
-          }
-          if (wx.getStorageSync('bgMusic') == res.data.data.music_info.url) {
-            console.log('缓存音乐与当前音乐相同')
-          } else {
-            console.log(wx.getStorageSync('bgMusic'), res.data.data.music_info.url, 222)
-            app.data.dataUrl = res.data.data.music_info.url;
-            wx.playBackgroundAudio({ //播放
-              dataUrl: res.data.data.music_info.url
-            })
-            that.setData({
-              music_play: true
-            })
-          }
-          wx.request({
-            url: app.data.apiurl + "photo/template-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-            data: {
-              temp_id: that.data.temp_id
-            },
-            header: {
-              'content-type': 'application/json'
-            },
-            method: "GET",
-            success: function (res) {
-              console.log("模板详情:", res);
-              var status = res.data.status;
-              console.log(JSON.parse(res.data.status));
+            wx.request({
+              url: app.data.apiurl + "photo/template-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+              data: {
+                temp_id: that.data.temp_id
+              },
+              header: {
+                'content-type': 'application/json'
+              },
+              method: "GET",
+              success: function (res) {
+                console.log("模板详情:", res);
+                var status = res.data.status;
+                console.log(JSON.parse(res.data.status));
 
-              if (status == 1) {
-                that.setData({
-                  photoInform: res.data.data,
-                  thumb: res.data.data.thumb + '?' + that.data.num,
-                  source_effect: res.data.data.source_effect
-                })
+                if (status == 1) {
+                  that.setData({
+                    photoInform: res.data.data,
+                    thumb: res.data.data.thumb + '?' + that.data.num,
+                    source_effect: res.data.data.source_effect
+                  })
 
-              } else {
-                //tips.alert(res.data.msg);
+                } else {
+                  //tips.alert(res.data.msg);
+                }
+              },
+
+            })
+            //照片墙信息temp_id
+            wx.request({
+              url: app.data.apiurl + "photo/photo-wall-detail?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+              data: {
+                pw_id: that.data.pw_id
+              },
+              header: {
+                'content-type': 'application/json'
+              },
+              method: "GET",
+              success: function (res) {
+                console.log("照片墙信息:", res);
+                var status = res.data.status;
+                if (status == 1) {
+                  that.setData({
+                    thumb: res.data.data.pic + '?' + that.data.num,
+                    temp_id: res.data.data.temp_id
+                  })
+                  if (!wx.getStorageSync('bgMusic')) {
+                    console.log('没有缓存音乐')
+                    wx.setStorageSync('bgMusic', res.data.data.music_info.url);
+                    app.data.dataUrl = res.data.data.music_info.url;
+                    wx.playBackgroundAudio({ //播放
+                      dataUrl: res.data.data.music_info.url,
+                      title: res.data.data.music_info.name,
+                    })
+                    that.setData({
+                      music_play: true
+                    })
+                  }
+                  if (wx.getStorageSync('bgMusic') == res.data.data.music_info.url) {
+                    console.log('缓存音乐与当前音乐相同')
+                  } else {
+                    console.log(wx.getStorageSync('bgMusic'), res.data.data.music_info.url, 222)
+                    app.data.dataUrl = res.data.data.music_info.url;
+                    wx.playBackgroundAudio({ //播放
+                      dataUrl: res.data.data.music_info.url
+                    })
+                    that.setData({
+                      music_play: true
+                    })
+                  }
+                  wx.request({
+                    url: app.data.apiurl + "photo/template-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+                    data: {
+                      temp_id: that.data.temp_id
+                    },
+                    header: {
+                      'content-type': 'application/json'
+                    },
+                    method: "GET",
+                    success: function (res) {
+                      console.log("模板详情:", res);
+                      var status = res.data.status;
+                      console.log(JSON.parse(res.data.status));
+
+                      if (status == 1) {
+                        that.setData({
+                          photoInform: res.data.data,
+                          thumb: res.data.data.thumb + '?' + that.data.num,
+                          source_effect: res.data.data.source_effect
+                        })
+
+                      } else {
+                        //tips.alert(res.data.msg);
+                      }
+                    },
+
+                  })
+                } else {
+                  console.log(res.data.msg);
+                }
+                wx.hideLoading()
               }
-            },
+            })
 
-          })
-        } else {
-          console.log(res.data.msg);
+
+          } else {
+            tips.alert(res.data.msg);
+          }
+
         }
-        wx.hideLoading()
-      }
-    })
-    // 判断照片墙是否已满
-    wx.request({
-      url: app.data.apiurl + "photo/is-full?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-      data: {
-        pw_id: that.data.pw_id
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "GET",
-      success: function (res) {
-        console.log("照片墙是否已满:", res);
-        var status = res.data.status;
-        if (status == 1) {
-          that.setData({
-            finish: res.data.data.flag
-          })
-        } else {
-          console.log(res.data.msg);
+      })
+    }
+    if (that.data.pw_id != 'undefined') {
+        wx.request({
+          url: app.data.apiurl + "photo/template-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+          data:{
+            temp_id: that.data.temp_id
+          },
+          header: {
+            'content-type': 'application/json'
+          },
+          method: "GET",
+          success: function (res) {
+            console.log("模板详情:", res);
+            var status = res.data.status;
+            console.log(JSON.parse(res.data.status));
+            
+            if (status == 1) {
+              that.setData({
+                photoInform: res.data.data,
+                thumb: res.data.data.thumb + '?' + that.data.num,
+                source_effect: res.data.data.source_effect
+              })
+              
+            } else {
+              //tips.alert(res.data.msg);
+            }
+          },
+          
+        })
+        //照片墙信息temp_id
+        wx.request({
+          url: app.data.apiurl + "photo/photo-wall-detail?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+          data: {
+            pw_id: that.data.pw_id
+          },
+          header: {
+            'content-type': 'application/json'
+          },
+          method: "GET",
+          success: function (res) {
+            console.log("照片墙信息:", res);
+            var status = res.data.status;
+            if (status == 1) {
+              that.setData({
+                thumb: res.data.data.pic +'?'+ that.data.num,
+                temp_id: res.data.data.temp_id
+              })
+              if (!wx.getStorageSync('bgMusic')) {
+                console.log('没有缓存音乐')
+                wx.setStorageSync('bgMusic', res.data.data.music_info.url);
+                app.data.dataUrl = res.data.data.music_info.url;
+                wx.playBackgroundAudio({ //播放
+                  dataUrl: res.data.data.music_info.url,
+                  title: res.data.data.music_info.name,
+                })
+                that.setData({
+                  music_play: true
+                })
+              }
+              if (wx.getStorageSync('bgMusic') == res.data.data.music_info.url) {
+                console.log('缓存音乐与当前音乐相同')
+              } else {
+                console.log(wx.getStorageSync('bgMusic'), res.data.data.music_info.url, 222)
+                app.data.dataUrl = res.data.data.music_info.url;
+                wx.playBackgroundAudio({ //播放
+                  dataUrl: res.data.data.music_info.url
+                })
+                that.setData({
+                  music_play: true
+                })
+              }
+              wx.request({
+                url: app.data.apiurl + "photo/template-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+                data: {
+                  temp_id: that.data.temp_id
+                },
+                header: {
+                  'content-type': 'application/json'
+                },
+                method: "GET",
+                success: function (res) {
+                  console.log("模板详情:", res);
+                  var status = res.data.status;
+                  console.log(JSON.parse(res.data.status));
+
+                  if (status == 1) {
+                    that.setData({
+                      photoInform: res.data.data,
+                      thumb: res.data.data.thumb + '?' + that.data.num,
+                      source_effect: res.data.data.source_effect
+                    })
+
+                  } else {
+                    //tips.alert(res.data.msg);
+                  }
+                },
+
+              })
+            } else {
+              console.log(res.data.msg);
+            }
+            wx.hideLoading()
+          }
+        })
+        // 判断照片墙是否已满
+        wx.request({
+              url: app.data.apiurl + "photo/is-full?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+              data: {
+                pw_id: that.data.pw_id
+              },
+              header: {
+                'content-type': 'application/json'
+              },
+              method: "GET",
+              success: function (res) {
+                console.log("照片墙是否已满:", res);
+                var status = res.data.status;
+                if (status == 1) {
+                  that.setData({
+                    finish: res.data.data.flag
+                  })
+                } else {
+                  console.log(res.data.msg);
+                }
+                wx.hideLoading()
+              }
+            })
         }
-        wx.hideLoading()
-      }
-    })
+    
   },
   // 导航跳转
   navUrl(e) {

@@ -21,8 +21,8 @@ Page({
       cut: {
         x: (width - 300) / 2,
         y: (height - 300) / 2,
-        width: wx.getStorageSync('width')/2,
-        height: wx.getStorageSync('height')/2
+        width: wx.getStorageSync('width'),
+        height: wx.getStorageSync('height')
       }
     },
     tapss:true

@@ -115,10 +115,6 @@ Page({
 
       }
     })
-      
-    
-    
-      
   },
   pwIndexs(){
     wx.reLaunch({
