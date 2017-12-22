@@ -16,31 +16,32 @@ Page({
       icon: 'loading'
     })
     let that = this;
-    console.log(app.data.apiurl + "photo/photo-circle?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid)
-    wx.request({
-        url: app.data.apiurl + "photo/photo-circle?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-        header: {
-          'content-type': 'application/json'
-        },
-        method: "GET",
-        success: function (res) {
-          console.log("圈子列表:", res);
-          var status = res.data.status;
-          if (status == 1) {
-            that.setData({
-              allList: res.data.data
-            })
-          } else {
-            wx.reLaunch({
-              url: '../templatePhoto/templatePhoto' 
-            })
-            that.setData({
-              allList: false
-            })
-            tips.alert(res.data.msg);
-          }
-          wx.hideLoading()
-        }
+    app.getAuth(function () {
+        wx.request({
+            url: app.data.apiurl + "photo/photo-circle?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+            header: {
+              'content-type': 'application/json'
+            },
+            method: "GET",
+            success: function (res) {
+              console.log("圈子列表:", res);
+              var status = res.data.status;
+              if (status == 1) {
+                that.setData({
+                  allList: res.data.data
+                })
+              } else {
+                wx.reLaunch({
+                  url: '../templatePhoto/templatePhoto' 
+                })
+                that.setData({
+                  allList: false
+                })
+                tips.alert(res.data.msg);
+              }
+              wx.hideLoading()
+            }
+        })
     })
   },
   navUrl(e) {
@@ -70,17 +71,18 @@ Page({
   },
   // 评论
   pinglunTap(e){
-    console.log(e);
+    //console.log(e);
       wx.navigateTo({
         url: '../inform/inform?pw_id=' + e.currentTarget.dataset.pw_id + '&type=' + e.currentTarget.dataset.type + '&name=' + e.currentTarget.dataset.name + '&temp_id=' + e.currentTarget.dataset.temp_id,
       })
   },
   // 详情
   informSquare(e){
-    console.log(e);
+    //console.log(e);
+    let form_id = e.detail.formId;
     let that = this;
     wx.navigateTo({
-      url: '../inform/inform?pw_id=' + e.currentTarget.dataset.pw_id + '&type=' + e.currentTarget.dataset.type + '&name=' + e.currentTarget.dataset.name + '&temp_id=' + e.currentTarget.dataset.temp_id,
+      url: '../inform/inform?pw_id=' + e.currentTarget.dataset.pw_id + '&type=' + e.currentTarget.dataset.type + '&name=' + e.currentTarget.dataset.name + '&temp_id=' + e.currentTarget.dataset.temp_id + '&form_id=' + form_id,
     })
   },
   // 点赞

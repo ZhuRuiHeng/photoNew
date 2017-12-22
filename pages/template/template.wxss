@@ -52,6 +52,7 @@ navigator{
   line-height: 80rpx;
   padding: 0rpx 0 2rpx 0;
   z-index: 99;
+  border:1px solid #e4e4e4;
 }
 .pretty1 image{
   width: 42rpx;

@@ -8,12 +8,13 @@ Page({
     url: 'https://friend-guess.playonwechat.com/assets/images/result/40741d60add2279916d8783b3d6667f9.jpg?1513410944?0.5924372259162527'
   },
   onLoad: function (options) {
-    console.log(options);
+    //console.log(options);
       this.setData({
         pw_id: options.pw_id,
         type: options.type,
         name: options.name,
-        temp_id: options.temp_id
+        temp_id: options.temp_id,
+        form_id: options.form_id
       })
   },
   onReady: function () {
@@ -29,14 +30,15 @@ Page({
       wx.request({
         url: app.data.apiurl + "photo/comment-detail?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
         data:{
-          pw_id: that.data.pw_id
+          pw_id: that.data.pw_id,
+          form_id: that.data.form_id
         },
         header: {
           'content-type': 'application/json'
         },
         method: "GET",
         success: function (res) {
-          console.log("照片墙详情:", res);
+          //console.log("照片墙详情:", res);
           var status = res.data.status;
           if (status == 1) {
             that.setData({
@@ -45,7 +47,8 @@ Page({
             })
           } else {
             that.setData({
-              allList: false
+              allList: false,
+              comment_list: false
             })
             tips.alert(res.data.msg);
             setTimeout(function(){
@@ -69,7 +72,7 @@ Page({
   // 预览图片
   prewimg: function (e) { //图片预览
     let url = e.currentTarget.dataset.url;
-    console.log(url);
+    //console.log(url);
     wx.previewImage({
       current: url, // 当前显示图片的http链接
       urls: [url] // 需要预览的图片http链接列表
@@ -90,7 +93,7 @@ Page({
       }
   },
   seeH5(e){
-    console.log(e);
+    //console.log(e);
     let that = this;
     wx.navigateTo({
       url: '../seephoto/seephoto?pw_id=' + that.data.pw_id + '&temp_id=' + that.data.temp_id,

@@ -32,8 +32,8 @@
     </view>
     <view class='content'>
         <view class='title'>最新留言</view>
-        <block wx:for="{{comment_list}}">
-            <view class='chartItem' data-comment_id='{{item.comment_id}}'>
+        <block wx:if="{{comment_list}}">
+            <view wx:for="{{comment_list}}" class='chartItem' data-comment_id='{{item.comment_id}}'>
                 <view class='chartTop'>
                     <image class='niceImgs' src="{{item.avatarurl}}" mode='widthFix'></image>
                     <view class='niceNames'>
@@ -46,7 +46,9 @@
                 <view class='chartText'>{{item.comment}}</view>
             </view>
         </block> 
-        
+        <block wx:if="{{comment_list.length<1}}">
+            <view style="text-align:center;font-size:24rpx;padding:30rpx;"> 快来成为第一个帮Ta评论的人吧！ </view>
+        </block>
     </view>
 </view>
 <view class='footer' bindtap='writeTap'>

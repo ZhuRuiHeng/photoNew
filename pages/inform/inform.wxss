@@ -1,6 +1,6 @@
 .container{
   padding-bottom: 200rpx;
-  font-size: 28rpx;
+  font-size: 24rpx;
   overflow-x: hidden;
 }
 .nicePhoto{
@@ -51,7 +51,7 @@
 }
 .top .niceNames{
   margin: 20rpx 0 0 0;
-  font-size: 32rpx;
+  font-size: 28rpx;
 }
 .topnice .nickName{ 
     line-height: 50rpx;
@@ -60,10 +60,10 @@
     line-height: 44rpx;
 }
 .niceNames .nickName.one{
-  font-size: 32rpx;
+  font-size: 28rpx;
 }
 .niceNames .nickName.two{
-  font-size: 28rpx;
+  font-size: 24rpx;
   color: #626262;
 }
 .top text{
@@ -94,7 +94,7 @@
   flex: 1;
 }
 .lowNight{
-  font-size: 32rpx;
+  font-size: 28rpx;
   padding-right: 40rpx;
 }
 .lowNight .zan{
@@ -127,6 +127,7 @@
     height: 60rpx;
     line-height: 60rpx;
     padding: 20rpx;
+    font-size: 28rpx;
 }
 .chartItem{
   border-bottom:1px solid #ddd;
@@ -184,7 +185,7 @@
   top: 38rpx;
 }
 .chartText{
-  font-size: 30rpx;
+  font-size: 26rpx;
   margin-left: 120rpx;
   line-height: 40rpx;
   padding-right: 20rpx;
@@ -201,7 +202,7 @@
 }
 .footer .pinglun{
   display: inline-block;
-  font-size: 32rpx;
+  font-size: 28rpx;
   height: 52rpx;
   text-align: center;
   padding-left: 10rpx;

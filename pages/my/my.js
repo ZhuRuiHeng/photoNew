@@ -7,10 +7,13 @@ Page({
     num: Math.random(),
     userInfo: wx.getStorageSync('userInfo'),
     now:1,
-    show:false
+    show:false,
+    newName: '朋友照片墙'
   },
   onLoad: function (options) {
-    newName: '朋友照片墙'
+    this.setData({
+      userInfo: wx.getStorageSync('userInfo')
+    })
   },
   onShow: function () {
     wx.showLoading({
@@ -18,6 +21,9 @@ Page({
     })
     let that = this;
     let sign = wx.getStorageSync('sign');
+    that.setData({
+      userInfo: wx.getStorageSync('userInfo')
+    })
     // 请求 
     wx.request({
       url: app.data.apiurl + "photo/photo-wall-list?sign=" + sign + '&operator_id=' + app.data.kid,
@@ -255,7 +261,7 @@ Page({
       },
       method: "GET",
       success: function (res) {
-        console.log("删除照片墙:", res);
+        //console.log("删除照片墙:", res);
         var status = res.data.status;
         if (status == 1) {
           tips.success('照片墙删除成功!');
@@ -308,7 +314,7 @@ Page({
     wx.setStorageSync('bgMusic', e.currentTarget.dataset.musicurl);
     wx.setStorageSync('nameMusic', e.currentTarget.dataset.nameMusic);
     // temp_id: options.temp_id,pw_id: options.pw_id
-    wx.reLaunch({
+    wx.navigateTo({
       url: '../templateInform/templateInform?pw_id=' + e.currentTarget.dataset.pw_id,
     })
   },
@@ -345,35 +351,6 @@ Page({
       url: '../album/album',
     })
   },
-  // newPhotos(e) {
-  //   wx.showLoading({
-  //     title: '加载中',
-  //   })
-  //   let that = this;
-  //   let sign = wx.getStorageSync('sign');
-  //   // 请求 
-  //   wx.request({
-  //     url: apiurl + "photo/create-new-wall?sign=" + sign + '&operator_id=' + app.data.kid,
-  //     header: {
-  //       'content-type': 'application/json'
-  //     },
-  //     method: "GET",
-  //     success: function (res) {
-  //       console.log("新增照片墙:", res);
-  //       var status = res.data.status;
-  //       if (status == 1) {
-  //         wx.setStorageSync('pw_id', res.data.data);
-  //         wx.reLaunch({
-  //           url: '../indexs/indexs',
-  //         })
-
-  //       } else {
-
-  //       }
-  //       wx.hideLoading()
-  //     }
-  //   })
-  // },
   // 新增照片名称
   niceName(e) {
     this.setData({

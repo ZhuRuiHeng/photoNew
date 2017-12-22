@@ -106,6 +106,9 @@ Page({
         console.log("新建相册:", res);
         var status = res.data.status;
         if (status == 1) {
+          that.setData({
+            show:false
+          })
           wx.navigateTo({
             url: '../templateInform/templateInform?temp_id=' + e.currentTarget.dataset.temp_id + '&pw_id=' + res.data.data
           })
@@ -114,11 +117,6 @@ Page({
         }
 
       }
-    })
-  },
-  pwIndexs(){
-    wx.reLaunch({
-      url: '../indexs/indexs',
     })
   },
   navUrl(e) {
@@ -133,12 +131,10 @@ Page({
         })
       } else {
         this.setData({
-          itemBar: 2,
-          show: true
+            itemBar: 2,
+            show: true
         })
-
       }
-
     } else {
       console.log(222);
       wx.reLaunch({

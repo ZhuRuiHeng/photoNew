@@ -18,161 +18,164 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
+    //console.log(options);
     let that = this;
     that.setData({
       temp_id: options.temp_id,
       pw_id: options.pw_id
     })
     wx.setStorageSync('temp_id', options.temp_id)
-    console.log(wx.getStorageSync('temp_id'));
     
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
   onReady: function () {
   
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
     wx.showToast({
       title: '加载中',
       icon: 'loading'
     })
     let that = this;
-    // if (wx.getStorageSync('temp_id')){
-    //     that.setData({
-    //       temp_id: wx.getStorageSync('temp_id')
-    //     })
-    // }
-        wx.request({
-          url: app.data.apiurl + "photo/template-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-          data:{
-            temp_id: that.data.temp_id
-          },
-          header: {
-            'content-type': 'application/json'
-          },
-          method: "GET",
-          success: function (res) {
-            console.log("模板详情:", res);
-            var status = res.data.status;
-            console.log(JSON.parse(res.data.status));
-            
-            if (status == 1) {
-              that.setData({
-                photoInform: res.data.data,
-                source_effect: res.data.data.source_effect
-              })
-              
-            } else {
-              //tips.alert(res.data.msg);
-            }
-          },
+    const backgroundAudioManager = wx.getBackgroundAudioManager()
+    console.log(backgroundAudioManager.paused)
+    
+    wx.request({
+      url: app.data.apiurl + "photo/template-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+      data:{
+        temp_id: that.data.temp_id
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        //console.log("模板详情:", res);
+        var status = res.data.status;
+        //console.log(JSON.parse(res.data.status));
+        
+        if (status == 1) {
+          that.setData({
+            photoInform: res.data.data,
+            source_effect: res.data.data.source_effect
+          })
           
-        })
-        //照片墙信息temp_id
-        wx.request({
-          url: app.data.apiurl + "photo/photo-wall-detail?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-          data: {
-            pw_id: that.data.pw_id
-          },
-          header: {
-            'content-type': 'application/json'
-          },
-          method: "GET",
-          success: function (res) {
-            console.log("照片墙信息:", res);
-            var status = res.data.status;
-            if (status == 1) {
+        } else {
+          //tips.alert(res.data.msg);
+        }
+      },
+      
+    })
+    //照片墙信息temp_id
+    wx.request({
+      url: app.data.apiurl + "photo/photo-wall-detail?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+      data: {
+        pw_id: that.data.pw_id
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        console.log("照片墙信息:", res);
+        var status = res.data.status;
+        if (status == 1) {
+          that.setData({
+            thumb: res.data.data.pic +'?'+ that.data.num,
+            temp_id: res.data.data.temp_id
+          })
+          if (!wx.getStorageSync('bgMusic')) {
+            //console.log('没有缓存音乐')
+            wx.setStorageSync('bgMusic', res.data.data.music_info.url);
+            app.data.dataUrl = res.data.data.music_info.url;
+            wx.playBackgroundAudio({ //播放
+              dataUrl: res.data.data.music_info.url,
+              title: res.data.data.music_info.name,
+            })
+            that.setData({
+              music_play: true
+            })
+          }else if(wx.getStorageSync('bgMusic') == res.data.data.music_info.url) {
+            //console.log('缓存音乐与当前音乐相同')
+            const backgroundAudioManager = wx.getBackgroundAudioManager()
+            console.log(backgroundAudioManager.paused);
+            if (backgroundAudioManager.paused==true){
               that.setData({
-                thumb: res.data.data.pic +'?'+ that.data.num,
-                temp_id: res.data.data.temp_id
+                music_play: false
               })
-              if (!wx.getStorageSync('bgMusic')) {
-                console.log('没有缓存音乐')
-                wx.setStorageSync('bgMusic', res.data.data.music_info.url);
-                app.data.dataUrl = res.data.data.music_info.url;
-                wx.playBackgroundAudio({ //播放
-                  dataUrl: res.data.data.music_info.url,
-                  title: res.data.data.music_info.name,
-                })
-                that.setData({
-                  music_play: true
-                })
-              }
-              if (wx.getStorageSync('bgMusic') == res.data.data.music_info.url) {
-                console.log('缓存音乐与当前音乐相同')
-              } else {
-                console.log(wx.getStorageSync('bgMusic'), res.data.data.music_info.url, 222)
-                app.data.dataUrl = res.data.data.music_info.url;
-                wx.playBackgroundAudio({ //播放
-                  dataUrl: res.data.data.music_info.url
-                })
-                that.setData({
-                  music_play: true
-                })
-              }
-              wx.request({
-                url: app.data.apiurl + "photo/template-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-                data: {
-                  temp_id: that.data.temp_id
-                },
-                header: {
-                  'content-type': 'application/json'
-                },
-                method: "GET",
-                success: function (res) {
-                  console.log("模板详情:", res);
-                  var status = res.data.status;
-                  console.log(JSON.parse(res.data.status));
-
-                  if (status == 1) {
-                    that.setData({
-                      photoInform: res.data.data,
-                      source_effect: res.data.data.source_effect
-                    })
-
-                  } else {
-                    //tips.alert(res.data.msg);
-                  }
-                },
-
-              })
-            } else {
-              console.log(res.data.msg);
             }
-            wx.hideLoading()
+          } else {
+            console.log(backgroundAudioManager.paused)
+            // console.log(wx.getStorageSync('bgMusic'), res.data.data.music_info.url, 222)
+            if (backgroundAudioManager.paused !=true) {
+              that.setData({
+                music_play: false
+              })
+            }else{
+              app.data.dataUrl = res.data.data.music_info.url;
+              wx.playBackgroundAudio({ //播放
+                dataUrl: res.data.data.music_info.url
+              })
+              that.setData({
+                music_play: true
+              })
+            }
+            
           }
-        })
-        // 判断照片墙是否已满
-        wx.request({
-            url: app.data.apiurl + "photo/is-full?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+          wx.request({
+            url: app.data.apiurl + "photo/template-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
             data: {
-              pw_id: that.data.pw_id
+              temp_id: that.data.temp_id
             },
             header: {
               'content-type': 'application/json'
             },
             method: "GET",
             success: function (res) {
-              console.log("照片墙是否已满:", res);
+              //console.log("模板详情:", res);
               var status = res.data.status;
+              //console.log(JSON.parse(res.data.status));
+
               if (status == 1) {
                 that.setData({
-                  finish: res.data.data.flag
+                  photoInform: res.data.data,
+                  source_effect: res.data.data.source_effect
                 })
+
               } else {
-                console.log(res.data.msg);
+                //tips.alert(res.data.msg);
               }
-              wx.hideLoading()
-            }
-        })
+            },
+
+          })
+        } else {
+          //console.log(res.data.msg);
+        }
+        wx.hideLoading()
+      }
+    })
+    // 判断照片墙是否已满
+    wx.request({
+        url: app.data.apiurl + "photo/is-full?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+        data: {
+          pw_id: that.data.pw_id
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "GET",
+        success: function (res) {
+          //console.log("照片墙是否已满:", res);
+          var status = res.data.status;
+          if (status == 1) {
+            that.setData({
+              finish: res.data.data.flag
+            })
+          } else {
+            //console.log(res.data.msg);
+          }
+          wx.hideLoading()
+        }
+    })
   },
   management() {
     wx.navigateTo({
@@ -220,18 +223,17 @@ Page({
       },
       method: "GET",
       success: function (res) {
-        console.log("好友拼图照片:", res);
-        console.log("海报:", res.data);
+        //console.log("好友拼图照片:", res);
         var status = res.data.status;
         // if (status == 1) {
           that.setData({
             friendsImg: res.data
           })
           let friendsImg = res.data.data;
-          console.log("friendsImg:", res.data.data);
+          //console.log("friendsImg:", res.data.data);
           let friendsImgs = friendsImg.split();
-          console.log(friendsImg)
-          console.log(friendsImgs)
+          // console.log(friendsImg)
+          // console.log(friendsImgs)
           wx.previewImage({
             current: friendsImg, // 当前显示图片的http链接
             urls: friendsImgs // 需要预览的图片http链接列表
@@ -247,8 +249,7 @@ Page({
   // 音乐
   bindPlay: function () {
     var that = this;
-    let music_play = app.data.music_play;
-    console.log('music_play:', music_play);
+    let music_play = that.data.music_play;
     if (music_play == true) {
       wx.pauseBackgroundAudio();//暂停
       app.data.music_play = false;

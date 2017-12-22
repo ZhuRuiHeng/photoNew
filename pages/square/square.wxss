@@ -63,6 +63,7 @@ page{
   text-align: center;
   margin: 0 auto;
   padding: 30rpx 0;
+  width: 100%;
 }
 .mid image{
   width: 300rpx;
@@ -120,4 +121,15 @@ button:after{
 	border-top:8px solid #e4e4e4;
 	top:99%;
 	left:46%;
+}
+button{
+  background-color:#fff;
+  font-size:26rpx;
+  margin: 0!important;
+  line-height:inherit;
+  padding:26rpx 0;
+  border-radius:0!important;
+}
+button::after{
+  content: none;
 }

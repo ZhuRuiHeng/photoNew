@@ -245,9 +245,6 @@ Page({
           console.log(`current canvas context:`, ctx)
           wx.hideToast()
         })
-      
-      this.A = new weCropper(cropperOptA)
-      this.B = new weCropper(cropperOptB)
     }
   }
 })
