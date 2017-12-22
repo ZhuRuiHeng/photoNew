@@ -15,14 +15,24 @@
         </view>
     </view>
     <view class='top'>
-        <view class='navbar'>
+          <view class='navbar'>
+                <form report-submit="true" bindsubmit="navbar" class="formSubmit one {{now==1?'active':''}}" data-now='1'>
+                    <button class="submit one {{now==1?'active':''}}" formType="submit">
+                    <image src="../img/1422830-200.png" mode="widthFix"></image>我的照片墙</button>
+                </form>
+                <form report-submit="true" bindsubmit="navbar" class="formSubmit two {{now==2?'active':''}}" data-now='2'>
+                    <button class="submit two {{now==2?'active':''}}" formType="submit">
+                    <image src="../img/1419919-200.png" mode="widthFix"></image>我的照片集</button>
+                </form>
+          </view> 
+        <!-- <view class='navbar'>
             <view class="one {{now==1?'active':''}} " bindtap='navbar' data-now='1'>
                 <image src="../img/1422830-200.png" mode="widthFix"></image>我的照片墙
             </view>
             <view class="two {{now==2?'active':''}} " bindtap='navbar' data-now='2'>
                 <image src="../img/1419919-200.png" mode="widthFix"></image>我的照片集
             </view>
-        </view>
+        </view> -->
         <!--1  -->
         <view class='content' wx:if="{{now==1}}">
               <view class='item' wx:for="{{photosList}}" wx:key="{{index}}" data-pw_id='{{item.id}}' >

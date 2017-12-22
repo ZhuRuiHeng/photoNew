@@ -194,7 +194,9 @@ Page({
     })
   },
   navbar(e){
+    console.log(e);
     let that = this;
+    let form_id=e.detail.formId;
     let type ='';
     that.setData({
        now:e.currentTarget.dataset.now
@@ -207,7 +209,8 @@ Page({
     wx.request({
       url: app.data.apiurl + "photo/photo-wall-list?sign=" +wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
       data: {
-        type: type
+        type: type,
+        form_id: form_id
       },
       header: {
         'content-type': 'application/json'
