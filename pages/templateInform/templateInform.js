@@ -36,8 +36,6 @@ Page({
       icon: 'loading'
     })
     let that = this;
-    const backgroundAudioManager = wx.getBackgroundAudioManager()
-    console.log(backgroundAudioManager.paused)
     
     wx.request({
       url: app.data.apiurl + "photo/template-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
@@ -83,7 +81,9 @@ Page({
             thumb: res.data.data.pic +'?'+ that.data.num,
             temp_id: res.data.data.temp_id
           })
+          console.log(111)
           if (!wx.getStorageSync('bgMusic')) {
+            console.log(22222)
             //console.log('没有缓存音乐')
             wx.setStorageSync('bgMusic', res.data.data.music_info.url);
             app.data.dataUrl = res.data.data.music_info.url;
@@ -91,33 +91,24 @@ Page({
               dataUrl: res.data.data.music_info.url,
               title: res.data.data.music_info.name,
             })
-            that.setData({
-              music_play: true
-            })
-          }else if(wx.getStorageSync('bgMusic') == res.data.data.music_info.url) {
-            //console.log('缓存音乐与当前音乐相同')
-            const backgroundAudioManager = wx.getBackgroundAudioManager()
-            console.log(backgroundAudioManager.paused);
-            if (backgroundAudioManager.paused==true){
-              that.setData({
-                music_play: false
-              })
-            }
+            app.data.music_play = true
           } else {
-            console.log(backgroundAudioManager.paused)
             // console.log(wx.getStorageSync('bgMusic'), res.data.data.music_info.url, 222)
-            if (backgroundAudioManager.paused !=true) {
+            if (wx.getStorageSync('music_play') == false) {
               that.setData({
                 music_play: false
               })
+              app.data.music_play = false
+              wx.pauseBackgroundAudio();//暂停
             }else{
-              app.data.dataUrl = res.data.data.music_info.url;
-              wx.playBackgroundAudio({ //播放
-                dataUrl: res.data.data.music_info.url
-              })
-              that.setData({
-                music_play: true
-              })
+                app.data.dataUrl = res.data.data.music_info.url;
+                app.data.music_play = true
+                wx.playBackgroundAudio({ //播放
+                  dataUrl: res.data.data.music_info.url,
+                })
+                that.setData({
+                  music_play: true
+                })
             }
             
           }
@@ -248,11 +239,14 @@ Page({
   },
   // 音乐
   bindPlay: function () {
+    const backgroundAudioManager = wx.getBackgroundAudioManager()
+    console.log(backgroundAudioManager.paused);
     var that = this;
     let music_play = that.data.music_play;
     if (music_play == true) {
       wx.pauseBackgroundAudio();//暂停
       app.data.music_play = false;
+      wx.setStorageSync('music_play', false)
       that.setData({
         music_play: false
       })
@@ -261,6 +255,7 @@ Page({
         dataUrl: app.data.dataUrl
       })
       app.data.music_play = true;
+      wx.setStorageSync('music_play', true)
       that.setData({
         music_play: true
       })
