@@ -98,9 +98,7 @@ Page({
                 app.data.music_play = false
                 wx.pauseBackgroundAudio();//暂停
               }else{
-                wx.playBackgroundAudio({ //播放
-                  dataUrl: res.data.data.music_info.url,
-                })
+                wx.playBackgroundAudio()
               }
           } else {
             console.log(wx.getStorageSync('bgMusic'), res.data.data.music_info.url, 222)
