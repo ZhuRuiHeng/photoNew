@@ -81,9 +81,7 @@ Page({
             thumb: res.data.data.pic +'?'+ that.data.num,
             temp_id: res.data.data.temp_id
           })
-          console.log(111)
           if (!wx.getStorageSync('bgMusic')) {
-            console.log(22222)
             //console.log('没有缓存音乐')
             wx.setStorageSync('bgMusic', res.data.data.music_info.url);
             app.data.dataUrl = res.data.data.music_info.url;
@@ -92,25 +90,36 @@ Page({
               title: res.data.data.music_info.name,
             })
             app.data.music_play = true
-          } else {
-            // console.log(wx.getStorageSync('bgMusic'), res.data.data.music_info.url, 222)
+          }else if (wx.getStorageSync('bgMusic') == res.data.data.music_info.url) {
             if (wx.getStorageSync('music_play') == false) {
-              that.setData({
-                music_play: false
-              })
-              app.data.music_play = false
-              wx.pauseBackgroundAudio();//暂停
-            }else{
-                app.data.dataUrl = res.data.data.music_info.url;
-                app.data.music_play = true
+                that.setData({
+                  music_play: false
+                })
+                app.data.music_play = false
+                wx.pauseBackgroundAudio();//暂停
+              }else{
                 wx.playBackgroundAudio({ //播放
                   dataUrl: res.data.data.music_info.url,
                 })
+              }
+          } else {
+            console.log(wx.getStorageSync('bgMusic'), res.data.data.music_info.url, 222)
+              if (wx.getStorageSync('music_play') == false) {
                 that.setData({
-                  music_play: true
+                  music_play: false
                 })
-            }
-            
+                app.data.music_play = false
+                wx.pauseBackgroundAudio();//暂停
+              }else{
+                  app.data.dataUrl = res.data.data.music_info.url;
+                  app.data.music_play = true
+                  wx.playBackgroundAudio({ //播放
+                    dataUrl: res.data.data.music_info.url,
+                  })
+                  that.setData({
+                    music_play: true
+                  })
+              }
           }
           wx.request({
             url: app.data.apiurl + "photo/template-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
