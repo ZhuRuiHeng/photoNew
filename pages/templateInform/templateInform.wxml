@@ -6,7 +6,7 @@
 <view class="container">
     <view class='management'>
         <view class="left {{music_play?'music_play':''}}" bindtap="bindPlay"></view>
-         <!-- <view class='right' bindtap='management'>照片管理</view>  -->
+        <view class='right' bindtap='management' >照片管理</view>  
     </view>
     <view class='photo'>
         <view class='index'></view>
@@ -18,7 +18,7 @@
         <view class='active' bindtap='savePhoto' wx:if="{{finish}}">生成照片墙</view>
         <view class='active' bindtap='upPhoto' wx:if="{{!finish}}">上传图片</view>
         <!-- <view class='active' bindtap='upVideo'>上传视频</view> -->
-        <view class='active' bindtap='friends' >邀请好友拼图</view>
+        <view class='active' bindtap='friends' wx:if="{{!finish}}">邀请好友拼图</view>
         
     </view>
     <view class='checkboxs' wx:if="{{finish}}">

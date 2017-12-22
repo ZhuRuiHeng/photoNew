@@ -25,15 +25,7 @@ Page({
     },
     tapss:true
   },
-  onLoad(options) {
-    console.log("options:", options);
-    let pw_id = options.pw_id;
-    let position = options.position;
-    that.setData({
-      pw_id,
-      position
-    })
-  },
+
   touchStart(e) {
     this.wecropper.touchStart(e)
   },
@@ -54,6 +46,7 @@ Page({
     console.log("photosLength:", photosLength);
     let position = wx.getStorageSync('position');
     this.wecropper.getCropperImage((avatar) => {
+      console.log("avatar：",avatar);
       if (avatar) {
         var that = this;
         that.setData({
@@ -95,40 +88,9 @@ Page({
                     let status = res.data.status;
                     if (status == 1) {
                       console.log('上传成功！')
-                      // 获取照片墙pwid
-                      wx.request({
-                        url: apiurl + "photo/pw?sign=" + sign + '&operator_id=' + app.data.kid,
-                        header: {
-                          'content-type': 'application/json'
-                        },
-                        method: "GET",
-                        success: function (res) {
-                          console.log("照片墙pwid:", res);
-                          var status = res.data.status;
-                          if (status == 1) {
-                            console.log(111);
-                            that.setData({
-                              pw_id: pw_id,
-                              tapss: true
-                            })
-                            wx.setStorageSync('pw_id', pw_id)
-                            //  获取到裁剪后的图片
-                            wx.reLaunch({
-                              url: '../../templateInform/templateInform?temp_id=' + wx.getStorageSync('temp_id'),
-                            })
-
-                          } else {
-                            console.log(res.data.msg);
-                            wx.showToast({
-                              title: res.data.msg,
-                              icon: 'loading'
-                            })
-                            wx.reLaunch({
-                              url: '../../templateInform/templateInform?temp_id=' + wx.getStorageSync('temp_id'),
-                            })
-                          }
-                        }
-                        
+                      //  获取到裁剪后的图片
+                      wx.reLaunch({
+                        url: '../../templateInform/templateInform?temp_id=' + wx.getStorageSync('temp_id')+'&pw_id='+ wx.getStorageSync('pw_id'),
                       })
 
                     } else {

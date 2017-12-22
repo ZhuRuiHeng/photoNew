@@ -8,22 +8,29 @@ let width1='';
 let height1 = '';
 const app = getApp();
 const apiurl = 'https://friend-guess.playonwechat.com/';
-console.log(wx.getStorageSync('width') / 2);
-console.log(wx.getStorageSync('height') / 2)
-// if (wx.getStorageSync('width') > width){
-//   width1 = wx.getStorageSync('width')/2
-//   height1 = wx.getStorageSync('height')/2
-// } 
-// if (wx.getStorageSync('height') > height){
-//   width1 = wx.getStorageSync('width') / 2
-//   height1 = wx.getStorageSync('height') / 2
-// }
-// else{
-//   width1 = 214
-//   height1 = 136
-// }
-console.log(width1)
-console.log(height1)
+let w = width / wx.getStorageSync('width');
+let h = height / wx.getStorageSync('height');
+if (w < 1 || h < 1) {
+  if (w < h) {
+    width1 = width;
+    height1 = wx.getStorageSync('height') * w;
+  } else {
+    height1 = height;
+    width1 = wx.getStorageSync('width') * h;
+  }
+}else {
+  width1 = wx.getStorageSync('width')
+  height1 = wx.getStorageSync('height')
+}
+/*if (wx.getStorageSync('width') > width){
+  width1 = width;// * (width / wx.getStorageSync('width') ) * 0.8; 
+  height1 = wx.getStorageSync('height') * (width / wx.getStorageSync('width'))
+}else if (wx.getStorageSync('height') > height){
+  width1 = wx.getStorageSync('width') * (wx.getStorageSync('height') / height) * 0.8
+  height1 = wx.getStorageSync('height') * (wx.getStorageSync('height') / height) * 0.8 
+}*/
+// console.log(width1)
+// console.log(height1)
 
 Page({
   data: {
@@ -34,15 +41,18 @@ Page({
       scale: 2.5,
       zoom: 8,
       cut: {
-        x: (width - 300) / 2,
-        y: (height - 300) / 2,
-        width: wx.getStorageSync('width') / 2,
-        height: wx.getStorageSync('height') / 2
+        x: (width - width1)/2,
+        y: (height - height1)/2,
+        width: width1,
+        height: height1
       }
     },
     tapss:true
   },
- 
+  onshow(){
+    let that = this;
+   
+  },
   touchStart(e) {
     this.wecropper.touchStart(e)
   },
@@ -59,8 +69,6 @@ Page({
     })
     
     let pw_id = wx.getStorageSync('pw_id');
-    let photosLength = wx.getStorageSync('photosLength');
-    console.log("photosLength:", photosLength);
     let position = wx.getStorageSync('position');
     this.wecropper.getCropperImage((avatar) => {
       if (avatar) {
@@ -107,7 +115,8 @@ Page({
                         // 获取照片墙pwid
                         wx.setStorageSync('temp_id', wx.getStorageSync('temp_id'));
                         wx.removeStorageSync('width');
-                        wx.removeStorageSync('height')
+                        wx.removeStorageSync('height');
+                        wx.removeStorageSync('weizhi');
                         wx.reLaunch({
                           url: '../../templateInform/templateInform?temp_id=' + wx.getStorageSync('temp_id') + '&pw_id=' + wx.getStorageSync('pw_id'),
                         })
@@ -120,7 +129,8 @@ Page({
                         wx.setStorageSync('temp_id', wx.getStorageSync('temp_id'))
                         setTimeout(function(){
                           wx.removeStorageSync('width');
-                          wx.removeStorageSync('height')
+                          wx.removeStorageSync('height');
+                          wx.removeStorageSync('weizhi');
                           wx.reLaunch({
                             url: '../../templateInform/templateInform?temp_id=' + wx.getStorageSync('temp_id') + '&pw_id=' + wx.getStorageSync('pw_id'),
                           })
@@ -173,11 +183,50 @@ Page({
   },
   onLoad(option) {
     // do something
-    const { cropperOpt } = this.data
-    const { src } = option
+    const device = wx.getSystemInfoSync()
+    const width = device.windowWidth
+    const height = device.windowHeight - 50
+    console.log('option:', option);
+    console.log("width:", option.width);
+    let w = width / option.width;
+    let h = height / option.height;
+    let width1 = '';
+    let height1 = '';
+    if (w < 1 || h < 1) {
+      if (w < h) {
+        width1 = width;
+        height1 = parseInt(option.height * w);
+      } else {
+        height1 = height;
+        width1 = parseInt(option.width * h);
+      }
+    }else{
+      width1 = wx.getStorageSync('width')
+      height1 = wx.getStorageSync('height')
+    }
+    const { cropperOpt } = this.data;
+    const src  = option.src;
+    this.setData({
+        cropperOpt: {
+            id: 'cropper',
+            width,
+            height,
+            scale: 2,
+            zoom: 8,
+            cut: {
+             x: parseInt((width - width1*.8)/2),
+              y: parseInt((height - height1 * .8) / 2),
+              width: parseInt(width1 * .8),
+              height: parseInt(height1 * .8)
+            }, 
+            src: option.src
+       }
+    })
+    
+    
     if (src) {
-      Object.assign(cropperOpt, { src })
-
+      // Object.assign(cropperOpt, { src })
+      const { cropperOpt } = this.data
       new weCropper(cropperOpt)
         .on('ready', function (ctx) {
           console.log(`wecropper is ready for work!`)
@@ -196,6 +245,9 @@ Page({
           console.log(`current canvas context:`, ctx)
           wx.hideToast()
         })
+      
+      this.A = new weCropper(cropperOptA)
+      this.B = new weCropper(cropperOptB)
     }
   }
 })

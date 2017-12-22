@@ -174,6 +174,11 @@ Page({
             }
         })
   },
+  management() {
+    wx.navigateTo({
+      url: '../setting/setting?pw_id=' + this.data.pw_id
+    })
+  },
   // 导航跳转
   navUrl(e) {
     // console.log(e);
@@ -322,6 +327,11 @@ Page({
             console.log('weizhi', weizhi);
             weizhi.split('x');
             let shuju = weizhi.split('x');
+            console.log('shuju:', shuju);
+            that.setData({
+              width: shuju[0],
+              height: shuju[1]
+            })
             wx.setStorageSync('weizhi', weizhi);
             wx.setStorageSync('width', shuju[0]);
             wx.setStorageSync('height', shuju[1]);
@@ -363,7 +373,7 @@ Page({
                 wx.setStorageSync('temp_id', that.data.temp_id);
                 wx.setStorageSync('pw_id', that.data.pw_id);
                 wx.redirectTo({
-                  url: `../avatarUpload/upload/upload?src=${src}&options=that.data.options&position=that.data.position`
+                  url: `../avatarUpload/upload/upload?src=${src}`
                 })
                 // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
                 var tempFilePaths = res.tempFilePaths;
@@ -416,6 +426,10 @@ Page({
               console.log('weizhi', weizhi);
               weizhi.split('x');
               let shuju = weizhi.split('x');
+              that.setData({
+                width: shuju[0],
+                height: shuju[1]
+              })
               wx.setStorageSync('weizhi', weizhi);
               wx.setStorageSync('width', shuju[0]);
               wx.setStorageSync('height', shuju[1]);
@@ -454,9 +468,13 @@ Page({
                 console.log("选择相册", res);
                 const src = res.tempFilePaths[0]
                 console.log('src', src);
-
+                wx.setStorageSync('pw_id', that.data.pw_id);
+                wx.setStorageSync('temp_id', that.data.temp_id);
+                // wx.redirectTo({
+                //   url: `../wx-cropper1/wx-cropper1?src=${src}&width=${that.data.width}&height=${that.data.height}`
+                // })
                 wx.redirectTo({
-                  url: `../avatarUpload/upload2/upload2?src=${src}`
+                  url: `../avatarUpload/upload2/upload2?src=${src}&position=${that.data.position}&width=${that.data.width}&height=${that.data.height}`
                 })
                 // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
                 var tempFilePaths = res.tempFilePaths;

@@ -19,6 +19,7 @@ page{
     top: 0;
     width: 100%;
     box-sizing: border-box;
+    z-index: 99;
 }
 .management .left{
   width: 70rpx;

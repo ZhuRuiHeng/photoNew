@@ -134,6 +134,12 @@ Page({
       }
     })
   },
+  // 管理相册
+  management() {
+    wx.navigateTo({
+      url: '../setting/setting?pw_id=' + this.data.pw_id
+    })
+  },
   // 音乐
   bindPlay: function () {
     var that = this;

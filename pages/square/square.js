@@ -4,7 +4,8 @@ import tips from '../../utils/tips.js';
 Page({
   data: {
     userInfo: wx.getStorageSync('userInfo'),
-    url:'https://friend-guess.playonwechat.com/assets/images/result/40741d60add2279916d8783b3d6667f9.jpg?1513410944?0.5924372259162527'
+    url:'https://friend-guess.playonwechat.com/assets/images/result/40741d60add2279916d8783b3d6667f9.jpg?1513410944?0.5924372259162527',
+    page:1
   },
   onLoad: function (options) {
   
@@ -16,9 +17,7 @@ Page({
     })
     let that = this;
     console.log(app.data.apiurl + "photo/photo-circle?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid)
-    
-    
-      wx.request({
+    wx.request({
         url: app.data.apiurl + "photo/photo-circle?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
         header: {
           'content-type': 'application/json'
@@ -28,11 +27,6 @@ Page({
           console.log("圈子列表:", res);
           var status = res.data.status;
           if (status == 1) {
-            // if (wx.getStorageSync('allList')) {
-            //   that.setData({
-            //     allList: wx.getStorageSync('allList')
-            //   })
-            // }
             that.setData({
               allList: res.data.data
             })
@@ -47,9 +41,7 @@ Page({
           }
           wx.hideLoading()
         }
-      })
-    
-    
+    })
   },
   navUrl(e) {
     console.log(e);
@@ -150,6 +142,64 @@ Page({
           // 转发失败
         }
       }
+  },
+  // 下拉分页
+  onReachBottom: function () {
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    console.log("下拉分页")
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading'
+    })
+    var that = this;
+    var oldGoodsList = that.data.allList;
+    console.log("oldGoodsList:" + oldGoodsList);
+    var allList = [];
+    var oldPage = that.data.page;
+    var reqPage = oldPage + 1;
+    console.log(that.data.page);
+    wx.request({
+      url: app.data.apiurl + "photo/photo-circle?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+      data: {
+        page: reqPage,
+        limit: 10
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        console.log('新res', res);
+        var allList = res.data.data;
+        if (res.data.data.length == 0) 
+        tips.alert('没有更多数据了')
+        return;
+        var page = oldPage + 1;
+        var newContent = oldGoodsList.concat(allList);
+
+        that.setData({
+          allList: newContent,
+          page: reqPage
+        });
+        wx.hideLoading();
+        if (newContent == undefined) {
+          wx.showToast({
+            title: '没有更多数据',
+            duration: 800
+          })
+        }
+        console.log("newContent:" + that.data.newContent);
+
+      },
+      fail: function () {
+        // fail
+      },
+      complete: function () {
+        // complete
+        wx.hideNavigationBarLoading() //完成停止加载
+        wx.stopPullDownRefresh() //停止下拉刷新
+      }
+    });
   },
   shanchu(e){
     console.log(e);

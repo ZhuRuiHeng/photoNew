@@ -118,6 +118,18 @@
 					"name": "square",
 					"pathName": "pages/square/square",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "wx-cropper",
+					"pathName": "pages/wx-cropper/wx-cropper",
+					"query": "scene=photo_wall_image_2914"
+				},
+				{
+					"id": 17,
+					"name": "wx-cropper1",
+					"pathName": "pages/wx-cropper1/wx-cropper1",
+					"query": "src=https://friend-guess.playonwechat.com/assets/images/face/5a3c638767f5e6798.png"
 				}
 			]
 		}

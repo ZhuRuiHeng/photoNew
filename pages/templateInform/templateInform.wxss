@@ -14,11 +14,12 @@ page{
     height: 70rpx;
     line-height: 70rpx;
     padding: 10rpx 20rpx;
-    margin-top: 30rpx;
     position: absolute;
     top: 0;
+    left: 0;
     width: 100%;
     box-sizing: border-box;
+    z-index: 9;
 }
 .management .left{
   width: 70rpx;
@@ -101,7 +102,7 @@ button::after{
   content: none;
 }
 .photo{
-  margin: 0 auto;
+  margin: -20rpx auto 0;
   text-align: center;
   position: relative;
   width: 100%;

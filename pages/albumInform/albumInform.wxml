@@ -6,7 +6,7 @@
 <view class="container">
     <view class='management'>
         <view class="left {{music_play?'music_play':''}}" bindtap="bindPlay"></view>
-         <!-- <view class='right' bindtap='management'>照片管理</view>  -->
+          <view class='right' bindtap='management'>照片管理</view>  
     </view>
     <view class='photo'>
         <view class='index'></view>
