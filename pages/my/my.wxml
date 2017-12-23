@@ -46,12 +46,9 @@
                 <image class='niceImg' data-url='{{item.thumb}}' src="{{item.thumb}}?{{num}}" data-musicUrl='{{item.music_info.url}}' data-nameMusic='{{item.music_info.name}}'
                         mode='aspectFill' data-pw_id='{{item.id}}' bindtap='seeTap'></image>
                 <view class='timeWho'>
-                    <input wx:if="{{item.name == 'undefined' || !item.name}}" type='text' 
-                          data-pw_id='{{item.id}}' bindinput="setName" 
-                          placeholder='照片墙' value='朋友照片墙' />
-                    <input wx:else type='text' data-pw_id='{{item.id}}' bindinput="setName" 
-                          placeholder='照片墙' value='朋友照片墙' />
-                          <image class='setting' src="../img/1162232-200.png" mode="aspectFill"></image>
+                    <input type='text' data-pw_id='{{item.id}}' bindinput="setName" 
+                          placeholder='照片墙' value='{{item.name}}' class='222'/>
+                    <image class='setting' src="../img/1162232-200.png" mode="aspectFill"></image>
                 </view>
             </view>
             <!--新增  -->
@@ -80,11 +77,8 @@
                 <image class='niceImg' data-url='{{item.thumb}}' src="{{item.thumb}}?{{num}}" data-musicUrl='{{item.music_info.url}}' data-nameMusic='{{item.music_info.name}}'
                         mode='aspectFill' data-pw_id='{{item.id}}' bindtap='seeTap1'></image>
                 <view class='timeWho'>
-                    <input wx:if="{{item.name == 'undefined' || !item.name}}" type='text' 
-                          data-pw_id='{{item.id}}' bindinput="setName" 
-                          placeholder='照片墙' value='朋友照片墙' />
-                    <input wx:else type='text' data-pw_id='{{item.id}}' bindinput="setName" 
-                          placeholder='照片墙' value='朋友照片墙' />
+                    <input type='text' data-pw_id='{{item.id}}' bindinput="setName" class='222'
+                          placeholder='照片墙' value='{{item.name}}' />
                           <image class='setting' src="../img/1162232-200.png" mode="widthFix"></image>
                 </view>
             </view>
