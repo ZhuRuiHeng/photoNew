@@ -35,7 +35,8 @@ Page({
   touchEnd(e) {
     this.wecropper.touchEnd(e)
   },
-  getCropperImage() {
+  getCropperImage(e) {
+    let form_id = e.detail.formId;
     wx.showToast({
       title: '上传中',
       icon: 'loading'
@@ -50,7 +51,8 @@ Page({
       if (avatar) {
         var that = this;
         that.setData({
-          tapss: false
+          tapss: false,
+          form_id: form_id
         })
         let sign = wx.getStorageSync('sign');
         console.log(apiurl + "api/upload-image?sign=" + sign + ' & operator_id=' + app.data.kid);
@@ -76,7 +78,8 @@ Page({
                   data: {
                     pw_id: pw_id,
                     picture: that.data.picture,
-                    temp_id: wx.getStorageSync('temp_id')
+                    temp_id: wx.getStorageSync('temp_id'),
+                    form_id: that.data.form_id
                   },
                   header: {
                     'content-type': 'application/json'

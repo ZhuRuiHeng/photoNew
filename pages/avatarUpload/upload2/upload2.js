@@ -62,7 +62,9 @@ Page({
   touchEnd(e) {
     this.wecropper.touchEnd(e)
   },
-  getCropperImage() {
+  getCropperImage(e) {
+    //console.log("getCropperImage2",e)
+    let form_id = e.detail.formId;
     wx.showToast({
       title: '上传中',
       icon: 'loading'
@@ -74,7 +76,8 @@ Page({
       if (avatar) {
         var that = this;
         that.setData({
-          tapss: false
+          tapss: false,
+          form_id: form_id
         })
         let sign = wx.getStorageSync('sign');
         console.log(apiurl + "api/upload-image?sign=" + sign + ' & operator_id=' + app.data.kid);
@@ -100,7 +103,8 @@ Page({
                     data: {
                       pw_id: pw_id,
                       position: wx.getStorageSync('position'),
-                      picture: picture
+                      picture: picture,
+                      form_id: that.data.form_id
                     },
                     header: {
                       'content-type': 'application/json'
@@ -185,7 +189,7 @@ Page({
     // do something
     const device = wx.getSystemInfoSync()
     const width = device.windowWidth
-    const height = device.windowHeight - 50
+    const height = device.windowHeight - 50;
     console.log('option:', option);
     console.log("width:", option.width);
     let w = width / option.width;

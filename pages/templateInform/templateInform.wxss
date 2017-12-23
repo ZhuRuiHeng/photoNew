@@ -231,15 +231,16 @@ button::after{
 }
 form{
   display:block;
-  width:220rpx;
+  width:200rpx;
   height:60rpx;
   line-height:60rpx;
-  border-radius:10rpx;
-  background:#666;
+  border-radius:10rpx!important;
+  background:#34a8e0;
   color:#fff;
-  margin:0rpx auto;
+  margin:20rpx auto;
   text-align:center;
   cursor:pointer;
+  padding:0 20rpx;
 }
 button{
   background-color:#fff;

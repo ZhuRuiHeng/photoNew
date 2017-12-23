@@ -75,6 +75,7 @@ Page({
         console.log("照片墙信息:", res);
         var status = res.data.status;
         if (status == 1) {
+          console.log(res.data.data.pic + '?' + that.data.num,111)
           that.setData({
             thumb: res.data.data.pic +'?'+ that.data.num,
             temp_id: res.data.data.temp_id,
@@ -299,6 +300,8 @@ Page({
   upPhoto: function (e) {
     let that = this;
     console.log(e, that.data.temp_id);
+    let form_id = e.detail.formId;
+    wx.setStorageSync('form_id', e.detail.formId)
     let sign = wx.getStorageSync('sign');
     // wx.showToast({
     //   title: '此模板可以上传' + that.data.photoInform.counts.length+'张照片',
@@ -313,7 +316,8 @@ Page({
       wx.request({
         url: app.data.apiurl + "photo/can-up-position-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
         data: {
-          pw_id: that.data.pw_id
+          pw_id: that.data.pw_id,
+          form_id: form_id
         },
         header: {
           'content-type': 'application/json'
@@ -358,7 +362,8 @@ Page({
               url: app.data.apiurl + "photo/start-up-picture?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
               data: {
                 pw_id: that.data.pw_id,
-                position: that.data.position
+                position: that.data.position,
+                form_id: form_id
               },
               header: {
                 'content-type': 'application/json'
@@ -411,7 +416,8 @@ Page({
       wx.request({
         url: app.data.apiurl + "photo/can-up-position-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
         data: {
-          pw_id: that.data.pw_id
+          pw_id: that.data.pw_id,
+          form_id: form_id
         },
         header: {
           'content-type': 'application/json'
@@ -455,7 +461,8 @@ Page({
               url: app.data.apiurl + "photo/start-up-picture?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
               data: {
                 pw_id: that.data.pw_id,
-                position: that.data.position
+                position: that.data.position,
+                form_id: form_id
               },
               header: {
                 'content-type': 'application/json'
