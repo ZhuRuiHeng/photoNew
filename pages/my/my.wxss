@@ -138,6 +138,7 @@ page{
 }
 .timeWho .setting{
     width: 20rpx;
+    height: 20rpx;
     position: absolute;
     bottom: 10rpx;
     right: 0rpx;

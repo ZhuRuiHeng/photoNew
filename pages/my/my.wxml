@@ -60,7 +60,7 @@
                 <image class='niceImg'  src="../img/add.png" bindtap='newPhotos1'
                       mode='aspectFill'></image>
                 <view class='timeWho'>
-                    <input type='text' placeholder='创建照片墙' disabled bindinput="niceName" value='{{newName}}' />
+                    <input type='text' placeholder='创建照片墙'  bindinput="niceName" value='{{newName}}' />
                 </view>
             </view>
         </view> 
@@ -91,7 +91,7 @@
                 <image class='niceImg'  src="../img/add.png" bindtap='newPhotos2'
                       mode='aspectFill'></image>
                 <view class='timeWho'>
-                    <input type='text' placeholder='创建影片集' disabled bindinput="niceName" value='{{newName}}' />
+                    <input type='text' placeholder='创建影片集' bindinput="niceName" value='{{newName}}' />
                 </view>
             </view>
         </view> 

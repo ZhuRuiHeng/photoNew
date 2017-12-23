@@ -175,11 +175,9 @@ Page({
         var allList = res.data.data;
         if (res.data.msg==0){
           tips.alert('没有更多数据了')
-          return;
         }
         if (res.data.data.length == 0 ) 
         tips.alert('没有更多数据了')
-        return;
         var page = oldPage + 1;
         var newContent = oldGoodsList.concat(allList);
 
