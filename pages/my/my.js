@@ -23,7 +23,8 @@ Page({
     let sign = wx.getStorageSync('sign');
     wx.setStorageSync('music_play', true); 
     that.setData({
-      userInfo: wx.getStorageSync('userInfo')
+      userInfo: wx.getStorageSync('userInfo'),
+      show: false
     })
     // 请求 
     wx.request({
@@ -115,9 +116,7 @@ Page({
         url: e.currentTarget.dataset.url,
       })
     }
-    this.setData({
-      show:false
-    })
+    
   },
   // 音乐列表
   musicList: function (e) {

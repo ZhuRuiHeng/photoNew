@@ -31,6 +31,9 @@ Page({
     wx.showLoading({
       title: '加载中',
     });
+    that.setData({
+      show: false
+    })
     wx.request({
       url: "https://unify.playonweixin.com/site/get-advertisements",
       success: function (res) {

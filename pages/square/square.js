@@ -16,6 +16,9 @@ Page({
       icon: 'loading'
     })
     let that = this;
+    that.setData({
+      show: false
+    })
     app.getAuth(function () {
         wx.request({
             url: app.data.apiurl + "photo/photo-circle?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
@@ -65,10 +68,11 @@ Page({
       wx.reLaunch({
         url: e.currentTarget.dataset.url,
       })
+      this.setData({
+        show: false
+      })
     }
-    this.setData({
-      show: false
-    })
+    
   },
   // 评论
   pinglunTap(e){
