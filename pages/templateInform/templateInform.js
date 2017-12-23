@@ -11,7 +11,8 @@ Page({
       checkboxs: 1, //0不展示  1展示
       finish:false, //是否拼完
       num: Math.random(),
-      music_play: true
+      music_play: true,
+      button:true
   },
 
   /**
@@ -36,7 +37,6 @@ Page({
       icon: 'loading'
     })
     let that = this;
-    
     wx.request({
       url: app.data.apiurl + "photo/template-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
       data:{
@@ -50,14 +50,12 @@ Page({
         //console.log("模板详情:", res);
         var status = res.data.status;
         //console.log(JSON.parse(res.data.status));
-        
         if (status == 1) {
           that.setData({
             photoInform: res.data.data,
             source_effect: res.data.data.source_effect
           })
-          
-        } else {
+        }else {
           //tips.alert(res.data.msg);
         }
       },
@@ -133,24 +131,28 @@ Page({
               //console.log("模板详情:", res);
               var status = res.data.status;
               //console.log(JSON.parse(res.data.status));
-
               if (status == 1) {
                 that.setData({
                   photoInform: res.data.data,
                   source_effect: res.data.data.source_effect
                 })
-
-              } else {
-                //tips.alert(res.data.msg);
+                
+              }else {
+                tips.alert(res.data.msg);
               }
             },
-
           })
-        }else {
-          tips.alert(res.data.msg)
-          //console.log(res.data.msg);
+         
+        }else{
+          tips.alert(res.data.msg);
+          setTimeout(function(){
+            wx.reLaunch({
+              url: '../square/square',
+            })
+          }, 3000)
+          console.log(res.data.msg,1111);
         }
-        wx.hideLoading()
+       
       }
     })
     // 判断照片墙是否已满
@@ -170,12 +172,14 @@ Page({
             that.setData({
               finish: res.data.data.flag
             })
+            
           } else {
             //console.log(res.data.msg);
           }
-          wx.hideLoading()
+          
         }
     })
+    wx.hideLoading()
   },
   management() {
     wx.navigateTo({
@@ -248,7 +252,7 @@ Page({
         // } else {
         //   console.log(res.data.msg);
         // }
-        wx.hideLoading()
+        
       }
     })
   },
@@ -369,7 +373,7 @@ Page({
                 } else {
                   console.log(res.data.msg);
                 }
-                wx.hideLoading()
+                
               }
             })
             // 上传 
@@ -398,7 +402,7 @@ Page({
           } else {
             console.log(res.data.msg);
           }
-          wx.hideLoading()
+          
         }
       })
       
@@ -467,7 +471,7 @@ Page({
                 } else {
                   console.log(res.data.msg);
                 }
-                wx.hideLoading()
+                
               }
             })
           // 上传 
@@ -498,14 +502,17 @@ Page({
           } else {
             console.log(res.data.msg);
           }
-          wx.hideLoading()
+          
         }
       })
   }
-    wx.hideLoading()
+    
   },
   savePhoto(e){
       let that = this;
+      that.setData({
+        button:false
+      })
       wx.request({
         url: app.data.apiurl + "photo/create-image?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
         data: {
@@ -531,7 +538,9 @@ Page({
             console.log(res.data.msg);
             tips.alert(res.data.msg)
           }
-          wx.hideLoading()
+          that.setData({
+            button: true
+          })
         }
       })
   },

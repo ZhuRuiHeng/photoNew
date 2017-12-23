@@ -1,5 +1,5 @@
 .container{
-  padding-bottom: 200rpx;
+  padding-bottom: 100rpx;
   font-size: 24rpx;
   overflow-x: hidden;
 }
@@ -121,7 +121,7 @@
     text-align: right;
 }
 .content{
-  padding-bottom: 200rpx;
+  padding-bottom: 100rpx;
 }
 .content .title{
     height: 60rpx;

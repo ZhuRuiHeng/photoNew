@@ -10,7 +10,8 @@ Page({
     show: false,
     checkboxs: 1,
     finish:false,
-    music_play: true
+    music_play: true,
+    button:true
   },
 
   /**
@@ -34,6 +35,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.showLoading({
+      title: '加载中',
+    })
     let that = this;
     // 判断照片信息
     wx.request({
@@ -65,9 +69,16 @@ Page({
             that.setData({
               music_play: true
             })
-          }
-          if (wx.getStorageSync('bgMusic') == res.data.data.music_info.url) {
-            console.log('缓存音乐与当前音乐相同')
+          }else if (wx.getStorageSync('bgMusic') == res.data.data.music_info.url) {
+            if (wx.getStorageSync('music_play') == false) {
+              that.setData({
+                music_play: false
+              })
+              app.data.music_play = false
+              wx.pauseBackgroundAudio();//暂停
+            } else {
+              wx.playBackgroundAudio()
+            }
           } else {
             console.log(wx.getStorageSync('bgMusic'), res.data.data.music_info.url, 222)
             app.data.dataUrl = res.data.data.music_info.url;
@@ -78,7 +89,6 @@ Page({
               music_play: true
             })
           }
-          
           wx.request({
             url: app.data.apiurl + "photo/template-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
             data: {
@@ -106,10 +116,16 @@ Page({
             },
 
           })
+          
         } else {
           tips.alert(res.data.msg)
+          setTimeout(function () {
+            wx.reLaunch({
+              url: '../square/square',
+            })
+          }, 2000)
         }
-        wx.hideLoading()
+        
       }
     })
     wx.request({
@@ -131,9 +147,9 @@ Page({
         } else {
           console.log(res.data.msg);
         }
-        wx.hideLoading()
       }
     })
+    wx.hideLoading()
   },
   // 管理相册
   management() {
@@ -200,7 +216,7 @@ Page({
         // } else {
         //   console.log(res.data.msg);
         // }
-        wx.hideLoading()
+        
       }
     })
   },
@@ -264,25 +280,24 @@ Page({
           var status = res.data.status;
           if (status == 1) {
             console.log(res);
-
+            if (that.data.finish) {
+              wx.pauseBackgroundAudio();//暂停
+              app.data.music_play = false;
+              that.setData({
+                music_play: false
+              })
+              wx.navigateTo({
+                url: '../seephoto/seephoto?pw_id=' + that.data.pw_id + '&temp_id=' + that.data.temp_id,
+              })
+            } else {
+              tips.alert('请先填满照片集！')
+            }
           } else {
             tips.alert(res.data.msg)
           }
-          wx.hideLoading()
         }
       })
-      if (that.data.finish){
-          wx.pauseBackgroundAudio();//暂停
-          app.data.music_play = false;
-          that.setData({
-            music_play: false
-          })
-          wx.navigateTo({
-            url: '../seephoto/seephoto?pw_id=' + that.data.pw_id + '&temp_id=' + that.data.temp_id,
-          })
-      }else{
-          tips.alert('请先填满照片集！')
-      }
+      
   },
   //我也要玩
   myplay(){
@@ -359,7 +374,7 @@ Page({
                           } else {
                             console.log(res.data.msg);
                           }
-                          wx.hideLoading()
+                          
                         }
                       })
                     } else {

@@ -10,7 +10,7 @@
     </view>
     <view class='photo'>
         <view class='index' wx:if="{{finish}}" bindtap='savePhoto'></view>
-         <image class='play' wx:if="{{finish}}" bindtap='savePhoto' src="../img/sanjiao.png"></image> 
+         <image class='play' wx:if="{{finish}}" src="../img/sanjiao.png"></image> 
          <image class='thumb' src='https://gcdn.playonwechat.com/photo/o_1c10c739b1pqu13g0bmu4lj12ua81.jpg' mode='aspectFit'></image> 
     </view>
     <view class='notice'>注：此模板可以上传{{photo_count}}张照片</view>
