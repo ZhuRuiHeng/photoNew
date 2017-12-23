@@ -51,7 +51,8 @@ Page({
         if (status == 1) {
           that.setData({
             thumb: res.data.data.pic + '?' + that.data.num,
-            temp_id: res.data.data.temp_id
+            temp_id: res.data.data.temp_id,
+            self: res.data.data.self
           })
           if (!wx.getStorageSync('bgMusic')) {
             console.log('没有缓存音乐')
@@ -106,7 +107,7 @@ Page({
 
           })
         } else {
-          console.log(res.data.msg);
+          tips.alert(res.data.msg)
         }
         wx.hideLoading()
       }
@@ -282,6 +283,12 @@ Page({
       }else{
           tips.alert('请先填满照片集！')
       }
+  },
+  //我也要玩
+  myplay(){
+    wx.redirectTo({
+      url: '../album/album',
+    })
   },
   upPhoto(){
     let that = this;

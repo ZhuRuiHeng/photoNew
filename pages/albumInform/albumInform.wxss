@@ -70,6 +70,9 @@ page{
   text-align: center;
   margin-top: 20rpx;
 }
+.buttons{
+  padding-bottom:40rpx; 
+}
 .buttons view{
   display: block;
   width: 200rpx;

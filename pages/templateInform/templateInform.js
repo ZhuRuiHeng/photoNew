@@ -79,7 +79,8 @@ Page({
         if (status == 1) {
           that.setData({
             thumb: res.data.data.pic +'?'+ that.data.num,
-            temp_id: res.data.data.temp_id
+            temp_id: res.data.data.temp_id,
+            self: res.data.data.self
           })
           if (!wx.getStorageSync('bgMusic')) {
             //console.log('没有缓存音乐')
@@ -145,7 +146,8 @@ Page({
             },
 
           })
-        } else {
+        }else {
+          tips.alert(res.data.msg)
           //console.log(res.data.msg);
         }
         wx.hideLoading()
@@ -178,6 +180,12 @@ Page({
   management() {
     wx.navigateTo({
       url: '../setting/setting?pw_id=' + this.data.pw_id
+    })
+  },
+  //我也要玩
+  myplay() {
+    wx.redirectTo({
+      url: '../templatePhoto/templatePhoto',
     })
   },
   // 导航跳转

@@ -6,7 +6,7 @@
 <view class="container">
     <view class='management'>
         <view class="left {{music_play?'music_play':''}}" bindtap="bindPlay"></view>
-          <view class='right' bindtap='management'>照片管理</view>  
+          <view class='right' wx:if="{{self}}" bindtap='management'>照片管理</view>  
     </view>
     <view class='photo'>
         <view class='index' wx:if="{{finish}}" bindtap='savePhoto'></view>
@@ -16,12 +16,13 @@
     <view class='notice'>注：此模板可以上传{{photo_count}}张照片</view>
     <view class='buttons'>
           <!-- wx:if="{{finish}}"  -->
-          <view class='active' bindtap='upPhoto' wx:if="{{!finish}}">上传图片</view>
+          <view class='active' bindtap='upPhoto' wx:if="{{self && !finish}}">上传图片</view>
           <view class='active' bindtap='savePhoto' wx:if="{{finish}}">查看相册集</view> 
           <!-- friends -->
-          <view class='active' bindtap='friends' wx:if="{{finish}}">分享给好友</view> 
+          <view class='active' bindtap='friends' wx:if="{{finish && self}}">分享给好友</view> 
+          <view class='active' bindtap='myplay' wx:if="{{!self}}">我也要玩</view> 
     </view>
-      <view class='checkboxs'  wx:if="{{finish}}">
+      <view class='checkboxs'  wx:if="{{finish && self}}">
             <image  wx:if="{{checkboxs==1}}"  bindtap="Change" data-check='0' 
                     src="../img/checka.png" mode='widthFix'></image>
             <image wx:if="{{checkboxs==0}}"  bindtap="Change" data-check='1' 
