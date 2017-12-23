@@ -97,52 +97,53 @@ Page({
               that.setData({
                 picture: data.data
               })
-                console.log('上传pw_id：',pw_id);
-                wx.request({
-                    url: app.data.apiurl + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid,
-                    data: {
-                      pw_id: pw_id,
-                      position: wx.getStorageSync('position'),
-                      picture: picture,
-                      form_id: that.data.form_id
-                    },
-                    header: {
-                      'content-type': 'application/json'
-                    },
-                    method: "GET",
-                    success: function (res) {
-                      console.log('上传pw_id：', pw_id);
-                      console.log("添加照片:", res);
-                      let status = res.data.status;
-                      if (status == 1) {
-                        console.log('上传成功！')
-                        // 获取照片墙pwid
-                        wx.setStorageSync('temp_id', wx.getStorageSync('temp_id'));
+              console.log('上传pw_id：',pw_id);
+              wx.request({
+                  url: app.data.apiurl + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid,
+                  data: {
+                    pw_id: pw_id,
+                    position: wx.getStorageSync('position'),
+                    picture: picture,
+                    form_id: that.data.form_id
+                  },
+                  header: {
+                    'content-type': 'application/json'
+                  },
+                  method: "GET",
+                  success: function (res) {
+                    console.log('上传pw_id：', pw_id);
+                    console.log("添加照片:", res);
+                    let status = res.data.status;
+                    if (status == 1) {
+                      console.log('上传成功！')
+                      // 获取照片墙pwid
+                      wx.setStorageSync('temp_id', wx.getStorageSync('temp_id'));
+                      wx.removeStorageSync('width');
+                      wx.removeStorageSync('height');
+                      wx.removeStorageSync('weizhi');
+                      wx.reLaunch({
+                        url: '../../templateInform/templateInform?temp_id=' + wx.getStorageSync('temp_id') + '&pw_id=' + wx.getStorageSync('pw_id'),
+                      })
+
+                    } else {
+                      console.log(res.data.msg);
+                      wx.showToast({
+                        title: res.data.msg,
+                        icon: 'loading'
+                      })
+                      wx.setStorageSync('temp_id', wx.getStorageSync('temp_id'))
+                      setTimeout(function(){
                         wx.removeStorageSync('width');
                         wx.removeStorageSync('height');
                         wx.removeStorageSync('weizhi');
                         wx.reLaunch({
                           url: '../../templateInform/templateInform?temp_id=' + wx.getStorageSync('temp_id') + '&pw_id=' + wx.getStorageSync('pw_id'),
                         })
-
-                      } else {
-                        wx.showToast({
-                          title: res.data.msg,
-                          icon: 'loading'
-                        })
-                        wx.setStorageSync('temp_id', wx.getStorageSync('temp_id'))
-                        setTimeout(function(){
-                          wx.removeStorageSync('width');
-                          wx.removeStorageSync('height');
-                          wx.removeStorageSync('weizhi');
-                          wx.reLaunch({
-                            url: '../../templateInform/templateInform?temp_id=' + wx.getStorageSync('temp_id') + '&pw_id=' + wx.getStorageSync('pw_id'),
-                          })
-                        })
-                      }
-
+                      },2000)
                     }
-               })
+
+                  }
+              })
               
             } else {
               wx.showToast({

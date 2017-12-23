@@ -24,10 +24,10 @@
 <template name="pretty">
     <view class='prettyBox'>
         <view class='pretty triangle'>
-            <navigator url="../templatePhoto/templatePhoto" open-type="reLaunch"  class="pretty1" >
+            <navigator url="../templatePhoto/templatePhoto"   class="pretty1" >
                 <image src="../img/1422830-200.png" ></image><text>照片墙</text>
             </navigator>
-            <navigator url="../album/album" class="pretty2" open-type="reLaunch" >
+            <navigator url="../album/album" class="pretty2"  >
                 <image src="../img/1419919-200.png" ></image><text>相册集</text>
             </navigator>
         </view>

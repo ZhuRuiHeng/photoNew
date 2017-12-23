@@ -75,7 +75,7 @@ Page({
               if (that.data.pw_id){
                 if (that.data.type=='h5'){
                   wx.redirectTo({
-                    url: '../albumInform/albumInform?pw_id=' + that.data.pw_id,
+                    url: '../albumInform/albumInform?pw_id=' + that.data.pw_id+'&ewm=1',
                   })
                 }else{
                   wx.redirectTo({

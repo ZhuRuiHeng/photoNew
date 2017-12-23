@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/square/square",
     "pages/photos/photos",
     "pages/my/my",
     "pages/inform/inform",
@@ -19,8 +20,8 @@
     "pages/albumInform/albumInform",
     "pages/templateInform/templateInform",
     "pages/mode1/mode1",
-    "pages/seephoto/seephoto",
-    "pages/square/square"
+    "pages/seephoto/seephoto"
+    
   ],
   "window":{
     "backgroundTextStyle":"light",

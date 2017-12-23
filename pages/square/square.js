@@ -59,15 +59,16 @@ Page({
           itemBar: 2,
           show: true
         })
-
       }
-
     } else {
       console.log(222);
       wx.reLaunch({
         url: e.currentTarget.dataset.url,
       })
     }
+    this.setData({
+      show: false
+    })
   },
   // 评论
   pinglunTap(e){

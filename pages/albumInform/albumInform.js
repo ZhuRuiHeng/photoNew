@@ -22,6 +22,11 @@ Page({
     this.setData({
       pw_id: options.pw_id
     })
+    if (options.ewm){
+      this.setData({
+         ewm: options.ewm
+      })
+    }
   },
 
   /**
@@ -262,38 +267,45 @@ Page({
   // 查看照片集
   savePhoto(e){
       let that = this;
-      wx.request({
-        url: app.data.apiurl + "photo/create-image?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-        data: {
-          pw_id: that.data.pw_id,
-          is_show: that.data.checkboxs
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        method: "GET",
-        success: function (res) {
-          console.log("图片照片墙:", res);
-          var status = res.data.status;
-          if (status == 1) {
-            console.log(res);
-            if (that.data.finish) {
-              wx.pauseBackgroundAudio();//暂停
-              app.data.music_play = false;
-              that.setData({
-                music_play: false
-              })
-              wx.navigateTo({
-                url: '../seephoto/seephoto?pw_id=' + that.data.pw_id + '&temp_id=' + that.data.temp_id,
-              })
+      console.log(that.data.temp_id,that.data.ewm)
+      if (that.data.temp_id && that.data.ewm==1){
+        wx.navigateTo({
+          url: '../seephoto/seephoto?pw_id=' + that.data.pw_id + '&temp_id=' + that.data.temp_id,
+        })
+      }else{
+        wx.request({
+          url: app.data.apiurl + "photo/create-image?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+          data: {
+            pw_id: that.data.pw_id,
+            is_show: that.data.checkboxs
+          },
+          header: {
+            'content-type': 'application/json'
+          },
+          method: "GET",
+          success: function (res) {
+            console.log("图片照片墙:", res);
+            var status = res.data.status;
+            if (status == 1) {
+              console.log(res);
+              if (that.data.finish) {
+                wx.pauseBackgroundAudio();//暂停
+                app.data.music_play = false;
+                that.setData({
+                  music_play: false
+                })
+                wx.navigateTo({
+                  url: '../seephoto/seephoto?pw_id=' + that.data.pw_id + '&temp_id=' + that.data.temp_id,
+                })
+              } else {
+                tips.alert('请先填满照片集！')
+              }
             } else {
-              tips.alert('请先填满照片集！')
+              tips.alert(res.data.msg)
             }
-          } else {
-            tips.alert(res.data.msg)
           }
-        }
-      })
+        })
+      }
       
   },
   //我也要玩

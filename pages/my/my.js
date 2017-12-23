@@ -108,15 +108,16 @@ Page({
           itemBar: 2,
           show: true
         })
-
       }
-
     } else {
       console.log(222);
       wx.reLaunch({
         url: e.currentTarget.dataset.url,
       })
     }
+    this.setData({
+      show:false
+    })
   },
   // 音乐列表
   musicList: function (e) {
@@ -231,7 +232,7 @@ Page({
     let that = this;
     let sign = wx.getStorageSync('sign');
     console.log(e.currentTarget.dataset.pw_id);
-    let photoIndex = e.currentTarget.dataset.photoIndex;
+    let photoIndex = e.currentTarget.dataset.photoindex;
     let photosList = that.data.photosList;
     // 请求 
     wx.request({
