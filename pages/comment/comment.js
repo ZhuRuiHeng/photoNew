@@ -42,13 +42,14 @@ Page({
   publishText(e){
     var that = this;
     var content = that.data.text;
-
+    let form_id = e.detail.formId;
     if (content){
       wx.request({
         url: app.data.apiurl + "photo/comment-photo-wall?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
         data: {
           pw_id: that.data.pw_id,
-          content: content
+          content: content,
+          form_id: form_id
         },
         header: {
           'content-type': 'application/json'

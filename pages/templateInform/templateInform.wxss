@@ -229,3 +229,26 @@ button::after{
 	top:99%;
 	left:46%;
 }
+form{
+  display:block;
+  width:220rpx;
+  height:60rpx;
+  line-height:60rpx;
+  border-radius:10rpx;
+  background:#666;
+  color:#fff;
+  margin:0rpx auto;
+  text-align:center;
+  cursor:pointer;
+}
+button{
+  background-color:#fff;
+  font-size:26rpx;
+  margin: 0!important;
+  line-height:inherit;
+  padding:0!important;
+  border-radius:0!important;
+}
+button::after{
+  content: none;
+}

@@ -21,7 +21,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 11,
+			"current": 14,
 			"list": [
 				{
 					"id": -1,
@@ -33,7 +33,7 @@
 					"id": 1,
 					"name": "分享index",
 					"pathName": "pages/index/index",
-					"query": "scene=photo_wall_image_3241"
+					"query": "scene=photo_wall_h5_3241"
 				},
 				{
 					"id": 2,
@@ -108,10 +108,10 @@
 					"query": "pw_id=1312"
 				},
 				{
-					"id": -1,
+					"id": 14,
 					"name": "templateInform",
 					"pathName": "pages/templateInform/templateInform",
-					"query": ""
+					"query": "pw_id=3255"
 				},
 				{
 					"id": -1,
@@ -130,6 +130,12 @@
 					"name": "wx-cropper1",
 					"pathName": "pages/wx-cropper1/wx-cropper1",
 					"query": "src=https://friend-guess.playonwechat.com/assets/images/face/5a3c638767f5e6798.png"
+				},
+				{
+					"id": -1,
+					"name": "评论",
+					"pathName": "pages/comment/comment",
+					"query": "scene=photo_wall_h5_3241"
 				}
 			]
 		}

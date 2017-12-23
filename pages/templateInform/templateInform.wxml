@@ -18,6 +18,9 @@
         <view class='active buttona' bindtap='savePhoto' wx:if="{{finish && self && button}}">生成照片墙</view>
         <view class='active buttonb' wx:if="{{!button}}">生成照片墙</view>
         <view class='active' bindtap='upPhoto' wx:if="{{!finish}}">上传图片</view>
+         <form report-submit="true" bindsubmit="upPhoto" class="formSubmit active" wx:if="{{!finish}}">
+            <button class="submit one {{now==1?'active':''}}" formType="submit">上传图片</button>
+        </form> 
         <!-- <view class='active' bindtap='upVideo'>上传视频</view> -->
         <view class='active' bindtap='friends' wx:if="{{!finish && self}}">邀请好友拼图</view>
         <view class='active' bindtap='myplay' wx:if="{{!self}}">我也要玩</view> 

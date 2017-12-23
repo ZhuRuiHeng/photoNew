@@ -173,7 +173,11 @@ Page({
       success: function (res) {
         console.log('新res', res);
         var allList = res.data.data;
-        if (res.data.data.length == 0) 
+        if (res.data.msg==0){
+          tips.alert('没有更多数据了')
+          return;
+        }
+        if (res.data.data.length == 0 ) 
         tips.alert('没有更多数据了')
         return;
         var page = oldPage + 1;

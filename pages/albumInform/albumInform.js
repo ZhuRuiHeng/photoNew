@@ -199,24 +199,23 @@ Page({
         console.log("好友拼图照片:", res);
         console.log("海报:", res.data);
         var status = res.data.status;
-        // if (status == 1) {
-        that.setData({
-          friendsImg: res.data
-        })
-        let friendsImg = res.data.data;
-        console.log("friendsImg:", res.data.data);
-        let friendsImgs = friendsImg.split();
-        console.log(friendsImg)
-        console.log(friendsImgs)
-        wx.previewImage({
-          current: friendsImg, // 当前显示图片的http链接
-          urls: friendsImgs // 需要预览的图片http链接列表
-        })
-
-        // } else {
-        //   console.log(res.data.msg);
-        // }
-        
+        if (status == 1) {
+          that.setData({
+            friendsImg: res.data
+          })
+          let friendsImg = res.data.data;
+          console.log("friendsImg:", res.data.data);
+          let friendsImgs = friendsImg.split();
+          console.log(friendsImg)
+          console.log(friendsImgs)
+          wx.previewImage({
+            current: friendsImg, // 当前显示图片的http链接
+            urls: friendsImgs // 需要预览的图片http链接列表
+          })
+        } else {
+          console.log(res.data.msg);
+        }
+        wx.hideLoading()
       }
     })
   },
@@ -236,9 +235,7 @@ Page({
           itemBar: 2,
           show: true
         })
-
       }
-
     } else {
       console.log(222);
       wx.reLaunch({

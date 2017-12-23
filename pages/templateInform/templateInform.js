@@ -297,7 +297,6 @@ Page({
   },
   // 传过来可以上传几张照片
   upPhoto: function (e) {
-    
     let that = this;
     console.log(e, that.data.temp_id);
     let sign = wx.getStorageSync('sign');
@@ -399,13 +398,12 @@ Page({
               }
             })
 
-          } else {
+          }else {
             console.log(res.data.msg);
           }
-          
+          wx.hideLoading()
         }
       })
-      
     }else{
       wx.setStorageSync('temp_id', that.data.temp_id);
       wx.setStorageSync('pw_id', that.data.pw_id);
@@ -450,7 +448,7 @@ Page({
               wx.setStorageSync('height', shuju[1]);
               wx.setStorageSync('position', position);
             // }
-           // that
+          // that
             
             // 占位置给后台start - up - picture
             wx.request({
@@ -502,14 +500,17 @@ Page({
           } else {
             console.log(res.data.msg);
           }
-          
+          wx.hideLoading()
         }
       })
-  }
-    
+    }
   },
   savePhoto(e){
       let that = this;
+      wx.showToast({
+        title: '照片墙生成中...',
+        icon: 'loading'
+      })
       that.setData({
         button:false
       })
@@ -541,8 +542,9 @@ Page({
           that.setData({
             button: true
           })
+          wx.hideLoading()
         }
       })
-  },
+  }
   
 })

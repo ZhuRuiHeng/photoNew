@@ -37,3 +37,19 @@
   box-sizing: border-box;
   color: #333;
 }
+button{
+  background-color:#fff;
+  margin: 0!important;
+  padding:0;
+  border-radius:10rpx!important;
+  color:#000;
+  background:#ddd;
+  width:150rpx;
+  height:50rpx;
+  font-size:30rpx;
+  text-align:center;
+  line-height:50rpx;
+}
+button::after{
+  content: none;
+}
