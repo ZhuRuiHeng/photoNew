@@ -24,24 +24,6 @@ Page({
     show:false,
     checkboxs: true
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
     wx.showToast({
       title: '加载中',
@@ -72,7 +54,6 @@ Page({
     })
   },
   albumInform(e){
-      
       console.log(e);
       let that = this;
       let checked = e.currentTarget.dataset.checked;
@@ -100,10 +81,8 @@ Page({
           } else {
             tips.alert(res.data.msg);
           }
-
         }
       })
-      
       that.setData({
         imgUrls
       })
@@ -124,9 +103,7 @@ Page({
           itemBar: 2,
           show: true
         })
-
-      }
-      
+      } 
     } else {
       console.log(222);
       wx.reLaunch({
@@ -134,6 +111,23 @@ Page({
       })
     }
   },
+  //设置分享
+  onShareAppMessage: function (e) {
+    console.log(e);
+    let that = this;
+    return {
+      title: '快来制作你的照片集吧！',
+      path: '/pages/album/album',
+      success: function (res) {
+        console.log(res);
+        // 转发成功
+      },
+      fail: function (res) {
+        console.log(res);
+        // 转发失败
+      }
+    }
+  }
 
  
 })

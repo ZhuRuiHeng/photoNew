@@ -41,9 +41,9 @@ Page({
       title: '上传中',
       icon: 'loading'
     })
-    
     let pw_id = wx.getStorageSync('pw_id');
     let photosLength = wx.getStorageSync('photosLength');
+    console.log("pw_id", pw_id);
     console.log("photosLength:", photosLength);
     let position = wx.getStorageSync('position');
     this.wecropper.getCropperImage((avatar) => {
@@ -127,7 +127,7 @@ Page({
         tapss: true
       })
     })
-    
+    console.log('nonononoo')
   },
   uploadTap() {
     const self = this

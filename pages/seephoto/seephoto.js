@@ -42,6 +42,7 @@ Page({
       wx.showLoading({
         title: '加载中',
       });
+      
       let indexUrl = apiurl + 'assets/html/index' + that.data.temp_id + '.html?kid=' + kid + '&sign=' + sign + '&pw_id=' + that.data.pw_id + '&a=' + that.data.num;
       console.log(indexUrl)
       that.setData({

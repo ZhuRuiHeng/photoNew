@@ -11,31 +11,14 @@ Page({
     show:false,
     page:1
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
     wx.setStorageSync('music_play',true); 
     wx.showToast({
       title: '加载中',
       icon: 'loading'
     })
-      let that = this;
+    let that = this;
+    app.getAuth(function () {
       wx.request({
         url: app.data.apiurl + "photo/template-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
         data:{
@@ -49,15 +32,15 @@ Page({
           console.log("模板:", res);
           var status = res.data.status;
           if (status == 1) {
-           that.setData({
-             photoList:res.data.data
-           })
+            that.setData({
+              photoList:res.data.data
+            })
           } else {
             tips.alert(res.data.msg);
           }
-
         }
       })
+    })
   },
   navbar(e) {
     console.log('type:',e.currentTarget.dataset.now)
@@ -85,10 +68,8 @@ Page({
         } else {
           tips.alert(res.data.msg);
         }
-
       }
     })
-
   },
   templateInform(e){
     console.log(e);
@@ -143,58 +124,22 @@ Page({
       })
     }
   },
-  // onReachBottom: function () {
-  //   wx.showNavigationBarLoading() //在标题栏中显示加载
-  //   console.log("下拉分页")
-  //   wx.showToast({
-  //     title: '加载中',
-  //     icon: 'loading'
-  //   })
-  //   var that = this;
-  //   var oldGoodsList = that.data.main_content;
-  //   console.log("oldGoodsList:" + oldGoodsList);
-  //   var goodsList = [];
-  //   var oldPage = that.data.page;
-  //   var reqPage = oldPage + 1;
-  //   console.log(that.data.page);
-  //   wx.request({
-  //     url: app.data.apiurl + "photo/template-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-  //     data: {
-  //       page: reqPage,
-  //     },
-  //     header: {
-  //       'content-type': 'application/json'
-  //     },
-  //     method: "GET",
-  //     success: function (res) {
-  //       console.log('新res', res);
-  //       var goodsList = res.data.data.goodsList;
-  //       if (res.data.data.length == 0) return;
-  //       var page = oldPage + 1;
-  //       var newContent = oldGoodsList.concat(goodsList);
-
-  //       that.setData({
-  //         main_content: newContent,
-  //         page: reqPage
-  //       });
-  //       wx.hideLoading();
-  //       if (newContent == undefined) {
-  //         wx.showToast({
-  //           title: '没有更多模板',
-  //           duration: 800
-  //         })
-  //       }
-  //       console.log("newContent:" + that.data.newContent);
-
-  //     },
-  //     fail: function () {
-  //       // fail
-  //     },
-  //     complete: function () {
-  //       // complete
-  //       wx.hideNavigationBarLoading() //完成停止加载
-  //       wx.stopPullDownRefresh() //停止下拉刷新
-  //     }
-  //   });
-  // },
+  //设置分享
+  onShareAppMessage: function (e) {
+    console.log(e);
+    let that = this;
+    return {
+      title: '快来制作我们的照片墙吧！',
+      path: '/pages/templatePhoto/templatePhoto',
+      success: function (res) {
+        console.log(res);
+        // 转发成功
+      },
+      fail: function (res) {
+        console.log(res);
+        // 转发失败
+      }
+    }
+  }
+  
 })
