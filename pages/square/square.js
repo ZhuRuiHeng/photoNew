@@ -5,7 +5,8 @@ Page({
   data: {
     userInfo: wx.getStorageSync('userInfo'),
     url:'https://friend-guess.playonwechat.com/assets/images/result/40741d60add2279916d8783b3d6667f9.jpg?1513410944?0.5924372259162527',
-    page:1
+    page:1,
+    type:'new'
   },
   onLoad: function (options) {
   
@@ -21,7 +22,10 @@ Page({
     })
     app.getAuth(function () {
         wx.request({
-            url: app.data.apiurl + "photo/photo-circle?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+            url: app.data.apiurl2 + "photo/photo-circle?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+            data:{
+              type: 'new'
+            },
             header: {
               'content-type': 'application/json'
             },
@@ -34,9 +38,9 @@ Page({
                   allList: res.data.data
                 })
               } else {
-                wx.reLaunch({
-                  url: '../templatePhoto/templatePhoto' 
-                })
+                // wx.reLaunch({
+                //   url: '../templatePhoto/templatePhoto' 
+                // })
                 that.setData({
                   allList: false
                 })
@@ -74,6 +78,46 @@ Page({
     }
     
   },
+  newList(e){
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading'
+    })
+    let that = this;
+    that.setData({
+      type: e.currentTarget.dataset.type,
+      page:1
+    })
+    wx.request({
+      url: app.data.apiurl2 + "photo/photo-circle?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+      data:{
+        type:e.currentTarget.dataset.type
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        console.log("圈子列表:", res);
+        var status = res.data.status;
+        if (status == 1) {
+          that.setData({
+            allList: res.data.data,
+            type: e.currentTarget.dataset.type
+          })
+        } else {
+          // wx.reLaunch({
+          //   url: '../templatePhoto/templatePhoto'
+          // })
+          that.setData({
+            allList: false
+          })
+          tips.alert(res.data.msg);
+        }
+        wx.hideLoading()
+      }
+    })
+  },
   // 评论
   pinglunTap(e){
     //console.log(e);
@@ -86,8 +130,20 @@ Page({
     //console.log(e);
     let form_id = e.detail.formId;
     let that = this;
+    wx.request({
+      url: app.data.apiurl1 + "api/save-form?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+      data: {
+        form_id: form_id
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+      }
+    })
     wx.navigateTo({
-      url: '../inform/inform?pw_id=' + e.currentTarget.dataset.pw_id + '&type=' + e.currentTarget.dataset.type + '&name=' + e.currentTarget.dataset.name + '&temp_id=' + e.currentTarget.dataset.temp_id + '&form_id=' + form_id,
+      url: '../inform/inform?pw_id=' + e.currentTarget.dataset.pw_id + '&type=' + e.currentTarget.dataset.type + '&name=' + e.currentTarget.dataset.name + '&temp_id=' + e.currentTarget.dataset.temp_id,
     })
   },
   // 点赞
@@ -166,10 +222,11 @@ Page({
     var reqPage = oldPage + 1;
     console.log(that.data.page);
     wx.request({
-      url: app.data.apiurl + "photo/photo-circle?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+      url: app.data.apiurl2 + "photo/photo-circle?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
       data: {
         page: reqPage,
-        limit: 10
+        limit: 20,
+        type: that.data.type
       },
       header: {
         'content-type': 'application/json'

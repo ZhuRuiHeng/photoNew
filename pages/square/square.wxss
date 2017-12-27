@@ -10,6 +10,7 @@ page{
     font-size: 26rpx;
     background-color: #fff;
     padding-bottom: 200rpx;
+    margin-top: 90rpx;
 }
 .item{
   background: #fff;
@@ -92,6 +93,7 @@ page{
 .btm .right{
   display: flex;
   justify-content: space-around;
+  text-align:center;
 }
 .btm .right view{
   cursor: pointer;
@@ -132,4 +134,31 @@ button{
 }
 button::after{
   content: none;
+}
+.navflex{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  font-size: 26rpx;
+  color: #000;
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+.navflex .flex{
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  padding:20rpx 0;
+}
+.navflex .flex.two{
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+.navflex .flex.active{
+   background: #aaf3ff; 
 }

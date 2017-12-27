@@ -13,8 +13,7 @@ Page({
         pw_id: options.pw_id,
         type: options.type,
         name: options.name,
-        temp_id: options.temp_id,
-        form_id: options.form_id
+        temp_id: options.temp_id
       })
   },
   onReady: function () {
@@ -28,17 +27,16 @@ Page({
     let that = this;
     app.getAuth(function () {
       wx.request({
-        url: app.data.apiurl + "photo/comment-detail?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+        url: app.data.apiurl2 + "photo/comment-detail?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
         data:{
-          pw_id: that.data.pw_id,
-          form_id: that.data.form_id
+          pw_id: that.data.pw_id
         },
         header: {
           'content-type': 'application/json'
         },
         method: "GET",
         success: function (res) {
-          //console.log("照片墙详情:", res);
+          console.log("照片墙详情:", res);
           var status = res.data.status;
           if (status == 1) {
             that.setData({

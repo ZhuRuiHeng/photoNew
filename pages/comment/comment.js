@@ -60,6 +60,18 @@ Page({
           var status = res.data.status;
           if (status == 1) {
             tips.success('评论成功！');
+            wx.request({
+              url: app.data.apiurl1 + "api/save-form?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+              data: {
+                form_id: form_id
+              },
+              header: {
+                'content-type': 'application/json'
+              },
+              method: "GET",
+              success: function (res) {
+              }
+            })
             wx.navigateBack({
               url: '../inform/inform?pw_id=' + that.data.pw_id + '&type=' + that.data.type + '&name=' + that.data.name
             })

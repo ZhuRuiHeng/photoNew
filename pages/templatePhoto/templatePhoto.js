@@ -9,7 +9,18 @@ Page({
   data: {
     now:'image',
     show:false,
-    page:1
+    page:1,
+    // navList:[
+    //   { cate_id: "5", cate_name: "简约" },
+    //   { cate_id: "6", cate_name: "圣诞节" },
+    //   { cate_id: "7", cate_name: "圣诞节" },
+    //   { cate_id: "8", cate_name: "圣诞节" },
+    //   { cate_id: "9", cate_name: "圣诞节" },
+    //   { cate_id: "10", cate_name: "圣诞节" },
+    //   { cate_id: "11", cate_name: "圣诞节" },
+    //   { cate_id: "12", cate_name: "圣诞节" },
+    //   { cate_id: "13", cate_name: "圣诞节" }
+    // ]
   },
   onShow: function () {
     wx.setStorageSync('music_play',true); 
@@ -20,7 +31,7 @@ Page({
     let that = this;
     app.getAuth(function () {
       wx.request({
-        url: app.data.apiurl + "photo/template-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+        url: app.data.apiurl2 + "photo/template-category?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
         data:{
           type:'image'
         },
@@ -29,11 +40,35 @@ Page({
         },
         method: "GET",
         success: function (res) {
-          console.log("模板:", res);
+          console.log("分类:", res);
           var status = res.data.status;
           if (status == 1) {
             that.setData({
-              photoList:res.data.data
+              navList: res.data.data,
+              cate_id: res.data.data[0].cate_id
+            })
+            // 默认第一个
+            wx.request({
+              url: app.data.apiurl2 + "photo/template-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+              data: {
+                type: 'image',
+                cate_id: that.data.navList[0].cate_id
+              },
+              header: {
+                'content-type': 'application/json'
+              },
+              method: "GET",
+              success: function (res) {
+                console.log("模板:", res);
+                var status = res.data.status;
+                if (status == 1) {
+                  that.setData({
+                    photoList: res.data.data
+                  })
+                } else {
+                  tips.alert(res.data.msg);
+                }
+              }
             })
           } else {
             tips.alert(res.data.msg);
@@ -49,10 +84,14 @@ Page({
       icon: 'loading'
     })
     let that = this;
+    that.setData({
+      cate_id: e.currentTarget.dataset.cate_id
+    })
     wx.request({
-      url: app.data.apiurl + "photo/template-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+      url: app.data.apiurl2 + "photo/template-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
       data: {
-        type: e.currentTarget.dataset.now
+        type: e.currentTarget.dataset.now,
+        cate_id: e.currentTarget.dataset.cate_id
       },
       header: {
         'content-type': 'application/json'
@@ -67,6 +106,9 @@ Page({
           })
         } else {
           tips.alert(res.data.msg);
+          that.setData({
+            photoList: false
+          })
         }
       }
     })

@@ -118,3 +118,35 @@ wx-swiper wx-image{ width: 100%; height: 192px; }
     width: 100%;
     height:380rpx;
 }
+.navbar{
+  width: 100%;
+  text-align: center;
+  font-size: 26rpx;
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+}
+
+.navbar .one{
+    width: 33%;
+    display: inline-block;
+}
+.navbar .two{
+    width: 50%;
+    display: inline-block;
+}
+.navbar view{
+  flex: 1;
+  padding: 18rpx 0 20rpx;
+  cursor: pointer;
+  background: #fff;
+}
+.navbar view image{
+    width: 40rpx;
+    height: 40rpx;
+    position: relative;
+    top: 6rpx;
+    right: 6rpx;
+}
+.one.active{
+  background: #aaf3ff;
+}

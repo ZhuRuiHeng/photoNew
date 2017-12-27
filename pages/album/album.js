@@ -22,7 +22,8 @@ Page({
       }
     ],
     show:false,
-    checkboxs: true
+    checkboxs: true,
+    now: 'h5'
   },
   onShow: function () {
     wx.showToast({
@@ -31,9 +32,66 @@ Page({
     })
     let that = this;
     wx.request({
-      url: app.data.apiurl + "photo/template-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+      url: app.data.apiurl2 + "photo/template-category?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
       data: {
         type: 'h5'
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        console.log("分类:", res);
+        var status = res.data.status;
+        if (status == 1) {
+          that.setData({
+            navList: res.data.data,
+            cate_id: res.data.data[0].cate_id
+          })
+          // 默认第一个
+          wx.request({
+            url: app.data.apiurl2 + "photo/template-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+            data: {
+              type: 'h5',
+              cate_id: that.data.navList[0].cate_id
+            },
+            header: {
+              'content-type': 'application/json'
+            },
+            method: "GET",
+            success: function (res) {
+              console.log("模板:", res);
+              var status = res.data.status;
+              if (status == 1) {
+                that.setData({
+                  photoList: res.data.data
+                })
+              } else {
+                tips.alert(res.data.msg);
+              }
+            }
+          })
+        } else {
+          tips.alert(res.data.msg);
+        }
+      }
+    })
+  },
+  navbar(e) {
+    console.log('type:', e.currentTarget.dataset.now)
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading'
+    })
+    let that = this;
+    that.setData({
+      cate_id: e.currentTarget.dataset.cate_id
+    })
+    wx.request({
+      url: app.data.apiurl2 + "photo/template-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+      data: {
+        type: e.currentTarget.dataset.now,
+        cate_id: e.currentTarget.dataset.cate_id
       },
       header: {
         'content-type': 'application/json'
@@ -48,8 +106,10 @@ Page({
           })
         } else {
           tips.alert(res.data.msg);
+          that.setData({
+            photoList: false
+          })
         }
-
       }
     })
   },

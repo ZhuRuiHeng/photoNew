@@ -30,7 +30,8 @@
             </view>
         </view>
     </view>
-    <view class='content'>
+    <!-- 关闭评论 -->
+     <!-- <view class='content'>
         <view class='title'>最新留言</view>
         <block wx:if="{{comment_list}}">
             <view wx:for="{{comment_list}}" class='chartItem' data-comment_id='{{item.comment_id}}'>
@@ -49,13 +50,14 @@
         <block wx:if="{{comment_list.length<1}}">
             <view style="text-align:center;font-size:24rpx;padding:30rpx;"> 快来成为第一个帮Ta评论的人吧！ </view>
         </block>
-    </view>
+    </view>  -->
 </view>
-<view class='footer' bindtap='writeTap'>
+<!--关闭评论  -->
+ <!-- <view class='footer' bindtap='writeTap'>
     <view class='foot'>
         <image src="../img/1162232-200.png" mode='widthFix'></image>
         <view class='placeholder'>写留言...</view>
         <view class='pinglun'>评论</view>
     </view>
-</view>
+</view>  -->
 

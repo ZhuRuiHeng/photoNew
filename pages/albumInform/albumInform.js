@@ -401,8 +401,25 @@ Page({
             }
           })
         }
-        
       }
     })
+  },
+  onShareAppMessage: function () {
+    let that = this;
+    console.log(that.data.pw_id);
+    // 获取照片墙pwid
+    return {
+      title: "快来一起制作照片墙",
+      path: '/pages/albumInform/albumInform?pw_id=' + that.data.pw_id,
+      success: function (res) {
+        console.log(res);
+        console.log('/pages/albumInform/albumInform?pw_id=' + that.data.pw_id);
+        // 转发成功
+      },
+      fail: function (res) {
+        console.log(res);
+        // 转发失败
+      }
+    }
   }
 })

@@ -22,7 +22,10 @@
             <button class="submit one {{now==1?'active':''}}" formType="submit">上传图片</button>
         </form> 
         <!-- <view class='active' bindtap='upVideo'>上传视频</view> -->
-        <view class='active' bindtap='friends' wx:if="{{!finish && self}}">邀请好友拼图</view>
+        <!-- <view class='active' bindtap='friends' wx:if="{{!finish && self}}">邀请好友拼图</view> -->
+        <view class='active' wx:if="{{!finish && self}}">
+            <button  open-type='share'>邀请好友拼图</button>  
+        </view>
         <view class='active' bindtap='myplay' wx:if="{{!self}}">我也要玩</view> 
     </view>
     <view class='checkboxs' wx:if="{{finish && self}}">

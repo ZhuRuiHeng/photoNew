@@ -4,18 +4,16 @@
 <template is="navBar"></template>
 <template is="pretty" wx:if="{{show}}"></template>
 <view class="container common">
-    <!-- <view class='swiper'>
-         <scroll-view scroll-x="true" class="star-box" scroll-top="0" scroll-left="0">
-            <view class="single-star" wx:for="{{photoList}}" >
-                <image class='radio' bindtap='albumInform' wx:if="{{item.checked}}" data-index="{{index}}"
-                       data-checked='{{item.checked}}' src="../img/radios.png" mode='widthFix'></image>
-                <image class='radio' bindtap='albumInform' wx:else src="../img/radio.png" data-index="{{index}}"
-                        data-checked='{{item.checked}}' mode='widthFix'></image> 
-                <image class="star-avatar" bindtap='albumInform' src="{{item.thumb}}"  data-index="{{index}}"
-                      style="display:inline-block" data-temp_id='{{item.temp_id}}' mode='widthFix'></image>
-            </view>
-        </scroll-view> 
-    </view> -->
+    <view class='navbar' wx:if="{{navList.length>=3}}">
+        <view wx:for="{{navList}}" class="one {{cate_id==item.cate_id?'active':''}} " 
+              bindtap='navbar' data-now='h5' data-cate_id='{{item.cate_id}}'>
+        {{item.cate_name}}</view>
+    </view>  
+    <view class='navbar' wx:else>
+        <view wx:for="{{navList}}" class="one two {{cate_id==item.cate_id?'active':''}} " 
+              bindtap='navbar' data-now='h5' data-cate_id='{{item.cate_id}}'>
+        {{item.cate_name}}</view>
+    </view>
     <view class='item' bindtap='albumInform' wx:for="{{photoList}}" wx:key="{{index}}" data-temp_id='{{item.temp_id}}'>
             <image src="{{item.thumb}}" mode='aspectFit'></image>
         </view>

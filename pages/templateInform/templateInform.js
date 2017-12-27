@@ -303,11 +303,18 @@ Page({
     let form_id = e.detail.formId;
     wx.setStorageSync('form_id', e.detail.formId)
     let sign = wx.getStorageSync('sign');
-    // wx.showToast({
-    //   title: '此模板可以上传' + that.data.photoInform.counts.length+'张照片',
-    //   mask: true,
-    //   duration: 3000
-    // })
+    wx.request({
+      url: app.data.apiurl1 + "api/save-form?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+      data: {
+        form_id: form_id
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+      }
+    })
     if (that.data.temp_id==1){
       wx.showLoading({
         title: '加载中'
@@ -316,8 +323,7 @@ Page({
       wx.request({
         url: app.data.apiurl + "photo/can-up-position-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
         data: {
-          pw_id: that.data.pw_id,
-          form_id: form_id
+          pw_id: that.data.pw_id
         },
         header: {
           'content-type': 'application/json'
@@ -552,6 +558,24 @@ Page({
           wx.hideLoading()
         }
       })
+  },
+  onShareAppMessage: function () {
+    let that = this;
+    console.log(that.data.pw_id);
+    // 获取照片墙pwid
+    return {
+      title: "快来一起制作照片墙",
+      path: '/pages/templateInform/templateInform?pw_id=' + that.data.pw_id,
+      success: function (res) {
+        console.log(res);
+        console.log('/pages/templateInform/templateInform?pw_id=' + that.data.pw_id);
+        // 转发成功
+      },
+      fail: function (res) {
+        console.log(res);
+        // 转发失败
+      }
+    }
   }
   
 })

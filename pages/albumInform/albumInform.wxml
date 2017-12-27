@@ -19,7 +19,10 @@
           <view class='active' bindtap='upPhoto' wx:if="{{self && !finish}}">上传图片</view>
           <view class='active' bindtap='savePhoto' wx:if="{{finish}}">查看相册集</view> 
           <!-- friends -->
-          <view class='active' bindtap='friends' wx:if="{{finish && self}}">分享给好友</view> 
+          <!-- <view class='active' bindtap='friends' wx:if="{{finish && self}}">分享给好友</view>  -->
+          <view class='active' wx:if="{{finish && self}}">
+              <button  open-type='share'>分享给好友</button>  
+          </view>
           <view class='active' bindtap='myplay' wx:if="{{!self}}">我也要玩</view> 
     </view>
       <view class='checkboxs'  wx:if="{{finish && self}}">

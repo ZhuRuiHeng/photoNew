@@ -2,7 +2,11 @@
 <!--引入模板  -->
 <template is="navBar"></template>
 <template is="pretty" wx:if="{{show}}"></template>
-
+<view class='navflex'>
+    <view class='flex {{type=="new"?"active":""}}' data-type='new' bindtap='newList'>最新</view>
+    <view class='flex two {{type=="hot"?"active":""}}' data-type='hot' bindtap='newList'>最热</view>
+    <view class='flex {{type=="activity"?"active":""}}' data-type='activity' bindtap='newList'>活动</view>
+</view> 
 <view class="container" wx:if="{{allList}}">
     <view class='item' wx:for="{{allList}}" wx:key="{{index}}">
         <view class='top'>
@@ -33,10 +37,10 @@
                 <view class='zan' bindtap='zanTap' data-type='photowall' data-object_id='{{item.pw_id}}' data-index="{{index}}">
                     <image src="../img/983476-200.png"></image>{{item.thumb_count}}
                 </view>
-                <view class='chart' bindtap='pinglunTap'  data-name="{{item.name}}" data-pw_id='{{item.pw_id}}' 
+                <!-- <view class='chart' bindtap='pinglunTap'  data-name="{{item.name}}" data-pw_id='{{item.pw_id}}' 
               data-type='{{item.type}}' data-temp_id="{{item.temp_id}}">
                     <image src="../img/chart.png"></image>{{item.comment_count}}
-                </view>
+                </view> -->
                 <view class='chart' bindtap='share' >
                     <button open-type='share' data-pw_id='{{item.pw_id}}' data-type='{{item.type}}' 
                             data-image="{{item.thumb}}" data-name="{{item.name}}" data-temp_id="{{item.temp_id}}">
@@ -48,5 +52,5 @@
     </view>
 </view>
 <view wx:else>
-    <view style="text-align:center;font-size:24rpx;padding:30rpx;"> 您还未创建照片信息！ </view>
+    <view style="text-align:center;font-size:24rpx;padding:30rpx;margin-top:90rpx"> 暂无数据！ </view>
 </view>

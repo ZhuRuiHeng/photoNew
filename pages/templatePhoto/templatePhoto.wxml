@@ -4,16 +4,28 @@
 <template is="navBar"></template>
 <template is="pretty" wx:if="{{show}}"></template>
 <view class="container">
-     <!-- <view class='navbar'>
-        <view class="one {{now=='image'?'active':''}} " bindtap='navbar' data-now='image'>照片墙模板</view>
-        <view class="two {{now=='video'?'active':''}} " bindtap='navbar' data-now='video'>视频模板</view>
-    </view>  -->
+    <view class='navbar' wx:if="{{navList.length>=3}}">
+        <view wx:for="{{navList}}" class="one {{cate_id==item.cate_id?'active':''}} " 
+              bindtap='navbar' data-now='image' data-cate_id='{{item.cate_id}}'>
+        {{item.cate_name}}</view>
+    </view>  
+    <view class='navbar' wx:else>
+        <view wx:for="{{navList}}" class="one two {{cate_id==item.cate_id?'active':''}} " 
+              bindtap='navbar' data-now='image' data-cate_id='{{item.cate_id}}'>
+        {{item.cate_name}}</view>
+    </view>
     <view class='photo common'>
         <!-- <view class='item pwIndexs' bindtap='pwIndexs'>
             <image src="https://friend-guess.playonwechat.com/assets/images/result/83576588b6e758842edb6206a75bc605.jpg?1513681886?0.7209287272992198" mode='aspectFit'></image>
         </view> -->
-        <view class='item' bindtap='templateInform' wx:for="{{photoList}}" wx:key="{{index}}" data-temp_id='{{item.temp_id}}'>
-            <image src="{{item.thumb}}" mode='aspectFit'></image>
+        <block wx:if="{{photoList.length>0}}">
+            <view class='item' bindtap='templateInform' wx:for="{{photoList}}" wx:key="{{index}}" 
+                  data-temp_id='{{item.temp_id}}'>
+                <image src="{{item.thumb}}" mode='aspectFit'></image>
+            </view>
+        </block>
+        <view wx:else>
+            <view style="text-align:center;font-size:24rpx;padding:30rpx;"> 暂无数据！ </view>
         </view>
     </view>
     

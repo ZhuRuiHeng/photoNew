@@ -50,9 +50,20 @@ Page({
       console.log("avatar：",avatar);
       if (avatar) {
         var that = this;
+        wx.request({
+          url: app.data.apiurl1 + "api/save-form?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+          data: {
+            form_id: form_id
+          },
+          header: {
+            'content-type': 'application/json'
+          },
+          method: "GET",
+          success: function (res) {
+          }
+        })
         that.setData({
-          tapss: false,
-          form_id: form_id
+          tapss: false
         })
         let sign = wx.getStorageSync('sign');
         console.log(apiurl + "api/upload-image?sign=" + sign + ' & operator_id=' + app.data.kid);
