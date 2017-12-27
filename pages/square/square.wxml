@@ -54,3 +54,35 @@
 <view wx:else>
     <view style="text-align:center;font-size:24rpx;padding:30rpx;margin-top:90rpx"> 暂无数据！ </view>
 </view>
+<!--活动  -->
+<view class='bg' wx:if="{{activity}}"  bindtap='activeClose'></view> 
+<view class='activity' wx:if="{{activity}}" >
+      <view class='activityClose' bindtap='activeClose'>
+          <image src="../img/error.png" mode='widthFix'></image>
+      </view>
+      <view class='activityTop'>
+          <image src="../img/yuandan.png" mode='widthFix'></image>
+      </view>
+      <view class='activityTime'>
+          <view>活动时间</view>
+          <view>1月1日-1月3日</view>
+      </view>
+      <view class='explain'>
+          <view class='jiangpin'>
+              <image src="../img/logo.png" mode='widthFix'></image>
+          </view>
+          <view>1个月爱奇艺会员(10)名</view>
+      </view>
+      <view class='imgRules'><image src="../img/rules.png" mode='widthFix'></image></view>
+      <view class='activityRules'>
+        <view class='rule'>
+              <view class='rol'>1</view>
+              <view>庆元旦晒美照庆元旦晒美照庆元旦晒美照庆元旦晒美照庆元旦晒美照庆元旦晒美照庆元元旦晒美照</view>
+        </view>
+        <view class='rule'>
+              <view class='rol'>2</view>
+              <view>庆元旦晒美照庆元旦晒美照庆元旦晒美照庆元旦晒美照庆元旦晒美照庆元旦晒美照庆元元旦晒美照</view>
+        </view>
+      </view>
+      <button class='inGroup'>参与活动</button>
+</view>

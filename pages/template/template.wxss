@@ -94,7 +94,6 @@ navigator{
 	position:absolute;
 }
 .triangle:before{
-			
 	border-top:8px solid #c2e1f5;
 	top:100%;
 	left:46%;

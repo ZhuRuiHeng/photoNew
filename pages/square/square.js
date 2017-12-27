@@ -6,7 +6,8 @@ Page({
     userInfo: wx.getStorageSync('userInfo'),
     url:'https://friend-guess.playonwechat.com/assets/images/result/40741d60add2279916d8783b3d6667f9.jpg?1513410944?0.5924372259162527',
     page:1,
-    type:'new'
+    type:'new',
+    activity:false
   },
   onLoad: function (options) {
   
@@ -84,6 +85,11 @@ Page({
       icon: 'loading'
     })
     let that = this;
+    if (e.currentTarget.dataset.type == 'activity'){
+        that.setData({
+          activity:true
+        })
+    }
     that.setData({
       type: e.currentTarget.dataset.type,
       page:1
@@ -186,6 +192,12 @@ Page({
   share(e){
     this.setData({
       shareId: e.currentTarget.dataset.pw_id
+    })
+  },
+  // 关闭弹窗
+  activeClose(){
+    this.setData({
+      activity:false
     })
   },
     //设置分享
