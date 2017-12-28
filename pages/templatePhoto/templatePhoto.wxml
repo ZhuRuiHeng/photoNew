@@ -21,6 +21,7 @@
         <block wx:if="{{photoList.length>0}}">
             <view class='item' bindtap='templateInform' wx:for="{{photoList}}" wx:key="{{index}}" 
                   data-temp_id='{{item.temp_id}}'>
+                  <text wx:if="{{item.activity==true}}" class='activity'>活动中...</text>
                 <image src="{{item.thumb}}" mode='aspectFit'></image>
             </view>
         </block>

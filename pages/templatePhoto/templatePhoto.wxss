@@ -81,3 +81,10 @@ page{
     /* position: relative;
     top: -80rpx; */
 }
+.activity{
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 28rpx;
+  color: #ff4444;
+}

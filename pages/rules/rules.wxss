@@ -1,0 +1,20 @@
+.activityRules{
+  padding: 20rpx;
+  font-size: 32rpx;
+}
+.rule{
+  min-height: 500rpx;
+} 
+.button{
+  width:200rpx;
+  text-align: center;
+  height:60rpx;
+  line-height:60rpx;
+  border-radius:10rpx;
+  padding:0 20rpx;
+  background:#34a8e0;
+  color:#fff;
+  cursor:pointer;
+  margin: 30rpx auto;
+  position: relative;
+}

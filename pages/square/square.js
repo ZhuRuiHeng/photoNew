@@ -1,13 +1,15 @@
 const app = getApp();
 const apiurl = 'https://friend-guess.playonwechat.com/';
 import tips from '../../utils/tips.js';
+var WxParse = require('../../wxParse/wxParse.js');
 Page({
   data: {
     userInfo: wx.getStorageSync('userInfo'),
     url:'https://friend-guess.playonwechat.com/assets/images/result/40741d60add2279916d8783b3d6667f9.jpg?1513410944?0.5924372259162527',
     page:1,
     type:'new',
-    activity:false
+    activity:false,
+    rules:false
   },
   onLoad: function (options) {
   
@@ -50,6 +52,66 @@ Page({
               wx.hideLoading()
             }
         })
+        //获奖信息
+        wx.request({
+          url: app.data.apiurl2 + "photo/last-activity-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+          header: {
+            'content-type': 'application/json'
+          },
+          method: "GET",
+          success: function (res) {
+            console.log("获奖信息:", res);
+            var status = res.data.status;
+            if (status == 1) {
+              that.setData({
+                winer:true
+              })
+            } else {
+              tips.alert(res.data.msg);
+            }
+            wx.hideLoading()
+          }
+        })
+        // 活动规则
+        wx.request({
+          url: app.data.apiurl2 + "photo/activity-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+          header: {
+            'content-type': 'application/json'
+          },
+          method: "GET",
+          success: function (res) {
+            console.log("活动信息:", res);
+            var status = res.data.status;
+            if (status == 1) {
+              function toDate(number) {
+                var n = number * 1000;
+                var date = new Date(n);
+                console.log("date", date)
+                var y = date.getFullYear();
+                var m = date.getMonth() + 1;
+                m = m < 10 ? ('0' + m) : m;
+                var d = date.getDate();
+                d = d < 10 ? ('0' + d) : d;
+                var h = date.getHours();
+                h = h < 10 ? ('0' + h) : h;
+                var minute = date.getMinutes();
+                var second = date.getSeconds();
+                minute = minute < 10 ? ('0' + minute) : minute;
+                second = second < 10 ? ('0' + second) : second;
+                //return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+                return y + '.' + m + '.' + d;
+              }
+              that.setData({
+                activeInform: res.data.data,
+                start_time: toDate(res.data.data.start_time),
+                end_time: toDate(res.data.data.end_time),
+              })
+            } else {
+              tips.alert(res.data.msg);
+            }
+            wx.hideLoading()
+          }
+        })
     })
   },
   navUrl(e) {
@@ -85,10 +147,30 @@ Page({
       icon: 'loading'
     })
     let that = this;
-    if (e.currentTarget.dataset.type == 'activity'){
+    console.log("activity:", wx.getStorageSync('activity'))
+    if (e.currentTarget.dataset.type == 'activity' ){
+      if (wx.getStorageSync('activity')==true){
+        console.log(111);
         that.setData({
-          activity:true
+          activity: false,
+          rules: true
         })
+      }else{
+        console.log(222);
+        wx.setStorageSync('activity', true)
+        that.setData({
+          activity: true,
+          rules: true
+        })
+        if (that.data.activeInform.rules) {
+          WxParse.wxParse('newrules', 'html', that.data.activeInform.rules, that, 5)
+        }
+      }
+    }else{
+      that.setData({
+        activity: false,
+        rules: false
+      })
     }
     that.setData({
       type: e.currentTarget.dataset.type,
@@ -200,6 +282,15 @@ Page({
       activity:false
     })
   },
+  // 参与活动
+  activeIn(e){
+      this.setData({
+        activity: false
+      })
+      wx.navigateTo({
+        url: '../templatePhoto/templatePhoto'
+      })
+  },
     //设置分享
   onShareAppMessage: function (e) {
     console.log(e);
@@ -278,6 +369,11 @@ Page({
         wx.stopPullDownRefresh() //停止下拉刷新
       }
     });
+  },
+  newRules(){
+      wx.navigateTo({
+        url: '../rules/rules'
+      })
   },
   shanchu(e){
     console.log(e);

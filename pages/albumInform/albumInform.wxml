@@ -5,13 +5,13 @@
 <template is="pretty" wx:if="{{show}}"></template>
 <view class="container">
     <view class='management'>
-        <view class="left {{music_play?'music_play':''}}" bindtap="bindPlay"></view>
-          <view class='right' wx:if="{{self}}" bindtap='management'>照片管理</view>  
+         <view class="left {{music_play?'music_play':''}}" bindtap="bindPlay"></view> 
+        <view class='right' wx:if="{{self}}" bindtap='management'>照片管理</view>  
     </view>
     <view class='photo'>
         <view class='index' wx:if="{{finish}}" bindtap='savePhoto'></view>
          <image class='play' wx:if="{{finish}}" bindtap='savePhoto' src="../img/sanjiao.png"></image> 
-         <image class='thumb' src='https://gcdn.playonwechat.com/photo/o_1c10c739b1pqu13g0bmu4lj12ua81.jpg' mode='aspectFit'></image> 
+         <image class='thumb' src='{{photoInform.thumb}}' mode='aspectFit'></image> 
     </view>
     <view class='notice'>注：此模板可以上传{{photo_count}}张照片</view>
     <view class='buttons'>
