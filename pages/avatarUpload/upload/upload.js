@@ -83,9 +83,9 @@ Page({
               that.setData({
                 picture: data.data
               })
-              console.log(app.data.apiurl + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid);
+              console.log(app.data.apiurl2 + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid);
               wx.request({
-                  url: app.data.apiurl + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid,
+                  url: app.data.apiurl2 + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid,
                   data: {
                     pw_id: pw_id,
                     picture: that.data.picture,

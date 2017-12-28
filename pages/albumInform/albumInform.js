@@ -124,11 +124,11 @@ Page({
           
         } else {
           tips.alert(res.data.msg)
-          setTimeout(function () {
-            wx.reLaunch({
-              url: '../square/square',
-            })
-          }, 2000)
+          // setTimeout(function () {
+          //   wx.reLaunch({
+          //     url: '../square/square',
+          //   })
+          // }, 2000)
         }
         
       }
@@ -350,7 +350,7 @@ Page({
                   url: data.data
                 })
                 wx.request({
-                  url: app.data.apiurl + "photo/append-photo?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+                  url: app.data.apiurl2 + "photo/append-photo?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
                   data: {
                     pw_id: that.data.pw_id,
                     picture: data.data

@@ -45,11 +45,10 @@ Page({
     let form_id = e.detail.formId;
     if (content){
       wx.request({
-        url: app.data.apiurl + "photo/comment-photo-wall?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+        url: app.data.apiurl2 + "photo/comment-photo-wall?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
         data: {
           pw_id: that.data.pw_id,
-          content: content,
-          form_id: form_id
+          content: content
         },
         header: {
           'content-type': 'application/json'

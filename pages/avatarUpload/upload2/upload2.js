@@ -110,7 +110,7 @@ Page({
               })
               console.log('上传pw_id：',pw_id);
               wx.request({
-                  url: app.data.apiurl + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid,
+                  url: app.data.apiurl2 + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid,
                   data: {
                     pw_id: pw_id,
                     position: wx.getStorageSync('position'),
