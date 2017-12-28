@@ -28,7 +28,7 @@ Page({
     })
     // 请求 
     wx.request({
-      url: app.data.apiurl + "photo/photo-wall-list?sign=" + sign + '&operator_id=' + app.data.kid,
+      url: app.data.apiurl2 + "photo/photo-wall-list?sign=" + sign + '&operator_id=' + app.data.kid,
       data:{
         type:'image'
       },
@@ -196,7 +196,7 @@ Page({
       type = 'image'
     }
     wx.request({
-      url: app.data.apiurl + "photo/photo-wall-list?sign=" +wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+      url: app.data.apiurl2 + "photo/photo-wall-list?sign=" +wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
       data: {
         type: type
       },

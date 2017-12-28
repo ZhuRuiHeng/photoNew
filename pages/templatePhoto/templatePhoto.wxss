@@ -85,6 +85,7 @@ page{
   position: absolute;
   top: 0;
   left: 0;
-  font-size: 28rpx;
+  font-size: 26rpx;
   color: #ff4444;
+  
 }

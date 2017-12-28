@@ -274,7 +274,7 @@ Page({
         })
       }else{
         wx.request({
-          url: app.data.apiurl + "photo/create-image?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+          url: app.data.apiurl2 + "photo/create-image?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
           data: {
             pw_id: that.data.pw_id,
             is_show: that.data.checkboxs
@@ -314,8 +314,9 @@ Page({
       url: '../album/album',
     })
   },
-  upPhoto(){
+  upPhoto(e){
     let that = this;
+    let form_id = e.detail.formId;
     // 上传 
     wx.chooseImage({
       count: that.data.photo_count, // 默认9
@@ -349,6 +350,20 @@ Page({
                 that.setData({
                   url: data.data
                 })
+                // 上传form
+                wx.request({
+                  url: app.data.apiurl1 + "api/save-form?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+                  data: {
+                    form_id: form_id
+                  },
+                  header: {
+                    'content-type': 'application/json'
+                  },
+                  method: "GET",
+                  success: function (res) {
+                  }
+                })
+                // 添加图片
                 wx.request({
                   url: app.data.apiurl2 + "photo/append-photo?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
                   data: {

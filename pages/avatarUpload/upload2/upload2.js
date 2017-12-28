@@ -65,6 +65,7 @@ Page({
   getCropperImage(e) {
     //console.log("getCropperImage2",e)
     let form_id = e.detail.formId;
+    console.log("form_id:", form_id);
     wx.showToast({
       title: '上传中',
       icon: 'loading'
@@ -78,18 +79,7 @@ Page({
         that.setData({
           tapss: false
         })
-        wx.request({
-          url: app.data.apiurl1 + "api/save-form?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-          data: {
-            form_id: form_id
-          },
-          header: {
-            'content-type': 'application/json'
-          },
-          method: "GET",
-          success: function (res) {
-          }
-        })
+       
         let sign = wx.getStorageSync('sign');
         console.log(apiurl + "api/upload-image?sign=" + sign + ' & operator_id=' + app.data.kid);
         wx.uploadFile({
@@ -114,8 +104,7 @@ Page({
                   data: {
                     pw_id: pw_id,
                     position: wx.getStorageSync('position'),
-                    picture: picture,
-                    form_id: that.data.form_id
+                    picture: picture
                   },
                   header: {
                     'content-type': 'application/json'
@@ -126,6 +115,19 @@ Page({
                     console.log("添加照片:", res);
                     let status = res.data.status;
                     if (status == 1) {
+                      // 保存formid
+                      wx.request({
+                        url: app.data.apiurl1 + "api/save-form?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+                        data: {
+                          form_id: form_id
+                        },
+                        header: {
+                          'content-type': 'application/json'
+                        },
+                        method: "GET",
+                        success: function (res) {
+                        }
+                      })
                       console.log('上传成功！')
                       // 获取照片墙pwid
                       wx.setStorageSync('temp_id', wx.getStorageSync('temp_id'));

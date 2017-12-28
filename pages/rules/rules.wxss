@@ -1,6 +1,6 @@
 .activityRules{
   padding: 20rpx;
-  font-size: 32rpx;
+  font-size: 28rpx;
 }
 .rule{
   min-height: 500rpx;

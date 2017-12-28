@@ -528,7 +528,7 @@ Page({
         button:false
       })
       wx.request({
-        url: app.data.apiurl + "photo/create-image?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+        url: app.data.apiurl2 + "photo/create-image?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
         data: {
           pw_id: that.data.pw_id,
           is_show: that.data.checkboxs

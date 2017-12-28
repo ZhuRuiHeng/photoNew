@@ -310,4 +310,58 @@ button::after{
   border-radius: 20rpx;
   padding: 4rpx 10rpx;
   background: #6fe8ff;
+  z-index: 12;
+}
+.wines{
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+.wines .item{
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  font-size: 28rpx;
+  padding: 20rpx 0;
+}
+.wines .item text{
+  color: #f5b141;
+}
+.wines .item:after{
+   content:" ";
+    display: inline-block;
+    width:100%;
+    position:absolute;
+    bottom:0;
+    right:0;
+    border:1px solid #e5e5e5;
+    -webkit-transform:scaleY(0.5);
+    transform:scaleY(0.5);
+    -webkit-transform-origin:0 0;
+    transform-origin:0 0;
+    box-sizing:border-box;
+}
+.wines .item image{
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+.wines .title{
+  text-align: center;
+  font-size: 30rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1px solid #ddd;
+}
+.button{
+  width:200rpx;
+  text-align: center;
+  height:60rpx;
+  line-height:60rpx;
+  border-radius:10rpx;
+  padding:0 20rpx;
+  background:#34a8e0;
+  color:#fff;
+  cursor:pointer;
+  margin: 30rpx auto;
+  position: relative;
 }

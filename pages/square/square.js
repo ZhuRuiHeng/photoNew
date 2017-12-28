@@ -9,7 +9,8 @@ Page({
     page:1,
     type:'new',
     activity:false,
-    rules:false
+    rules:false,
+    oldWiner:false
   },
   onLoad: function (options) {
   
@@ -52,7 +53,7 @@ Page({
               wx.hideLoading()
             }
         })
-        //获奖信息
+        //往期开奖
         wx.request({
           url: app.data.apiurl2 + "photo/last-activity-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
           header: {
@@ -60,12 +61,16 @@ Page({
           },
           method: "GET",
           success: function (res) {
-            console.log("获奖信息:", res);
+            console.log("往期开奖:", res);
             var status = res.data.status;
             if (status == 1) {
-              
+              that.setData({
+                oldWiner:true,
+                WinerInform: res.data.data.activity_info,
+                winnerOpen: res.data.data.winner,
+              })
             } else {
-              tips.alert(res.data.msg);
+              //tips.alert(res.data.msg);
             }
             wx.hideLoading()
           }
@@ -105,7 +110,10 @@ Page({
                 end_time: toDate(res.data.data.end_time),
               })
             } else {
-              tips.alert(res.data.msg);
+              //tips.alert(res.data.msg);
+              that.setData({
+                activity:false
+              })
             }
             wx.hideLoading()
           }
@@ -368,7 +376,14 @@ Page({
       }
     });
   },
-  newRules(){
+  // 往期开奖
+  oldWiner1(){
+    wx.navigateTo({
+      url: '../oldWiner/oldWiner'
+    })
+  },
+  // 规则
+  newRules1(e){
       wx.navigateTo({
         url: '../rules/rules'
       })
