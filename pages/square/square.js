@@ -63,9 +63,7 @@ Page({
             console.log("获奖信息:", res);
             var status = res.data.status;
             if (status == 1) {
-              that.setData({
-                winer:true
-              })
+              
             } else {
               tips.alert(res.data.msg);
             }
