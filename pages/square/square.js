@@ -13,7 +13,7 @@ Page({
     oldWiner:false
   },
   onLoad: function (options) {
-  
+      wx.removeStorageSync('activity')
   },
   onShow: function () {
     wx.showToast({
@@ -22,8 +22,12 @@ Page({
     })
     let that = this;
     that.setData({
-      show: false
+      show: false,
+      type: 'new'
     })
+    if (that.data.type =='activity'){
+       allList: false
+    }
     app.getAuth(function () {
         wx.request({
             url: app.data.apiurl2 + "photo/photo-circle?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
@@ -53,28 +57,7 @@ Page({
               wx.hideLoading()
             }
         })
-        //往期开奖
-        wx.request({
-          url: app.data.apiurl2 + "photo/last-activity-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-          header: {
-            'content-type': 'application/json'
-          },
-          method: "GET",
-          success: function (res) {
-            console.log("往期开奖:", res);
-            var status = res.data.status;
-            if (status == 1) {
-              that.setData({
-                oldWiner:true,
-                WinerInform: res.data.data.activity_info,
-                winnerOpen: res.data.data.winner,
-              })
-            } else {
-              //tips.alert(res.data.msg);
-            }
-            wx.hideLoading()
-          }
-        })
+     
         // 活动规则
         wx.request({
           url: app.data.apiurl2 + "photo/activity-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
@@ -105,6 +88,9 @@ Page({
                 return y + '.' + m + '.' + d;
               }
               that.setData({
+                oldWiner:false,
+                WinerInform: false,
+                winnerOpen: false,
                 activeInform: res.data.data,
                 start_time: toDate(res.data.data.start_time),
                 end_time: toDate(res.data.data.end_time),
@@ -113,6 +99,28 @@ Page({
               //tips.alert(res.data.msg);
               that.setData({
                 activity:false
+              })
+              //往期开奖
+              wx.request({
+                url: app.data.apiurl2 + "photo/last-activity-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+                header: {
+                  'content-type': 'application/json'
+                },
+                method: "GET",
+                success: function (res) {
+                  console.log("往期开奖:", res);
+                  var status = res.data.status;
+                  if (status == 1) {
+                    that.setData({
+                      oldWiner: true,
+                      WinerInform: res.data.data.activity_info,
+                      winnerOpen: res.data.data.winner,
+                    })
+                  } else {
+                    //tips.alert(res.data.msg);
+                  }
+                  wx.hideLoading()
+                }
               })
             }
             wx.hideLoading()

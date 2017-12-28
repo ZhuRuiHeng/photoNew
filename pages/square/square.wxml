@@ -53,7 +53,7 @@
             </view>
         </view>
     </block>
-    <block wx:if="{{allList==false && type!='activity'}}">
+    <block wx:if="{{allList==false && winnerOpen==true}}">
         <view style="text-align:center;font-size:24rpx;padding:30rpx;margin-top:90rpx"> 暂无数据！ </view>
     </block>
     <view class='wines'  wx:if="{{type=='activity' && winnerOpen}}">
@@ -62,18 +62,18 @@
             <image src="{{item.avatarurl}}" mode='widthFix'></image>
             <view class='content'>{{item.wx_name}}</view>
         </view>
-    </view>
-    <!--service  -->
-    <view class='button'>
-        <view class='position'>
-            <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:0rpx;left:0rpx;"> </contact-button> 
-            <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:0rpx;left:40rpx;"> </contact-button> 
-            <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:0rpx;left:80rpx;"> </contact-button> 
-            <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:0rpx;left:120rpx;"> </contact-button> 
-            <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:0rpx;left:160rpx;"> </contact-button> 
-            <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:0rpx;left:200rpx;"> </contact-button> 
+        <!--service  -->
+        <view class='button'>
+            <view class='position'>
+                <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:0rpx;left:0rpx;"> </contact-button> 
+                <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:0rpx;left:40rpx;"> </contact-button> 
+                <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:0rpx;left:80rpx;"> </contact-button> 
+                <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:0rpx;left:120rpx;"> </contact-button> 
+                <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:0rpx;left:160rpx;"> </contact-button> 
+                <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:0rpx;left:200rpx;"> </contact-button> 
+            </view>
+            <view class='chartIn'>联系客服</view>   
         </view>
-        <view class='chartIn'>联系客服</view>   
     </view>
 </view>
 <!--活动  -->

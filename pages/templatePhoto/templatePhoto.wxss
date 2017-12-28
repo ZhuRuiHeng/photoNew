@@ -84,8 +84,22 @@ page{
 .activity{
   position: absolute;
   top: 0;
-  left: 0;
-  font-size: 26rpx;
-  color: #ff4444;
-  
+  right: 0;
+  font-size: 20rpx;
+  color: #fff;
+  width: 0;
+  height: 0;
+  border-top: 80rpx solid #ad0b16;
+  border-left: 80rpx solid transparent; 
+  z-index: 9;
+}
+.activity1{
+  z-index: 9;
+  position: absolute;
+  top: 16rpx;
+  right: 0;
+  font-size: 20rpx;
+  color: #fff;
+  -webkit-transform: rotate(45deg);  
+ -moz-transform: rotate(45deg);  
 }
