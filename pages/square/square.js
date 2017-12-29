@@ -272,17 +272,22 @@ Page({
         console.log("点赞:", res);
         var status = res.data.status;
         if (status == 1) {
-          for (let i = 0; i < allList.length;i++){
-            if (i == zanIndex){
-              let thumb_count = parseInt(allList[zanIndex].thumb_count);
-              //console.log(typeof (thumb_count));
-              allList[zanIndex].thumb_count = thumb_count + 1
+          if (res.data.data.flag==true){
+            for (let i = 0; i < allList.length; i++) {
+              if (i == zanIndex) {
+                let thumb_count = parseInt(allList[zanIndex].thumb_count);
+                //console.log(typeof (thumb_count));
+                allList[zanIndex].thumb_count = thumb_count + 1
+              }
             }
+            tips.success('点赞成功！')
+          }else{
+              tips.alert('点过赞了哦！')
           }
           that.setData({
             allList
           })
-          tips.success('点赞成功！')
+          
         } else {
           tips.alert(res.data.msg);
         }

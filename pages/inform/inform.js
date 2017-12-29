@@ -115,15 +115,17 @@ Page({
         console.log("点赞result:", res);
         var status = res.data.status;
         if (status == 1) {
-          
-        let thumb_count = parseInt(info.thumb_count);
-        //console.log(thumb_count);
-        info.thumb_count = thumb_count + 1
-        //thumb_count+=1
+          if (res.data.data.flag == true) {
+            let thumb_count = parseInt(info.thumb_count);
+            //console.log(typeof (thumb_count));
+            info.thumb_count = thumb_count + 1
+            tips.success('点赞成功！')
+          } else {
+            tips.alert('点过赞了哦！')
+          }
           that.setData({
             info
           })
-          tips.success('点赞成功！')
         } else {
           tips.alert(res.data.msg);
         }
