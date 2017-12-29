@@ -53,7 +53,7 @@
             </view>
         </view>
     </block>
-    <block wx:if="{{allList==false && winnerOpen==true}}">
+    <block wx:if="{{allList==false && type!='activity'}}">
         <view style="text-align:center;font-size:24rpx;padding:30rpx;margin-top:90rpx"> 暂无数据！ </view>
     </block>
     <view class='wines'  wx:if="{{type=='activity' && winnerOpen}}">

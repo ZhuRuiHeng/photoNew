@@ -102,7 +102,7 @@ Page({
     let that = this;
     let info = that.data.info;
     wx.request({
-      url: app.data.apiurl + "photo/thumb?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+      url: app.data.apiurl2 + "photo/thumb?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
       data: {
         type: e.currentTarget.dataset.type,
         object_id: e.currentTarget.dataset.object_id
@@ -138,7 +138,7 @@ Page({
     let comment_list = that.data.comment_list;
     let zanIndex = e.currentTarget.dataset.index;
     wx.request({
-      url: app.data.apiurl + "photo/thumb?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+      url: app.data.apiurl2 + "photo/thumb?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
       data: {
         type: e.currentTarget.dataset.type,
         object_id: e.currentTarget.dataset.object_id

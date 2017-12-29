@@ -13,9 +13,10 @@ Page({
     oldWiner:false
   },
   onLoad: function (options) {
-      wx.removeStorageSync('activity')
+    wx.removeStorageSync('activity')
   },
   onShow: function () {
+    console.log(wx.getStorageSync('activity'));
     wx.showToast({
       title: '加载中',
       icon: 'loading'
@@ -57,7 +58,6 @@ Page({
               wx.hideLoading()
             }
         })
-     
         // 活动规则
         wx.request({
           url: app.data.apiurl2 + "photo/activity-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
@@ -95,11 +95,13 @@ Page({
                 start_time: toDate(res.data.data.start_time),
                 end_time: toDate(res.data.data.end_time),
               })
-            } else {
+            }else {
               //tips.alert(res.data.msg);
               that.setData({
                 activity:false
               })
+              // 存缓存
+              wx.setStorageSync('activity', true)
               //往期开奖
               wx.request({
                 url: app.data.apiurl2 + "photo/last-activity-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
@@ -161,8 +163,14 @@ Page({
       icon: 'loading'
     })
     let that = this;
-    console.log("activity:", wx.getStorageSync('activity'))
+    console.log("activity:", wx.getStorageSync('activity'));
+    that.setData({
+      type: e.currentTarget.dataset.type,
+      page: 1
+    })
     if (e.currentTarget.dataset.type == 'activity' ){
+      console.log("activity:", wx.getStorageSync('activity'))
+      console.log(wx.getStorageSync('activity'));
       if (wx.getStorageSync('activity')==true){
         console.log(111);
         that.setData({
@@ -186,10 +194,7 @@ Page({
         rules: false
       })
     }
-    that.setData({
-      type: e.currentTarget.dataset.type,
-      page:1
-    })
+    // list
     wx.request({
       url: app.data.apiurl2 + "photo/photo-circle?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
       data:{
@@ -254,7 +259,7 @@ Page({
     let zanIndex = e.currentTarget.dataset.index;
     let allList = that.data.allList;
     wx.request({
-      url: app.data.apiurl + "photo/thumb?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+      url: app.data.apiurl2 + "photo/thumb?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
       data:{
         type: e.currentTarget.dataset.type,
         object_id: e.currentTarget.dataset.object_id
