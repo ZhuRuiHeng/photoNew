@@ -13,7 +13,10 @@ Page({
     oldWiner:false
   },
   onLoad: function (options) {
-    wx.removeStorageSync('activity')
+    //wx.removeStorageSync('activity')
+  },
+  onUnload: function () {
+    wx.removeStorageSync('activity');
   },
   onShow: function () {
     console.log(wx.getStorageSync('activity'));
@@ -95,6 +98,24 @@ Page({
                 start_time: toDate(res.data.data.start_time),
                 end_time: toDate(res.data.data.end_time),
               })
+
+              if (wx.getStorageSync('activity') == true) {
+                  console.log(111);
+                  that.setData({
+                    activity: false,
+                    rules: true
+                  })
+              } else {
+                console.log(222);
+                wx.setStorageSync('activity', true)
+                that.setData({
+                  activity: true,
+                  rules: true
+                })
+                if (that.data.activeInform.rules) {
+                  WxParse.wxParse('newrules', 'html', that.data.activeInform.rules, that, 5)
+                }
+              }
             }else {
               //tips.alert(res.data.msg);
               that.setData({
@@ -168,32 +189,32 @@ Page({
       type: e.currentTarget.dataset.type,
       page: 1
     })
-    if (e.currentTarget.dataset.type == 'activity' ){
-      console.log("activity:", wx.getStorageSync('activity'))
-      console.log(wx.getStorageSync('activity'));
-      if (wx.getStorageSync('activity')==true){
-        console.log(111);
-        that.setData({
-          activity: false,
-          rules: true
-        })
-      }else{
-        console.log(222);
-        wx.setStorageSync('activity', true)
-        that.setData({
-          activity: true,
-          rules: true
-        })
-        if (that.data.activeInform.rules) {
-          WxParse.wxParse('newrules', 'html', that.data.activeInform.rules, that, 5)
-        }
-      }
-    }else{
-      that.setData({
-        activity: false,
-        rules: false
-      })
-    }
+    // if (e.currentTarget.dataset.type == 'activity' ){
+    //   console.log("activity:", wx.getStorageSync('activity'))
+    //   console.log(wx.getStorageSync('activity'));
+    //   if (wx.getStorageSync('activity')==true){
+    //     console.log(111);
+    //     that.setData({
+    //       activity: false,
+    //       rules: true
+    //     })
+    //   }else{
+    //     console.log(222);
+    //     wx.setStorageSync('activity', true)
+    //     that.setData({
+    //       activity: true,
+    //       rules: true
+    //     })
+    //     if (that.data.activeInform.rules) {
+    //       WxParse.wxParse('newrules', 'html', that.data.activeInform.rules, that, 5)
+    //     }
+    //   }
+    // }else{
+    //   that.setData({
+    //     activity: false,
+    //     rules: false
+    //   })
+    // }
     // list
     wx.request({
       url: app.data.apiurl2 + "photo/photo-circle?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,

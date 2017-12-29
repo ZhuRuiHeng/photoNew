@@ -17,6 +17,9 @@ App({
     apiurl1: 'https://friend-guess.playonwechat.com/',
     apiurl2: 'https://friend-guess.playonwechat.com/v2/'
   },
+  onUnload: function () {
+     wx.removeStorageSync('activity');
+  },
   onLaunch: function () {
     let that = this;
     let extConfig = wx.getExtConfigSync ? wx.getExtConfigSync() : {};
@@ -147,6 +150,7 @@ App({
   },
   onHide: function () {
     wx.pauseBackgroundAudio();
-  }
+  },
+  
   
 })

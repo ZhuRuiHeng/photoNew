@@ -55,6 +55,7 @@ Page({
             photoInform: res.data.data,
             source_effect: res.data.data.source_effect
           })
+          wx.hideLoading()
         }else {
           //tips.alert(res.data.msg);
         }
@@ -137,7 +138,7 @@ Page({
                   photoInform: res.data.data,
                   source_effect: res.data.data.source_effect
                 })
-                
+                wx.hideLoading()
               }else {
                 tips.alert(res.data.msg);
               }
@@ -180,7 +181,6 @@ Page({
           
         }
     })
-    wx.hideLoading()
   },
   management() {
     wx.navigateTo({
