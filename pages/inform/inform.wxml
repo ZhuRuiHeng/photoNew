@@ -23,8 +23,8 @@
         <view class='top'>
             <image class='niceImg' src="{{info.avatarurl}}"></image>
             <view class='niceNames topnice'>
-                <view class='nickName nice'>{{info.wx_name}}</view>
-                <view class='nickName'>{{name}}
+                 <view class='nickName nice'>{{info.wx_name}}</view> 
+                <view class='nickName'>
                     <text wx:if="{{type=='image'}}">照片墙 </text><text wx:else>相册集</text>
                 </view>
             </view>

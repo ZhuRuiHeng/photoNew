@@ -15,9 +15,6 @@ Page({
   onLoad: function (options) {
     //wx.removeStorageSync('activity')
   },
-  onUnload: function () {
-    wx.removeStorageSync('activity');
-  },
   onShow: function () {
     console.log(wx.getStorageSync('activity'));
     wx.showToast({

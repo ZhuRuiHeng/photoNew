@@ -21,8 +21,8 @@
                 </view> -->
                 <image class='niceImg' src="{{item.avatarurl}}"></image>
                 <view class='niceNames'>
-                    <view class='nickName'>{{item.wx_name}}</view>
-                    <view class='nickName'>{{item.name}}
+                     <view class='nickName'>{{item.wx_name}}</view> 
+                    <view class='nickName'>
                         <text wx:if="{{item.type=='image'}}">照片墙 </text>
                         <text wx:else>相册集</text>
                     </view>

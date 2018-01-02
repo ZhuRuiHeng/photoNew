@@ -107,30 +107,20 @@ Page({
               console.log("模板详情:", res);
               var status = res.data.status;
               console.log(JSON.parse(res.data.status));
-
               if (status == 1) {
                 that.setData({
                   photoInform: res.data.data,
                   source_effect: res.data.data.source_effect,
                   photo_count: res.data.data.photo_count
                 })
-
               } else {
                 //tips.alert(res.data.msg);
               }
             },
-
-          })
-          
+          })   
         } else {
           tips.alert(res.data.msg)
-          // setTimeout(function () {
-          //   wx.reLaunch({
-          //     url: '../square/square',
-          //   })
-          // }, 2000)
-        }
-        
+        }  
       }
     })
     wx.request({

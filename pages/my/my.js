@@ -90,7 +90,26 @@ Page({
         } else {
           tips.alert(res.data.msg)
         }
-
+      }
+    })
+    //背景图  
+    wx.request({
+      url: app.data.apiurl2 + "photo/get-user-bg?sign=" + sign + '&operator_id=' + app.data.kid,
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
+        console.log("背景图:", res);
+        var status = res.data.status;
+        if (status == 1) {
+          that.setData({
+            bgImg: res.data.data.bg
+          })
+          //wx.hideLoading()
+        } else {
+          console.log(res.data.msg)
+        }
       }
     })
   },
@@ -115,8 +134,69 @@ Page({
       wx.reLaunch({
         url: e.currentTarget.dataset.url,
       })
-    }
-    
+    } 
+  },
+  //编辑
+  editTap(e){
+    let that = this;
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        var tempFilePaths = res.tempFilePaths;
+        console.log(tempFilePaths);
+        tips.loading('上传中');
+        tips.loaded(); //消失
+        that.setData({
+          dialog: true
+        })
+        for (let i = 0; i < tempFilePaths.length; i++) {
+          wx.uploadFile({
+            url: apiurl + "api/upload-image?sign=" + wx.getStorageSync('sign') + ' & operator_id=' + app.data.kid,
+            filePath: tempFilePaths[i],
+            name: 'image',
+            formData: {
+              'user': 'test'
+            },
+            success: function (res) {
+              console.log('上传图片成功', res);
+              let data = JSON.parse(res.data);
+              if (data.status == 1) {
+                that.setData({
+                  url: data.data
+                })
+                //更换背景图  
+                wx.request({
+                  url: app.data.apiurl2 + "photo/change-user-bg?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+                  data:{
+                    picture: that.data.url
+                  },
+                  header: {
+                    'content-type': 'application/json'
+                  },
+                  method: "GET",
+                  success: function (res) {
+                    console.log("改变背景图:", res);
+                    var status = res.data.status;
+                    if (status == 1) {
+                      that.setData({
+                        bgImg: that.data.picture
+                      })
+                      tips.success('上传成功！')
+                    } else {
+                      tips.alert(res.data.msg)
+                    }
+                  }
+                })
+              } else {
+                tips.alert(res.data.msg)
+              }
+            }
+          })
+        }
+      }
+    })
   },
   // 音乐列表
   musicList: function (e) {
@@ -218,6 +298,19 @@ Page({
           })
           tips.alert(res.data.msg)
         }
+      }
+    }),
+    // 保存formid
+    wx.request({
+      url: app.data.apiurl1 + "api/save-form?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+      data: {
+        form_id: form_id
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "GET",
+      success: function (res) {
       }
     })
 

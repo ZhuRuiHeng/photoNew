@@ -285,3 +285,13 @@ button::after{
 .two.active{
   background: #fedcff!important;
 }
+.edit{
+  position: absolute;
+  top: 6rpx;
+  right: 20rpx;
+  z-index: 99;
+}
+.edit image{
+  width: 50rpx;
+  height: 50rpx;
+}

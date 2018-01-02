@@ -14,10 +14,6 @@ Page({
       music_play: true,
       button:true
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     //console.log(options);
     let that = this;
@@ -55,12 +51,11 @@ Page({
             photoInform: res.data.data,
             source_effect: res.data.data.source_effect
           })
-          wx.hideLoading()
+          
         }else {
           //tips.alert(res.data.msg);
         }
       },
-      
     })
     //照片墙信息temp_id
     wx.request({
@@ -138,13 +133,11 @@ Page({
                   photoInform: res.data.data,
                   source_effect: res.data.data.source_effect
                 })
-                wx.hideLoading()
               }else {
                 tips.alert(res.data.msg);
               }
             },
           })
-         
         }else{
           tips.alert(res.data.msg);
           setTimeout(function(){
@@ -152,9 +145,7 @@ Page({
               url: '../square/square',
             })
           }, 3000)
-          console.log(res.data.msg,1111);
         }
-       
       }
     })
     // 判断照片墙是否已满
