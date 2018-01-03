@@ -2,7 +2,7 @@
 <!--引入模板  -->
 <template is="navBar"></template>
 <template is="pretty" wx:if="{{show}}"></template>
-<view class='musicList active'></view>
+<view class="musicList {{music_play?'music_play':'stop'}}"  bindtap='bindPlay'></view> 
 <view class="container {{music==true?'fixed':''}}" >
     <view class='edit' bindtap='editTap'><image src="../img/setting.png" mode='widthFix'></image></view>
     <view class='header'>
@@ -42,29 +42,29 @@
                 <view class='dels' bindtap="dels" data-pw_id='{{item.id}}' data-photoindex='{{index}}'>
                     <image class='dels' src="../img/dels.png" mode="aspectFill"></image>
                 </view>
-                <view class='musicTip' bindtap="musicList"  data-pw_id="{{item.id}}" data-index='{{index}}'>
+                <!-- <view class='musicTip' bindtap="musicList"  data-pw_id="{{item.id}}" data-index='{{index}}'>
                     <image class='music' src="../img/music.png" mode='aspectFill'></image>
                     <view>{{item.music_info.name}}-{{item.music_info.singer}}</view>
-                </view>
+                </view> -->
                 <image class='niceImg' data-url='{{item.thumb}}' src="{{item.thumb}}?{{num}}" data-musicUrl='{{item.music_info.url}}' data-nameMusic='{{item.music_info.name}}'
                         mode='aspectFill' data-pw_id='{{item.id}}' bindtap='seeTap'></image>
-                <view class='timeWho'>
+                <!-- <view class='timeWho'>
                     <input type='text' data-pw_id='{{item.id}}' bindinput="setName" 
                           placeholder='照片墙' value='{{item.name}}' class='222' disabled/>
-                    <!-- <image class='setting' src="../img/1162232-200.png" mode="aspectFill"></image> -->
-                </view>
+                     <image class='setting' src="../img/1162232-200.png" mode="aspectFill"></image> 
+                </view> -->
             </view>
             <!--新增  -->
             <view class='item newAdd' >
-                <view class='musicTip'  style="visibility: hidden;">
+                <!-- <view class='musicTip'  style="visibility: hidden;">
                     <image class='music' src="../img/music.png" mode='aspectFill' ></image>
                     <view>那些年十年那些年</view>
-                </view>
+                </view> -->
                 <image class='niceImg'  src="../img/add.png" bindtap='newPhotos1'
                       mode='aspectFill'></image>
-                <view class='timeWho'>
+                <!-- <view class='timeWho'>
                     <input type='text' placeholder='创建照片墙'  bindinput="niceName" value='{{newName}}' disabled/>
-                </view>
+                </view> -->
             </view>
         </view> 
         <!--2  -->
@@ -73,29 +73,29 @@
                 <view class='dels' bindtap="dels" data-pw_id='{{item.id}}' data-photoIndex='{{index}}'>
                     <image class='dels' src="../img/dels.png" mode="widthFix"></image>
                 </view>
-                <view class='musicTip' bindtap="musicList"  data-pw_id="{{item.id}}" data-index='{{index}}'>
+                <!-- <view class='musicTip' bindtap="musicList"  data-pw_id="{{item.id}}" data-index='{{index}}'>
                     <image class='music' src="../img/music.png" mode='widthFix'></image>
                     <view>{{item.music_info.name}}-{{item.music_info.singer}}</view>
-                </view>
+                </view> -->
                 <image class='niceImg' data-url='{{item.thumb}}' src="{{item.thumb}}?{{num}}" data-musicUrl='{{item.music_info.url}}' data-nameMusic='{{item.music_info.name}}'
                         mode='aspectFill' data-pw_id='{{item.id}}' bindtap='seeTap1'></image>
-                <view class='timeWho'>
+                <!-- <view class='timeWho'>
                     <input type='text' data-pw_id='{{item.id}}' bindinput="setName" class='222'
                           placeholder='照片墙' value='{{item.name}}' disabled/>
-                          <!-- <image class='setting' src="../img/1162232-200.png" mode="widthFix"></image> -->
-                </view>
+                           <image class='setting' src="../img/1162232-200.png" mode="widthFix"></image> 
+                </view> -->
             </view>
             <!--新增  -->
             <view class='item newAdd' >
-                <view class='musicTip'  style="visibility: hidden;">
+                <!-- <view class='musicTip'  style="visibility: hidden;">
                     <image class='music' src="../img/music.png" mode='widthFix' ></image>
                     <view>那些年十年那些年</view>
-                </view>
+                </view> -->
                 <image class='niceImg'  src="../img/add.png" bindtap='newPhotos2'
                       mode='aspectFill'></image>
-                <view class='timeWho'>
+                <!-- <view class='timeWho'>
                     <input type='text' placeholder='创建影片集' bindinput="niceName" value='{{newName}}' disabled/>
-                </view>
+                </view> -->
             </view>
         </view> 
     </view>

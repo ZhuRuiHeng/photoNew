@@ -19,7 +19,7 @@
           <form report-submit="true" bindsubmit="upPhoto" class="formSubmit active" wx:if="{{self && !finish}}">
               <button class="submit one {{now==1?'active':''}}" formType="submit">上传图片</button>
           </form>
-          <view class='active' bindtap='upPhoto' wx:if="{{self && !finish}}">上传图片</view>
+          <!-- <view class='active' bindtap='upPhoto' wx:if="{{self && !finish}}">上传图片</view> -->
           <view class='active' bindtap='savePhoto' wx:if="{{finish}}">查看相册集</view> 
           <!-- friends -->
           <!-- <view class='active' bindtap='friends' wx:if="{{finish && self}}">分享给好友</view>  -->

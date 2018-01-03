@@ -5,7 +5,7 @@
 <template is="pretty" wx:if="{{show}}"></template>
 <view class="container">
     <view class='management'>
-        <view class="left {{music_play?'music_play':''}}" bindtap="bindPlay"></view>
+        <view class="left {{music_play?'music_play':'stop'}}" bindtap="bindPlay"></view>
         <view class='right' wx:if="{{self}}" bindtap='management' >照片管理</view>  
     </view>
     <view class='photo'>
@@ -17,15 +17,13 @@
     <view class='buttons'>
         <view class='active buttona' bindtap='savePhoto' wx:if="{{finish && self && button}}">生成照片墙</view>
         <view class='active buttonb' wx:if="{{!button}}">生成照片墙</view>
-        <!-- <view class='active' bindtap='upPhoto' wx:if="{{!finish}}">上传图片</view> -->
         <form report-submit="true" bindsubmit="upPhoto" class="formSubmit active" wx:if="{{!finish}}">
             <button class="submit one {{now==1?'active':''}}" formType="submit">上传图片</button>
         </form> 
-        <!-- <view class='active' bindtap='upVideo'>上传视频</view> -->
-        <!-- <view class='active' bindtap='friends' wx:if="{{!finish && self}}">邀请好友拼图</view> -->
         <view class='active' wx:if="{{!finish && self}}">
             <button  open-type='share'>邀请好友拼图</button>  
         </view>
+        <view class='active' bindtap='friends' wx:if="{{self}}">生成朋友圈海报</view> 
         <view class='active' bindtap='myplay' wx:if="{{!self}}">我也要玩</view> 
     </view>
     <view class='checkboxs' wx:if="{{finish && self}}">

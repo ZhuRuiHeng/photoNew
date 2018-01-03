@@ -15,7 +15,8 @@ App({
     music_play: true,
     apiurl:'https://friend-guess.playonwechat.com/v1/',
     apiurl1: 'https://friend-guess.playonwechat.com/',
-    apiurl2: 'https://friend-guess.playonwechat.com/v2/'
+    apiurl2: 'https://friend-guess.playonwechat.com/v2/',
+    apiurl3: 'https://friend-guess.playonwechat.com/v3/'
   },
   onUnload: function () {
      wx.removeStorageSync('activity');
@@ -137,6 +138,27 @@ App({
   globalData: {
     baseUrl: 'https://friend-guess.playonwechat.com/'
   },
+  // 音乐
+  bindPlay: function () {
+    var that = this;
+    let music_play = app.data.music_play;
+    console.log('music_play:', music_play);
+    if (music_play == true) {
+      wx.pauseBackgroundAudio();//暂停
+      app.data.music_play = false;
+      that.setData({
+        music_play: false
+      })
+    } else {
+      wx.playBackgroundAudio({ //播放
+        dataUrl: app.data.dataUrl
+      })
+      app.data.music_play = true;
+      that.setData({
+        music_play: true
+      })
+    }
+  },
   showLoading: function (title) {
     if (!title) {
       title = '正在加载图片中';
@@ -149,7 +171,8 @@ App({
     wx.hideLoading();
   },
   onHide: function () {
-    wx.pauseBackgroundAudio();
+    wx.stopBackgroundAudio()
+    console.log('stop music');
   },
   
   

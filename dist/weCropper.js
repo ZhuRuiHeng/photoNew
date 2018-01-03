@@ -345,7 +345,6 @@ function methods() {
 			self.ctx.drawImage(self.croperTarget, self.imgLeft, self.imgTop, self.scaleWidth, self.scaleHeight);
 		}
 		typeof self.onBeforeDraw === 'function' && self.onBeforeDraw(self.ctx, self);
-
 		self.setBoundStyle //	设置边界样式
 		();self.ctx.draw();
 		return self;

@@ -23,7 +23,9 @@ Page({
     ],
     show:false,
     checkboxs: true,
-    now: 'h5'
+    now: 'h5',
+    dataUrl: wx.getStorageSync('dataUrl'),
+    music_play: wx.getStorageSync('music_play')
   },
   onShow: function () {
     wx.showToast({
@@ -46,7 +48,9 @@ Page({
         if (status == 1) {
           that.setData({
             navList: res.data.data,
-            cate_id: res.data.data[0].cate_id
+            cate_id: res.data.data[0].cate_id,
+            dataUrl: wx.getStorageSync('dataUrl'),
+            music_play: wx.getStorageSync('music_play')
           })
           // 默认第一个
           wx.request({
@@ -76,6 +80,29 @@ Page({
         }
       }
     })
+  },
+  bindPlay() {
+    var that = this;
+    let music_play = that.data.music_play;
+    if (music_play == true) {
+      console.log(1);
+      wx.pauseBackgroundAudio();//暂停
+      app.data.music_play = false;
+      wx.setStorageSync('music_play', false)
+      that.setData({
+        music_play: false
+      })
+    } else {
+      console.log(2);
+      wx.playBackgroundAudio({ //播放
+        dataUrl: app.data.dataUrl
+      })
+      app.data.music_play = true;
+      wx.setStorageSync('music_play', true)
+      that.setData({
+        music_play: true
+      })
+    }
   },
   navbar(e) {
     console.log('type:', e.currentTarget.dataset.now)

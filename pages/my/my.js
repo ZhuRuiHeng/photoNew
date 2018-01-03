@@ -1,6 +1,7 @@
 const app = getApp()
 const apiurl = 'https://friend-guess.playonwechat.com/';
-import tips from '../../utils/tips.js'
+import tips from '../../utils/tips.js';
+const common = require('../../common.js');
 Page({
   data: {
     music: false,
@@ -8,7 +9,9 @@ Page({
     userInfo: wx.getStorageSync('userInfo'),
     now:1,
     show:false,
-    newName: '朋友照片墙'
+    newName: '朋友照片墙',
+    dataUrl: wx.getStorageSync('dataUrl'),
+    music_play: wx.getStorageSync('music_play')
   },
   onLoad: function (options) {
     this.setData({
@@ -21,14 +24,16 @@ Page({
     })
     let that = this;
     let sign = wx.getStorageSync('sign');
-    wx.setStorageSync('music_play', true); 
+    
     that.setData({
       userInfo: wx.getStorageSync('userInfo'),
-      show: false
+      show: false,
+      music_play: wx.getStorageSync('music_play'),
+      now: 1,
     })
     // 请求 
     wx.request({
-      url: app.data.apiurl2 + "photo/photo-wall-list?sign=" + sign + '&operator_id=' + app.data.kid,
+      url: app.data.apiurl3 + "photo/photo-wall-list?sign=" + sign + '&operator_id=' + app.data.kid,
       data:{
         type:'image'
       },
@@ -112,6 +117,29 @@ Page({
         }
       }
     })
+  },
+  bindPlay() {
+    var that = this;
+    let music_play = that.data.music_play;
+    if (music_play == true) {
+      console.log(1);
+      wx.pauseBackgroundAudio();//暂停
+      app.data.music_play = false;
+      wx.setStorageSync('music_play', false)
+      that.setData({
+        music_play: false
+      })
+    } else {
+      console.log(2);
+      wx.playBackgroundAudio({ //播放
+        dataUrl: app.data.dataUrl
+      })
+      app.data.music_play = true;
+      wx.setStorageSync('music_play', true)
+      that.setData({
+        music_play: true
+      })
+    }
   },
   navUrl(e) {
     console.log(e);
@@ -275,7 +303,7 @@ Page({
       type = 'image'
     }
     wx.request({
-      url: app.data.apiurl2 + "photo/photo-wall-list?sign=" +wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+      url: app.data.apiurl3 + "photo/photo-wall-list?sign=" +wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
       data: {
         type: type
       },

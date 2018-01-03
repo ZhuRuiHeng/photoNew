@@ -77,8 +77,6 @@ Page({
         pw_id: that.data.pw_id
       })
     } 
-    
-
     app.getAuth(function () {
       let userInfo = wx.getStorageSync('userInfo');
       let sign = wx.getStorageSync('sign');
@@ -118,6 +116,7 @@ Page({
         })
 
       }
+      
       // 请求数据
       wx.request({
         url: apiurl + "photo/photo-wall-detail?sign=" + sign + '&operator_id=' + app.data.kid,

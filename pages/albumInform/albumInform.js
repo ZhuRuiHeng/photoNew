@@ -10,7 +10,8 @@ Page({
     show: false,
     checkboxs: 1,
     finish:false,
-    music_play: true,
+    dataUrl: wx.getStorageSync('dataUrl'),
+    music_play: wx.getStorageSync('music_play'),
     button:true
   },
 
@@ -28,18 +29,11 @@ Page({
       })
     }
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
+    console.log('music_play',wx.getStorageSync('music_play'));
+    if (wx.getStorageSync('music_play')==false){
+      wx.pauseBackgroundAudio();//暂停
+    }
     wx.showLoading({
       title: '加载中',
     })
@@ -61,39 +55,9 @@ Page({
           that.setData({
             thumb: res.data.data.pic + '?' + that.data.num,
             temp_id: res.data.data.temp_id,
-            self: res.data.data.self
+            self: res.data.data.self,
+            music_play: wx.getStorageSync('music_play')
           })
-          if (!wx.getStorageSync('bgMusic')) {
-            console.log('没有缓存音乐')
-            wx.setStorageSync('bgMusic', res.data.data.music_info.url);
-            app.data.dataUrl = res.data.data.music_info.url;
-            wx.playBackgroundAudio({ //播放
-              dataUrl: res.data.data.music_info.url,
-              title: res.data.data.music_info.name,
-            })
-            that.setData({
-              music_play: true
-            })
-          }else if (wx.getStorageSync('bgMusic') == res.data.data.music_info.url) {
-            if (wx.getStorageSync('music_play') == false) {
-              that.setData({
-                music_play: false
-              })
-              app.data.music_play = false
-              wx.pauseBackgroundAudio();//暂停
-            } else {
-              wx.playBackgroundAudio()
-            }
-          } else {
-            console.log(wx.getStorageSync('bgMusic'), res.data.data.music_info.url, 222)
-            app.data.dataUrl = res.data.data.music_info.url;
-            wx.playBackgroundAudio({ //播放
-              dataUrl: res.data.data.music_info.url
-            })
-            that.setData({
-              music_play: true
-            })
-          }
           wx.request({
             url: app.data.apiurl + "photo/template-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
             data: {
@@ -153,21 +117,24 @@ Page({
     })
   },
   // 音乐
-  bindPlay: function () {
+  bindPlay() {
     var that = this;
-    let music_play = app.data.music_play;
-    console.log('music_play:', music_play);
+    let music_play = that.data.music_play;
     if (music_play == true) {
+      console.log('music1');
       wx.pauseBackgroundAudio();//暂停
       app.data.music_play = false;
+      wx.setStorageSync('music_play', false)
       that.setData({
         music_play: false
       })
     } else {
+      console.log('music2');
       wx.playBackgroundAudio({ //播放
         dataUrl: app.data.dataUrl
       })
       app.data.music_play = true;
+      wx.setStorageSync('music_play', true)
       that.setData({
         music_play: true
       })
@@ -182,7 +149,7 @@ Page({
     let that = this;
     let sign = wx.getStorageSync('sign');
     wx.request({
-      url: apiurl + "photo/share?sign=" + sign + '&operator_id=' + app.data.kid,
+      url: app.data.apiurl1 + "photo/share?sign=" + sign + '&operator_id=' + app.data.kid,
       data: {
         pw_id: that.data.pw_id
       },
@@ -322,12 +289,12 @@ Page({
         that.setData({
           dialog: true
         })
-        console.log(apiurl + "api/upload-image?sign=" + wx.getStorageSync('sign') + ' & operator_id=' + app.data.kid);
+        console.log(app.data.apiurl1 + "api/upload-image?sign=" + wx.getStorageSync('sign') + ' & operator_id=' + app.data.kid);
         console.log('length:', tempFilePaths.length)
         for (let i = 0; i < tempFilePaths.length;i++){
           console.log('image:',tempFilePaths[i])
           wx.uploadFile({
-            url: apiurl + "api/upload-image?sign=" + wx.getStorageSync('sign') + ' & operator_id=' + app.data.kid,
+            url: app.data.apiurl1 + "api/upload-image?sign=" + wx.getStorageSync('sign') + ' & operator_id=' + app.data.kid,
             filePath: tempFilePaths[i],
             name: 'image',
             formData: {

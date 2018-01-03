@@ -7,7 +7,12 @@ page{
   font-size: 28rpx;
 }
 .rule{
-  background: #fff;
+  /* background: #fff; */
+  width: 100%;
+  margin: 0 auto;
+  position: absolute;
+  bottom: 60rpx;
+  left: 0;
 }
 .title{
     text-align: center;
@@ -126,7 +131,7 @@ page{
     width: 70%;
 }
 .activityRules{
-  background: #fff;
+  /* background: #fff; */
   border-radius: 10rpx;
   width: 86%;
   margin: 0 auto;

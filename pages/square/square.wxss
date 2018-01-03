@@ -281,6 +281,9 @@ button::after{
   min-height: 300rpx;
 }
 .inGroup{
+  position: absolute;
+  bottom: 40rpx;
+  left: 15%;
   width: 70%;
   margin: 30rpx auto 0!important;
   font-size: 32rpx;
@@ -309,9 +312,10 @@ button::after{
 .newRules{
   position: absolute;
   top: 10rpx;
-  right: 10rpx;
-  border-radius: 20rpx;
-  padding: 4rpx 10rpx;
+  right: -20rpx;
+  border-top-left-radius: 20rpx;
+  border-bottom-left-radius: 20rpx;
+  padding: 4rpx 20rpx 4rpx 16rpx;
   background: #6fe8ff;
   z-index: 12;
 }

@@ -10,7 +10,9 @@ Page({
     type:'new',
     activity:false,
     rules:false,
-    oldWiner:false
+    oldWiner:false,
+    music_play: wx.getStorageSync('music_play'),
+    dataUrl: ''
   },
   onLoad: function (options) {
     //wx.removeStorageSync('activity')
@@ -57,6 +59,37 @@ Page({
               }
               wx.hideLoading()
             }
+        })
+        // music
+        wx.request({
+          url: app.data.apiurl3 + "photo/get-music?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+          header: {
+            'content-type': 'application/json'
+          },
+          method: "GET",
+          success: function (res) {
+            console.log("music:", res);
+            var status = res.data.status;
+            if (status == 1) {
+              app.data.dataUrl = res.data.data.url;
+              if (wx.getStorageSync("music_play")==false){
+                  that.setData({
+                    music_play:false
+                  })
+              }else{
+                wx.playBackgroundAudio({ //播放音乐
+                  dataUrl: res.data.data.url
+                })
+              }
+              wx.setStorageSync('dataUrl', res.data.data.url);
+              that.setData({
+                dataUrl: res.data.data.url
+              })
+            } else {
+              console.log(res.data.msg);
+            }
+            wx.hideLoading()
+          }
         })
         // 活动规则
         wx.request({
@@ -147,6 +180,29 @@ Page({
           }
         })
     })
+  },
+  bindPlay(){
+    var that = this;
+    let music_play = that.data.music_play;
+    if(music_play == true) {
+      console.log('music1');
+      wx.pauseBackgroundAudio();//暂停
+      app.data.music_play = false;
+      wx.setStorageSync('music_play', false)
+      that.setData({
+        music_play: false
+      })
+    } else {
+      console.log('music2');
+      wx.playBackgroundAudio({ //播放
+        dataUrl: app.data.dataUrl
+      })
+    app.data.music_play = true;
+      wx.setStorageSync('music_play', true)
+      that.setData({
+        music_play: true
+      })
+    }
   },
   navUrl(e) {
     console.log(e);

@@ -106,7 +106,7 @@ page{
 .item{
     width: 31%;
     position: relative;
-    padding: 10rpx;
+    padding: 20rpx;
     margin: 1%;
     background: #fff;
     box-sizing: border-box;
@@ -147,7 +147,7 @@ page{
   position: relative;
 }
 .newAdd .niceImg{
-    top: -26rpx;
+    top: 10rpx;
 }
 .musicTip{
   width: 100%;
@@ -288,8 +288,9 @@ button::after{
 .edit{
   position: absolute;
   top: 6rpx;
-  right: 20rpx;
+  left: 20rpx;
   z-index: 99;
+  cursor: pointer;
 }
 .edit image{
   width: 50rpx;
