@@ -2,6 +2,7 @@
 <!--引入模板  -->
 <template is="navBar"></template>
 <template is="pretty" wx:if="{{show}}"></template>
+<view class='musicList active'></view>
 <view class="container {{music==true?'fixed':''}}" >
     <view class='edit' bindtap='editTap'><image src="../img/setting.png" mode='widthFix'></image></view>
     <view class='header'>

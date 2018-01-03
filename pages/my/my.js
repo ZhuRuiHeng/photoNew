@@ -263,7 +263,6 @@ Page({
     })
   },
   navbar(e){
-    console.log(e);
     let that = this;
     let form_id=e.detail.formId;
     let type ='';
@@ -285,7 +284,7 @@ Page({
       },
       method: "GET",
       success: function (res) {
-        console.log("照片墙列表:", res);
+        //console.log("照片墙列表:", res);
         var status = res.data.status;
         if (status == 1) {
           that.setData({

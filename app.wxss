@@ -1,0 +1,17 @@
+.musicList{
+  position: absolute;
+  display: inline-block;
+  width: 50rpx;
+  height: 50rpx;
+  z-index: 1;
+  border-radius: 50%;
+  background: url(https://friend-check.playonwechat.com/static/images/stop_music.png) no-repeat;
+  background-size: 100%;
+}
+.musicList.active{
+  background: url(https://friend-check.playonwechat.com/static/images/music.png) no-repeat;
+  background-size: 100%;
+  -webkit-animation: music 3s linear infinite;
+  animation: music 3s linear infinite;
+  -webkit-tap-highlight-color: transparent;
+}
