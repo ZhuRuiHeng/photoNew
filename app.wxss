@@ -1,6 +1,6 @@
 .musicList{
   position: fixed;
-  top: 6rpx;
+  top: 10rpx;
   right: 20rpx;
   display: inline-block;  
   width: 50rpx;

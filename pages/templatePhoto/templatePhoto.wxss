@@ -10,12 +10,17 @@ page{
   font-size: 26rpx;
   border-bottom: 1px solid #ddd;
   background: #fff;
+  color: #fff;
 }
 
 .navbar .one{
-    width: 33%;
+    width: 29%;
     display: inline-block;
-    text-align: center;
+    text-align: left;
+    padding:20rpx 0 0 30rpx;
+    box-sizing: border-box;
+    margin: 2%;
+    border-radius: 12rpx;
 }
 .navbar .two{
     width: 50%;
@@ -23,13 +28,12 @@ page{
 }
 .navbar view{
   flex: 1;
-  padding: 18rpx 0 20rpx;
+  padding: 0 0 20rpx;
   cursor: pointer;
-  background: #fff;
 }
 .navbar view image{
-    width: 40rpx;
-    height: 40rpx;
+    width: 60rpx;
+    height: 60rpx;
     position: relative;
     top: 6rpx;
     right: 6rpx;

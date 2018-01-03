@@ -1,6 +1,6 @@
 @import "../template/template.wxss";
 page{
-  background: #fff;
+  background: #e6e8f5;
 }
 .container{
     overflow: hidden;
@@ -8,14 +8,16 @@ page{
     box-sizing: border-box;
     width: 100%;
     font-size: 26rpx;
-    background-color: #fff;
+    background-color: #e6e8f5;
     padding-bottom: 200rpx;
     margin-top: 90rpx;
     position: relative;
 }
 .item{
   background: #fff;
-  width: 100%;
+  width: 94%;
+  margin: 0rpx auto 20rpx;
+  border-radius: 20rpx;
 }
 .item .top{
   display: flex;
@@ -32,7 +34,7 @@ page{
 .top{
     position: relative;
     padding:10rpx 20rpx;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #f7f7f7;
 }
 .top .shanchu{
     position: absolute;
@@ -67,35 +69,38 @@ page{
   width: 100%;
 }
 .mid image{
-  width: 300rpx;
+  width: 90%;
+  margin: 0 auto;
 }
 .btm{
   width: 100%;
-  background: #000;
-  opacity: 0.6;
+  text-align: center;
   display: flex;
-  color: #fff;
+  color: #000;
   height: 72rpx;
   line-height: 72rpx;
+  border-top: 1px solid #f7f7f7;
 }
 .btm view{
   flex: 1;
 }
-.btm .right image{
+.btm  .right{
+    border-left:1px solid #f7f7f7; 
+    border-right:1px solid #f7f7f7; 
+}
+.btm .right image,.chart image{
   width: 50rpx;
   height: 50rpx;
   position: relative;
   top: 10rpx;
 }
+.right image{
+  right: 10rpx;
+}
 .btm .left{
   padding-left: 20rpx;
 }
-.btm .right{
-  display: flex;
-  justify-content: space-around;
-  text-align:center;
-}
-.btm .right view{
+.btm .chart view{
   cursor: pointer;
 }
 .btm button{
@@ -105,7 +110,6 @@ page{
   border-radius: 0!important;
   height: 72rpx;
   line-height: 72rpx;
-  background: #000;
 }
 button:after{
   content: none;
@@ -125,12 +129,12 @@ button:after{
 	left:46%;
 }
 button{
-  background-color:#fff;
+  background-color:none;
+
   font-size:26rpx;
   margin: 0!important;
   line-height:inherit;
   padding:26rpx 0;
-  border-radius:0!important;
 }
 button::after{
   content: none;
@@ -142,7 +146,7 @@ button::after{
   text-align: center;
   font-size: 26rpx;
   color: #000;
-  border-bottom: 1px solid #ddd;
+  /* border-bottom: 1px solid #ddd; */
   background: #fff;
   position: fixed;
   top: 0;
@@ -155,12 +159,8 @@ button::after{
   cursor: pointer;
   padding:20rpx 0;
 }
-.navflex .flex.two{
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-}
-.navflex .flex.active{
-   background: #aaf3ff; 
+.navflex .flex.active text{
+   border-bottom: 2px solid #ff4444;
 }
 .bg{
   display: block;
@@ -288,11 +288,14 @@ button::after{
   margin: 30rpx auto 0!important;
   font-size: 32rpx;
   padding: 18rpx!important;
-  color:#fff;
-  background: -webkit-linear-gradient(#3acaff, #6fe8ff); /* Safari 5.1 - 6.0 */
-  background: -o-linear-gradient(#3acaff, #6fe8ff); /* Opera 11.1 - 12.0 */
-  background: -moz-linear-gradient(#3acaff, #6fe8ff); /* Firefox 3.6 - 15 */
-  background: linear-gradient(#3acaff, #6fe8ff); /* 标准的语法 */
+  color:#3e3d4b;
+  border:1px solid #3c3e4b;
+  border-radius: 6rpx;
+  background: rgba(255, 255, 255, .5);
+  /* background: -webkit-linear-gradient(#3acaff, #6fe8ff); 
+  background: -o-linear-gradient(#3acaff, #6fe8ff); 
+  background: -moz-linear-gradient(#3acaff, #6fe8ff); 
+  background: linear-gradient(#3acaff, #6fe8ff);   */
 }
 .rule{
   display: flex;
@@ -311,7 +314,7 @@ button::after{
 }
 .newRules{
   position: absolute;
-  top: 10rpx;
+  top: 1rpx;
   right: -20rpx;
   border-top-left-radius: 20rpx;
   border-bottom-left-radius: 20rpx;

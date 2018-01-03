@@ -145,22 +145,24 @@ page{
   width: 70%;
   margin: 30rpx auto 0!important;
   font-size: 32rpx;
-  color:#fff;
-  background: -webkit-linear-gradient(#3acaff, #6fe8ff); /* Safari 5.1 - 6.0 */
-  background: -o-linear-gradient(#3acaff, #6fe8ff); /* Opera 11.1 - 12.0 */
-  background: -moz-linear-gradient(#3acaff, #6fe8ff); /* Firefox 3.6 - 15 */
-  background: linear-gradient(#3acaff, #6fe8ff); /* 标准的语法 */
+  color:#3e3d4b;
+  border:1px solid #3c3e4b;
+  border-radius: 6rpx;
+  background: rgba(255, 255, 255, .5);
 }
 .button{
   text-align: center;
   height:80rpx;
-  border-radius:10rpx;
+  border-radius:6rpx;
   padding:0 20rpx;
-  color:#fff;
+  color:#3e3d4b;
   cursor:pointer;
   margin: 30rpx auto;
   position: relative;
 }
 .chartIn{
   position: relative;top: -30rpx;
+}
+button:after{
+  content: none;
 }

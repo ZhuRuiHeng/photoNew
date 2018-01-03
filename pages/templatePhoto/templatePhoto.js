@@ -11,7 +11,40 @@ Page({
     show:false,
     page:1,
     dataUrl: wx.getStorageSync('dataUrl'),
-    music_play:app.data.music_play
+    music_play:app.data.music_play,
+    TemplateList:[
+      {
+        icon:'../img/6.png',
+        title:'最新',
+        bg:'#ff7ea2',
+        cate_id:'22'
+      }, {
+        icon: '../img/5.png',
+        title: '节日活动',
+        bg: '#578ffe',
+        cate_id: '13'
+      }, {
+        icon: '../img/4.png',
+        title: '头像',
+        bg: '#fcadb2',
+        cate_id: '23'
+      }, {
+        icon: '../img/3.png',
+        title: '拼图',
+        bg: '#ffbf43',
+        cate_id: '15'
+      }, {
+        icon: '../img/2.png',
+        title: '素材库',
+        bg: '#80d9eb',
+        cate_id: '24'
+      }, {
+        icon: '../img/1.png',
+        title: '视频',
+        bg: '#8c9ffd',
+        cate_id: '25'
+      }
+    ]
   },
   onShow: function () {
     console.log('music_play:',app.data.music_play);

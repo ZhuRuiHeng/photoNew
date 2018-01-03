@@ -5,9 +5,9 @@
 <template is="pretty" wx:if="{{show}}"></template>
 <view class="musicList {{music_play?'music_play':'stop'}}"  bindtap='bindPlay'></view> 
 <view class='navflex'>
-    <view class='flex {{type=="new"?"active":""}}' data-type='new' bindtap='newList'>最新</view>
-    <view class='flex two {{type=="hot"?"active":""}}' data-type='hot' bindtap='newList'>最热</view>
-    <view class='flex {{type=="activity"?"active":""}}' data-type='activity' bindtap='newList'>活动</view>
+    <view class='flex {{type=="new"?"active":""}}' data-type='new' bindtap='newList'><text>最新</text></view>
+    <view class='flex two {{type=="hot"?"active":""}}' data-type='hot' bindtap='newList'><text>最热</text></view>
+    <view class='flex {{type=="activity"?"active":""}}' data-type='activity' bindtap='newList'><text>活动</text></view>
 </view> 
 <view class="container">
     <view class='guizze'>
@@ -37,19 +37,20 @@
             <view class='btm'>
                 <view class='left'>{{item.click_count}}次播放</view>
                 <view class='right'>
-                    <view class='zan' bindtap='zanTap' data-type='photowall' data-object_id='{{item.pw_id}}' data-index="{{index}}">
+                    <view class='zan' bindtap='zanTap' data-type='photowall' data-object_id='{{item.pw_id}}' 
+                           data-index="{{index}}">
                         <image src="../img/983476-200.png"></image>{{item.thumb_count}}
                     </view>
                     <!-- <view class='chart' bindtap='pinglunTap'  data-name="{{item.name}}" data-pw_id='{{item.pw_id}}' 
                   data-type='{{item.type}}' data-temp_id="{{item.temp_id}}">
                         <image src="../img/chart.png"></image>{{item.comment_count}}
                     </view> -->
-                    <view class='chart' bindtap='share' >
-                        <button open-type='share' data-pw_id='{{item.pw_id}}' data-type='{{item.type}}' 
-                                data-image="{{item.thumb}}" data-name="{{item.name}}" data-temp_id="{{item.temp_id}}">
-                            <image src="../img/1227062-200.png"></image>
-                        </button>
-                    </view>
+                </view>
+                <view class='chart' bindtap='share' >
+                    <button open-type='share' data-pw_id='{{item.pw_id}}' data-type='{{item.type}}' style='background:#fff'
+                            data-image="{{item.thumb}}" data-name="{{item.name}}" data-temp_id="{{item.temp_id}}">
+                        <image src="../img/1227062-200.png"></image>
+                    </button>
                 </view>
             </view>
         </view>
