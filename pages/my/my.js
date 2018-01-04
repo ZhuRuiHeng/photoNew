@@ -420,18 +420,14 @@ Page({
     })
   },
   // 新增相册
-  newPhotos1(e){
-    wx.navigateTo({
+  newPhotos(e){
+    wx.switchTab({
       url: '../templatePhoto/templatePhoto',
-    })
-  },
-  newPhotos2(e) {
-    wx.navigateTo({
-      url: '../album/album',
     })
   },
   // 新增照片名称
   niceName(e) {
+    console.log(e.detail.value);
     this.setData({
       newName: e.detail.value
     })

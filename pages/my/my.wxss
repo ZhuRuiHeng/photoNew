@@ -1,6 +1,6 @@
 @import "../template/template.wxss";
 page{
-  background: #e4e4e4;
+  background: #e6e8f5;
 }
 .headerInform{
     margin: 0 auto;
@@ -32,27 +32,37 @@ page{
     -ms-filter: blur(5px);
     filter: blur(5px);
 }
-.header .headerInform image{
+.header .headerInform image.avatarUrl{
   width: 140rpx;
   height: 140rpx;
   border-radius: 50%;
   border: 2px solid #fff;
   box-sizing: border-box;
 }
+.niceName{
+  font-size: 36rpx;
+}
 .niceInform{
-  width: 300rpx;
-  background:rgba(0,0,0,0.5);
-  color: #fff;
-  border-radius: 20rpx;
+  width: 260rpx;
+  background:#fad01c;
+  color: #7c3c00;
+  border-radius: 30rpx;
   margin: 0 auto;
   display: inline-block;
-  padding: 10rpx 0;
+  padding:0 0 10rpx 0;
+  box-sizing: border-box;
 }
 .niceInform view{
   line-height: 36rpx;
 }
 .niceInform .niceFun{
     font-size: 24rpx;
+}
+.niceFun image{
+  width: 40rpx;
+  height: 40rpx;
+  position: relative;
+  top: 10rpx;
 }
 .niceInform .niceName{
     width: 300rpx;
@@ -61,6 +71,12 @@ page{
 .bgImage,.bgImage image{
   width: 100%;
   height: 646rpx;
+}
+.bgImage .bg{
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+
 }
 .navbar{
   display: flex;
@@ -74,7 +90,6 @@ page{
 }
 .top{
   margin-top: -100rpx;
-  background: #fff;
   position: relative;
   z-index: 8;
 }
@@ -83,7 +98,7 @@ page{
   width: 100%;
 }
 .content{
-  background: #e4e4e4;
+  background: #e6e8f5;
 }
 .navbar view image,.navbar form button image{
     width: 40rpx;
@@ -100,22 +115,23 @@ page{
     box-sizing: border-box;
     width: 100%;
     font-size: 26rpx;
-    background-color: #e4e4e4;
     padding-bottom: 100rpx;
+    text-align: center;
 }
 .item{
-    width: 31%;
+    width: 94%;
+    margin: 10rpx auto;
     position: relative;
     padding: 20rpx;
-    margin: 1%;
     background: #fff;
+    border-radius: 10rpx;
     box-sizing: border-box;
     display: inline-block;
     z-index: 1;
 }
 .item image{
-  width: 100%;
-  height: 180rpx;
+  width: 400rpx;
+  height: 400rpx;
   position: relative;
 }
 .timeWho{
@@ -267,23 +283,28 @@ page{
 }
 .navbar form{
   flex: 1;
+  padding:16rpx 0;
 }
 button{
   background-color:#fff;
   font-size:26rpx;
-  margin: 0!important;
+  margin:0 auto!important;
+  width: 60%;
   line-height:inherit;
-  padding:16rpx 0;
   border-radius:0!important;
+  color: #626262;
+  padding: 6rpx 0;
 }
 button::after{
   content: none;
 }
-.one.active{
-  background: #aaf3ff!important;
+.one.active button{
+  border-bottom:2px solid #ff4444;
+  color: #000;
 }
-.two.active{
-  background: #fedcff!important;
+.two.active button{
+  border-bottom:2px solid #ff4444;
+  color: #000;
 }
 .edit{
   position: absolute;
@@ -293,6 +314,34 @@ button::after{
   cursor: pointer;
 }
 .edit image{
-  width: 50rpx;
-  height: 50rpx;
+  width: 100rpx;
+  height: 100rpx;
+}
+.editName{
+  width: 90%;
+  margin: 20rpx auto;
+  padding: 10rpx 20rpx;
+  border-radius: 10rpx;
+  box-shadow: 2rpx 2rpx 2rpx 2rpx #e8ecff;
+  background: #fff;
+  position: relative;
+}
+.editName image{
+  display: inline-block;
+  width: 60rpx;
+  height: 60rpx;
+  position: absolute;
+  right: 20rpx; 
+  top: 0rpx;
+  cursor: pointer;
+}
+.editName input{
+  width: 80%;
+  display: inline-block;
+  text-align: left;
+}
+.timeTitle{
+  width: 1rpx;
+  height: 300rpx;
+  background: #626262;
 }

@@ -1,24 +1,7 @@
 <import src="../../wxParse/wxParse.wxml"/> 
 <view class='activity' style='background: url({{activeInform.thumb}}) no-repeat; background-size: cover;'>
-    <!-- <view class='activityTop'>
-        <image src="../img/yuandan.png" mode='widthFix'></image>
-    </view>
-    <view class='activityTime'>
-        <view>活动时间</view>
-        <view>{{start_time}}-{{end_time}}</view>
-    </view>
-    <view class='explain'>
-        <view class='jiangpin'>
-            <image src="../img/logo.png" mode='widthFix'></image>
-        </view>
-        <view class='jiangpinb'>{{activeInform.prize}}</view>
-    </view>
-    <view class='imgRules'><image src="../img/rules.png" mode='widthFix'></image></view> -->
     <view class='activityRules'>
       <view class='rule'>
-            <!-- <view class="wxParse">
-                <template is="wxParse" data="{{wxParseData:newrules.nodes}}"/>
-            </view> -->
             <button class='inGroup' bindtap='activeIn'>参与活动</button>
             <button class='button inGroup' >
                 <view class='position' style='padding:20rpx;'>
