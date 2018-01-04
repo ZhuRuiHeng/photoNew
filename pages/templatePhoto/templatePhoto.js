@@ -86,7 +86,7 @@ Page({
             })
             // 默认第一个
             wx.request({
-              url: app.data.apiurl2 + "photo/template-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+              url: app.data.apiurl3 + "photo/image-template-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
               data: {
                 type: 'image',
                 cate_id: that.data.navList[0].cate_id
@@ -152,48 +152,76 @@ Page({
           nowImage: index
         })
       }
-      
     }
-    console.log("index:", index);
-    that.setData({
-      cate_id: e.currentTarget.dataset.cate_id,
-      type: e.currentTarget.dataset.type
-    })
-    wx.request({
-      url: app.data.apiurl2 + "photo/template-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-      data: {
-        type: e.currentTarget.dataset.type,
-        cate_id: e.currentTarget.dataset.cate_id
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "GET",
-      success: function (res) {
-        console.log("模板:", res);
-        var status = res.data.status;
-        if (status == 1) {
-          that.setData({
-            photoList: res.data.data
-          })
-        } else {
-          tips.alert(res.data.msg);
-          that.setData({
-            photoList: false
-          })
+    // image
+    if (e.currentTarget.dataset.type =='image'){
+      that.setData({
+        cate_id: e.currentTarget.dataset.cate_id,
+        type: e.currentTarget.dataset.type
+      })
+      wx.request({
+        url: app.data.apiurl3 + "photo/image-template-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+        data: {
+          type: e.currentTarget.dataset.type,
+          cate_id: e.currentTarget.dataset.cate_id
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "GET",
+        success: function (res) {
+          console.log("模板:", res);
+          var status = res.data.status;
+          if (status == 1) {
+            that.setData({
+              photoList: res.data.data
+            })
+          } else {
+            tips.alert(res.data.msg);
+            that.setData({
+              photoList: false
+            })
+          }
         }
-      }
-    })
+      })
+    }else{ //video
+      that.setData({
+        type: ''
+      })
+      wx.request({
+        url: app.data.apiurl3 + "photo/other-template-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "GET",
+        success: function (res) {
+          console.log("模板:", res);
+          var status = res.data.status;
+          if (status == 1) {
+            that.setData({
+              photoList: res.data.data
+            })
+          } else {
+            tips.alert(res.data.msg);
+            that.setData({
+              photoList: false
+            })
+          }
+        }
+      })
+    }
+    
   },
   templateInform(e){
     console.log(e);
     let that = this;
+    let type = e.currentTarget.dataset.type;
     wx.request({
       url: apiurl + "photo/create-new-wall?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
       data: {
         name: '朋友照片墙',
         temp_id: e.currentTarget.dataset.temp_id,
-        type: that.data.type
+        type: e.currentTarget.dataset.type
       },
       header: {
         'content-type': 'application/json'
@@ -206,11 +234,13 @@ Page({
           that.setData({
             show:false
           })
-          if (that.data.type=='image'){
+          if (type=='image'){
+            console.log('image')
             wx.navigateTo({
               url: '../templateInform/templateInform?temp_id=' + e.currentTarget.dataset.temp_id + '&pw_id=' + res.data.data
             })
-          } else if (that.data.type == 'h5'){
+          } else if (type == 'h5'){
+            console.log('h5')
             wx.navigateTo({
               url: '../albumInform/albumInform?temp_id=' + e.currentTarget.dataset.temp_id + '&pw_id=' + res.data.data
             })

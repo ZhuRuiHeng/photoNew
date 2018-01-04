@@ -78,7 +78,7 @@ Page({
                   photo_count: res.data.data.photo_count
                 })
               } else {
-                //tips.alert(res.data.msg);
+                tips.alert(res.data.msg);
               }
             },
           })   

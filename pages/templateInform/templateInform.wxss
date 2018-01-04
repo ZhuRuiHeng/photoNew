@@ -58,7 +58,7 @@ page{
 }
 .notice{
   text-align: left;
-  margin-top: 40rpx;
+  margin: 40rpx 0 100rpx 0;
   color: #626262;
   padding-left: 40rpx;
 }

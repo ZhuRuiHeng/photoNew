@@ -1,11 +1,13 @@
 <!--index.wxml-->
 <view class="container">
     <view class='management'>
-         <view class="left {{music_play?'music_play':''}}" bindtap="bindPlay"></view> 
-        <view class='right' wx:if="{{self}}" bindtap='management'>照片管理</view>  
+        <view class="left {{music_play?'music_play':'stop'}}" bindtap="bindPlay"></view>
+        <view class='right' wx:if="{{self}}" bindtap='management' >
+            <image src="../img/photoEdit.png" mode="widthFix"></image>
+        </view>  
     </view>
     <view class='photo'>
-        <view class='index' wx:if="{{finish}}" bindtap='savePhoto'></view>
+         <view class='index' wx:if="{{finish}}" bindtap='savePhoto'></view>
          <image class='play' wx:if="{{finish}}" bindtap='savePhoto' src="../img/sanjiao.png"></image> 
          <image class='thumb' src='{{photoInform.thumb}}' mode='aspectFit'></image> 
     </view>

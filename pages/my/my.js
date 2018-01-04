@@ -111,7 +111,6 @@ Page({
             that.setData({
               bgImg: res.data.data.bg
             })
-            //wx.hideLoading()
           } else {
             console.log(res.data.msg)
           }

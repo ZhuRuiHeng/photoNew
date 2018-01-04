@@ -498,7 +498,7 @@ Page({
     console.log(that.data.pw_id);
     // 获取照片墙pwid
     return {
-      title: "快来一起制作照片墙",
+      title: "制作我们的照片墙",
       path: '/pages/templateInform/templateInform?pw_id=' + that.data.pw_id,
       success: function (res) {
         console.log(res);
