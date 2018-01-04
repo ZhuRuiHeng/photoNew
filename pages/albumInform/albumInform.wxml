@@ -1,5 +1,4 @@
 <!--index.wxml-->
-<import src="../template/template.wxml" />
 <view class="container">
     <view class='management'>
          <view class="left {{music_play?'music_play':''}}" bindtap="bindPlay"></view> 

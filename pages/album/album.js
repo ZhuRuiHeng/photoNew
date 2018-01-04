@@ -175,29 +175,6 @@ Page({
       })
   },
  
-  navUrl(e) {
-    console.log(e);
-    console.log(e.currentTarget.dataset.itembar);
-    if (e.currentTarget.dataset.itembar == 2) {
-      console.log(111);
-      if (this.data.show){
-        this.setData({
-          itemBar: 2,
-          show: false
-        })
-      }else{
-        this.setData({
-          itemBar: 2,
-          show: true
-        })
-      } 
-    } else {
-      console.log(222);
-      wx.reLaunch({
-        url: e.currentTarget.dataset.url,
-      })
-    }
-  },
   //设置分享
   onShareAppMessage: function (e) {
     console.log(e);

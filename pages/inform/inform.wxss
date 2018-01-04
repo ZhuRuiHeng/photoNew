@@ -1,5 +1,5 @@
 page{
-  background: #e6e8f5;
+  background: #fff;
 }
 .container{
   padding-bottom: 100rpx;

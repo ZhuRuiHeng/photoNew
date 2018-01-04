@@ -150,29 +150,6 @@ Page({
       url: '../templatePhoto/templatePhoto',
     })
   },
-  // 导航跳转
-  navUrl(e) {
-    // console.log(e);
-    // console.log(e.currentTarget.dataset.itembar);
-    if (e.currentTarget.dataset.itembar == 2) {
-      if (this.data.show) {
-        this.setData({
-          itemBar: 2,
-          show: false
-        })
-      } else {
-        this.setData({
-          itemBar: 2,
-          show: true
-        })
-      }
-
-    } else {
-      wx.reLaunch({
-        url: e.currentTarget.dataset.url,
-      })
-    }
-  },
   // 分享好友
   friends() {
     wx.showToast({

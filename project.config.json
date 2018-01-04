@@ -25,7 +25,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 12,
+			"current": 13,
 			"list": [
 				{
 					"id": -1,
@@ -82,12 +82,6 @@
 					"query": ""
 				},
 				{
-					"id": 9,
-					"name": "indexs",
-					"pathName": "pages/indexs/indexs",
-					"query": "scene=photo_wall_2766"
-				},
-				{
 					"id": -1,
 					"name": "album",
 					"pathName": "pages/album/album",
@@ -112,10 +106,10 @@
 					"query": "pw_id=1312"
 				},
 				{
-					"id": 14,
+					"id": 13,
 					"name": "templateInform",
 					"pathName": "pages/templateInform/templateInform",
-					"query": "pw_id=3255"
+					"query": "pw_id=62838"
 				},
 				{
 					"id": -1,

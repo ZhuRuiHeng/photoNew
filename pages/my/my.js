@@ -24,98 +24,99 @@ Page({
     })
     let that = this;
     let sign = wx.getStorageSync('sign');
-    
     that.setData({
       userInfo: wx.getStorageSync('userInfo'),
       show: false,
       music_play: wx.getStorageSync('music_play'),
       now: 1,
     })
-    // 请求 
-    wx.request({
-      url: app.data.apiurl3 + "photo/photo-wall-list?sign=" + sign + '&operator_id=' + app.data.kid,
-      data:{
-        type:'image'
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "GET",
-      success: function (res) {
-        console.log("照片墙列表:", res);
-        var status = res.data.status;
-        if (status == 1) {
-          that.setData({
-            photosList: res.data.data
-          })
-          wx.hideLoading()
-        } else {
-          tips.alert(res.data.msg)
+    app.getAuth(function () {
+      // 请求 
+      wx.request({
+        url: app.data.apiurl3 + "photo/photo-wall-list?sign=" + sign + '&operator_id=' + app.data.kid,
+        data: {
+          type: 'image'
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "GET",
+        success: function (res) {
+          console.log("照片墙列表:", res);
+          var status = res.data.status;
+          if (status == 1) {
+            that.setData({
+              photosList: res.data.data
+            })
+            wx.hideLoading()
+          } else {
+            tips.alert(res.data.msg)
+          }
         }
-      }
-    })
-    //音乐 请求 
-    wx.request({
-      url: apiurl + "photo/music-list?sign=" + sign + '&operator_id=' + app.data.kid,
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "GET",
-      success: function (res) {
-        console.log("音乐列表:", res);
-        var status = res.data.status;
-        if (status == 1) {
-          console.log('音乐列表：', res.data.data);
-          that.setData({
-            musicsList: res.data.data
-          })
-          //wx.hideLoading()
-        } else {
-          tips.alert(res.data.msg)
-        }
+      })
+      //音乐 请求 
+      wx.request({
+        url: apiurl + "photo/music-list?sign=" + sign + '&operator_id=' + app.data.kid,
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "GET",
+        success: function (res) {
+          console.log("音乐列表:", res);
+          var status = res.data.status;
+          if (status == 1) {
+            console.log('音乐列表：', res.data.data);
+            that.setData({
+              musicsList: res.data.data
+            })
+            //wx.hideLoading()
+          } else {
+            tips.alert(res.data.msg)
+          }
 
-      }
-    })
-    //获取用户信息
-    wx.request({
-      url: app.data.apiurl + "photo/user-info?sign=" + sign + '&operator_id=' + app.data.kid,
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "GET",
-      success: function (res) {
-        console.log("用户信息:", res);
-        var status = res.data.status;
-        if (status == 1) {
-          that.setData({
-            member_number: res.data.data.member_number,
-            photo_fans_count: res.data.data.photo_fans_count
-          })
-          //wx.hideLoading()
-        } else {
-          tips.alert(res.data.msg)
         }
-      }
-    })
-    //背景图  
-    wx.request({
-      url: app.data.apiurl2 + "photo/get-user-bg?sign=" + sign + '&operator_id=' + app.data.kid,
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "GET",
-      success: function (res) {
-        console.log("背景图:", res);
-        var status = res.data.status;
-        if (status == 1) {
-          that.setData({
-            bgImg: res.data.data.bg
-          })
-          //wx.hideLoading()
-        } else {
-          console.log(res.data.msg)
+      })
+      //获取用户信息
+      wx.request({
+        url: app.data.apiurl + "photo/user-info?sign=" + sign + '&operator_id=' + app.data.kid,
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "GET",
+        success: function (res) {
+          console.log("用户信息:", res);
+          var status = res.data.status;
+          if (status == 1) {
+            that.setData({
+              member_number: res.data.data.member_number,
+              photo_fans_count: res.data.data.photo_fans_count
+            })
+            //wx.hideLoading()
+          } else {
+            tips.alert(res.data.msg)
+          }
         }
-      }
+      })
+      //背景图  
+      wx.request({
+        url: app.data.apiurl2 + "photo/get-user-bg?sign=" + sign + '&operator_id=' + app.data.kid,
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "GET",
+        success: function (res) {
+          console.log("背景图:", res);
+          var status = res.data.status;
+          if (status == 1) {
+            that.setData({
+              bgImg: res.data.data.bg
+            })
+            //wx.hideLoading()
+          } else {
+            console.log(res.data.msg)
+          }
+        }
+      })
     })
   },
   bindPlay() {
@@ -140,29 +141,6 @@ Page({
         music_play: true
       })
     }
-  },
-  navUrl(e) {
-    console.log(e);
-    console.log(e.currentTarget.dataset.itembar);
-    if (e.currentTarget.dataset.itembar == 2) {
-      console.log(111);
-      if (this.data.show) {
-        this.setData({
-          itemBar: 2,
-          show: false
-        })
-      } else {
-        this.setData({
-          itemBar: 2,
-          show: true
-        })
-      }
-    } else {
-      console.log(222);
-      wx.reLaunch({
-        url: e.currentTarget.dataset.url,
-      })
-    } 
   },
   //编辑
   editTap(e){

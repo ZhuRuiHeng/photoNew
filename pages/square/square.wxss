@@ -323,6 +323,7 @@ button::after{
   z-index: 12;
   color: #fff;
   font-size: 22rpx;
+  cursor: pointer;
 }
 .wines{
   padding: 20rpx;

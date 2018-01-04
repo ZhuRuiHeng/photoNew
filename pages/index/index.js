@@ -1,9 +1,4 @@
-// pages/before/before.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     second: 3
   },
@@ -41,10 +36,6 @@ Page({
       })
       wx.setStorageSync('pw_id', pw_id);
     } 
-    // else { //没有参
-    //   console.log('没有参')
-    //   wx.setStorageSync('pw_id', '0');
-    // }
    
   },
 
@@ -77,17 +68,14 @@ Page({
                   wx.redirectTo({
                     url: '../albumInform/albumInform?pw_id=' + that.data.pw_id+'&ewm=1',
                   })
-                }else{
+                } else if(that.data.type=='image'){
                   wx.redirectTo({
                     url: '../templateInform/templateInform?pw_id=' + that.data.pw_id,
                   })
                 }
                 
               }else{
-                // wx.redirectTo({
-                //   url: '../indexs/indexs',
-                // })
-                wx.redirectTo({
+                wx.switchTab({
                   url: '../square/square',
                 })
               }
@@ -112,11 +100,6 @@ Page({
   //     url: '../indexs/indexs',
   //   })
   // },
-
-
-  /**
-   * 用户点击右上角分享
-   */
   onShareAppMessage: function () {
     return {
       path: '/pages/index/index',

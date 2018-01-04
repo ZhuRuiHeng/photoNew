@@ -11,12 +11,8 @@ page{
 .management{
     display: flex;
     justify-content: space-between;
-    height: 50rpx;
-    line-height: 50rpx;
-    padding: 10rpx 20rpx;
-    position: absolute;
-    top: 0;
-    left: 0;
+    height: 90rpx;
+    padding:20rpx;
     width: 100%;
     box-sizing: border-box;
     z-index: 9;
@@ -56,33 +52,32 @@ page{
         transform:rotate(-3turn)
     }
 }
-
-.management .right{
-    background: #34a8e0;
-    color: #fff;
-    height: 60rpx;
-    line-height: 60rpx;
-    border-radius: 10rpx;
-    padding: 0 20rpx;
-    box-sizing: border-box;
+.right image{
+  width: 50rpx;
+  height: 50rpx;
 }
 .notice{
-  text-align: center;
-  margin-top: 20rpx;
+  text-align: left;
+  margin-top: 40rpx;
+  color: #626262;
+  padding-left: 40rpx;
 }
 .buttons{
   padding-bottom:40rpx; 
+  color: #626262;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
 }
-.buttons view{
+.buttons view.active{
   display: block;
-  width: 200rpx;
+  width: 260rpx;
   height: 60rpx;
   line-height: 60rpx;
-  border-radius: 10rpx;
+  border-radius: 30rpx;
   padding: 0 20rpx;
   background: #666;
   color: #fff;
-  margin: 20rpx auto;
   text-align: center;
   cursor: pointer;
 }
@@ -90,14 +85,14 @@ page{
   margin-bottom: 100rpx;
 }
 .buttons view.active{
-  background: #34a8e0;
+  background: #ff999a;
+  margin-top:20rpx;
 }
-.buttons button{
+.buttons form button{
   font-size: 26rpx;
   margin: 0;
   padding: 0;
-  border-radius: 0;
-  background: #34a8e0;
+  background: #ff999a;
   color: #fff;
   line-height: inherit;
 }
@@ -105,17 +100,23 @@ button::after{
   content: none;
 }
 .photo{
-  margin: -20rpx auto 0;
+  margin: 0 auto;
   text-align: center;
   position: relative;
   width: 100%;
-  height: 800rpx;
+  height: 700rpx;
 }
 .photo .thumb{
-  width: 100%;
-  height: 800rpx;
+  width: 90%;
+  height: 700rpx;
+  border: 2rpx solid #e8ecff; 
+  border-radius: 16rpx;
+  box-shadow:5rpx 5rpx 5rpx 5rpx #e8ecff;
 }
-
+.icon image{
+    width: 60rpx;
+    height: 60rpx;
+}
 @-webkit-keyframes an_photo{
     0%{
         opacity:0
@@ -231,16 +232,19 @@ button::after{
 }
 form{
   display:block;
-  width:200rpx;
-  height:60rpx;
-  line-height:60rpx;
-  border-radius:10rpx!important;
-  background:#34a8e0;
+  width:260rpx;
+  height:62rpx;
+  line-height:62rpx;
+  border-radius:30rpx!important;
+  background:#ff999a;
   color:#fff;
-  margin:20rpx auto;
   text-align:center;
   cursor:pointer;
   padding:0 20rpx;
+  margin-top: 20rpx;
+}
+.buttona{
+    border-radius: 30rpx;
 }
 button{
   background-color:#fff;
@@ -248,7 +252,7 @@ button{
   margin: 0!important;
   line-height:inherit;
   padding:0!important;
-  border-radius:0!important;
+  border-radius: 10rpx;
 }
 button::after{
   content: none;

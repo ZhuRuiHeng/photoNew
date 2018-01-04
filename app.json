@@ -2,15 +2,12 @@
   "pages":[
     "pages/index/index",
     "pages/square/square",
-    "pages/photos/photos",
     "pages/my/my",
     "pages/inform/inform",
     "pages/avatarUpload/upload/upload",
     "pages/avatarUpload/upload1/upload1",
     "pages/avatarUpload/upload2/upload2",
-    "pages/indexs/indexs",
-    "pages/share/share",
-   "pages/setting/setting",
+    "pages/setting/setting",
     "pages/comment/comment",
     "pages/template/template",
     "pages/templatePhoto/templatePhoto",
@@ -19,7 +16,6 @@
     "pages/album/album",
     "pages/albumInform/albumInform",
     "pages/templateInform/templateInform",
-    "pages/mode1/mode1",
     "pages/rules/rules",
     "pages/seephoto/seephoto"
     

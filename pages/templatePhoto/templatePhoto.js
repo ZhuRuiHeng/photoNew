@@ -54,11 +54,11 @@ Page({
       }
     ],
     nowTitle:'最新',
-    nowImage: 0
+    nowImage: 0,
+    type:'image'
   },
   onShow: function () {
     console.log('music_play:',app.data.music_play);
-    
     console.log('music_play:', wx.getStorageSync('music_play'))
     wx.showToast({
       title: '加载中',
