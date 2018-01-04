@@ -25,6 +25,7 @@
                         <text wx:else>相册集</text>
                     </view>
                 </view>
+                <view class='addTime'>{{item.add_time}}</view>
             </view>
             <form report-submit="true" bindsubmit="informSquare" class='mid'  data-name="{{item.name}}" 
                   data-pw_id='{{item.pw_id}}' data-type='{{item.type}}' data-temp_id="{{item.temp_id}}">

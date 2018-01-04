@@ -22,6 +22,7 @@ page{
 .item .top{
   display: flex;
   justify-content: flex-start;
+  position: relative;
 }
 .item .top image.niceImg{
     width: 90rpx;
@@ -51,7 +52,10 @@ page{
     height: 30rpx;
 }
 .niceNames view{
-   line-height: 46rpx; 
+   line-height: 46rpx;
+   display: block;
+   width: 200rpx;
+   white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
 .niceNames view text{
   background: #e7e7e7;
@@ -380,4 +384,11 @@ button::after{
 }
 .wines .content{
   line-height: 56rpx;
+}
+.item .addTime{
+  color: #626262;
+  font-size: 22rpx;
+  position: absolute;
+  right:20rpx;
+  bottom: 20rpx; 
 }

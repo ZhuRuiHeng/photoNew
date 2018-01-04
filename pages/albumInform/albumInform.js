@@ -243,8 +243,8 @@ Page({
   },
   //我也要玩
   myplay(){
-    wx.redirectTo({
-      url: '../album/album',
+    wx.switchTab({
+      url: '../templatePhoto/templatePhoto',
     })
   },
   upPhoto(e){

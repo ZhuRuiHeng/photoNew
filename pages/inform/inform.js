@@ -8,7 +8,7 @@ Page({
     url: 'https://friend-guess.playonwechat.com/assets/images/result/40741d60add2279916d8783b3d6667f9.jpg?1513410944?0.5924372259162527'
   },
   onLoad: function (options) {
-    //console.log(options);
+    console.log(options);
       this.setData({
         pw_id: options.pw_id,
         type: options.type,
@@ -81,11 +81,11 @@ Page({
       let that = this;
       let type = e.currentTarget.dataset.type;
       if (type=='h5'){
-        wx.navigateTo({
-          url: '../album/album',
+        wx.switchTab({
+          url: '../templatePhoto/templatePhoto',
         })
       } else{
-        wx.navigateTo({
+        wx.switchTab({
           url: '../templatePhoto/templatePhoto',
         })
       }

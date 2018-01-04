@@ -45,7 +45,6 @@ page{
   display: flex;
   justify-content: flex-start;
   position: relative;
-  border-bottom: 1px solid #ddd;
 }
 .top image.niceImg{
     width: 120rpx;
@@ -58,11 +57,11 @@ page{
   margin: 20rpx 0 0 0;
   font-size: 28rpx;
 }
-.topnice .nickName{ 
-    line-height: 50rpx;
-}
 .niceNames .nickName{
     line-height: 44rpx;
+    display: inline-block;
+    width: 120rpx;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
 .niceNames .nickName.one{
   font-size: 28rpx;
@@ -86,7 +85,7 @@ page{
   margin-top: 20rpx;
 }
 .tops.border{
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #f7f7f7;
 }
 .nowInform{
   width: 100%;
@@ -111,7 +110,7 @@ page{
   width: 40rpx;
   height: 40rpx;
   position: relative;
-  top: 3rpx;
+  top: 8rpx;
 }
 .production{
   width: 140rpx;
@@ -122,6 +121,7 @@ page{
   border-radius:30rpx;
   padding:0 20rpx;
   text-align: center;
+  margin: 30rpx auto 0;
 }
 .lowNight{
     text-align: right;
@@ -168,7 +168,8 @@ page{
   width: 40rpx;
   height: 40rpx;
   position: relative;
-  top:2rpx; 
+  top:8rpx; 
+  margin-right: 8rpx;
 }
 .footer{
   width: 100%;
@@ -216,4 +217,7 @@ page{
 image.play{
    width: 80rpx;
   height: 80rpx;
+}
+.left,.right{
+  line-height: 130rpx;
 }

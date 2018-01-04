@@ -146,7 +146,7 @@ Page({
   },
   //我也要玩
   myplay() {
-    wx.redirectTo({
+    wx.switchTab({
       url: '../templatePhoto/templatePhoto',
     })
   },

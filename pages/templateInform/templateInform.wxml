@@ -10,13 +10,13 @@
     </view>
     <view class='notice'>注：此模板可以上传{{photoInform.counts.length}}张照片</view>
     <view class='buttons'>
-        <view class='active buttona' bindtap='savePhoto' wx:if="{{finish && self && button}}">生成照片墙</view>
-        <view class='active buttonb' wx:if="{{!button}}">生成照片墙</view>
         <!--wx:if="{{!finish && self}}"   -->
         <button class='translate icon'  wx:if="{{self}}"  open-type='share' style='background:none'>
             <image src="../img/inter.png" mode='widthFix'></image>
             <view>邀请</view>
-        </button>   
+        </button> 
+        <view class='active buttona' bindtap='savePhoto' wx:if="{{finish && self && button}}">生成照片墙</view>
+        <view class='active buttonb' wx:if="{{!button}}">生成照片墙</view>  
         <form report-submit="true" bindsubmit="upPhoto" class="formSubmit active" wx:if="{{!finish}}">
             <button class="submit one {{now==1?'active':''}}" formType="submit">上传图片</button>
         </form>

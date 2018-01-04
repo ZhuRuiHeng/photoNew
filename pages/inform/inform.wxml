@@ -24,7 +24,7 @@
                     <image src="../img/983476-200.png"></image>{{info.thumb_count}}
               </view>
             </view> -->
-            <view class='left' bindtap='informSquare'  data-name="{{item.name}}" 
+            <view class='left' bindtap='informSquare'  data-name="{{name}}" 
                   data-pw_id='{{pw_id}}' data-type='photowall'>
                 <image src="../img/7.png" mode='widthFix'></image>
                 {{info.click_count}}次

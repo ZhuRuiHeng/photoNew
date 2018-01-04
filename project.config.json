@@ -70,10 +70,10 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 7,
 					"name": "inform",
 					"pathName": "pages/inform/inform",
-					"query": ""
+					"query": "pw_id=78136"
 				},
 				{
 					"id": -1,
