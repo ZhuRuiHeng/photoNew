@@ -88,7 +88,7 @@ page{
     border-left:1px solid #f7f7f7; 
     border-right:1px solid #f7f7f7; 
 }
-.btm .right image,.chart image{
+.btm .right image,.chart image,.left image{
   width: 50rpx;
   height: 50rpx;
   position: relative;
@@ -319,8 +319,10 @@ button::after{
   border-top-left-radius: 20rpx;
   border-bottom-left-radius: 20rpx;
   padding: 4rpx 20rpx 4rpx 16rpx;
-  background: #6fe8ff;
+  background: rgba(0, 0, 0, 0.6);
   z-index: 12;
+  color: #fff;
+  font-size: 22rpx;
 }
 .wines{
   padding: 20rpx;

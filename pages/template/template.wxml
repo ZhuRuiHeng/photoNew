@@ -3,7 +3,7 @@
         <view class="navBar">
             <view class='itemBar' data-itemBar='1' bindtap='navUrl' data-url='../square/square'>
                 <image wx:if="{{itemBar==1}}" src="../img/home-icon-active.png" mode='widthFix'></image>
-                <image wx:else src="../img/home-icon.png" mode='widthFix'></image>
+                <image wx:else src="../img/home-icon1.png" mode='widthFix'></image>
             </view>
             <view class='itemBar' data-itemBar='2' bindtap='navUrl' data-url='../photos/photos'>
                 

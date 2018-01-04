@@ -1,6 +1,6 @@
 @import "../template/template.wxss";
 page{
-  background: #e4e4e4;
+  background: #e6e8f5;
 }
 .container{
   padding-bottom: 100rpx;
@@ -43,6 +43,7 @@ page{
 }
 .common{
   width: 100%;
+  background: #e6e8f5;
 }
 .common .item{
     width: 48%;
@@ -106,4 +107,17 @@ page{
   color: #fff;
   -webkit-transform: rotate(45deg);  
  -moz-transform: rotate(45deg);  
+}
+.nowTitle{
+  font-size: 30rpx;
+  line-height: 66rpx;
+  vertical-align: middle;
+  background: #fff;
+  padding: 0 20rpx;
+}
+.nowTitle image{
+  width: 50rpx;
+  height: 50rpx;
+  vertical-align: middle;
+  margin-left: 10rpx;
 }

@@ -1,3 +1,6 @@
+page{
+  background: #e6e8f5;
+}
 .container{
   padding-bottom: 100rpx;
   font-size: 24rpx;

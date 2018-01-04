@@ -1,7 +1,3 @@
-<import src="../template/template.wxml" />
-<!--引入模板  -->
-<template is="navBar"></template>
-<template is="pretty" wx:if="{{show}}"></template>
 <view class="musicList {{music_play?'music_play':'stop'}}"  bindtap='bindPlay'></view> 
 <view class="container {{music==true?'fixed':''}}" >
     <view class='edit' bindtap='editTap'><image src="../img/setting.png" mode='widthFix'></image></view>

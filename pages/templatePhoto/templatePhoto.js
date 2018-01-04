@@ -2,10 +2,6 @@ const app = getApp()
 import tips from '../../utils/tips.js'
 const apiurl = 'https://friend-guess.playonwechat.com/';
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     now:'image',
     show:false,
@@ -14,40 +10,55 @@ Page({
     music_play:app.data.music_play,
     TemplateList:[
       {
-        icon:'../img/6.png',
+        icon:'../img/1.png',
         title:'最新',
         bg:'#ff7ea2',
-        cate_id:'22'
-      }, {
-        icon: '../img/5.png',
-        title: '节日活动',
-        bg: '#578ffe',
-        cate_id: '13'
-      }, {
-        icon: '../img/4.png',
-        title: '头像',
-        bg: '#fcadb2',
-        cate_id: '23'
-      }, {
-        icon: '../img/3.png',
-        title: '拼图',
-        bg: '#ffbf43',
-        cate_id: '15'
+        cate_id:'22',
+        width: '58rpx',
+        type: 'image'
       }, {
         icon: '../img/2.png',
+        title: '节日活动',
+        bg: '#578ffe',
+        cate_id: '13',
+        width: '70rpx',
+        type: 'image'
+      }, {
+        icon: '../img/3.png',
+        title: '头像',
+        bg: '#fcadb2',
+        cate_id: '23',
+        width: '60rpx',
+        type: 'image'
+      }, {
+        icon: '../img/4.png',
+        title: '拼图',
+        bg: '#ffbf43',
+        cate_id: '15',
+        width: '56rpx',
+        type: 'image'
+      }, {
+        icon: '../img/5.png',
         title: '素材库',
         bg: '#80d9eb',
-        cate_id: '24'
+        cate_id: '24',
+        width: '62rpx',
+        type: 'image'
       }, {
-        icon: '../img/1.png',
+        icon: '../img/6.png',
         title: '视频',
         bg: '#8c9ffd',
-        cate_id: '25'
+        cate_id: '25',
+        width: '60rpx',
+        type: 'video'
       }
-    ]
+    ],
+    nowTitle:'最新',
+    nowImage: 0
   },
   onShow: function () {
     console.log('music_play:',app.data.music_play);
+    
     console.log('music_play:', wx.getStorageSync('music_play'))
     wx.showToast({
       title: '加载中',
@@ -127,19 +138,31 @@ Page({
     }
   },
   navbar(e) {
-    console.log('type:',e.currentTarget.dataset.now)
     wx.showToast({
       title: '加载中',
       icon: 'loading'
     })
     let that = this;
+    let index = e.currentTarget.dataset.index;
+    let TemplateList = that.data.TemplateList;
+    for (let i = 0; i < TemplateList.length;i++){
+      if (index == i){
+        that.setData({
+          nowTitle: TemplateList[i].title,
+          nowImage: index
+        })
+      }
+      
+    }
+    console.log("index:", index);
     that.setData({
-      cate_id: e.currentTarget.dataset.cate_id
+      cate_id: e.currentTarget.dataset.cate_id,
+      type: e.currentTarget.dataset.type
     })
     wx.request({
       url: app.data.apiurl2 + "photo/template-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
       data: {
-        type: e.currentTarget.dataset.now,
+        type: e.currentTarget.dataset.type,
         cate_id: e.currentTarget.dataset.cate_id
       },
       header: {
@@ -169,7 +192,8 @@ Page({
       url: apiurl + "photo/create-new-wall?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
       data: {
         name: '朋友照片墙',
-        temp_id: e.currentTarget.dataset.temp_id
+        temp_id: e.currentTarget.dataset.temp_id,
+        type: that.data.type
       },
       header: {
         'content-type': 'application/json'
@@ -182,13 +206,18 @@ Page({
           that.setData({
             show:false
           })
-          wx.navigateTo({
-            url: '../templateInform/templateInform?temp_id=' + e.currentTarget.dataset.temp_id + '&pw_id=' + res.data.data
-          })
+          if (that.data.type=='image'){
+            wx.navigateTo({
+              url: '../templateInform/templateInform?temp_id=' + e.currentTarget.dataset.temp_id + '&pw_id=' + res.data.data
+            })
+          } else if (that.data.type == 'h5'){
+            wx.navigateTo({
+              url: '../albumInform/albumInform?temp_id=' + e.currentTarget.dataset.temp_id + '&pw_id=' + res.data.data
+            })
+          }
         } else {
           tips.alert(res.data.msg);
         }
-
       }
     })
   },

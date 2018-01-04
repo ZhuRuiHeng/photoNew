@@ -16,7 +16,7 @@
               阅读 {{info.click_count}} 
               <view class='zan' bindtap='zanTap' data-type='photowall' data-index='{{item.index}}'
                     data-object_id='{{pw_id}}'>
-                    <image src="../img/zan.png"></image>{{info.thumb_count}}
+                    <image src="../img/983476-200.png"></image>{{info.thumb_count}}
               </view>
             </view>
         </view>
