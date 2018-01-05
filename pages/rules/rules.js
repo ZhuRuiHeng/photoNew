@@ -3,54 +3,43 @@ import tips from '../../utils/tips.js';
 var WxParse = require('../../wxParse/wxParse.js');
 Page({
   data: {
-  
+    num: Math.random()
   },
   onLoad: function (options) {
-  
+      this.setData({
+        thumb: options.thumb,
+        win1: options.win1
+      })
   },
   onShow: function () {
     let that = this;
     app.getAuth(function () {
-        // 活动规则
-        wx.request({
-          url: app.data.apiurl2 + "photo/activity-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-          header: {
-            'content-type': 'application/json'
-          },
-          method: "GET",
-          success: function (res) {
-            console.log("活动海报:", res);
-            var status = res.data.status;
-            if (status == 1) {
-              that.setData({
-                activeInform: res.data.data,
-                thumb: res.data.data.thumb
-              })
-              wx.hideLoading()
-            } else {
-              tips.alert(res.data.msg);
-            }
-          }
-        })
+
     })
   },
   chart(){
-    //console.log(this.data.thumb);
-    wx.navigateToMiniProgram({
-      appId: 'wx22c7c27ae08bb935',
-      path: 'pages/photoWall/photoWall?poster=' + this.data.thumb,
-      envVersion: 'release',
-      success(res) {
-        // 打开成功
-        console.log(res);
-      }
-    })
+    if (wx.getStorageSync('win1')==false){
+      tips.alert('集齐照片墙才可领取')
+    }else{
+      wx.navigateToMiniProgram({
+          appId: 'wx22c7c27ae08bb935',
+          path: 'pages/photoWall/photoWall?poster=http://ovhvevt35.bkt.clouddn.com/photo/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180105171204.png',
+          envVersion: 'release',
+          success(res) {
+            // 打开成功
+            console.log(res);
+          }
+        })
+    }
   },
  // 参与活动
   activeIn(e) {
+    wx.setStorageSync('cate_id', 13);
+    wx.setStorageSync('nowImage', 1);
+    wx.setStorageSync('nowTitle', '节日活动')
     wx.switchTab({
       url: '../templatePhoto/templatePhoto'
     })
-  },
+  }
 
 })

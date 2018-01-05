@@ -16,7 +16,7 @@
             <view>邀请</view>
         </button> 
         <view class='active buttona' bindtap='savePhoto' wx:if="{{finish && self && button}}">生成照片墙</view>
-        <!-- <view class='active buttonb' wx:if="{{!button}}">生成照片墙</view>   -->
+        <view class='active buttonb' wx:if="{{!button}}">生成照片墙</view>   
         <form report-submit="true" bindsubmit="upPhoto" class="formSubmit active" wx:if="{{!finish}}">
             <button class="submit one {{now==1?'active':''}}" formType="submit">上传图片</button>
         </form>

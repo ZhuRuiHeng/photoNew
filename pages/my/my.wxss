@@ -130,9 +130,11 @@ page{
     z-index: 1;
 }
 .item image{
-  width: 400rpx;
+  width: 460rpx;
   height: 400rpx;
   position: relative;
+  left: 60rpx;
+  top: -60rpx;
 }
 .timeWho{
   position: relative;
@@ -240,8 +242,8 @@ page{
   width: 50rpx;
   height: 40rpx;
   position: absolute;
-  top: -7rpx;
-  right: -6rpx;
+  top: 0rpx;
+  right: 56rpx;
   cursor: pointer;
 }
 .pop .closePop{
@@ -254,8 +256,8 @@ page{
   right: 30rpx;
 }
 .item .dels image,.pop .closePop .dels{
-  width: 36rpx;
-  height: 36rpx;
+  width: 46rpx;
+  height: 46rpx;
 }
 .pop{
   padding: 20rpx;
@@ -366,17 +368,21 @@ button::after{
   width: 80rpx;
   height: 80rpx;
 }
+.item:nth-child(odd) .addTimes{
+    background: #ff999a;
+}
+.item:nth-child(even) .addTimes{
+    background: #9596ff;
+}
 .addTimes{
   border: 2rpx solid #ff999a;
   width: 108rpx;
   height: 108rpx;
   border-radius: 50%;
-  background: #ff999a;
   position: relative;
   z-index: 6;
 }
 .addTime{
-    background: #ff999a;
     border:4rpx solid #fff;
     width: 100rpx;
     height: 100rpx;
@@ -388,4 +394,8 @@ button::after{
     font-size: 30rpx;
     padding-top: 10rpx;
     box-sizing: border-box;
+}
+form .button-hover{
+  background: #fff!important;
+  color: #626226!important;
 }

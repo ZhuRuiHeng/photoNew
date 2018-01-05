@@ -75,17 +75,15 @@ Page({
             'user': 'test'
           },
           success: function (res) {
-            console.log('上传图片成功', res);
-            console.log('上传pw_id：', pw_id);
             let data = JSON.parse(res.data);
             let picture = data.data;
             if (data.status == 1) {
               that.setData({
                 picture: data.data
               })
-              console.log(app.data.apiurl2 + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid);
+              console.log(app.data.apiurl3 + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid);
               wx.request({
-                  url: app.data.apiurl2 + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid,
+                  url: app.data.apiurl3 + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid,
                   data: {
                     pw_id: pw_id,
                     picture: that.data.picture,
@@ -103,7 +101,7 @@ Page({
                     if (status == 1) {
                       console.log('上传成功！')
                       //  获取到裁剪后的图片
-                      wx.reLaunch({
+                      wx.redirectTo({
                         url: '../../templateInform/templateInform?temp_id=' + wx.getStorageSync('temp_id')+'&pw_id='+ wx.getStorageSync('pw_id'),
                       })
 
@@ -128,7 +126,7 @@ Page({
       } else {
         console.log('获取图片失败，请稍后重试'),
         setTimeout(function(){
-          wx.reLaunch({
+          wx.redirectTo({
             url: '../../templateInform/templateInform?temp_id=' + wx.getStorageSync('temp_id'),
           })
         },1000)

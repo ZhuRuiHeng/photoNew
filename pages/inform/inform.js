@@ -50,7 +50,7 @@ Page({
             })
             tips.alert(res.data.msg);
             setTimeout(function(){
-              wx.reLaunch({
+              wx.switchTab({
                 url: '../square/square',
               })
             },2000)

@@ -11,7 +11,7 @@
          <image class='play' wx:if="{{finish}}" bindtap='savePhoto' src="../img/sanjiao.png"></image> 
          <image class='thumb' src='{{photoInform.thumb}}' mode='aspectFit'></image> 
     </view>
-    <view class='notice'>注：此模板可以上传{{photo_count}}张照片</view>
+    <view class='notice'>注：此模板需上传{{photo_count}}张照片</view>
     <view class='buttons'>
           <!-- wx:if="{{finish}}"  -->
           <form report-submit="true" bindsubmit="upPhoto" class="formSubmit active" wx:if="{{self && !finish}}">

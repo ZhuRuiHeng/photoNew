@@ -257,3 +257,7 @@ button{
 button::after{
   content: none;
 }
+.button-hover{
+  background: #ff999a!important;
+  color: #fff!important;
+}

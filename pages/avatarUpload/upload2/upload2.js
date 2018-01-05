@@ -100,7 +100,7 @@ Page({
               })
               console.log('上传pw_id：',pw_id);
               wx.request({
-                  url: app.data.apiurl2 + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid,
+                  url: app.data.apiurl3 + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid,
                   data: {
                     pw_id: pw_id,
                     position: wx.getStorageSync('position'),
@@ -134,7 +134,7 @@ Page({
                       wx.removeStorageSync('width');
                       wx.removeStorageSync('height');
                       wx.removeStorageSync('weizhi');
-                      wx.reLaunch({
+                      wx.redirectTo({
                         url: '../../templateInform/templateInform?temp_id=' + wx.getStorageSync('temp_id') + '&pw_id=' + wx.getStorageSync('pw_id'),
                       })
 
@@ -149,7 +149,7 @@ Page({
                         wx.removeStorageSync('width');
                         wx.removeStorageSync('height');
                         wx.removeStorageSync('weizhi');
-                        wx.reLaunch({
+                        wx.redirectTo({
                           url: '../../templateInform/templateInform?temp_id=' + wx.getStorageSync('temp_id') + '&pw_id=' + wx.getStorageSync('pw_id'),
                         })
                       },2000)
@@ -172,7 +172,7 @@ Page({
         setTimeout(function(){
           wx.removeStorageSync('width');
           wx.removeStorageSync('height')
-          wx.reLaunch({
+          wx.redirectTo({
             url: '../../templateInform/templateInform?temp_id=' + wx.getStorageSync('temp_id') + '&pw_id=' + wx.getStorageSync('pw_id'),
           })
         },1000)

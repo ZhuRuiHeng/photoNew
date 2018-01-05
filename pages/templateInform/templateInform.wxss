@@ -257,3 +257,11 @@ button{
 button::after{
   content: none;
 }
+.buttons .button-hover{
+  background: #fff!important;
+  color: #626262;
+}
+form.active button.button-hover{
+  background: #ff999a!important;
+  color: #fff;
+}

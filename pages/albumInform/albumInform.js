@@ -40,7 +40,7 @@ Page({
     let that = this;
     // 判断照片信息
     wx.request({
-      url: app.data.apiurl + "photo/photo-wall-detail?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+      url: app.data.apiurl3 + "photo/photo-wall-detail?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
       data: {
         pw_id: that.data.pw_id
       },
@@ -77,6 +77,7 @@ Page({
                   source_effect: res.data.data.source_effect,
                   photo_count: res.data.data.photo_count
                 })
+                wx.hideLoading()
               } else {
                 tips.alert(res.data.msg);
               }
@@ -108,7 +109,7 @@ Page({
         }
       }
     })
-    wx.hideLoading()
+    
   },
   // 管理相册
   management() {
@@ -149,7 +150,7 @@ Page({
     let that = this;
     let sign = wx.getStorageSync('sign');
     wx.request({
-      url: app.data.apiurl1 + "photo/share?sign=" + sign + '&operator_id=' + app.data.kid,
+      url: app.data.apiurl3 + "photo/share?sign=" + sign + '&operator_id=' + app.data.kid,
       data: {
         pw_id: that.data.pw_id
       },

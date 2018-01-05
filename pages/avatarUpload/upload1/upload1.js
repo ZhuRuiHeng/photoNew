@@ -118,7 +118,7 @@ Page({
                   console.log("传：", that.data.position);
                   if (data.status == 1) {
                     wx.request({
-                      url: apiurl + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid,
+                      url: app.data.apiurl3 + "photo/append-photo?sign=" + sign + '&operator_id=' + app.data.kid,
                       data: {
                         pw_id: pw_id,
                         picture: that.data.picture,

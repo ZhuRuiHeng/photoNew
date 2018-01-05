@@ -8,14 +8,53 @@ Page({
     url:'https://friend-guess.playonwechat.com/assets/images/result/40741d60add2279916d8783b3d6667f9.jpg?1513410944?0.5924372259162527',
     page:1,
     type:'new',
-    activity:false,
     rules:false,
     oldWiner:false,
     music_play: wx.getStorageSync('music_play'),
-    dataUrl: ''
+    dataUrl: '',
+    finish:true,
+    num: Math.random(),
+    win:false,
+    join:true
   },
   onLoad: function (options) {
     //wx.removeStorageSync('activity')
+    let that = this;
+    // 活动信息
+    app.getAuth(function () {
+        wx.request({
+          url: app.data.apiurl3 + "photo/activity-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+          header: {
+            'content-type': 'application/json'
+          },
+          method: "GET",
+          success: function (res) {
+            console.log("活动信息:", res);
+            var status = res.data.status;
+            if (status == 1) {
+              that.setData({
+                activeInform: res.data.data,
+                thumb: res.data.data.activity_info.thumb + '?' + that.data.num,
+                join: res.data.data.join,
+                win: res.data.data.win,
+                win1: res.data.data.win
+              })
+              wx.setStorageSync('join', res.data.data.join);
+              wx.setStorageSync('win', res.data.data.win);
+              wx.setStorageSync('win1', res.data.data.win);
+              // 如果缓存win是true,则不弹  未参与活动每次都弹
+              if (wx.getStorageSync('win') == true) {
+                that.setData({
+                  win: false
+                })
+              }
+              wx.hideLoading()
+            } else {
+              tips.alert(res.data.msg);
+            }
+          }
+        })
+    })
   },
   onShow: function () {
     console.log(wx.getStorageSync('activity'));
@@ -49,7 +88,7 @@ Page({
                   allList: res.data.data
                 })
               } else {
-                // wx.reLaunch({
+                // wx.switchTab({
                 //   url: '../templatePhoto/templatePhoto' 
                 // })
                 that.setData({
@@ -91,94 +130,7 @@ Page({
             wx.hideLoading()
           }
         })
-        // 活动规则
-        wx.request({
-          url: app.data.apiurl2 + "photo/activity-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-          header: {
-            'content-type': 'application/json'
-          },
-          method: "GET",
-          success: function (res) {
-            console.log("活动信息:", res);
-            var status = res.data.status;
-            if (status == 1) {
-              function toDate(number) {
-                var n = number * 1000;
-                var date = new Date(n);
-                console.log("date", date)
-                var y = date.getFullYear();
-                var m = date.getMonth() + 1;
-                m = m < 10 ? ('0' + m) : m;
-                var d = date.getDate();
-                d = d < 10 ? ('0' + d) : d;
-                var h = date.getHours();
-                h = h < 10 ? ('0' + h) : h;
-                var minute = date.getMinutes();
-                var second = date.getSeconds();
-                minute = minute < 10 ? ('0' + minute) : minute;
-                second = second < 10 ? ('0' + second) : second;
-                //return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
-                return y + '.' + m + '.' + d;
-              }
-              that.setData({
-                oldWiner:false,
-                WinerInform: false,
-                winnerOpen: false,
-                activeInform: res.data.data,
-                start_time: toDate(res.data.data.start_time),
-                end_time: toDate(res.data.data.end_time),
-              })
-
-              if (wx.getStorageSync('activity') == true) {
-                  console.log(111);
-                  that.setData({
-                    activity: false,
-                    rules: true
-                  })
-              } else {
-                console.log(222);
-                wx.setStorageSync('activity', true)
-                that.setData({
-                  activity: true,
-                  rules: true
-                })
-                if (that.data.activeInform.rules) {
-                  WxParse.wxParse('newrules', 'html', that.data.activeInform.rules, that, 5)
-                }
-              }
-            }else {
-              //tips.alert(res.data.msg);
-              that.setData({
-                activity:false
-              })
-              // 存缓存
-              wx.setStorageSync('activity', true)
-              //往期开奖
-              wx.request({
-                url: app.data.apiurl2 + "photo/last-activity-info?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-                header: {
-                  'content-type': 'application/json'
-                },
-                method: "GET",
-                success: function (res) {
-                  console.log("往期开奖:", res);
-                  var status = res.data.status;
-                  if (status == 1) {
-                    that.setData({
-                      oldWiner: true,
-                      WinerInform: res.data.data.activity_info,
-                      winnerOpen: res.data.data.winner,
-                    })
-                  } else {
-                    //tips.alert(res.data.msg);
-                  }
-                  wx.hideLoading()
-                }
-              })
-            }
-            wx.hideLoading()
-          }
-        })
+        
     })
   },
   bindPlay(){
@@ -204,43 +156,28 @@ Page({
       })
     }
   },
+  // 联系客服
+  chart() {
+    wx.navigateToMiniProgram({
+      appId: 'wx22c7c27ae08bb935',
+      path: 'pages/photoWall/photoWall?poster=http://ovhvevt35.bkt.clouddn.com/photo/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180105171204.png',
+      envVersion: 'release',
+      success(res) {
+        // 打开成功
+        console.log(res);
+      }
+    })
+  },
   newList(e){
     wx.showToast({
       title: '加载中',
       icon: 'loading'
     })
     let that = this;
-    console.log("activity:", wx.getStorageSync('activity'));
     that.setData({
       type: e.currentTarget.dataset.type,
       page: 1
     })
-    // if (e.currentTarget.dataset.type == 'activity' ){
-    //   console.log("activity:", wx.getStorageSync('activity'))
-    //   console.log(wx.getStorageSync('activity'));
-    //   if (wx.getStorageSync('activity')==true){
-    //     console.log(111);
-    //     that.setData({
-    //       activity: false,
-    //       rules: true
-    //     })
-    //   }else{
-    //     console.log(222);
-    //     wx.setStorageSync('activity', true)
-    //     that.setData({
-    //       activity: true,
-    //       rules: true
-    //     })
-    //     if (that.data.activeInform.rules) {
-    //       WxParse.wxParse('newrules', 'html', that.data.activeInform.rules, that, 5)
-    //     }
-    //   }
-    // }else{
-    //   that.setData({
-    //     activity: false,
-    //     rules: false
-    //   })
-    // }
     // list
     wx.request({
       url: app.data.apiurl2 + "photo/photo-circle?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
@@ -260,7 +197,7 @@ Page({
             type: e.currentTarget.dataset.type
           })
         } else {
-          // wx.reLaunch({
+          // wx.switchTab({
           //   url: '../templatePhoto/templatePhoto'
           // })
           that.setData({
@@ -355,14 +292,18 @@ Page({
   // 关闭弹窗
   activeClose(){
     this.setData({
-      activity:false
+      join:true,
+      win:false
     })
   },
   // 参与活动
   activeIn(e){
       this.setData({
-        activity: false
+        join: false
       })
+      wx.setStorageSync('cate_id', 13);
+      wx.setStorageSync('nowImage', 1);
+      wx.setStorageSync('nowTitle', '节日活动');
       wx.switchTab({
         url: '../templatePhoto/templatePhoto'
       })
@@ -446,16 +387,10 @@ Page({
       }
     });
   },
-  // 往期开奖
-  oldWiner1(){
-    wx.navigateTo({
-      url: '../oldWiner/oldWiner'
-    })
-  },
   // 规则
   newRules1(e){
       wx.navigateTo({
-        url: '../rules/rules'
+        url: '../rules/rules?thumb=' + this.data.thumb
       })
   },
   shanchu(e){

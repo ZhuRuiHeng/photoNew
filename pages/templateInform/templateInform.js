@@ -14,7 +14,7 @@ Page({
       music_play: wx.getStorageSync('music_play'),
       dataUrl: wx.getStorageSync('dataUrl'),
       button:true,
-      self:false
+      self:true
   },
   onLoad: function (options) {
     //console.log(options);
@@ -64,7 +64,7 @@ Page({
     })
     //照片墙信息temp_id
     wx.request({
-      url: app.data.apiurl + "photo/photo-wall-detail?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+      url: app.data.apiurl3 + "photo/photo-wall-detail?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
       data: {
         pw_id: that.data.pw_id
       },
@@ -108,7 +108,7 @@ Page({
         }else{
           tips.alert(res.data.msg);
           setTimeout(function(){
-            wx.reLaunch({
+            wx.switchTab({
               url: '../square/square',
             })
           }, 3000)
@@ -132,7 +132,6 @@ Page({
             that.setData({
               finish: res.data.data.flag
             })
-            
           } else {
             //console.log(res.data.msg);
           }
@@ -160,7 +159,7 @@ Page({
     let that = this;
     let sign = wx.getStorageSync('sign');
     wx.request({
-      url: app.data.apiurl2 + "photo/share?sign=" + sign + '&operator_id=' + app.data.kid,
+      url: app.data.apiurl3 + "photo/share?sign=" + sign + '&operator_id=' + app.data.kid,
       data: {
         pw_id: that.data.pw_id
       },

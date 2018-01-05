@@ -55,7 +55,12 @@ Page({
     ],
     nowTitle:'最新',
     nowImage: 0,
-    type:'image'
+    type:'image',
+    cate_id:22
+  },
+  //13
+  onLoad: function (options) {
+    
   },
   onShow: function () {
     console.log('music_play:',app.data.music_play);
@@ -64,12 +69,24 @@ Page({
       title: '加载中',
       icon: 'loading'
     })
+    if (wx.getStorageSync('cate_id')) {
+      this.setData({
+        cate_id: wx.getStorageSync('cate_id'),
+        nowImage: wx.getStorageSync('nowImage'),
+        nowTitle: wx.getStorageSync('nowTitle', )
+      })
+    }
+    if (wx.getStorageSync('type')) {
+      this.setData({
+        type: wx.getStorageSync('type')
+      })
+    }
     let that = this;
     app.getAuth(function () {
       wx.request({
         url: app.data.apiurl2 + "photo/template-category?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
         data:{
-          type:'image'
+          type: that.data.type
         },
         header: {
           'content-type': 'application/json'
@@ -81,31 +98,31 @@ Page({
           if (status == 1) {
             that.setData({
               navList: res.data.data,
-              cate_id: res.data.data[0].cate_id,
+              cate_id: that.data.cate_id,
               music_play: wx.getStorageSync('music_play')
             })
-            // 默认第一个
-            wx.request({
-              url: app.data.apiurl3 + "photo/image-template-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-              data: {
-                type: 'image',
-                cate_id: that.data.navList[0].cate_id
-              },
-              header: {
-                'content-type': 'application/json'
-              },
-              method: "GET",
-              success: function (res) {
-                console.log("模板:", res);
-                var status = res.data.status;
-                if (status == 1) {
-                  that.setData({
-                    photoList: res.data.data
-                  })
-                } else {
-                  tips.alert(res.data.msg);
-                }
-              }
+          } else {
+            tips.alert(res.data.msg);
+          }
+        }
+      })
+      // 默认第一个
+      wx.request({
+        url: app.data.apiurl3 + "photo/image-template-list?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+        data: {
+          type: that.data.type,
+          cate_id: that.data.cate_id
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        method: "GET",
+        success: function (res) {
+          console.log("模板:", res);
+          var status = res.data.status;
+          if (status == 1) {
+            that.setData({
+              photoList: res.data.data
             })
           } else {
             tips.alert(res.data.msg);
@@ -142,6 +159,11 @@ Page({
       title: '加载中',
       icon: 'loading'
     })
+    // 移除缓存
+    wx.removeStorageSync('cate_id');
+    wx.removeStorageSync('nowImage');
+    wx.removeStorageSync('nowTitle');
+    wx.removeStorageSync('type');
     let that = this;
     let index = e.currentTarget.dataset.index;
     let TemplateList = that.data.TemplateList;
