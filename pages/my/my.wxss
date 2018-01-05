@@ -340,8 +340,52 @@ button::after{
   display: inline-block;
   text-align: left;
 }
-.timeTitle{
-  width: 1rpx;
-  height: 300rpx;
-  background: #626262;
+.addTime .timeBig{
+  
+}
+.addTime .timeTitle{
+
+}
+.line{
+  width: 2rpx;
+  position: absolute;
+  top: 100rpx;
+  left: 74rpx;
+  height: 458rpx;
+  background: #dcdce8;
+  display: inline-block;
+  z-index: 2;
+}
+.addNew{
+  position: fixed;
+  bottom: 20rpx;
+  right: 20rpx;
+  z-index: 9;
+}
+.addNew image{
+  width: 80rpx;
+  height: 80rpx;
+}
+.addTimes{
+  border: 2rpx solid #ff999a;
+  width: 108rpx;
+  height: 108rpx;
+  border-radius: 50%;
+  background: #ff999a;
+  position: relative;
+  z-index: 6;
+}
+.addTime{
+    background: #ff999a;
+    border:4rpx solid #fff;
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 20rpx;
+}
+.addTime .timeBig{
+    font-size: 30rpx;
+    padding-top: 10rpx;
+    box-sizing: border-box;
 }

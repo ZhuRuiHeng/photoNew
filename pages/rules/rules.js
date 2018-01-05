@@ -2,10 +2,6 @@ const app = getApp();
 import tips from '../../utils/tips.js';
 var WxParse = require('../../wxParse/wxParse.js');
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
   
   },
@@ -23,70 +19,35 @@ Page({
           },
           method: "GET",
           success: function (res) {
-            console.log("活动信息:", res);
+            console.log("活动海报:", res);
             var status = res.data.status;
             if (status == 1) {
-              function toDate(number) {
-                var n = number * 1000;
-                var date = new Date(n);
-                console.log("date", date)
-                var y = date.getFullYear();
-                var m = date.getMonth() + 1;
-                m = m < 10 ? ('0' + m) : m;
-                var d = date.getDate();
-                d = d < 10 ? ('0' + d) : d;
-                var h = date.getHours();
-                h = h < 10 ? ('0' + h) : h;
-                var minute = date.getMinutes();
-                var second = date.getSeconds();
-                minute = minute < 10 ? ('0' + minute) : minute;
-                second = second < 10 ? ('0' + second) : second;
-                //return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
-                return y + '.' + m + '.' + d;
-              }
               that.setData({
-                oldWiner: false,
-                WinerInform: false,
-                winnerOpen: false,
                 activeInform: res.data.data,
-                start_time: toDate(res.data.data.start_time),
-                end_time: toDate(res.data.data.end_time),
+                thumb: res.data.data.thumb
               })
-              if (wx.getStorageSync('activity') == true) {
-                console.log(111);
-                that.setData({
-                  activity: false,
-                  rules: true
-                })
-              } else {
-                console.log(222);
-                wx.setStorageSync('activity', true)
-                that.setData({
-                  activity: true,
-                  rules: true
-                })
-                if (that.data.activeInform.rules) {
-                  WxParse.wxParse('newrules', 'html', that.data.activeInform.rules, that, 5)
-                }
-              }
+              wx.hideLoading()
             } else {
               tips.alert(res.data.msg);
             }
-            wx.hideLoading()
           }
         })
     })
   },
-  inActive(){
-    wx.switchTab({
-      url: '../templatePhoto/templatePhoto'
+  chart(){
+    //console.log(this.data.thumb);
+    wx.navigateToMiniProgram({
+      appId: 'wx22c7c27ae08bb935',
+      path: 'pages/photoWall/photoWall?poster=' + this.data.thumb,
+      envVersion: 'release',
+      success(res) {
+        // 打开成功
+        console.log(res);
+      }
     })
   },
  // 参与活动
   activeIn(e) {
-    this.setData({
-      activity: false
-    })
     wx.switchTab({
       url: '../templatePhoto/templatePhoto'
     })

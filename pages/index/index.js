@@ -92,14 +92,6 @@ Page({
     })
   },
 
-
-  // jumpAd() {
-  //   var inter = this.data.inter;
-  //   clearInterval(inter);
-  //   wx.switchTab({
-  //     url: '../indexs/indexs',
-  //   })
-  // },
   onShareAppMessage: function () {
     return {
       path: '/pages/index/index',

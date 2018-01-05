@@ -140,6 +140,12 @@
 					"name": "photos",
 					"pathName": "pages/photos/photos",
 					"query": ""
+				},
+				{
+					"id": 19,
+					"name": "poster",
+					"pathName": "pages/poster/poster",
+					"query": "poster=https://friend-guess.playonwechat.com/assets/template_thumb/668720180105093103.jpg"
 				}
 			]
 		}

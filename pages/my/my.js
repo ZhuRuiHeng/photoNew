@@ -45,35 +45,27 @@ Page({
           console.log("照片墙列表:", res);
           var status = res.data.status;
           if (status == 1) {
+            let photosList = res.data.data;
+            for (let i = 0; i < photosList.length;i++){
+              photosList[i].add_time = photosList[i].add_time.split("-");
+            }
+            console.log(photosList);
             that.setData({
-              photosList: res.data.data
+              photosList
             })
+            let _photosList = that.data.photosList;
+            console.log("_photosList:", _photosList);
+            for (let i = 0; i < _photosList.length; i++) {
+              _photosList[i].day = _photosList[i].add_time[2].substring(0, 2);
+            }
+            that.setData({
+              photosList: _photosList
+            })
+            console.log(that.data.photosList);
             wx.hideLoading()
           } else {
             tips.alert(res.data.msg)
           }
-        }
-      })
-      //音乐 请求 
-      wx.request({
-        url: apiurl + "photo/music-list?sign=" + sign + '&operator_id=' + app.data.kid,
-        header: {
-          'content-type': 'application/json'
-        },
-        method: "GET",
-        success: function (res) {
-          console.log("音乐列表:", res);
-          var status = res.data.status;
-          if (status == 1) {
-            console.log('音乐列表：', res.data.data);
-            that.setData({
-              musicsList: res.data.data
-            })
-            //wx.hideLoading()
-          } else {
-            tips.alert(res.data.msg)
-          }
-
         }
       })
       //获取用户信息
@@ -292,9 +284,24 @@ Page({
         //console.log("照片墙列表:", res);
         var status = res.data.status;
         if (status == 1) {
+          let photosList = res.data.data;
+          for (let i = 0; i < photosList.length; i++) {
+            photosList[i].add_time = photosList[i].add_time.split("-");
+          }
+          console.log(photosList);
           that.setData({
-            photosList: res.data.data
+            photosList
           })
+          let _photosList = that.data.photosList;
+          console.log("_photosList:", _photosList);
+          for (let i = 0; i < _photosList.length; i++) {
+            _photosList[i].day = _photosList[i].add_time[2].substring(0, 2);
+          }
+          that.setData({
+            photosList: _photosList
+          })
+          console.log(that.data.photosList);
+          wx.hideLoading()
           wx.hideLoading()
         } else {
           that.setData({
@@ -340,7 +347,7 @@ Page({
       },
       method: "GET",
       success: function (res) {
-        //console.log("删除照片墙:", res);
+        console.log("删除照片墙:", res);
         var status = res.data.status;
         if (status == 1) {
           tips.success('照片墙删除成功!');
@@ -348,26 +355,6 @@ Page({
           that.setData({
             photosList
           })
-          console.log("delsnew:", that.data.photosList)
-          // 重新其请求
-          // wx.request({
-          //   url: apiurl + "photo/photo-list?sign=" + sign + '&operator_id=' + app.data.kid,
-          //   header: {
-          //     'content-type': 'application/json'
-          //   },
-          //   method: "GET",
-          //   success: function (res) {
-          //     console.log("照片墙列表:", res);
-          //     var status = res.data.status;
-          //     if (status == 1) {
-          //       that.setData({
-          //         photosList: res.data.data
-          //       })
-          //     } else {
-          //       tips.alert(res.data.msg)
-          //     }
-          //   }
-          // })
         } else {
           tips.alert(res.data.msg)
         }
@@ -425,14 +412,6 @@ Page({
       url: '../templatePhoto/templatePhoto',
     })
   },
-  // 新增照片名称
-  niceName(e) {
-    console.log(e.detail.value);
-    this.setData({
-      newName: e.detail.value
-    })
-  },
-
   setName(e) {
     let that = this;
     let sign = wx.getStorageSync('sign');

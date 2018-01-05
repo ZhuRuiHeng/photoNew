@@ -17,6 +17,7 @@
     "pages/albumInform/albumInform",
     "pages/templateInform/templateInform",
     "pages/rules/rules",
+    "pages/poster/poster",
     "pages/seephoto/seephoto"
     
   ],

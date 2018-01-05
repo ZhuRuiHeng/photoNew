@@ -13,7 +13,8 @@ Page({
       num: Math.random(),
       music_play: wx.getStorageSync('music_play'),
       dataUrl: wx.getStorageSync('dataUrl'),
-      button:true
+      button:true,
+      self:false
   },
   onLoad: function (options) {
     //console.log(options);

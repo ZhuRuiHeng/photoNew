@@ -33,29 +33,21 @@
                     <image src="../img/1419919-200.png" mode="widthFix"></image>我的照片集</button>
                 </form>
           </view> 
-          <!--name  -->
-          <view class='editName'>
-              <input placeholder='制作新的...' bindinput="niceName" />
-              <image src='../img/addNew.png' mode='widthFix' bindtap='newPhotos'></image>
-          </view>
         <!--1  -->
         <view class='content' wx:if="{{now==1}}">
               <view class='item' wx:for="{{photosList}}" wx:key="{{index}}" data-pw_id='{{item.id}}' >
                 <view class='dels' bindtap="dels" data-pw_id='{{item.id}}' data-photoindex='{{index}}'>
                     <image class='dels' src="../img/dels.png" mode="aspectFill"></image>
                 </view>
-                <view class='addTime'>
-                    <view class='timeBig'>{{item.add_time}}</view>
-                    <view class='timeTitle'></view>
+                <view class='addTimes'>
+                    <view class='addTime'>
+                        <view class='timeBig'>{{item.day}}</view>
+                        <view class='timeTitle'>{{item.add_time[1]}}/{{item.add_time[0]}}</view>
+                    </view>
                 </view>
                 <view class='line'></view>
                 <image class='niceImg' data-url='{{item.thumb}}' src="{{item.thumb}}?{{num}}" data-musicUrl='{{item.music_info.url}}' data-nameMusic='{{item.music_info.name}}'
                         mode='aspectFill' data-pw_id='{{item.id}}' bindtap='seeTap'></image>
-            </view>
-            <!--新增  -->
-            <view class='item newAdd' >
-                <image class='niceImg'  src="../img/add.png" bindtap='newPhotos1'
-                      mode='aspectFill'></image>
             </view>
         </view> 
         <!--2  -->
@@ -64,14 +56,20 @@
                 <view class='dels' bindtap="dels" data-pw_id='{{item.id}}' data-photoIndex='{{index}}'>
                     <image class='dels' src="../img/dels.png" mode="widthFix"></image>
                 </view>
+                <view class='addTimes'>
+                    <view class='addTime'>
+                        <view class='timeBig'>{{item.day}}</view>
+                        <view class='timeTitle'>{{item.add_time[1]}}/{{item.add_time[0]}}</view>
+                    </view>
+                </view>
+                <view class='line'></view>
                 <image class='niceImg' data-url='{{item.thumb}}' src="{{item.thumb}}?{{num}}" data-musicUrl='{{item.music_info.url}}' data-nameMusic='{{item.music_info.name}}'
                         mode='aspectFill' data-pw_id='{{item.id}}' bindtap='seeTap1'></image>
             </view>
-            <!--新增  -->
-            <view class='item newAdd' >
-                <image class='niceImg'  src="../img/add.png" bindtap='newPhotos2'
-                      mode='aspectFill'></image>
-            </view>
         </view> 
     </view>
+</view>
+<!--新增  -->
+<view class='addNew'>
+    <image src='../img/addNew.png' mode='widthFix' bindtap='newPhotos'></image>
 </view>
