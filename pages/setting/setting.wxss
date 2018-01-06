@@ -1,5 +1,5 @@
 page{
-  background: #e4e4e4;
+    background: #e6e8f5;
 }
 .container{
     overflow: hidden;
@@ -7,7 +7,7 @@ page{
     box-sizing: border-box;
     width: 100%;
     font-size: 26rpx;
-    background-color: #e4e4e4;
+    background-color: #e6e8f5;
     margin-bottom: 100rpx;
 }
 .item{

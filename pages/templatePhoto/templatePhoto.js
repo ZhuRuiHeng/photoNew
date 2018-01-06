@@ -63,8 +63,6 @@ Page({
     
   },
   onShow: function () {
-    console.log('music_play:',app.data.music_play);
-    console.log('music_play:', wx.getStorageSync('music_play'))
     wx.showToast({
       title: '加载中',
       icon: 'loading'
@@ -135,7 +133,7 @@ Page({
     var that = this;
     let music_play = that.data.music_play;
     if (music_play == true) {
-      console.log(1);
+      console.log('music1');
       wx.pauseBackgroundAudio();//暂停
       app.data.music_play = false;
       wx.setStorageSync('music_play', false)
@@ -143,7 +141,7 @@ Page({
         music_play: false
       })
     } else {
-      console.log(2);
+      console.log('music2');
       wx.playBackgroundAudio({ //播放
         dataUrl: app.data.dataUrl
       })

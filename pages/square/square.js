@@ -48,8 +48,39 @@ Page({
               }
               wx.hideLoading()
             } else {
-              tips.alert(res.data.msg);
+              //tips.alert(res.data.msg);
             }
+          }
+        })
+        // music
+        wx.request({
+          url: app.data.apiurl3 + "photo/get-music?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
+          header: {
+            'content-type': 'application/json'
+          },
+          method: "GET",
+          success: function (res) {
+            console.log("music:", res);
+            var status = res.data.status;
+            if (status == 1) {
+              app.data.dataUrl = res.data.data.url;
+              if (wx.getStorageSync("music_play") == false) {
+                that.setData({
+                  music_play: false
+                })
+              } else {
+                wx.playBackgroundAudio({ //播放音乐
+                  dataUrl: res.data.data.url
+                })
+              }
+              wx.setStorageSync('dataUrl', res.data.data.url);
+              that.setData({
+                dataUrl: res.data.data.url
+              })
+            } else {
+              console.log(res.data.msg);
+            }
+            wx.hideLoading()
           }
         })
     })
@@ -63,7 +94,8 @@ Page({
     let that = this;
     that.setData({
       show: false,
-      type: 'new'
+      type: 'new',
+      music_play: wx.getStorageSync('music_play')
     })
     if (that.data.type =='activity'){
        allList: false
@@ -97,37 +129,7 @@ Page({
               wx.hideLoading()
             }
         })
-        // music
-        wx.request({
-          url: app.data.apiurl3 + "photo/get-music?sign=" + wx.getStorageSync('sign') + '&operator_id=' + app.data.kid,
-          header: {
-            'content-type': 'application/json'
-          },
-          method: "GET",
-          success: function (res) {
-            console.log("music:", res);
-            var status = res.data.status;
-            if (status == 1) {
-              app.data.dataUrl = res.data.data.url;
-              if (wx.getStorageSync("music_play")==false){
-                  that.setData({
-                    music_play:false
-                  })
-              }else{
-                wx.playBackgroundAudio({ //播放音乐
-                  dataUrl: res.data.data.url
-                })
-              }
-              wx.setStorageSync('dataUrl', res.data.data.url);
-              that.setData({
-                dataUrl: res.data.data.url
-              })
-            } else {
-              console.log(res.data.msg);
-            }
-            wx.hideLoading()
-          }
-        })
+       
         
     })
   },

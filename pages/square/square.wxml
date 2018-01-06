@@ -58,7 +58,7 @@
 </view>
 <!--参与 活动海报  --> 
 <view class='bg' wx:if="{{join==false}}"  bindtap='activeClose' > 
-    <view class='activity'  style='background: url(http://ovhvevt35.bkt.clouddn.com/photo/poster.png) no-repeat;background-size: cover;'> 
+    <view class='activity'  style='background: url(http://ovhvevt35.bkt.clouddn.com/photo/poster.png?{{num}}) no-repeat;background-size: cover;'> 
           <view class='activityClose' bindtap='activeClose' style='top:30rpx;right:60rpx;'> 
               <image src="../img/error.png" mode='widthFix'></image> 
           </view>

@@ -48,6 +48,7 @@ App({
     }else{
       wx.pauseBackgroundAudio();
     }
+
   },
   getAuth(cb) {
     // var that = this;
@@ -173,7 +174,6 @@ App({
   onHide: function () {
     wx.stopBackgroundAudio()
     console.log('stop music');
-  },
-  
+  }
   
 })
