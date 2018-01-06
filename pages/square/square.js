@@ -36,12 +36,10 @@ Page({
                 activeInform: res.data.data,
                 thumb: res.data.data.activity_info.thumb + '?' + that.data.num,
                 join: res.data.data.join,
-                win: res.data.data.win,
-                win1: res.data.data.win
+                win: res.data.data.win
               })
               wx.setStorageSync('join', res.data.data.join);
               wx.setStorageSync('win', res.data.data.win);
-              wx.setStorageSync('win1', res.data.data.win);
               // 如果缓存win是true,则不弹  未参与活动每次都弹
               if (wx.getStorageSync('win') == true) {
                 that.setData({
@@ -160,7 +158,7 @@ Page({
   chart() {
     wx.navigateToMiniProgram({
       appId: 'wx22c7c27ae08bb935',
-      path: 'pages/photoWall/photoWall?poster=http://ovhvevt35.bkt.clouddn.com/photo/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180105171204.png',
+      path: 'pages/photoWall/photoWall?poster=http://ovhvevt35.bkt.clouddn.com/photo/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180105171204.png&photowall=1',
       envVersion: 'release',
       success(res) {
         // 打开成功

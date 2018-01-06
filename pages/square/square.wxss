@@ -92,13 +92,18 @@ page{
     border-left:1px solid #f7f7f7; 
     border-right:1px solid #f7f7f7; 
 }
+.textBlock{
+  display: inline-block;
+  height:72rpx;
+  line-height:72rpx;
+}
 .btm .right image,.chart image,.left image{
   width: 50rpx;
   height: 50rpx;
   position: relative;
-  top: 10rpx;
+  top: 12rpx;
 }
-.right image{
+.right image,.left image{
   right: 10rpx;
 }
 .btm .left{

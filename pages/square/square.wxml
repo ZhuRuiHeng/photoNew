@@ -34,12 +34,13 @@
                 <view class='left' bindtap='informSquare'  data-name="{{item.name}}" 
                       data-pw_id='{{item.pw_id}}' data-type='{{item.type}}' data-temp_id="{{item.temp_id}}">
                     <image src="../img/7.png" mode='widthFix'></image>
-                    {{item.click_count}}次
+                   <text class='textBlock'>{{item.click_count}}次</text> 
                 </view>
                 <view class='right'>
                     <view class='zan' bindtap='zanTap' data-type='photowall' data-object_id='{{item.pw_id}}' 
                            data-index="{{index}}">
-                        <image src="../img/983476-200.png"></image>{{item.thumb_count}}
+                        <image src="../img/983476-200.png"></image>
+                        <text class='textBlock'>{{item.thumb_count}}</text>
                     </view>
                 </view>
                 <view class='chart' bindtap='share' >
@@ -57,7 +58,7 @@
 </view>
 <!--参与 活动海报  --> 
 <view class='bg' wx:if="{{join==false}}"  bindtap='activeClose' > 
-    <view class='activity'  style='background: url(http://ovhvevt35.bkt.clouddn.com/photo/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180105171204.png) no-repeat;background-size: cover;'> 
+    <view class='activity'  style='background: url(http://ovhvevt35.bkt.clouddn.com/photo/poster.png) no-repeat;background-size: cover;'> 
           <view class='activityClose' bindtap='activeClose' style='top:30rpx;right:60rpx;'> 
               <image src="../img/error.png" mode='widthFix'></image> 
           </view>
@@ -67,7 +68,7 @@
 <!--完成 弹出海报 -->
 <view class='bg' wx:if="{{win==true}}"  bindtap='activeClose'> 
     <view class='activity'   
-          style='background: url(http://ovhvevt35.bkt.clouddn.com/photo/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180105163503.jpg?{{num}}) no-repeat;background-size: cover;'> 
+          style='background: url(http://ovhvevt35.bkt.clouddn.com/photo/card.png?{{num}}) no-repeat;background-size: cover;'> 
           <view class='activityClose' bindtap='activeClose' > 
               <image src="../img/error.png" mode='widthFix'></image> 
           </view>
