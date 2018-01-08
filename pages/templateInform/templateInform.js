@@ -13,7 +13,7 @@ Page({
       num: Math.random(),
       music_play: wx.getStorageSync('music_play'),
       dataUrl: wx.getStorageSync('dataUrl'),
-      button:true,
+      button:true, //生成照片墙为false，回调中为true
       self:true
   },
   onLoad: function (options) {
@@ -440,10 +440,8 @@ Page({
                 var tempFilePaths = res.tempFilePaths;
                 tips.loading('上传中');
                 tips.loaded(); //消失
-
               }
             })
-
           } else {
             console.log(res.data.msg);
           }

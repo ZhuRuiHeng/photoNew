@@ -172,7 +172,7 @@ App({
     wx.hideLoading();
   },
   onHide: function () {
-    wx.stopBackgroundAudio()
+    wx.stopBackgroundAudio();
     console.log('stop music');
   }
   

@@ -370,12 +370,13 @@ button::after{
 }
 .item:nth-child(odd) .addTimes{
     background: #ff999a;
+    border: 2rpx solid #ff999a;
 }
 .item:nth-child(even) .addTimes{
     background: #9596ff;
+    border: 2rpx solid #9596ff;
 }
 .addTimes{
-  border: 2rpx solid #ff999a;
   width: 108rpx;
   height: 108rpx;
   border-radius: 50%;
