@@ -108,8 +108,11 @@ Page({
         }else{
           tips.alert(res.data.msg);
           setTimeout(function(){
+            // wx.switchTab({
+            //   url: '../square/square',
+            // })
             wx.switchTab({
-              url: '../square/square',
+              url: '../templatePhoto/templatePhoto',
             })
           }, 3000)
         }

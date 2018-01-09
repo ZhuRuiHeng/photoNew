@@ -50,8 +50,11 @@ Page({
             })
             tips.alert(res.data.msg);
             setTimeout(function(){
+              // wx.switchTab({
+              //   url: '../square/square',
+              // })
               wx.switchTab({
-                url: '../square/square',
+                url: '../templatePhoto/templatePhoto',
               })
             },2000)
             
