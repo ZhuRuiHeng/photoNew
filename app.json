@@ -34,6 +34,12 @@
     "borderStyle": "transparent",
     "list": [
       {
+        "pagePath": "pages/square/square",
+        "text": "首页",
+        "iconPath": "/pages/img/home-icon1.png",
+        "selectedIconPath": "/pages/img/home-icon-active1.png"
+      },
+      {
         "pagePath": "pages/templatePhoto/templatePhoto",
         "text": "制作",
         "iconPath": "/pages/img/photo1.png",

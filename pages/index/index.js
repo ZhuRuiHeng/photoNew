@@ -75,11 +75,8 @@ Page({
                 }
                 
               }else{
-                // wx.switchTab({
-                //   url: '../square/square',
-                // })
                 wx.switchTab({
-                  url: '../templatePhoto/templatePhoto',
+                  url: '../square/square',
                 })
               }
             }
